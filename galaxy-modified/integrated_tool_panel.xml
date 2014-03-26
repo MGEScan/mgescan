@@ -1,0 +1,312 @@
+<?xml version="1.0"?>
+<toolbox>
+    <label id="retrotminer_tools" text="RetroTMiner Tools" version="" />
+    <section id="mgescan-nonltr" name="nonLTR" version="">
+        <tool id="mgescan-nonltr" />
+    </section>
+    <section id="mgescan-ltr" name="LTR" version="">
+        <tool id="mgescan-ltr" />
+    </section>
+    <section id="getext" name="Get Data" version="">
+        <tool id="upload1" />
+    </section>
+    <label id="basic_tools" text="Galaxy Tools" version="" />
+    <section id="send" name="Send Data" version="">
+        <tool id="epigraph_export" />
+        <tool id="epigraph_test_export" />
+        <tool id="genomespace_exporter" />
+    </section>
+    <section id="EncodeTools" name="ENCODE Tools" version="">
+        <tool id="gencode_partition1" />
+        <tool id="random_intervals1" />
+    </section>
+    <section id="liftOver" name="Lift-Over" version="">
+        <tool id="liftOver1" />
+    </section>
+    <section id="textutil" name="Text Manipulation" version="">
+        <tool id="addValue" />
+        <tool id="Add_a_column1" />
+        <tool id="cat1" />
+        <tool id="Cut1" />
+        <tool id="mergeCols1" />
+        <tool id="Convert characters1" />
+        <tool id="createInterval" />
+        <tool id="ChangeCase" />
+        <tool id="Paste1" />
+        <tool id="Remove beginning1" />
+        <tool id="random_lines1" />
+        <tool id="Show beginning1" />
+        <tool id="Show tail1" />
+        <tool id="trimmer" />
+        <tool id="wc_gnu" />
+        <tool id="secure_hash_message_digest" />
+        <tool id="dna_filter" />
+        <tool id="tables_arithmetic_operations" />
+    </section>
+    <section id="filter" name="Filter and Sort" version="">
+        <tool id="Filter1" />
+        <tool id="sort1" />
+        <tool id="Grep1" />
+        <label id="gff" text="GFF" version="" />
+        <tool id="Extract_features1" />
+        <tool id="gff_filter_by_attribute" />
+        <tool id="gff_filter_by_feature_count" />
+        <tool id="gtf_filter_by_attribute_values_list" />
+    </section>
+    <section id="group" name="Join, Subtract and Group" version="">
+        <tool id="join1" />
+        <tool id="comp1" />
+        <tool id="subtract_query1" />
+        <tool id="Grouping1" />
+        <tool id="column_join" />
+    </section>
+    <section id="convert" name="Convert Formats" version="">
+        <tool id="axt_to_concat_fasta" />
+        <tool id="axt_to_fasta" />
+        <tool id="axt_to_lav_1" />
+        <tool id="bed2gff1" />
+        <tool id="fasta2tab" />
+        <tool id="gff2bed1" />
+        <tool id="lav_to_bed1" />
+        <tool id="MAF_To_BED1" />
+        <tool id="MAF_To_Interval1" />
+        <tool id="MAF_To_Fasta1" />
+        <tool id="tab2fasta" />
+        <tool id="fastq_to_fasta_python" />
+        <tool id="wiggle2simple1" />
+        <tool id="Sff_extractor" />
+        <tool id="gtf2bedgraph" />
+        <tool id="wig_to_bigWig" />
+        <tool id="bed_to_bigBed" />
+    </section>
+    <section id="features" name="Extract Features" version="">
+        <tool id="gene2exon1" />
+    </section>
+    <section id="fetchSeq" name="Fetch Sequences" version="">
+        <tool id="Extract genomic DNA 1" />
+    </section>
+    <section id="fetchAlign" name="Fetch Alignments" version="">
+        <tool id="Interval2Maf_pairwise1" />
+        <tool id="Interval2Maf1" />
+        <tool id="MAF_split_blocks_by_species1" />
+        <tool id="Interval_Maf_Merged_Fasta2" />
+        <tool id="GeneBed_Maf_Fasta2" />
+        <tool id="maf_stats1" />
+        <tool id="MAF_Thread_For_Species1" />
+        <tool id="MAF_Limit_To_Species1" />
+        <tool id="maf_limit_size1" />
+        <tool id="maf_by_block_number1" />
+        <tool id="MAF_Reverse_Complement_1" />
+        <tool id="MAF_filter" />
+    </section>
+    <section id="scores" name="Get Genomic Scores" version="">
+        <tool id="wiggle2simple1" />
+        <tool id="aggregate_scores_in_intervals2" />
+        <tool id="phastOdds_for_intervals" />
+    </section>
+    <section id="bxops" name="Operate on Genomic Intervals" version="">
+        <tool id="gops_intersect_1" />
+        <tool id="gops_subtract_1" />
+        <tool id="gops_merge_1" />
+        <tool id="gops_concat_1" />
+        <tool id="gops_basecoverage_1" />
+        <tool id="gops_coverage_1" />
+        <tool id="gops_complement_1" />
+        <tool id="gops_cluster_1" />
+        <tool id="gops_join_1" />
+        <tool id="get_flanks1" />
+        <tool id="flanking_features_1" />
+        <tool id="Annotation_Profiler_0" />
+    </section>
+    <section id="stats" name="Statistics" version="">
+        <tool id="Summary_Statistics1" />
+        <tool id="Count1" />
+        <tool id="cor2" />
+        <tool id="generate_matrix_for_pca_and_lda1" />
+        <tool id="lda_analy1" />
+        <tool id="plot_for_lda_output1" />
+        <tool id="maximal_information_based_nonparametric_exploration" />
+        <label id="gff" text="GFF" version="" />
+        <tool id="count_gff_features" />
+    </section>
+    <section id="dwt" name="Wavelet Analysis" version="">
+        <tool id="dwt_var1" />
+    </section>
+    <section id="plots" name="Graph/Display Data" version="">
+        <tool id="histogram_rpy" />
+        <tool id="scatterplot_rpy" />
+        <tool id="barchart_gnuplot" />
+        <tool id="qual_stats_boxplot" />
+        <tool id="gmaj_1" />
+        <tool id="laj_1" />
+        <tool id="build_ucsc_custom_track_1" />
+        <tool id="vcf_to_maf_customtrack1" />
+        <tool id="mutation_visualize" />
+    </section>
+    <section id="regVar" name="Regional Variation" version="">
+        <tool id="winSplitter" />
+        <tool id="featureCoverage1" />
+        <tool id="wtavg" />
+        <tool id="qualityFilter" />
+        <tool id="cpgFilter" />
+        <tool id="getIndels_2way" />
+        <tool id="indelRates_3way" />
+        <tool id="substitutions1" />
+        <tool id="subRate1" />
+        <tool id="microsats_align1" />
+        <tool id="microsats_mutability1" />
+    </section>
+    <section id="multReg" name="Multiple regression" version="">
+        <tool id="LinearRegression1" />
+        <tool id="LogisticRegression" />
+        <tool id="BestSubsetsRegression1" />
+        <tool id="rcve1" />
+        <tool id="partialRsq" />
+    </section>
+    <section id="multVar" name="Multivariate Analysis" version="">
+        <tool id="pca1" />
+        <tool id="cca1" />
+        <tool id="kpca1" />
+        <tool id="kcca1" />
+    </section>
+    <section id="hyphy" name="Evolution" version="">
+        <tool id="hyphy_branch_lengths_wrapper1" />
+        <tool id="hyphy_nj_tree_wrapper1" />
+        <tool id="hyphy_dnds_wrapper1" />
+        <tool id="hgv_codingSnps" />
+        <tool id="hgv_add_scores" />
+    </section>
+    <section id="motifs" name="Motif Tools" version="">
+        <tool id="meme_meme" />
+        <tool id="meme_fimo" />
+        <tool id="rgweblogo3" />
+    </section>
+    <section id="clustal" name="Multiple Alignments" version="">
+        <tool id="clustalw" />
+    </section>
+    <section id="tax_manipulation" name="Metagenomic analyses" version="">
+        <tool id="Fetch Taxonomic Ranks" />
+        <tool id="t2t_report" />
+        <tool id="Draw_phylogram" />
+        <tool id="find_diag_hits" />
+        <tool id="lca1" />
+        <tool id="poisson2test" />
+    </section>
+    <section id="fasta_manipulation" name="FASTA manipulation" version="">
+        <tool id="fasta_compute_length" />
+        <tool id="fasta_filter_by_length" />
+        <tool id="fasta_concatenate0" />
+        <tool id="fasta2tab" />
+        <tool id="tab2fasta" />
+    </section>
+    <section id="NGS_QC" name="NGS: QC and manipulation" version="">
+        <label id="fastqcsambam" text="FastQC: fastq/sam/bam" version="" />
+        <tool id="fastqc" />
+        <label id="illumina" text="Illumina fastq" version="" />
+        <tool id="fastq_groomer" />
+        <tool id="fastq_paired_end_splitter" />
+        <tool id="fastq_paired_end_joiner" />
+        <tool id="fastq_stats" />
+        <label id="454" text="Roche-454 data" version="" />
+        <tool id="quality_score_distribution" />
+        <tool id="trim_reads" />
+        <tool id="fastq_combiner" />
+        <label id="solid" text="AB-SOLiD data" version="" />
+        <tool id="solid2fastq" />
+        <tool id="solid_qual_stats" />
+        <tool id="solid_qual_boxplot" />
+        <label id="generic_fastq" text="Generic FASTQ manipulation" version="" />
+        <tool id="fastq_filter" />
+        <tool id="fastq_trimmer" />
+        <tool id="fastq_quality_trimmer" />
+        <tool id="fastq_masker_by_quality" />
+        <tool id="fastq_paired_end_interlacer" />
+        <tool id="fastq_paired_end_deinterlacer" />
+        <tool id="fastq_manipulation" />
+        <tool id="fastq_to_fasta_python" />
+        <tool id="fastq_to_tabular" />
+        <tool id="tabular_to_fastq" />
+        <label id="fastx_toolkit" text="FASTX-Toolkit for FASTQ data" version="" />
+    </section>
+    <section id="solexa_tools" name="NGS: Mapping" version="">
+        <tool id="bowtie2" />
+        <tool id="bfast_wrapper" />
+        <tool id="megablast_wrapper" />
+        <tool id="megablast_xml_parser" />
+        <tool id="PerM" />
+        <tool id="srma_wrapper" />
+        <tool id="mosaik_wrapper" />
+    </section>
+    <section id="indel_analysis" name="NGS: Indel Analysis" version="">
+        <tool id="sam_indel_filter" />
+        <tool id="indel_table" />
+        <tool id="indel_analysis" />
+    </section>
+    <section id="ngs-rna-tools" name="NGS: RNA Analysis" version="">
+        <label id="rna_seq" text="RNA-seq" version="" />
+        <tool id="tophat" />
+        <tool id="tophat2" />
+        <tool id="tophat_color" />
+        <tool id="express" />
+        <label id="filtering" text="Filtering" version="" />
+        <tool id="filter_combined_via_tracking" />
+    </section>
+    <section id="samtools" name="NGS: SAM Tools" version="">
+    </section>
+    <section id="gatk" name="NGS: GATK Tools (beta)" version="">
+        <label id="gatk_bam_utilities" text="Alignment Utilities" version="" />
+        <tool id="gatk_depth_of_coverage" />
+        <tool id="gatk_print_reads" />
+        <label id="gatk_realignment" text="Realignment" version="" />
+        <tool id="gatk_realigner_target_creator" />
+        <tool id="gatk_indel_realigner" />
+        <label id="gatk_recalibration" text="Base Recalibration" version="" />
+        <tool id="gatk_count_covariates" />
+        <tool id="gatk_table_recalibration" />
+        <tool id="gatk_analyze_covariates" />
+        <label id="gatk_genotyping" text="Genotyping" version="" />
+        <tool id="gatk_unified_genotyper" />
+        <label id="gatk_annotation" text="Annotation" version="" />
+        <tool id="gatk_variant_annotator" />
+        <label id="gatk_filtration" text="Filtration" version="" />
+        <tool id="gatk_variant_filtration" />
+        <tool id="gatk_variant_select" />
+        <label id="gatk_variant_quality_score_recalibration" text="Variant Quality Score Recalibration" version="" />
+        <tool id="gatk_variant_recalibrator" />
+        <tool id="gatk_variant_apply_recalibration" />
+        <label id="gatk_variant_utilities" text="Variant Utilities" version="" />
+        <tool id="gatk_validate_variants" />
+        <tool id="gatk_variant_eval" />
+        <tool id="gatk_variant_combine" />
+    </section>
+    <section id="peak_calling" name="NGS: Peak Calling" version="">
+        <tool id="peakcalling_macs" />
+        <tool id="peakcalling_sicer" />
+        <tool id="peakcalling_ccat" />
+    </section>
+    <section id="ngs-simulation" name="NGS: Simulation" version="">
+        <tool id="ngs_simulation" />
+    </section>
+    <section id="hgv" name="Phenotype Association" version="">
+        <tool id="hgv_codingSnps" />
+        <tool id="hgv_add_scores" />
+        <tool id="hgv_sift" />
+        <tool id="hgv_linkToGProfile" />
+        <tool id="hgv_david" />
+        <tool id="hgv_snpFreq" />
+        <tool id="hgv_ldtools" />
+        <tool id="hgv_pass" />
+        <tool id="hgv_gpass" />
+        <tool id="hgv_beam" />
+        <tool id="hgv_lps" />
+        <tool id="freebayes_wrapper" />
+        <tool id="master2pgSnp" />
+        <tool id="vcf2pgSnp" />
+    </section>
+    <section id="vcf_tools" name="VCF Tools" version="">
+        <tool id="vcf_intersect" />
+        <tool id="vcf_annotate" />
+        <tool id="vcf_filter" />
+        <tool id="vcf_extract" />
+    </section>
+</toolbox>

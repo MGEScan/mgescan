@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+
+<tool name="MGEScan-nonLTR" id="mgescan-nonltr" version="0.0.1" workflow_compatible="false">
+	<description>
+		computational identification and classification of non-LTR retroelements
+	</description>
+	<!--
+	<action module="galaxy.tools.actions.nonltr" class="nonltrToolAction"/>
+	<requirements>
+		<requirement type="package">HMMER</requirement>
+		<requirement type="package">EMBOSS</requirement>
+	</requirements>
+	-->
+	<command interpreter="perl">
+		/u/lee212/retrotminer/MGEScan_nonLTR_v2/run_MGEScan.pl -genome=/u/lee212/retrotminer/MGEScan_nonLTR_v2/anoGam1/ 
+		-data=/u/lee212/retrotminer/MGEScan_nonLTR_v2/example/data/  -program=/u/lee212/retrotminer/MGEScan_nonLTR_v2/
+	</command>
+	<inputs>
+		<param name="genome" type="text" label="directory where input genome data exists" />
+		<param name="data" type="text" label="directory of the output" />
+	</inputs>
+	<help>
+		Running the program
+		====================
+
+		To run MGEScan-nonLTR, follow the steps below:
+
+		1. Put genome files in a directory. You can put them in any directory since you will
+		specify the directory when you run the program.
+
+		2. Run run_MGEScane.pl. This perl script reads your genome files and runs the whole
+		process. You can type the following commands in a line. You need three parameters (genome
+		directory, output data directory, program directory for MGEScan-nonLTR). Using full paths
+		such as /home/Workshop/software/MGEScan-nonLTR/ is required.
+
+		command: ./run_MGEScan.pl genome=[directory that has genomes] -data=[directory where the 
+		output will be saved] -program=[directory that has all the files of MGEScan-nonLTR]
+
+		Example: ./run_MGEScan.pl -genome=/data/MGEScan_nonLTR_v2/example/seq/ 
+		-data=/data/MGEScan_nonLTR_v2/example/data/  -program=/data/MGEScan_nonLTR_v2/
+
+		Output
+		============
+		Upon completion, MGEScan-nonLTR generates the directory, "info" in the data directory you
+		specified. In this "info" directory, two sub-directories ("full" and "validation") are
+		generated.
+
+		- The "full" directory is for storing sequences of elements. Each subdirectory in "full" 
+		is the name of clade. In each directory of clade, the DNA sequences of nonLTRs identified
+		are listed. Each sequence is in fasta format. The header contains the position
+		information of TEs identified:
+		[genome_file_name]_[start position in the sequence]
+		For example, >chr1_333 means that this element start at 333bp in the "chr1" file.
+		- The "validation" directory is for storing Q values. In the files "en" and "rt", the
+		first column corresponds to the element name and the last column Q value. 
+
+
+	</help>
+</tool>
