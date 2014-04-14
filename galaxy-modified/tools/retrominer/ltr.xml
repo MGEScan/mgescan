@@ -11,92 +11,108 @@
 		<requirement type="package">EMBOSS</requirement>
 	</requirements>
 	-->
-	<command interpreter="python">
+	<command interpreter="bash">
+		<!--
 		/u/lee212/retrotminer/MGEScan_LTR/find_ltr.pl -genome=/u/lee212/retrotminer/MGEScan_nonLTR_v2/anoGam1/ 
 		-data=/u/lee212/retrotminer/MGEScan_LTR/example/data/  -program=/u/lee212/retrotminer/MGEScan_LTR/
+		-->
+		mgescan.sh $input $hmmver $output L
 	</command>
 	<inputs>
+		<!--
 		<param name="genome" type="text" label="directory where input genome data exists" />
 		<param name="data" type="text" label="directory of the output" />
+		-->
+		<param format="txt" name="input" type="data" label="From"/>
+		<param name="hmmver" type="select" label="Hmmsearch version">
+			<option selected="selected" value="3">3</option>
+			<option value="2">2</option>
+		</param>
 	</inputs>
+	<outputs>
+		<data format="tabular" name="output" />
+	</outputs>
 	<help>
-		Running the program
-		====================
+Running the program
+===================
 
-		To run MGEScan-LTR, follow the steps below:
+To run MGEScan-LTR, follow the steps below,
 
-		1. Update the configuration file path.conf.
-		a. data_dir: path for the directory that has output files
-		b. genome_dir: path for the directory that has genome files
-		c. sw_trf: path for tandem repeat finder.
-		d. sw_emboss: path for the directory that has executable files in EMBOSS package.
-		e. sw_hmmer: path for the directory that has executable files such as hmmsearch in HMMER package.
-		f. sw_rm (optional 1): path for repeatmasker if you want to preprocess
-		g. rm_dir(optional 1): path for the directory where repeatmasker results will be stored if you want to preprocess.
-		h. scaffold(optional2): path for the big file that has all scaffolds.
+1. Update the configuration file path.conf
 
-		For example,
-		data_dir=/home/mrho/ltr/daphnia/
-		genome_dir=/home/mrho/genome/daphnia/chr/
-		sw_trf=/home/mrho/sw/trf400.linux.exe
-		sw_emboss=/home/mrho/sw/EMBOSS-3.0.0/emboss/
-		sw_hmmer=/usr/local/bin/
-		sw_rm=/home/mrho/sw/RepeatMasker/RepeatMasker
-		rm_dir=/home/mrho/genome/daphnia/rm/
-		scaffold=
+* data_dir: path for the directory that has output files
+* genome_dir: path for the directory that has genome files
+* sw_trf: path for tandem repeat finder.
+* sw_emboss: path for the directory that has executable files in EMBOSS package.
+* sw_hmmer: path for the directory that has executable files such as hmmsearch in HMMER package.
+* sw_rm (optional 1): path for repeatmasker if you want to preprocess
+* rm_dir(optional 1): path for the directory where repeatmasker results will be stored if you want to preprocess.
+* scaffold(optional2): path for the big file that has all scaffolds.
 
-		2.Update the configuration file value.conf.
-		a. min_dist: minimum distance(bp) between LTRs.
-		b. max_dist: maximum distance(bp) between LTRS
-		c. min_len_ltr: minimum length(bp) of LTR.
-		d. max_len_ltr: maximum length(bp) of LTR.
-		e. ltr_sim_condition: minimum similarity(%) for LTRs in an element.
-		f. cluster_sim_condition: minimum similarity(%) for LTRs in a cluster
-		g. len_condition: minimum length(bp) for LTRs aligned in local alignment.
-
-		For example, the default values are listed as follows.
-		min_dist=2000
-		max_dist=20000
-		min_len_ltr=130
-		max_len_ltr=2000
-		ltr_sim_condition=70
-		cluster_sim_condition=70
-		len_condition=70
-
-		3. Put genome files in the directory xxx that is specified in the file conf.path
-		(genome_dir=xxx).
-
-		4. Run pre_process.pl to set up the directory structures and mask known repeats other than LTR retrotransposons.
-		Command:./pre_process.pl
-
-		5. Run find_ltr.pl to identify LTRs.
-		command: ./find_ltr.pl
+	For example,
+	data_dir=/home/mrho/ltr/daphnia/
+	genome_dir=/home/mrho/genome/daphnia/chr/
+	sw_trf=/home/mrho/sw/trf400.linux.exe
+	sw_emboss=/home/mrho/sw/EMBOSS-3.0.0/emboss/
+	sw_hmmer=/usr/local/bin/
+	sw_rm=/home/mrho/sw/RepeatMasker/RepeatMasker
+	rm_dir=/home/mrho/genome/daphnia/rm/
+	scaffold=
 
 
-		Output
-		============
-		Upon completion, MGEScan-LTR generates a file ltr.out. This output file has information
-		about clusters and coordinates of LTR retrotransposons identified. Each cluster of LTR
-		retrotransposons starts with the head line of [cluster_number]---------, followed by
-		the information of LTR retrotransposons in the cluster. The columns for LTR
-		retrotransposons are as follows.
+2.Update the configuration file value.conf
 
-		1. LTR_id: unique id of LTRs identified. It consist of two components, sequence file name
-		and id in the file. For example, chr1_2 is the second LTR retrotransposon in the chr1 file.
-		2. start position of 5 LTR.
-		3. end position of 5 LTR.
-		4. start position of 3 LTR.
-		5. end position of 3 LTR.
-		6. strand: + or -.
-		7. length of 5 LTR.
-		8. length of 3 LTR.
-		9. length of the LTR retrotransposon.
-		10.TSD on the left side of the LTR retotransposons.
-		11.TSD on the right side of the LTR retrotransposons.
-		12.di(tri)nucleotide on the left side of 5LTR
-		13.di(tri)nucleotide on the right side of 5LTR
-		14.di(tri)nucleotide on the left side of 3LTR
-		15.di(tri)nucleotide on the right side of 3LTR 
+* min_dist: minimum distance(bp) between LTRs.
+* max_dist: maximum distance(bp) between LTRS
+* min_len_ltr: minimum length(bp) of LTR.
+* max_len_ltr: maximum length(bp) of LTR.
+* ltr_sim_condition: minimum similarity(%) for LTRs in an element.
+* cluster_sim_condition: minimum similarity(%) for LTRs in a cluster
+* len_condition: minimum length(bp) for LTRs aligned in local alignment.
 
-	</help>
+	For example, the default values are listed as follows.
+	min_dist=2000
+	max_dist=20000
+	min_len_ltr=130
+	max_len_ltr=2000
+	ltr_sim_condition=70
+	cluster_sim_condition=70
+	len_condition=70
+
+
+3. Put genome files in the directory xxx that is specified in the file conf.path 
+	(genome_dir=xxx).
+	
+4. Run pre_process.pl to set up the directory structures and mask known repeats other than LTR retrotransposons
+	Command:./pre_process.pl
+	
+5. Run find_ltr.pl to identify LTRs
+	command: ./find_ltr.pl
+
+Output
+======
+
+Upon completion, MGEScan-LTR generates a file ltr.out. This output file has information
+about clusters and coordinates of LTR retrotransposons identified. Each cluster of LTR
+retrotransposons starts with the head line of [cluster_number]---------, followed by
+the information of LTR retrotransposons in the cluster. The columns for LTR
+retrotransposons are as follows.
+
+1. LTR_id: unique id of LTRs identified. It consist of two components, sequence file name and id in the file. For example, chr1_2 is the second LTR retrotransposon in the chr1 file.
+2. start position of 5 LTR.
+3. end position of 5 LTR.
+4. start position of 3 LTR.
+5. end position of 3 LTR.
+6. strand: + or -.
+7. length of 5 LTR.
+8. length of 3 LTR.
+9. length of the LTR retrotransposon.
+10. TSD on the left side of the LTR retotransposons.
+11. TSD on the right side of the LTR retrotransposons.
+12. di(tri)nucleotide on the left side of 5LTR
+13. di(tri)nucleotide on the right side of 5LTR
+14. di(tri)nucleotide on the left side of 3LTR
+15. di(tri)nucleotide on the right side of 3LTR 
+
+</help>
 </tool>

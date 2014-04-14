@@ -1,6 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <toolbox>
+	<section id="mgescan" name="mgescane">
+		<tool file="retrotminer/mgescan.xml" />
+	</section>
+
 	<label id="retrotminer_tools" text="RetroTMiner Tools" version="" /> 
+
 	<section id="mgescan-nonltr" name="nonLTR">
 		<tool file="retrotminer/nonltr.xml" />
 	</section>
@@ -8,7 +13,7 @@
 		<tool file="retrotminer/ltr.xml" />
 	</section>
   <section id="getext" name="Get Data">
-    <tool file="data_source/upload.xml" />
+    <tool file="retrotminer/upload.xml" />
     <!--    <tool file="data_source/ucsc_tablebrowser.xml" />
     <tool file="data_source/ucsc_tablebrowser_test.xml" />
     <tool file="data_source/ucsc_tablebrowser_archaea.xml" />

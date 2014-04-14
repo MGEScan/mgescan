@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+
+<tool name="MGEScan" id="mgescan" version="0.0.1" workflow_compatible="false">
+	<description>
+		MGEScan
+	</description>
+	<command interpreter="bash">
+		mgescan.sh $input $hmmver $output $program
+	</command>
+	<inputs>
+		<param format="txt" name="input" type="data" label="From"/>
+		<param name="hmmver" type="select" label="Hmmsearch version">
+			<option selected="selected" value="3">3</option>
+			<option value="2">2</option>
+		</param>
+		<param name="program" type="select" label="MGEScan">
+			<option selected="selected" value="B">Both</option>
+			<option value="L">LTR</option>
+			<option value="N">nonLTR</option>
+		</param>
+	</inputs>
+	<outputs>
+		<data format="tabular" name="output" />
+	</outputs>
+	<help>
+Running the program
+===================
+
+To run MGEScan, follow the steps below,
+
+Configuration files (Only for MGEScan_LTR)
+------------------------------------------
+1. Update the configuration file MGEScan1.0/MGEScan_LTR/path.conf
+
+a. sw_trf: path for tandem repeat finder.
+b. sw_rm (optional 1): path for repeatmasker if you want to preprocess
+c. rm_dir(optional 1): path for the directory where repeatmasker results will be stored if you want to preprocess.
+d. scaffold(optional2): path for the big file that has all scaffolds.
+
+
+	For example,
+	sw_trf=/home/mrho/sw/trf400.linux.exe
+	sw_rm=/home/mrho/sw/RepeatMasker/RepeatMasker
+	rm_dir=/home/mrho/genome/daphnia/rm/
+	scaffold=
+
+2. Update the configuration file MGEScan1.0/MGEScan_LTR/value.conf.
+a. min_dist: minimum distance(bp) between LTRs.
+b. max_dist: maximum distance(bp) between LTRS
+c. min_len_ltr: minimum length(bp) of LTR.
+d. max_len_ltr: maximum length(bp) of LTR.
+e. ltr_sim_condition: minimum similarity(%) for LTRs in an element.
+f. cluster_sim_condition: minimum similarity(%) for LTRs in a cluster
+g. len_condition: minimum length(bp) for LTRs aligned in local alignment.
+
+
+	For example, the default values are listed as follows.
+	min_dist=2000
+	max_dist=20000
+	min_len_ltr=130
+	max_len_ltr=2000
+	ltr_sim_condition=70
+	cluster_sim_condition=70
+	len_condition=70
+
+
+Running the program
+--------------------
+
+To run MGEScan, follow the steps below,
+
+1. Put genome files in a directory. You can put them in any directory since you will specify the directory when you run the program. Please make sure that the files in this directory contain a single sequence per file (NOT A MULTIFASTA). 
+
+Output
+============
+A. MGEScan_LTR:
+Upon completion, MGEScan-LTR generates a file "ltr.out". This output file has information
+about clusters and coordinates of LTR retrotransposons identified. Each cluster of LTR
+retrotransposons starts with the head line of "[cluster_number]---------", followed by
+the information of LTR retrotransposons in the cluster. The columns for LTR
+retrotransposons are as follows.
+
+1. LTR_id: unique id of LTRs identified. It consist of two components, sequence file name and id in the file. For example, chr1_2 is the second LTR retrotransposon in the chr1 file.
+2. start position of 5’ LTR.
+3. end position of 5’ LTR.
+4. start position of 3’ LTR.
+5. end position of 3’ LTR.
+6. strand: + or -.
+7. length of 5’ LTR.
+8. length of 3’ LTR.
+9. length of the LTR retrotransposon.
+10. TSD on the left side of the LTR retotransposons.
+11. TSD on the right side of the LTR retrotransposons.
+12. di(tri)nucleotide on the left side of 5’LTR
+13. di(tri)nucleotide on the right side of 5’LTR
+14. di(tri)nucleotide on the left side of 3’LTR
+15. di(tri)nucleotide on the right side of 3’LTR 
+
+B. MGEScan_nonLTR:
+   Upon completion, MGEScan-nonLTR generates the directory, "info" in the data directory you
+   specified. In this "info" directory, two sub-directories ("full" and "validation") are
+   generated.
+
+   - The "full" directory is for storing sequences of elements. Each subdirectory in "full" 
+   is the name of clade. In each directory of clade, the DNA sequences of nonLTRs identified
+   are listed. Each sequence is in fasta format. The header contains the position
+   information of TEs identified:
+   [genome_file_name]_[start position in the sequence]
+ For example, >chr1_333 means that this element start at 333bp in the "chr1" file.
+   - The "validation" directory is for storing Q values. In the files "en" and "rt", the first column corresponds to the element name and the last column Q value. 
+
+License
+============
+Copyright (C) 2014 Mina Rho & Haixu Tang.
+You may redistribute this software under the terms of the GNU General Public License.
+
+</help>
+</tool>
