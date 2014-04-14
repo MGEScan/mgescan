@@ -21,4 +21,4 @@ export PATH=$user_dir/retrotminer/EMBOSS/bin/:$PATH
 $script -genome=$input_dir/ -data=$output_dir/ -hmmerv=$hmmsearch_version -program=$program
 
 #make a coput of output
-/bin/cp $ouput_dir/ltr/ltr.out $output_file
+/bin/cp $output_dir/ltr/ltr.out $output_file
