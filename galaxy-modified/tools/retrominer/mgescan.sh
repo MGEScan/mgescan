@@ -25,7 +25,7 @@ export PATH=$user_dir/retrotminer/EMBOSS/bin/:$PATH
 #run
 #$script -genome=$input_dir/ -data=$output_dir/ -hmmerv=$hmmsearch_version -program=$program
 
-output_dir=/tmp/tmp.jAhYBeN8tz
+#output_dir=/tmp/tmp.jAhYBeN8tz
 #make a coput of output
 if [ "$program" == "L" ] || [ "$program" == "B" ]
 then
