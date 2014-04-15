@@ -12,7 +12,7 @@
 	</requirements>
 	-->
 	<command interpreter="bash">
-		mgescan.sh $input $hmmver $output N
+		mgescan.sh $input $hmmver None N $clade $qvalue_en $qvalue_rt
 	</command>
 	<inputs>
 		<!--
@@ -26,7 +26,9 @@
 		</param>
 	</inputs>
 	<outputs>
-		<data format="tabular" name="output" />
+		<data format="fasta" name="clade" />
+		<data format="qfile" name="qvalue_en" />
+		<data format="qfile" name="qvalue_rt" />
 	</outputs>
 	<help>
 

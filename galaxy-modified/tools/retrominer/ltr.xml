@@ -30,7 +30,7 @@
 		</param>
 	</inputs>
 	<outputs>
-		<data format="tabular" name="output" />
+		<data format="ltr.out" name="output" />
 	</outputs>
 	<help>
 Running the program

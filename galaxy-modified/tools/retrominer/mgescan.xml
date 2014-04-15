@@ -5,7 +5,7 @@
 		MGEScan
 	</description>
 	<command interpreter="bash">
-		mgescan.sh $input $hmmver $output $program
+		mgescan.sh $input $hmmver $output $program $clade $qvalue_en $qvalue_rt
 	</command>
 	<inputs>
 		<param format="txt" name="input" type="data" label="From"/>
@@ -20,7 +20,10 @@
 		</param>
 	</inputs>
 	<outputs>
-		<data format="tabular" name="output" />
+		<data format="ltr.out" name="output" />
+		<data format="fasta" name="clade" />
+		<data format="qfile" name="qvalue_en" />
+		<data format="qfile" name="qvalue_rt" />
 	</outputs>
 	<help>
 Running the program
