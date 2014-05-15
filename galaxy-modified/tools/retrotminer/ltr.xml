@@ -16,7 +16,8 @@
 		/u/lee212/retrotminer/MGEScan_LTR/find_ltr.pl -genome=/u/lee212/retrotminer/MGEScan_nonLTR_v2/anoGam1/ 
 		-data=/u/lee212/retrotminer/MGEScan_LTR/example/data/  -program=/u/lee212/retrotminer/MGEScan_LTR/
 		-->
-		mgescan.sh $input $input.name $hmmver $output L None None None $ltr_gff3 None
+		<!--mgescan.sh $input $input.name $hmmver $output L None None None $ltr_gff3 None-->
+		mgescan.sh $input $input.name 3 $output L None None None $ltr_gff3 None
 	</command>
 	<inputs>
 		<!--
@@ -24,10 +25,10 @@
 		<param name="data" type="text" label="directory of the output" />
 		-->
 		<param format="txt" name="input" type="data" label="From"/>
-		<param name="hmmver" type="select" label="Hmmsearch version">
+		<!--param name="hmmver" type="select" label="Hmmsearch version">
 			<option selected="selected" value="3">3</option>
 			<option value="2">2</option>
-		</param>
+		</param-->
 	</inputs>
 	<outputs>
 		<data format="ltr.out" name="output" />

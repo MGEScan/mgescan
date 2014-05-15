@@ -12,7 +12,8 @@
 	</requirements>
 	-->
 	<command interpreter="bash">
-		mgescan.sh $input $input.name $hmmver None N $clade $qvalue_en $qvalue_rt None $nonltr_gff3
+		<!--	mgescan.sh $input $input.name $hmmver None N $clade $qvalue_en $qvalue_rt None $nonltr_gff3 -->
+			mgescan.sh $input $input.name 3 None N $clade $qvalue_en $qvalue_rt None $nonltr_gff3
 	</command>
 	<inputs>
 		<!--
@@ -20,10 +21,10 @@
 		<param name="data" type="text" label="directory of the output" />
 		-->
 		<param format="fasta" name="input" type="data" label="From"/>
-		<param name="hmmver" type="select" label="Hmmsearch version">
+		<!--param name="hmmver" type="select" label="Hmmsearch version">
 			<option selected="selected" value="3">3</option>
 			<option value="2">2</option>
-		</param>
+		</param-->
 	</inputs>
 	<outputs>
 		<data format="fasta" name="clade" />
