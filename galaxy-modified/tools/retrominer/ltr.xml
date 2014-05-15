@@ -16,7 +16,7 @@
 		/u/lee212/retrotminer/MGEScan_LTR/find_ltr.pl -genome=/u/lee212/retrotminer/MGEScan_nonLTR_v2/anoGam1/ 
 		-data=/u/lee212/retrotminer/MGEScan_LTR/example/data/  -program=/u/lee212/retrotminer/MGEScan_LTR/
 		-->
-		mgescan.sh $input $hmmver $output L
+		mgescan.sh $input $input.name $hmmver $output L None None None $ltr_gff3 None
 	</command>
 	<inputs>
 		<!--
@@ -31,6 +31,7 @@
 	</inputs>
 	<outputs>
 		<data format="ltr.out" name="output" />
+		<data format="gff3" name="ltr_gff3" />
 	</outputs>
 	<help>
 Running the program

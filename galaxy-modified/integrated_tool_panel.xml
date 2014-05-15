@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <toolbox>
     <label id="retrotminer_tools" text="RetroTMiner Tools" version="" />
+    <section id="mgescan" name="MGEScan" version="">
+        <tool id="mgescan" />
+    </section>
     <section id="mgescan-nonltr" name="nonLTR" version="">
         <tool id="mgescan-nonltr" />
     </section>
@@ -8,7 +11,9 @@
         <tool id="mgescan-ltr" />
     </section>
     <section id="getext" name="Get Data" version="">
-        <tool id="upload1" />
+	    <tool id="upload1" />
+	    <tool id="ucsc_table_direct1" />
+	    <tool id="ebi_sra_main" />
     </section>
     <label id="basic_tools" text="Galaxy Tools" version="" />
     <section id="send" name="Send Data" version="">

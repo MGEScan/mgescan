@@ -12,14 +12,14 @@
 	</requirements>
 	-->
 	<command interpreter="bash">
-		mgescan.sh $input $hmmver None N $clade $qvalue_en $qvalue_rt
+		mgescan.sh $input $input.name $hmmver None N $clade $qvalue_en $qvalue_rt None $nonltr_gff3
 	</command>
 	<inputs>
 		<!--
 		<param name="genome" type="text" label="directory where input genome data exists" />
 		<param name="data" type="text" label="directory of the output" />
 		-->
-		<param format="txt" name="input" type="data" label="From"/>
+		<param format="fasta" name="input" type="data" label="From"/>
 		<param name="hmmver" type="select" label="Hmmsearch version">
 			<option selected="selected" value="3">3</option>
 			<option value="2">2</option>
@@ -29,6 +29,7 @@
 		<data format="fasta" name="clade" />
 		<data format="qfile" name="qvalue_en" />
 		<data format="qfile" name="qvalue_rt" />
+		<data format="gff3" name="nonltr_gff3" />
 	</outputs>
 	<help>
 

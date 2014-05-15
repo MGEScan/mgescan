@@ -1,11 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <toolbox>
-	<section id="mgescan" name="mgescane">
+	<label id="retrotminer_tools" text="RetroTMiner Tools" version="" /> 
+	<section id="mgescan" name="MGEScan">
 		<tool file="retrotminer/mgescan.xml" />
 	</section>
-
-	<label id="retrotminer_tools" text="RetroTMiner Tools" version="" /> 
-
 	<section id="mgescan-nonltr" name="nonLTR">
 		<tool file="retrotminer/nonltr.xml" />
 	</section>

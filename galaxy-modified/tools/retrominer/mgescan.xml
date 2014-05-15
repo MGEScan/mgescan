@@ -5,7 +5,7 @@
 		MGEScan
 	</description>
 	<command interpreter="bash">
-		mgescan.sh $input $hmmver $output $program $clade $qvalue_en $qvalue_rt
+		mgescan.sh $input $input.name $hmmver $output $program $clade $qvalue_en $qvalue_rt $ltr_gff3 $nonltr_gff3
 	</command>
 	<inputs>
 		<param format="txt" name="input" type="data" label="From"/>
@@ -20,10 +20,25 @@
 		</param>
 	</inputs>
 	<outputs>
-		<data format="ltr.out" name="output" />
-		<data format="fasta" name="clade" />
-		<data format="qfile" name="qvalue_en" />
-		<data format="qfile" name="qvalue_rt" />
+		<data format="ltr.out" name="output">
+			<filter>program != "N"</filter>
+		</data>
+		<data format="fasta" name="clade">
+			<filter>program != "L"</filter>
+		</data>
+		<data format="qfile" name="qvalue_en">
+			<filter>program != "L"</filter>
+		</data>
+		<data format="qfile" name="qvalue_rt">
+			<filter>program != "L"</filter>
+		</data>
+		<data format="gff3" name="ltr_gff3">
+			<filter>program != "N"</filter>
+		</data>
+		<data format="gff3" name="nonltr_gff3">
+			<filter>program != "L"</filter>
+		</data>
+
 	</outputs>
 	<help>
 Running the program
