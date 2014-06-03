@@ -1,7 +1,7 @@
 #!/bin/bash
 
 user_dir=/u/lee212
-script=$user_dir/retrotminer/wazim/MGEScan1.3/run_MGEScan.pl
+script=$user_dir/retrotminer/wazim/MGEScan1.1/run_MGEScan.pl
 input_file=$1
 input_file_name=$2
 hmmsearch_version=$3
@@ -12,7 +12,8 @@ clade=$6
 en=$7
 rt=$8
 ltr_gff3=$9
-nonltr_gff3=$10
+nonltr_gff3=${10}
+
 # /nfs/nfs4/home/lee212/retrotminer/galaxy-dist/tools/retrotminer/find_ltr.sh /nfs/nfs4/home/lee212/retrotminer/galaxy-dist/database/files/000/dataset_1.dat /nfs/nfs4/home/lee212/retrotminer/galaxy-dist/database/files/000/dataset_3.dat
 
 #load env?

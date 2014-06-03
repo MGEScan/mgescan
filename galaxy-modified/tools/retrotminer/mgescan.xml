@@ -5,7 +5,7 @@
 		MGEScan
 	</description>
 	<command interpreter="bash">
-		mgescan.sh $input $input.name 3 $output $program $clade $qvalue_en $qvalue_rt $ltr_gff3 $nonltr_gff3
+		mgescan.sh $input "$input.name" 3 $output $program $clade $qvalue_en $qvalue_rt $ltr_gff3 $nonltr_gff3
 		<!-- mgescan.sh $input $input.name $hmmver $output $program $clade $qvalue_en $qvalue_rt $ltr_gff3 $nonltr_gff3 -->
 	</command>
 	<inputs>
@@ -47,15 +47,9 @@ Running the program
 
 To run MGEScan, follow the steps below,
 
-Configuration files (Only for MGEScan_LTR)
-------------------------------------------
-1. Update the configuration file MGEScan1.0/MGEScan_LTR/path.conf
-
-a. sw_trf: path for tandem repeat finder.
 b. sw_rm (optional 1): path for repeatmasker if you want to preprocess
 c. rm_dir(optional 1): path for the directory where repeatmasker results will be stored if you want to preprocess.
 d. scaffold(optional2): path for the big file that has all scaffolds.
-
 
 	For example,
 	sw_trf=/home/mrho/sw/trf400.linux.exe
@@ -72,7 +66,6 @@ e. ltr_sim_condition: minimum similarity(%) for LTRs in an element.
 f. cluster_sim_condition: minimum similarity(%) for LTRs in a cluster
 g. len_condition: minimum length(bp) for LTRs aligned in local alignment.
 
-
 	For example, the default values are listed as follows.
 	min_dist=2000
 	max_dist=20000
@@ -82,11 +75,8 @@ g. len_condition: minimum length(bp) for LTRs aligned in local alignment.
 	cluster_sim_condition=70
 	len_condition=70
 
-
 Running the program
 --------------------
-
-To run MGEScan, follow the steps below,
 
 1. Put genome files in a directory. You can put them in any directory since you will specify the directory when you run the program. Please make sure that the files in this directory contain a single sequence per file (NOT A MULTIFASTA). 
 
