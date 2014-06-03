@@ -1,7 +1,9 @@
 #!/bin/bash
 
+# mgescan.sh $input $input.name 3 $output L None None None $ltr_gff3 None $sw_rm "$scaffold" $min_dist $max_dist $min_len_ltr $max_len_ltr $ltr_sim_condition $cluster_sim_condition $len_condition $repeatmasker
 user_dir=/u/lee212
-script=$user_dir/retrotminer/wazim/MGEScan1.1/run_MGEScan.pl
+#script=$user_dir/retrotminer/wazim/MGEScan1.1/run_MGEScan.pl
+script=$user_dir/retrotminer/wazim/MGEScan1.1/run_MGEScan2.pl
 input_file=$1
 input_file_name=$2
 hmmsearch_version=$3
@@ -13,6 +15,17 @@ en=$7
 rt=$8
 ltr_gff3=$9
 nonltr_gff3=${10}
+#### for ltr between $11 and $20
+sw_rm=${11}
+scaffold=${12}
+min_dist=${13}
+max_dist=${14}
+min_len_ltr=${15}
+max_len_ltr=${16}
+ltr_sim_condition=${17}
+cluster_sim_condition=${18}
+len_condition=${19}
+repeatmasker=${20}
 
 # /nfs/nfs4/home/lee212/retrotminer/galaxy-dist/tools/retrotminer/find_ltr.sh /nfs/nfs4/home/lee212/retrotminer/galaxy-dist/database/files/000/dataset_1.dat /nfs/nfs4/home/lee212/retrotminer/galaxy-dist/database/files/000/dataset_3.dat
 
@@ -45,7 +58,8 @@ else
 fi
 
 #run
-/usr/bin/perl $script -genome=$input_dir/ -data=$output_dir/ -hmmerv=$hmmsearch_version -program=$program
+/usr/bin/perl $script -genome=$input_dir/ -data=$output_dir/ -hmmerv=$hmmsearch_version -program=$program -sw_rm=${11} -scaffold=${12} -min_dist=${13} -max_dist=${14} -min_len_ltr=${15} -max_len_ltr=${16} -ltr_sim_condition=${17} -cluster_sim_condition=${18} -len_condition=${19}
+
 #RES=`ssh -i $user_dir/.ssh/.internal silo.cs.indiana.edu "/usr/bin/perl $script -genome=$input_dir/ -data=$output_dir/ -hmmerv=$hmmsearch_version -program=$program > /dev/null"`
 
 #make a copy of output
@@ -55,6 +69,12 @@ then
 	if [ "$ltr_gff3" != "" ]
 	then
 		/bin/cp $output_dir/ltr/ltr.gff3 $ltr_gff3
+	fi
+
+	if [ "$repeatmasker" != "" ]
+	then
+		# chr2L.fa.cat.gz  chr2L.fa.masked  chr2L.fa.out  chr2L.fa.out.pos  chr2L.fa.tbl
+		/bin/cp $output_dir/repeatmasker/${input_file_name}.out $repeatmasker
 	fi
 fi
 if [ "$program" != "L" ]
@@ -85,4 +105,9 @@ then
 fi
 
 # delete temp directory
-rm -rf $work_dir/$t_dir
+if [ $? -eq 0 ]
+then
+	rm -rf $work_dir/$t_dir
+else
+	cp -pr $work_dir/$t_dir $work_dir/error-cases/
+fi
