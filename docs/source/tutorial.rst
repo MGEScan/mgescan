@@ -54,7 +54,7 @@ Genome Browser via UCSC or Ensembl
 UCSC Genome Browser
 ^^^^^^^^^^^^^^^^^^^
 
-.. image:: images/rm-ltr-gff3-ucsc-browser.png
+.. image:: images/rtm-ltr-gff3-ucsc-browser.png
 
 Ensembl
 ^^^^^^^
