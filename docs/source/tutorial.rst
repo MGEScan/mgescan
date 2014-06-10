@@ -45,23 +45,35 @@ UCSC Table Browser provides the easy way to download the database to Galaxy.
 
 .. image:: images/rtm-upload-ucsc.png
 
+Program Execution
+------------------
+RetroTMiner provides simple and detailed steps to run program. With * MGEScan > MGEScan *, both LTR and non-LTR can be executed at once. In a separated tool such as LTR or nonLTR, you can choose more options and tools. 
+
 MGEScan
--------
+^^^^^^^^
+
+MGEScan runs LTR and nonLTR both with a selected input genome sequences. Default value settings and configurations are used.
 
 .. image:: images/rtm-mgescan.png
 
 LTR
----
+^^^^^^^^
+
+LTR takes option values from user input. RepeatMasker or scaffold files can be selected in this tool. 
 
 .. image:: images/rtm-ltr.png
 
 nonLTR
-------
+^^^^^^^^
+
+nonLTR
 
 .. image:: images/rtm-nonltr.png
 
-Genome Browser via UCSC or Ensembl
-----------------------------------
+Visualization via UCSC or Ensembl Genome Browser
+--------------------------------------------------------
+
+Upon completion of LTR or nonLTR, the output is generated in a gff3 format as well. In Galaxy, UCSC or Ensembl Genome Browser link is provided for a gff3 file to support interactive graphical display of genome sequence data.
 
 UCSC Genome Browser
 ^^^^^^^^^^^^^^^^^^^
@@ -73,8 +85,14 @@ Ensembl
 
 .. image:: images/rtm-ltr-gff3-ensembl.png
 
+Download Results
+----------------
+
+Galaxy provides a dowload option to results of tools via a download icon. 
+
 Description of tools
-^^^^^^^^^^^^^^^^^^^^
+--------------------
+
 Each tool in Galaxy has its description to explain how to use.
 
 .. image:: images/rtm-description.png
