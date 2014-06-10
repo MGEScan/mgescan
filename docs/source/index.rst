@@ -11,8 +11,8 @@ Contents:
 .. toctree::
    :maxdepth: 1
 
-   `tutorial <tutorial.html>`_
-
+   tutorial
+   .. `tutorial <tutorial.html>`_
 
 
 Indices and tables
