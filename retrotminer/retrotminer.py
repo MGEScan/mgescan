@@ -15,7 +15,7 @@ Options:
 """
 from docopt import docopt
 from multiprocessing import Process
-from subprocess import Popen
+from subprocess import Popen, PIPE
 import os
 
 class RetroTMiner:
@@ -81,11 +81,11 @@ class RetroTMiner:
         print 'ltr: starting'
         # scaffold
         # repeatmasker
-        res0 = subprocess.Popen("ltr/pre_process.pl -genome=%(genome_dir)s \
+        res0 = Popen("ltr/pre_process.pl -genome=%(genome_dir)s \
         -data=%(data_dir)s -sw_rm=%(sw_rm)s -scaffold=%(scaffold)s" %
-        vars(self), stdout=Pipe).stdout.read()
+        vars(self), stdout=PIPE).stdout.read()
         # find-ltr
-        res1 = subprocess.Popen("ltr/find_ltr.pl -genome=%(genome_dir)s \
+        res1 = Popen("ltr/find_ltr.pl -genome=%(genome_dir)s \
         -data=%(data_dir)s -hmmerv=%(hmmerv)s -min_dist=%(min_dist)s \
         -max_dist=%(max_dist)s -min_len_ltr=%(min_len_ltr)s \
         -max_len_ltr=%(max_len_ltr)s -ltr_sim_condition=%(ltr_sim_condition)s \
@@ -113,8 +113,7 @@ class RetroTMiner:
             return self.get_abspath(path)
         else:
             new_path = path + ".1"
-            os.makedirs(new_path)
-            return self.get_abspath(new_path)
+            return self.create_directory(new_path)
 
 if __name__ == "__main__":
     arguments = docopt(__doc__, version='RetroTMiner 0.1')
