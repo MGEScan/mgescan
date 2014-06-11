@@ -2,9 +2,10 @@ retrotminer
 ===========
 
 A Galaxy based system for identifying retrotransposons in genome
+
 License
 -------
-Copyright (C) 2014 Mina Rho & Haixu Tang.
+Copyright (C) 2014 Mina Rho & Haixu Tang. See the LICENSE file for license rights and limitations (GPL v3).
 
 This program is part of MGEScan.
 
