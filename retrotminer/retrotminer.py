@@ -81,7 +81,7 @@ class RetroTMiner:
         print 'ltr: starting'
         # scaffold
         # repeatmasker
-        res0 = subprocess.Popen("ltr/pre_process.pl -genome=%(genome_dir)s
+        res0 = subprocess.Popen("ltr/pre_process.pl -genome=%(genome_dir)s \
         -data=%(data_dir)s -sw_rm=%(sw_rm)s -scaffold=%(scaffold)s" %
         vars(self), stdout=Pipe).stdout.read()
         # find-ltr
@@ -102,10 +102,10 @@ class RetroTMiner:
 
     def get_abspath(self, path):
         try:
-             return os.path.abspath(path)
-         except:
-             # print [DEBUG] Failed to convert a path to an absolute path
-             return path
+            return os.path.abspath(path)
+        except:
+            # print [DEBUG] Failed to convert a path to an absolute path
+            return path
 
     def create_directory(self, path):
         if not os.path.exists(path):
