@@ -2,7 +2,7 @@ import os
 from setuptools import setup
 
 def read(fname):
-    return open(os.path.dirname(__file__), fname)).read()
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 reqs = [line.strip() for line in open('requirements.txt')]
 
@@ -18,7 +18,7 @@ setup(
         url = "https://github.com/lee212/retrotminer",
         packages = ['retrotminer'],
         install_requires = reqs,
-        long_description = read('README'),
+        long_description = read('README.md'),
         classifiers=[
             "Development Status :: 3 - Alpha",
             "Topic :: Scientific/Engineering",
