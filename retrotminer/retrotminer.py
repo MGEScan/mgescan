@@ -16,6 +16,7 @@ Options:
 from docopt import docopt
 from multiprocessing import Process
 from subprocess import Popen
+import os
 
 class RetroTMiner:
     """ RetroTMiner runs mgescan for identifying ltr and nonltr in genome
@@ -34,8 +35,8 @@ class RetroTMiner:
         self.set_defaults()
 
     def set_inputs(self):
-        self.data_dir = self.args['--output']
-        self.genome_dir = self.args['<genome_dir>']
+        self.data_dir = self.get_abspath(self.args['--output'])
+        self.genome_dir = self.get_abspath(self.args['<genome_dir>'])
         self.ltr_enabled = self.args['ltr']
         self.nonltr_enabled = self.args['nonltr']
 
@@ -52,6 +53,8 @@ class RetroTMiner:
         len_condition: minimum length(bp) for LTRs aligned in local alignment.
         """
 
+        self.data_dir = self.data_dir or self.create_directory("./output")
+
         self.hmmerv = 3
         self.min_dist = 2000
         self.max_dist = 20000
@@ -62,7 +65,7 @@ class RetroTMiner:
         self.len_condition = 70
 
         self.sw_rm = "No" # or Yes
-        self.scaffold = None # or directory
+        self.scaffold = "" # or directory
 
     def run(self):
         # ltr
@@ -96,6 +99,22 @@ class RetroTMiner:
         # nonltr
         # gff3
         print 'nonltr: finishing'
+
+    def get_abspath(self, path):
+        try:
+             return os.path.abspath(path)
+         except:
+             # print [DEBUG] Failed to convert a path to an absolute path
+             return path
+
+    def create_directory(self, path):
+        if not os.path.exists(path):
+            os.makedirs(path)
+            return self.get_abspath(path)
+        else:
+            new_path = path + ".1"
+            os.makedirs(new_path)
+            return self.get_abspath(new_path)
 
 if __name__ == "__main__":
     arguments = docopt(__doc__, version='RetroTMiner 0.1')
