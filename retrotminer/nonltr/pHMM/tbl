@@ -1,0 +1,13 @@
+#                                                                            --- full sequence --- -------------- this domain -------------   hmm coord   ali coord   env coord
+# target name        accession   tlen query name           accession   qlen   E-value  score  bias   #  of  c-Evalue  i-Evalue  score  bias  from    to  from    to  from    to  acc description of target
+#------------------- ---------- ----- -------------------- ---------- ----- --------- ------ ----- --- --- --------- --------- ------ ----- ----- ----- ----- ----- ----- ----- ---- ---------------------
+#
+# Program:         hmmsearch
+# Version:         3.1b1 (May 2013)
+# Pipeline mode:   SEARCH
+# Query file:      /nfs/nfs5/home/scratch/lee212/MGEScan1.3.1/MGEScan_nonLTR_v2/pHMM/CRE.rt.hmmc
+# Target file:     /scratch/lee212/MGEScan1.3.1/input/data/info/full/Rex/Rex.rt.pep
+# Option settings: hmmsearch --domtblout /nfs/nfs5/home/scratch/lee212/MGEScan1.3.1/MGEScan_nonLTR_v2/pHMM/tbl --noali /nfs/nfs5/home/scratch/lee212/MGEScan1.3.1/MGEScan_nonLTR_v2/pHMM/CRE.rt.hmmc /scratch/lee212/MGEScan1.3.1/input/data/info/full/Rex/Rex.rt.pep 
+# Current dir:     /nfs/nfs5/home/scratch/lee212/MGEScan1.3.1
+# Date:            Fri Jun  6 02:37:24 2014
+# [ok]
