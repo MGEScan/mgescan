@@ -81,16 +81,18 @@ class RetroTMiner:
         print 'ltr: starting'
         # scaffold
         # repeatmasker
-        res0 = Popen("ltr/pre_process.pl -genome=%(genome_dir)s \
+        cmd0 = "ltr/pre_process.pl -genome=%(genome_dir)s \
         -data=%(data_dir)s -sw_rm=%(sw_rm)s -scaffold=%(scaffold)s" %
-        vars(self), stdout=PIPE).stdout.read()
+        vars(self)
+        res0 = Popen(cmd0.split(), stdout=PIPE).stdout.read()
         # find-ltr
-        res1 = Popen("ltr/find_ltr.pl -genome=%(genome_dir)s \
+        cmd1 = "ltr/find_ltr.pl -genome=%(genome_dir)s \
         -data=%(data_dir)s -hmmerv=%(hmmerv)s -min_dist=%(min_dist)s \
         -max_dist=%(max_dist)s -min_len_ltr=%(min_len_ltr)s \
         -max_len_ltr=%(max_len_ltr)s -ltr_sim_condition=%(ltr_sim_condition)s \
         -cluster_sim_condition=%(cluster_sim_condition)s \
-        -len_condition=%(len_condition)s" % vars(self), stdout=PIPE).stdout.read()
+        -len_condition=%(len_condition)s" % vars(self)
+        res1 = Popen(cmd1.split(), stdout=PIPE).stdout.read()
         # gff3
         print 'ltr: finishing'
 

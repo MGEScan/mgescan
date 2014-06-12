@@ -13,12 +13,26 @@ my $genome_dir;
 my $data_dir;
 
 my ($scaffold_file, $genome_dir, $tool_rm, $rm_dir, $data_dir);
+my ($sw_rm, $scaffold);
 get_path($conf_file, \$scaffold_file, \$tool_rm, \$rm_dir);
 
 GetOptions(
            'data=s' => \$data_dir,
            'genome=s' => \$genome_dir,
+		'sw_rm:s' => \$sw_rm,
+		'scaffold:s' => \$scaffold
            );
+
+###########################################
+### get values in path.conf from parameters
+if ($sw_rm eq "Yes"){
+	$tool_rm = "/u/lee212/retrotminer/MGEScan_LTR/RepeatMasker/RepeatMasker";
+	$rm_dir = $data_dir."/repeatmasker/";
+}
+if (length($scaffold) > 0){
+	$scaffold_file = $scaffold;
+}
+###########################################
 
 if (length($genome_dir)==0){
     print "ERROR: An input genome directory was not specified.\n";

@@ -4,6 +4,8 @@ use Getopt::Long;
 use Cwd 'abs_path';
 use File::Basename;
 
+system("source /u/lee212/.bashrc");
+system("source /u/lee212/.bash_profile");
 ###################################################
 # path configuration
 ###################################################
@@ -57,11 +59,45 @@ my @rt=("anno_nonLTR_rt.hmm","anno_dirs_rt.hmm",
 get_path_conf($conf_file, \$tool_trf);
 get_value_conf($value_file, \$MIN_DIST,\$MAX_DIST,\$MIN_LEN_LTR,\$MAX_LEN_LTR,\$LTR_SIM_CONDITION,\$CLUSTER_SIM_CONDITION,\$LEN_CONDITION, );
 
+##############################################
+# get values in value.conf from parameters
+##############################################
+my ($min_dist, $max_dist, $min_len_ltr, $max_len_ltr, $ltr_sim_condition, $cluster_sim_condition, $len_condition);
 GetOptions(
            'data=s' => \$main_dir,
            'genome=s' => \$main_genome_dir,
            'hmmerv=s' => \$hmmerv,
-           );
+ 
+	'min_dist:s' => \$min_dist,
+	'max_dist:s' => \$max_dist,
+	'min_len_ltr:s' => \$min_len_ltr,
+	'max_len_ltr:s' => \$max_len_ltr,
+	'ltr_sim_condition:s' => \$ltr_sim_condition,
+	'cluster_sim_condition:s' => \$cluster_sim_condition,
+	'len_condition:s' => \$len_condition
+);
+if (length($min_dist) > 0){
+	$MIN_DIST = $min_dist
+}
+if (length($max_dist) > 0){
+	$MAX_DIST = $max_dist
+}
+if (length($min_len_ltr) > 0){
+	$MIN_LEN_LTR= $min_len_ltr
+}
+if (length($max_len_ltr) > 0){
+	$MAX_LEN_LTR = $MAX_LEN_LTR
+}
+if (length($ltr_sim_condition) > 0){
+	$LTR_SIM_CONDITION = $ltr_sim_condition
+}
+if (length($cluster_sim_condition) > 0){
+	$CLUSTER_SIM_CONDITION = $cluster_sim_condition
+}
+if (length($len_condition) > 0){
+	$LEN_CONDITION = $len_condition
+}
+##############################################
 
 if (length($main_genome_dir)==0){
     print "ERROR: An input genome directory was not specified.\n";
@@ -139,11 +175,11 @@ cluster_family($sim_file, $family_file, $ltr, $ltr_data_dir);
 #------------------------------------------------------------------------------------------
 select_putative_family($family_file, $family_selected_file);
 
-system("rm -r ".$genome_dir);
-system("rm -r ".$ir_seq_dir);
-system("rm -r ".$ltr_seq_dir);
-system("rm -r ".$ltr_data_dir);
-system("rm ".$sim_file);
+system("rm -rf ".$genome_dir);
+system("rm -rf ".$ir_seq_dir);
+system("rm -rf ".$ltr_seq_dir);
+system("rm -rf ".$ltr_data_dir);
+system("rm -rf ".$sim_file);
 
 sub call_find_ltr_for_each_chr{   #$genome_dir, $main_dir, $ltr_dir, $ltr_data_dir);
 
@@ -273,7 +309,7 @@ sub select_putative_family{
 
     close(IN);
     close(OUT);
-    system("rm ".$_[0]);
+    system("rm -rf ".$_[0]);
 }
 
 
@@ -601,17 +637,17 @@ sub find_mem{ #$genome_file, $mask_file, $mem_file
     system($command);
     my @temp = split(/\//, $genome_file_sub.".2.7.7.80.10.50.500");
     system("mv ".$temp[$#temp].".mask ".$mask_file_sub);
-    system("rm ".$temp[$#temp].".dat");
+    system("rm -rf ".$temp[$#temp].".dat");
     
     #Run ltr to get mem
     system($tool_ltr." -i ".$mask_file_sub." -o ".$mem_file_sub." -s ".$MIN_LEN_MEM." -d ".$MIN_DIST." -D ".$MAX_DIST);
-    system("rm ".$mask_file_sub);
+    system("rm -rf ".$mask_file_sub);
     
     #Remove the mem file when it doesn't have data
     if(!(-e $mem_file_sub)){	
 	return 0;
     }elsif(-s $mem_file_sub==0){
-	system("rm $mem_file_sub");
+	system("rm -rf $mem_file_sub");
 	return 0;
     }else{
 	return 1;
@@ -731,13 +767,13 @@ sub make_bin { #$mem_file, $dist_file, $bin_file
     close(TEMP_SORTED);
     close(OUTPUT);
 
-    system("rm $temp_file1");
-    system("rm $temp_file2");
-    system("rm $dist_file_sub");   
-    system("rm $mem_file_sub");
+    system("rm -rf $temp_file1");
+    system("rm -rf $temp_file2");
+    system("rm -rf $dist_file_sub");   
+    system("rm -rf $mem_file_sub");
 
     if ($line_count ==0){
-	system("rm ".$bin_file_sub);
+	system("rm -rf ".$bin_file_sub);
 	return 0;
     }else {
 	return 1;
@@ -883,25 +919,25 @@ sub find_putative_ltr{ #$bin_file, $ltr_pre_file, $run_hmm
     close(INPUT);
     
     if (-e $file1){
-	system("rm $file1");
+	system("rm -rf $file1");
     }
     if (-e $file2){
-	system("rm $file2");
+	system("rm -rf $file2");
     }
     if (-e $file3){
-	system("rm $file3");
+	system("rm -rf $file3");
     }
     if (-e $file4){
-	system("rm $file4");
+	system("rm -rf $file4");
     }
-    system("rm ".$bin_file_sub);
+    system("rm -rf ".$bin_file_sub);
     
     if ($line_count == 0){
-	system("rm $file5");
+	system("rm -rf $file5");
 	return 0;
     }else {
 	system("sort -k 1n  ".$file5." > ".$ltr_pre_file_sub);
-	system("rm $file5");
+	system("rm -rf $file5");
 	return 1;
     }
 }
