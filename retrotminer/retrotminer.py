@@ -79,27 +79,57 @@ class RetroTMiner:
 
     def ltr(self):
         print 'ltr: starting'
+
         # scaffold
         # repeatmasker
-        cmd0 = "ltr/pre_process.pl -genome=%(genome_dir)s \
-        -data=%(data_dir)s -sw_rm=%(sw_rm)s -scaffold=%(scaffold)s" % vars(self)
-        res0 = Popen(cmd0.split(), stdout=PIPE).stdout.read()
+        cmd0 = "ltr/pre_process.pl \
+                -genome=%(genome_dir)s \
+                -data=%(data_dir)s \
+                -sw_rm=%(sw_rm)s \
+                -scaffold=%(scaffold)s"
+        res0 = self.run_cmd(cmd0)
+
         # find-ltr
-        cmd1 = "ltr/find_ltr.pl -genome=%(genome_dir)s \
-        -data=%(data_dir)s -hmmerv=%(hmmerv)s -min_dist=%(min_dist)s \
-        -max_dist=%(max_dist)s -min_len_ltr=%(min_len_ltr)s \
-        -max_len_ltr=%(max_len_ltr)s -ltr_sim_condition=%(ltr_sim_condition)s \
-        -cluster_sim_condition=%(cluster_sim_condition)s \
-        -len_condition=%(len_condition)s" % vars(self)
-        res1 = Popen(cmd1.split(), stdout=PIPE).stdout.read()
+        cmd1 = "ltr/find_ltr.pl \
+                -genome=%(genome_dir)s \
+                -data=%(data_dir)s \
+                -hmmerv=%(hmmerv)s \
+                -min_dist=%(min_dist)s \
+                -max_dist=%(max_dist)s \
+                -min_len_ltr=%(min_len_ltr)s \
+                -max_len_ltr=%(max_len_ltr)s \
+                -ltr_sim_condition=%(ltr_sim_condition)s \
+                -cluster_sim_condition=%(cluster_sim_condition)s \
+                -len_condition=%(len_condition)s"
+        res1 = self.run_cmd(cmd1)
+
         # gff3
+        self.ltr_out_path = self.get_abspath(self.data_dir + "/ltr/ltr.out")
+        self.ltr_gff_path = self.get_abspath(self.data_dir + "/ltr/ltr.gff3")
+        cmd2 = "ltr/toGFF.py %(ltr_out_path)s %(ltr_gff_path)s"
+        res2 = self.run_cmd(cmd2)
+
         print 'ltr: finishing'
 
     def nonltr(self):
         print 'nonltr: starting'
         # nonltr
+        cmd0 = "nonltr/run_MGEScan.pl \
+                -genome=%(genome_dir)s \
+                -data=%(data_dir)s \
+                -hmmerv=%(hmmerv)s"
+        res0 = self.run_cmd(cmd0)
+        
         # gff3
+        self.nonltr_out_path = self.get_abspath(self.data_dir + "/info/full/")
+        self.nonltr_gff_path = self.get_abspath(self.data_dir + "/info/nonltr.gff3")
+        cmd1 = "nonltr/toGFF.py %(nonltr_out_path)s %(nonltr_gff_path)s"
+        res1 = self.run_cmd(cmd1)
+
         print 'nonltr: finishing'
+
+    def run_cmd(self, cmd):
+        return Popen((cmd % vars(self)).split(), stdout=PIPE).stdout.read()
 
     def get_abspath(self, path):
         try:
