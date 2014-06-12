@@ -82,8 +82,7 @@ class RetroTMiner:
         # scaffold
         # repeatmasker
         cmd0 = "ltr/pre_process.pl -genome=%(genome_dir)s \
-        -data=%(data_dir)s -sw_rm=%(sw_rm)s -scaffold=%(scaffold)s" %
-        vars(self)
+        -data=%(data_dir)s -sw_rm=%(sw_rm)s -scaffold=%(scaffold)s" % vars(self)
         res0 = Popen(cmd0.split(), stdout=PIPE).stdout.read()
         # find-ltr
         cmd1 = "ltr/find_ltr.pl -genome=%(genome_dir)s \
