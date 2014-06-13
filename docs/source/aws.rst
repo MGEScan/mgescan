@@ -26,12 +26,12 @@ In AWS Management Console, open *EC2 Dashboard > Launch Instance*. To choose an 
 RetroTMiner EC2 Image Information
 """"""""""""""""""""""""""""""""""
 
-Image Name:retrotminer-alpha
-ID: ami-23d9c74a
-Server type: 64bit
-Description: retrotminer - MGEscan for LTR and nonLTR
-Root device type: ebs 
-Virtualization type: paravirtual
+* Image Name:retrotminer-alpha
+* ID: ami-23d9c74a
+* Server type: 64bit
+* Description: retrotminer - MGEscan for LTR and nonLTR
+* Root device type: ebs 
+* Virtualization type: paravirtual
 
 Access to RetroTMiner Instance
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -43,6 +43,6 @@ Once the RetroTMiner instance is launched and accessible, galaxy scientific work
 Ready To Use
 ^^^^^^^^^^^^
 
-The RetroTMiner is ready to conduct your experiment on Amazon EC2.
+The RetroTMiner is now ready to conduct your experiment on Amazon EC2.
 
-Note. Do not forget to terminate the virtual instance after you finished all analysis. Amazon Cloud charges use of VM instances hourly.
+Note. Do not forget to terminate your virtual instance after all analysis completed. Amazon Cloud charges use of VM instances hourly.
