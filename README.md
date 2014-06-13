@@ -7,8 +7,6 @@ A Galaxy based system for identifying retrotransposons in genome
 
 * [Tutorial](http://retrotminer.readthedocs.org/en/latest/tutorial.html)
 * [Documentation](http://retrotminer.readthedocs.org/en/latest/index.html)
-* [MGEScan-LTR](http://darwin.informatics.indiana.edu/cgi-bin/evolution/daphnia_ltr.pl)
-* [MGEScan-nonLTR](http://darwin.informatics.indiana.edu/cgi-bin/evolution/nonltr/nonltr.pl)
 * [Source](https://github.com/MGEScan/retrotminer/)
 * [Home Page](http://mgescan.github.io/retrotminer/)
 
@@ -51,6 +49,12 @@ References
 1. M. Rho, S. Schaack, X. Gao, S. Kim, M. Lynch and H. Tang (2010), LTR retroelements in the genome of Daphnia pulex, BMC Genomics, 11:425. Pubmed. 
 2. M. Rho and H. Tang (2009), MGEScan-nonLTR: computational identification and classification of Non-LTR retrotransposons in eukaryotic genomes. Nucleic Acid Res, 37(21):e143. Free fulltext at NAR online 
 3. M. Rho, J. H. Choi, S. Kim, M. Lynch and H. Tang (2007), De novo identification of LTR retrotransposons in eukaryotic genomes. BMC Genomics, 8:90. Pubmed. 
+
+Web Sites
+---------
+
+* [MGEScan-LTR](http://darwin.informatics.indiana.edu/cgi-bin/evolution/daphnia_ltr.pl)
+* [MGEScan-nonLTR](http://darwin.informatics.indiana.edu/cgi-bin/evolution/nonltr/nonltr.pl)
 
 License
 -------
