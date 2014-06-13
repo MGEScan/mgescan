@@ -1,7 +1,7 @@
 MGEScan-nonLTR
 ==============
 
-.. images:: images/rtm-nonltr.png
+.. image:: images/rtm-nonltr.png
 
 Running the program
 --------------------
