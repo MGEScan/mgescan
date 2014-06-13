@@ -15,4 +15,4 @@ Ensembl
 
 Source Code
 -----------
-In RetoTMiner source code, ltr/toGFF.py and nonltr/toGFF.py are used to convert results to GFF format by Wazim Mohammmed Ismail.
+In RetoTMiner source code, ltr/toGFF.py and nonltr/toGFF.py are used to convert results to GFF format developed by Wazim Mohammmed Ismail.
