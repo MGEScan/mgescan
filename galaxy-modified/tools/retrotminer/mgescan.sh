@@ -1,9 +1,11 @@
 #!/bin/bash
-
 # mgescan.sh $input $input.name 3 $output L None None None $ltr_gff3 None $sw_rm "$scaffold" $min_dist $max_dist $min_len_ltr $max_len_ltr $ltr_sim_condition $cluster_sim_condition $len_condition $repeatmasker
 user_dir=/u/lee212
 #script=$user_dir/retrotminer/wazim/MGEScan1.1/run_MGEScan.pl
-script=$user_dir/retrotminer/wazim/MGEScan1.1/run_MGEScan2.pl
+#script=$user_dir/retrotminer/wazim/MGEScan1.3.1/run_MGEScan2.pl
+source $user_dir/virtualenv/retrotminer/bin/activate
+script_program=`which python`
+script=$user_dir/github/retrotminer/retrotminer/retrotminer.py
 input_file=$1
 input_file_name=$2
 hmmsearch_version=$3
@@ -58,7 +60,8 @@ else
 fi
 
 #run
-/usr/bin/perl $script -genome=$input_dir/ -data=$output_dir/ -hmmerv=$hmmsearch_version -program=$program -sw_rm=${11} -scaffold=${12} -min_dist=${13} -max_dist=${14} -min_len_ltr=${15} -max_len_ltr=${16} -ltr_sim_condition=${17} -cluster_sim_condition=${18} -len_condition=${19}
+$script_program $script -genome=$input_dir/ -data=$output_dir/ -hmmerv=$hmmsearch_version -program=$program -sw_rm=${11} -scaffold=${12} -min_dist=${13} -max_dist=${14} -min_len_ltr=${15} -max_len_ltr=${16} -ltr_sim_condition=${17} -cluster_sim_condition=${18} -len_condition=${19}
+#/usr/bin/perl $script -genome=$input_dir/ -data=$output_dir/ -hmmerv=$hmmsearch_version -program=$program -sw_rm=${11} -scaffold=${12} -min_dist=${13} -max_dist=${14} -min_len_ltr=${15} -max_len_ltr=${16} -ltr_sim_condition=${17} -cluster_sim_condition=${18} -len_condition=${19}
 
 #RES=`ssh -i $user_dir/.ssh/.internal silo.cs.indiana.edu "/usr/bin/perl $script -genome=$input_dir/ -data=$output_dir/ -hmmerv=$hmmsearch_version -program=$program > /dev/null"`
 
@@ -66,12 +69,12 @@ fi
 if [ "$program" != "N" ]
 then
 	/bin/cp $output_dir/ltr/ltr.out $output_file
-	if [ "$ltr_gff3" != "" ]
+	if [ "$ltr_gff3" != "None" ]
 	then
 		/bin/cp $output_dir/ltr/ltr.gff3 $ltr_gff3
 	fi
 
-	if [ "$repeatmasker" != "" ]
+	if [ "$repeatmasker" != "None" ]
 	then
 		# chr2L.fa.cat.gz  chr2L.fa.masked  chr2L.fa.out  chr2L.fa.out.pos  chr2L.fa.tbl
 		/bin/cp $output_dir/repeatmasker/${input_file_name}.out $repeatmasker
@@ -86,7 +89,7 @@ then
 	/bin/cp $output_dir/info/full/*/* $clade
 	/bin/cp $output_dir/info/validation/en $en
 	/bin/cp $output_dir/info/validation/rt $rt
-	if [ "$nonltr_gff3" != "" ]
+	if [ "$nonltr_gff3" != "None" ]
 	then
 		/bin/cp $output_dir/info/nonltr.gff3 $nonltr_gff3
 		# nonltr.gff3
@@ -108,6 +111,8 @@ fi
 if [ $? -eq 0 ]
 then
 	rm -rf $work_dir/$t_dir
+	#echo
 else
+	#echo cp -pr $work_dir/$t_dir $work_dir/error-cases/
 	cp -pr $work_dir/$t_dir $work_dir/error-cases/
 fi
