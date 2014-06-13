@@ -4,7 +4,9 @@ from distutils.command.install import install as DistutilsInstall
 
 class MyInstall(DistutilsInstall):
     def run(self):
-        #os.system("cd retrotminer/ltr/MER;make")
+        os.system("cd retrotminer/ltr/MER; make clean; make")
+        os.system("cd retrotminer/nonltr/; make clean; make translate")
+        os.system("cd retrotminer/nonltr/hmm;make clean; make")
         DistutilsInstall.run(self)
 
 def read(fname):
