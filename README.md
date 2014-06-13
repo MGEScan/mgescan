@@ -20,8 +20,8 @@ cd retrotminer
 python setup.py install
 ```
 
-virtualenv (optional for individual without sudo)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+### virtualenv (optional for individual without sudo)
+
 
 ```sh
 virtualenv ~/virtualenv/retrotminer
