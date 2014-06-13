@@ -1,5 +1,11 @@
 import os
 from setuptools import setup
+from distutils.command.install import install as DistutilsInstall
+
+class MyInstall(DistutilsInstall):
+    def run(self):
+        #os.system("cd retrotminer/ltr/MER;make")
+        DistutilsInstall.run(self)
 
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
@@ -32,5 +38,6 @@ setup(
             [console_scripts]
             rtm=retrotminer.retrotminer:main
             ''',
+        cmdclass={'install': MyInstall},
         )
 
