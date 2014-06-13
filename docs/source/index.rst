@@ -12,6 +12,7 @@ Contents:
    :maxdepth: 1
 
    tutorial
+   aws
    .. `tutorial <tutorial.html>`_
 
 
