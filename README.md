@@ -3,6 +3,29 @@ retrotminer
 
 A Galaxy based system for identifying retrotransposons in genome
 
+[Tutorial](http://retrotminer.readthedocs.org/en/latest/tutorial.html)
+Installation
+------------
+
+```sh
+git clone git@github.com:MGEScan/retrotminer.git
+cd retrotminer
+python setup.py install
+```
+
+Command Line Tool (rtm)
+-----------------------
+
+```sh
+Usage:
+    retrotminer.py <genome_dir> [--output=<data_dir>]
+    retrotminer.py ltr <genome_dir> [--output=<data_dir>]
+    retrotminer.py nonltr <genome_dir> [--output=<data_dir>]
+    retrotminer.py (-h | --help)
+    retrotminer.py --version
+```
+
+
 License
 -------
 Copyright (C) 2014 Hyungro Lee, Wazim Mohammed Ismail, Mina Rho & Haixu Tang. See the LICENSE file for license rights and limitations (GPL v3).
