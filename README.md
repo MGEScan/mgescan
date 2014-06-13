@@ -20,6 +20,14 @@ cd retrotminer
 python setup.py install
 ```
 
+### virtualenv (optional for individual without sudo)
+
+
+```sh
+virtualenv ~/virtualenv/retrotminer
+source ~/virtualenv/retrotminer/bin/activate
+```
+
 Command Line Tool (rtm)
 -----------------------
 
