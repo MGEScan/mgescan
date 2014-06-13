@@ -6,7 +6,9 @@
 Welcome to RetroTMiner's documentation!
 =======================================
 
-Contents:
+RetroTMiner is a Galaxy based workflow system for MGEScan which is identifying long terminal repeats (LTR) and non-LTR retroelements in eukaryotic genomic sequences.
+
+The documentation provides basic tutorials of using RetroTMiner with Galaxy Workflow system and detailed information of source code.
 
 .. toctree::
    :maxdepth: 1
