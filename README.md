@@ -2,7 +2,7 @@ RetroTMiner
 ===========
 
 A Galaxy based system for identifying retrotransposons in genome
-** DEMO Version : [silo.cs.indiana.edu](http://silo.cs.indiana.edu:38080/)
+**DEMO Version : [silo.cs.indiana.edu](http://silo.cs.indiana.edu:38080/)**
 
 * [Tutorial](http://retrotminer.readthedocs.org/en/latest/tutorial.html)
 * [Documentation](http://retrotminer.readthedocs.org/en/latest/index.html)
