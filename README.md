@@ -3,10 +3,11 @@ retrotminer
 
 A Galaxy based system for identifying retrotransposons in genome
 
-[Tutorial](http://retrotminer.readthedocs.org/en/latest/tutorial.html)
-[Documentation](http://retrotminer.readthedocs.org/en/latest/index.html)
-[MGEScan-LTR](http://darwin.informatics.indiana.edu/cgi-bin/evolution/daphnia_ltr.pl)
-[MGEScan-nonLTR](http://darwin.informatics.indiana.edu/cgi-bin/evolution/nonltr/nonltr.pl)
+* [Tutorial](http://retrotminer.readthedocs.org/en/latest/tutorial.html)
+* [Documentation](http://retrotminer.readthedocs.org/en/latest/index.html)
+* [MGEScan-LTR](http://darwin.informatics.indiana.edu/cgi-bin/evolution/daphnia_ltr.pl)
+* [MGEScan-nonLTR](http://darwin.informatics.indiana.edu/cgi-bin/evolution/nonltr/nonltr.pl)
+* [Source](https://github.com/MGEScan/retrotminer/)
 
 Installation
 ------------
@@ -28,6 +29,10 @@ Usage:
     retrotminer.py (-h | --help)
     retrotminer.py --version
 ```
+
+On Cloud (Amazon EC2)
+---------------------
+retrotminer-alpha - ami-23d9c74a
 
 References
 -----------
