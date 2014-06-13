@@ -145,8 +145,10 @@ class RetroTMiner:
         else:
             new_path = path + ".1"
             return self.create_directory(new_path)
-
-if __name__ == "__main__":
+def main():
     arguments = docopt(__doc__, version='RetroTMiner 0.1')
     rtm = RetroTMiner(arguments)
     rtm.run()
+
+if __name__ == "__main__":
+    main()

@@ -28,5 +28,9 @@ setup(
             "Operating System :: POSIX :: Linux",
             "programming Language :: Python",
             ],
+        entry_points='''
+            [console_scripts]
+            rtm=retrotminer.retrotminer:main
+            ''',
         )
 
