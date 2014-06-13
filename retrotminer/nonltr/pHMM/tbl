@@ -5,9 +5,9 @@
 # Program:         hmmsearch
 # Version:         3.1b1 (May 2013)
 # Pipeline mode:   SEARCH
-# Query file:      /nfs/nfs5/home/scratch/lee212/MGEScan1.3.1/MGEScan_nonLTR_v2/pHMM/CRE.rt.hmmc
-# Target file:     /scratch/lee212/MGEScan1.3.1/input/data/info/full/Rex/Rex.rt.pep
-# Option settings: hmmsearch --domtblout /nfs/nfs5/home/scratch/lee212/MGEScan1.3.1/MGEScan_nonLTR_v2/pHMM/tbl --noali /nfs/nfs5/home/scratch/lee212/MGEScan1.3.1/MGEScan_nonLTR_v2/pHMM/CRE.rt.hmmc /scratch/lee212/MGEScan1.3.1/input/data/info/full/Rex/Rex.rt.pep 
-# Current dir:     /nfs/nfs5/home/scratch/lee212/MGEScan1.3.1
-# Date:            Fri Jun  6 02:37:24 2014
+# Query file:      /nfs/nfs4/home/lee212/github/retrotminer/retrotminer/nonltr/pHMM/CRE.rt.hmmc
+# Target file:     /u/lee212/github/retrotminer/retrotminer/input/tmp.MTCjU20df5/data/info/full/Rex/Rex.rt.pep
+# Option settings: hmmsearch --domtblout /nfs/nfs4/home/lee212/github/retrotminer/retrotminer/nonltr/pHMM/tbl --noali /nfs/nfs4/home/lee212/github/retrotminer/retrotminer/nonltr/pHMM/CRE.rt.hmmc /u/lee212/github/retrotminer/retrotminer/input/tmp.MTCjU20df5/data/info/full/Rex/Rex.rt.pep 
+# Current dir:     /nfs/nfs4/home/lee212/github/retrotminer/retrotminer
+# Date:            Fri Jun 13 11:10:49 2014
 # [ok]

@@ -5,9 +5,9 @@
 # Program:         hmmsearch
 # Version:         3.1b1 (May 2013)
 # Pipeline mode:   SEARCH
-# Query file:      /nfs/nfs5/home/scratch/lee212/MGEScan1.3.1/MGEScan_LTR/pfam/c_PF03056_fs.hmm
-# Target file:     /scratch/lee212/MGEScan1.3.1/input/data/ltr/ltr/chr2L.bin.temp4
-# Option settings: hmmsearch --tblout /nfs/nfs5/home/scratch/lee212/MGEScan1.3.1/MGEScan_LTR/pfam/tbl --noali -E 0.000001 /nfs/nfs5/home/scratch/lee212/MGEScan1.3.1/MGEScan_LTR/pfam/c_PF03056_fs.hmm /scratch/lee212/MGEScan1.3.1/input/data/ltr/ltr/chr2L.bin.temp4 
-# Current dir:     /nfs/nfs5/home/scratch/lee212/MGEScan1.3.1
-# Date:            Fri Jun  6 02:22:06 2014
+# Query file:      /nfs/nfs4/home/lee212/github/retrotminer/retrotminer/ltr/pfam/c_PF03056_fs.hmm
+# Target file:     /u/lee212/github/retrotminer/retrotminer/input/tmp.MTCjU20df5/data/ltr/ltr/chr2L.fa.bin.temp4
+# Option settings: hmmsearch --tblout /nfs/nfs4/home/lee212/github/retrotminer/retrotminer/ltr/pfam/tbl --noali -E 0.000001 /nfs/nfs4/home/lee212/github/retrotminer/retrotminer/ltr/pfam/c_PF03056_fs.hmm /u/lee212/github/retrotminer/retrotminer/input/tmp.MTCjU20df5/data/ltr/ltr/chr2L.fa.bin.temp4 
+# Current dir:     /nfs/nfs4/home/lee212/github/retrotminer/retrotminer
+# Date:            Fri Jun 13 11:32:36 2014
 # [ok]

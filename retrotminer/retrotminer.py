@@ -129,7 +129,7 @@ class RetroTMiner:
         print 'nonltr: finishing'
 
     def run_cmd(self, cmd):
-        return Popen((cmd % vars(self)).split(), stdout=PIPE).stdout.read()
+        return Popen((cmd % vars(self)).split(), stdout=PIPE, stderr=PIPE).stdout.read()
 
     def get_abspath(self, path):
         try:
