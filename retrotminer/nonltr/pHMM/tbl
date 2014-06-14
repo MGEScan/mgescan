@@ -6,8 +6,8 @@
 # Version:         3.1b1 (May 2013)
 # Pipeline mode:   SEARCH
 # Query file:      /nfs/nfs4/home/lee212/github/retrotminer/retrotminer/nonltr/pHMM/CRE.rt.hmmc
-# Target file:     /u/lee212/github/retrotminer/retrotminer/input/tmp.MTCjU20df5/data/info/full/Rex/Rex.rt.pep
-# Option settings: hmmsearch --domtblout /nfs/nfs4/home/lee212/github/retrotminer/retrotminer/nonltr/pHMM/tbl --noali /nfs/nfs4/home/lee212/github/retrotminer/retrotminer/nonltr/pHMM/CRE.rt.hmmc /u/lee212/github/retrotminer/retrotminer/input/tmp.MTCjU20df5/data/info/full/Rex/Rex.rt.pep 
+# Target file:     /nfs/nfs4/home/lee212/github/retrotminer/retrotminer/output/info/full/Jockey/Jockey.rt.pep
+# Option settings: hmmsearch --domtblout /nfs/nfs4/home/lee212/github/retrotminer/retrotminer/nonltr/pHMM/tbl --noali /nfs/nfs4/home/lee212/github/retrotminer/retrotminer/nonltr/pHMM/CRE.rt.hmmc /nfs/nfs4/home/lee212/github/retrotminer/retrotminer/output/info/full/Jockey/Jockey.rt.pep 
 # Current dir:     /nfs/nfs4/home/lee212/github/retrotminer/retrotminer
-# Date:            Fri Jun 13 11:10:49 2014
+# Date:            Sat Jun 14 10:23:18 2014
 # [ok]

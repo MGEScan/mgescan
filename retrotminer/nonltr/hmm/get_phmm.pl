@@ -23,6 +23,7 @@ GetOptions(    'seq=s' => \$seq,
 $seq_file = $out_dir."aaaaa";
 $pep_file = $out_dir."bbbbb";
 
+system("export PATH=~/retrotminer/EMBOSS/bin/:$PATH")
 system("echo ".$seq." > ".$seq_file);
 system("transeq -frame=f ".$seq_file." -outseq=".$pep_file." 2>/dev/null");
 

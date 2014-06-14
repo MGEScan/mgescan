@@ -6,8 +6,8 @@
 # Version:         3.1b1 (May 2013)
 # Pipeline mode:   SEARCH
 # Query file:      /nfs/nfs4/home/lee212/github/retrotminer/retrotminer/ltr/pfam/c_PF03056_fs.hmm
-# Target file:     /u/lee212/github/retrotminer/retrotminer/input/tmp.MTCjU20df5/data/ltr/ltr/chr2L.fa.bin.temp4
-# Option settings: hmmsearch --tblout /nfs/nfs4/home/lee212/github/retrotminer/retrotminer/ltr/pfam/tbl --noali -E 0.000001 /nfs/nfs4/home/lee212/github/retrotminer/retrotminer/ltr/pfam/c_PF03056_fs.hmm /u/lee212/github/retrotminer/retrotminer/input/tmp.MTCjU20df5/data/ltr/ltr/chr2L.fa.bin.temp4 
+# Target file:     /nfs/nfs4/home/lee212/github/retrotminer/retrotminer/output.1/ltr/ltr/chr2L.fa.bin.temp4
+# Option settings: hmmsearch --tblout /nfs/nfs4/home/lee212/github/retrotminer/retrotminer/ltr/pfam/tbl --noali -E 0.000001 /nfs/nfs4/home/lee212/github/retrotminer/retrotminer/ltr/pfam/c_PF03056_fs.hmm /nfs/nfs4/home/lee212/github/retrotminer/retrotminer/output.1/ltr/ltr/chr2L.fa.bin.temp4 
 # Current dir:     /nfs/nfs4/home/lee212/github/retrotminer/retrotminer
-# Date:            Fri Jun 13 11:32:36 2014
+# Date:            Sat Jun 14 10:53:10 2014
 # [ok]
