@@ -8,7 +8,7 @@ Galaxy Workflow Canvas
 
 In Galaxy > Workflow > Edit, you can modify or update the RetroTMiner workflow on Galaxy Workflow Canvas.
 
-.. image:: images/rtm-workflow-composing.png
+.. image:: images/rtm-workflow-composing-large.png
 
 Registered Workflow in local
 --------------------------
