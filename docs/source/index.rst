@@ -18,6 +18,7 @@ The documentation provides basic tutorials of using RetroTMiner with Galaxy Work
    aws
    ltr
    nonltr
+   workflow
    visualization
 
 
