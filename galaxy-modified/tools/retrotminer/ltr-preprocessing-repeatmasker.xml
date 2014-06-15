@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 
-<tool name="repeatmasker" id="repeatmasker" version="0.0.1" workflow_compatible="false">
+<tool name="Step 2: RepeatMasker" id="repeatmasker" version="0.0.1" workflow_compatible="false">
 	<description>
-		RepeatMasker: screens DNA sequences for interspersed repeats and low complexity DNA sequences
+		Step 2 of 4: RepeatMasker screens DNA sequences for interspersed repeats and low complexity DNA sequences
 	</description>
 	<command interpreter="bash">
 		ltr-preprocessing.sh $input '$input.name' $output No Yes

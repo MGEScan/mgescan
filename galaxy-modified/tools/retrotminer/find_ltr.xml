@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 
-<tool name="find-ltr" id="find-ltr" version="0.0.1" workflow_compatible="false">
+<tool name="Step 3: Finding ltr" id="find-ltr" version="0.0.1" workflow_compatible="false">
 	<description>
-		Finding LTR: de novo identification of LTR retroelements
+		Step 3 of 4: Finding LTR is de novo identification of LTR retroelements
 	</description>
 	<command interpreter="bash">
 		find_ltr.sh -genome=$input $min_dist $max_dist $min_len_ltr $max_len_ltr $ltr_sim_condition $cluster_sim_condition $len_condition

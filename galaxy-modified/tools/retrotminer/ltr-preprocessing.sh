@@ -29,7 +29,11 @@ $script_program $script -genome=$input_dir/ -data=$output_dir/ -sw_rm=${repeatma
 
 if [ "$scaffold_YN" == "Yes" ]
 then
-	/bin/cp $output_dir/ltr/ltr.out $output_file
+	temp_file=`mktemp -p ./`
+	tar cvzf ${temp_file}.tar.gz $output_dir/genome/
+	/bin/cp ${temp_file}.tar.gz $output_file
+	rm -rf $temp_file
+	rm -rf ${temp_file}.tar.gz
 fi
 
 if [ "$repeatmasker_YN" == "Yes" ]
