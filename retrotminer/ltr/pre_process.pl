@@ -68,7 +68,7 @@ my $ltr_genome_dir = $data_dir."genome/";
 if (length($scaffold_file)>0){
 
     if (-e $scaffold_file){
-	system("mkdir ".$genome_dir);                               
+	system("mkdir -p ".$genome_dir);                               
 	create_scaffold_files($scaffold_file, $genome_dir);
     }else{
 	print "ERROR: incorrect $scaffold_file\n";
