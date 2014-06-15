@@ -1,15 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <toolbox>
 	<label id="retrotminer_tools" text="RetroTMiner Tools" version="" /> 
-	<section id="mgescan" name="MGEScan">
-		<tool file="retrotminer/mgescan.xml" />
-	</section>
-	<section id="mgescan-nonltr" name="nonLTR">
-		<tool file="retrotminer/nonltr.xml" />
-	</section>
-	<section id="mgescan-ltr" name="LTR">
-		<tool file="retrotminer/ltr.xml" />
-	</section>
+
   <section id="getext" name="Get Data">
     <tool file="retrotminer/upload.xml" />
     <tool file="data_source/ucsc_tablebrowser.xml" />
@@ -44,8 +36,26 @@
     <tool file="validation/fix_errors.xml" />
     -->
   </section>
+  <section id="mgescan" name="MGEScan">
+	  <tool file="retrotminer/mgescan.xml" />
+  </section>
+  <section id="mgescan-nonltr" name="nonLTR">
+	  <tool file="retrotminer/nonltr.xml" />
+  </section>
+  <section id="mgescan-ltr" name="LTR">
+	  <tool file="retrotminer/ltr.xml" />
+	  <tool file="retrotminer/ltr-preprocessing-repeatmasker.xml" />
+	  <tool file="retrotminer/ltr-preprocessing-scaffold.xml" />
+	  <tool file="retrotminer/find-ltr.xml" />
+	  <tool file="retrotminer/ltr-gff.xml" />
+  </section>
+  <!--section id="mgescan-tools" name="Tools">
+	  <tool file="retrotminer/trf.xml" />
+	  <tool file="retrotminer/emboss-matcher.xml" />
+	  <tool file="retrotminer/emboss-transeq.xml" />
+  </section-->
   <label id="basic_tools" text="Galaxy Tools" version="" />
-  <section id="send" name="Send Data">
+  <!--section id="send" name="Send Data">
     <tool file="data_destination/epigraph.xml" />
     <tool file="data_destination/epigraph_test.xml" />
     <tool file="genomespace/genomespace_exporter.xml" />
@@ -56,6 +66,43 @@
   </section>
   <section id="liftOver" name="Lift-Over">
     <tool file="extract/liftOver_wrapper.xml" />
+  </section>
+  <section id="filter" name="Filter and Sort">
+    <tool file="stats/filtering.xml" />
+    <tool file="filters/sorter.xml" />
+    <tool file="filters/grep.xml" />
+    
+    <label id="gff" text="GFF" />
+    <tool file="filters/gff/extract_GFF_Features.xml" />
+    <tool file="filters/gff/gff_filter_by_attribute.xml" />
+    <tool file="filters/gff/gff_filter_by_feature_count.xml" />
+    <tool file="filters/gff/gtf_filter_by_attribute_values_list.xml" />
+  </section>
+  <section id="group" name="Join, Subtract and Group">
+    <tool file="filters/joiner.xml" />
+    <tool file="filters/compare.xml" />
+    <tool file="new_operations/subtract_query.xml" />
+    <tool file="stats/grouping.xml" />
+    <tool file="new_operations/column_join.xml" />
+  </section-->
+  <section id="convert" name="Convert Formats">
+    <tool file="filters/axt_to_concat_fasta.xml" />
+    <tool file="filters/axt_to_fasta.xml" />
+    <tool file="filters/axt_to_lav.xml" />
+    <tool file="filters/bed2gff.xml" />
+    <tool file="fasta_tools/fasta_to_tabular.xml" />
+    <tool file="filters/gff2bed.xml" />
+    <tool file="filters/lav_to_bed.xml" />
+    <tool file="maf/maf_to_bed.xml" />
+    <tool file="maf/maf_to_interval.xml" />
+    <tool file="maf/maf_to_fasta.xml" />
+    <tool file="fasta_tools/tabular_to_fasta.xml" />
+    <tool file="fastq/fastq_to_fasta.xml" />
+    <tool file="filters/wiggle_to_simple.xml" />
+    <tool file="filters/sff_extractor.xml" />
+    <tool file="filters/gtf2bedgraph.xml" />
+    <tool file="filters/wig_to_bigwig.xml" />
+    <tool file="filters/bed_to_bigbed.xml" />
   </section>
   <section id="textutil" name="Text Manipulation">
     <tool file="filters/fixedValueColumn.xml" />
@@ -77,164 +124,6 @@
     <tool file="filters/secure_hash_message_digest.xml" />
     <tool file="stats/dna_filtering.xml" />
     <tool file="new_operations/tables_arithmetic_operations.xml" />
-  </section>
-  <section id="filter" name="Filter and Sort">
-    <tool file="stats/filtering.xml" />
-    <tool file="filters/sorter.xml" />
-    <tool file="filters/grep.xml" />
-    
-    <label id="gff" text="GFF" />
-    <tool file="filters/gff/extract_GFF_Features.xml" />
-    <tool file="filters/gff/gff_filter_by_attribute.xml" />
-    <tool file="filters/gff/gff_filter_by_feature_count.xml" />
-    <tool file="filters/gff/gtf_filter_by_attribute_values_list.xml" />
-  </section>
-  <section id="group" name="Join, Subtract and Group">
-    <tool file="filters/joiner.xml" />
-    <tool file="filters/compare.xml" />
-    <tool file="new_operations/subtract_query.xml" />
-    <tool file="stats/grouping.xml" />
-    <tool file="new_operations/column_join.xml" />
-  </section>
-  <section id="convert" name="Convert Formats">
-    <tool file="filters/axt_to_concat_fasta.xml" />
-    <tool file="filters/axt_to_fasta.xml" />
-    <tool file="filters/axt_to_lav.xml" />
-    <tool file="filters/bed2gff.xml" />
-    <tool file="fasta_tools/fasta_to_tabular.xml" />
-    <tool file="filters/gff2bed.xml" />
-    <tool file="filters/lav_to_bed.xml" />
-    <tool file="maf/maf_to_bed.xml" />
-    <tool file="maf/maf_to_interval.xml" />
-    <tool file="maf/maf_to_fasta.xml" />
-    <tool file="fasta_tools/tabular_to_fasta.xml" />
-    <tool file="fastq/fastq_to_fasta.xml" />
-    <tool file="filters/wiggle_to_simple.xml" />
-    <tool file="filters/sff_extractor.xml" />
-    <tool file="filters/gtf2bedgraph.xml" />
-    <tool file="filters/wig_to_bigwig.xml" />
-    <tool file="filters/bed_to_bigbed.xml" />
-  </section>
-  <section id="features" name="Extract Features">
-    <tool file="filters/ucsc_gene_bed_to_exon_bed.xml" />
-  </section>
-  <section id="fetchSeq" name="Fetch Sequences">
-    <tool file="extract/extract_genomic_dna.xml" />
-  </section>
-  <section id="fetchAlign" name="Fetch Alignments">
-    <tool file="maf/interval2maf_pairwise.xml" />
-    <tool file="maf/interval2maf.xml" />
-    <tool file="maf/maf_split_by_species.xml" />
-    <tool file="maf/interval_maf_to_merged_fasta.xml" />
-    <tool file="maf/genebed_maf_to_fasta.xml" />
-    <tool file="maf/maf_stats.xml" />
-    <tool file="maf/maf_thread_for_species.xml" />
-    <tool file="maf/maf_limit_to_species.xml" />
-    <tool file="maf/maf_limit_size.xml" />
-    <tool file="maf/maf_by_block_number.xml" />
-    <tool file="maf/maf_reverse_complement.xml" />
-    <tool file="maf/maf_filter.xml" />
-  </section>
-  <section id="scores" name="Get Genomic Scores">
-    <tool file="stats/wiggle_to_simple.xml" />
-    <tool file="stats/aggregate_binned_scores_in_intervals.xml" />
-    <tool file="extract/phastOdds/phastOdds_tool.xml" />
-  </section>
-  <section id="bxops" name="Operate on Genomic Intervals">
-    <tool file="new_operations/intersect.xml" />
-    <tool file="new_operations/subtract.xml" />
-    <tool file="new_operations/merge.xml" />
-    <tool file="new_operations/concat.xml" />
-    <tool file="new_operations/basecoverage.xml" />
-    <tool file="new_operations/coverage.xml" />
-    <tool file="new_operations/complement.xml" />
-    <tool file="new_operations/cluster.xml" id="cluster" />
-    <tool file="new_operations/join.xml" />
-    <tool file="new_operations/get_flanks.xml" />
-    <tool file="new_operations/flanking_features.xml" />
-    <tool file="annotation_profiler/annotation_profiler.xml" />
-  </section>
-  <section id="stats" name="Statistics">
-    <tool file="stats/gsummary.xml" />
-    <tool file="filters/uniq.xml" />
-    <tool file="stats/cor.xml" />
-    <tool file="stats/generate_matrix_for_pca_lda.xml" />
-    <tool file="stats/lda_analy.xml" />
-    <tool file="stats/plot_from_lda.xml" />
-    <tool file="stats/MINE.xml" />
-    
-    <label id="gff" text="GFF" />
-    <tool file="stats/count_gff_features.xml" />
-  </section>
-  <section id="dwt" name="Wavelet Analysis">
-    <tool file="discreteWavelet/execute_dwt_var_perFeature.xml" />
-    <!--
-    Keep this section/tools commented until all of the tools have functional tests
-    <tool file="discreteWavelet/execute_dwt_IvC_all.xml" />
-    <tool file="discreteWavelet/execute_dwt_cor_aVa_perClass.xml" />
-    <tool file="discreteWavelet/execute_dwt_cor_aVb_all.xml" />
-    <tool file="discreteWavelet/execute_dwt_var_perClass.xml" />
-    -->
-  </section>
-  <section id="plots" name="Graph/Display Data">
-    <tool file="plotting/histogram2.xml" />
-    <tool file="plotting/scatterplot.xml" />
-    <tool file="plotting/bar_chart.xml" />
-    <tool file="plotting/boxplot.xml" />
-    <tool file="visualization/GMAJ.xml" />
-    <tool file="visualization/LAJ.xml" />
-    <tool file="visualization/build_ucsc_custom_track.xml" />
-    <tool file="maf/vcf_to_maf_customtrack.xml" />
-    <tool file="mutation/visualize.xml" />
-  </section>
-  <section id="regVar" name="Regional Variation">
-    <tool file="regVariation/windowSplitter.xml" />
-    <tool file="regVariation/featureCounter.xml" />
-    <tool file="regVariation/WeightedAverage.xml" />
-    <tool file="regVariation/quality_filter.xml" />
-    <tool file="regVariation/maf_cpg_filter.xml" />
-    <tool file="regVariation/getIndels_2way.xml" />
-    <tool file="regVariation/getIndelRates_3way.xml" />
-    <tool file="regVariation/substitutions.xml" />
-    <tool file="regVariation/substitution_rates.xml" />
-    <tool file="regVariation/microsats_alignment_level.xml" />
-    <tool file="regVariation/microsats_mutability.xml" />
-  </section>
-  <section id="multReg" name="Multiple regression">
-    <tool file="regVariation/linear_regression.xml" />
-    <tool file="regVariation/logistic_regression_vif.xml" />
-    <tool file="regVariation/best_regression_subsets.xml" />
-    <tool file="regVariation/rcve.xml" />
-    <tool file="regVariation/partialR_square.xml" />
-  </section>
-  <section id="multVar" name="Multivariate Analysis">
-    <tool file="multivariate_stats/pca.xml" />
-    <tool file="multivariate_stats/cca.xml" />
-    <tool file="multivariate_stats/kpca.xml" />
-    <tool file="multivariate_stats/kcca.xml" />
-  </section>
-  <section id="hyphy" name="Evolution">
-    <tool file="hyphy/hyphy_branch_lengths_wrapper.xml" />
-    <tool file="hyphy/hyphy_nj_tree_wrapper.xml" />
-    <tool file="hyphy/hyphy_dnds_wrapper.xml" />
-    <tool file="evolution/codingSnps.xml" />
-    <tool file="evolution/add_scores.xml" />
-  </section>
-  <section id="motifs" name="Motif Tools">
-    <tool file="meme/meme.xml" />
-    <tool file="meme/fimo.xml" />
-    <tool file="rgenetics/rgWebLogo3.xml" />
-  </section>
-  <section id="clustal" name="Multiple Alignments">
-    <tool file="rgenetics/rgClustalw.xml" />
-  </section>
-  <section id="tax_manipulation" name="Metagenomic analyses">
-    <tool file="taxonomy/gi2taxonomy.xml" />
-    <tool file="taxonomy/t2t_report.xml" />
-    <tool file="taxonomy/t2ps_wrapper.xml" />
-    <tool file="taxonomy/find_diag_hits.xml" />
-    <tool file="taxonomy/lca.xml" />
-    <tool file="taxonomy/poisson2test.xml" />
   </section>
   <section id="fasta_manipulation" name="FASTA manipulation">
     <tool file="fasta_tools/fasta_compute_length.xml" />
@@ -275,7 +164,7 @@
     <tool file="fastq/fastq_to_fasta.xml" />
     <tool file="fastq/fastq_to_tabular.xml" />
     <tool file="fastq/tabular_to_fastq.xml" />
-    
+
     <label id="fastx_toolkit" text="FASTX-Toolkit for FASTQ data" />
   </section>
   <!--
@@ -362,6 +251,131 @@
   <section id="ngs-simulation" name="NGS: Simulation">
     <tool file="ngs_simulation/ngs_simulation.xml" />
   </section>
+     <section id="clustal" name="Multiple Alignments">
+    <tool file="rgenetics/rgClustalw.xml" />
+  </section>
+ 
+  <section id="tax_manipulation" name="Metagenomic analyses">
+    <tool file="taxonomy/gi2taxonomy.xml" />
+    <tool file="taxonomy/t2t_report.xml" />
+    <tool file="taxonomy/t2ps_wrapper.xml" />
+    <tool file="taxonomy/find_diag_hits.xml" />
+    <tool file="taxonomy/lca.xml" />
+    <tool file="taxonomy/poisson2test.xml" />
+  </section>
+
+  <!--section id="features" name="Extract Features">
+    <tool file="filters/ucsc_gene_bed_to_exon_bed.xml" />
+  </section>
+  <section id="fetchSeq" name="Fetch Sequences">
+    <tool file="extract/extract_genomic_dna.xml" />
+  </section>
+  <section id="fetchAlign" name="Fetch Alignments">
+    <tool file="maf/interval2maf_pairwise.xml" />
+    <tool file="maf/interval2maf.xml" />
+    <tool file="maf/maf_split_by_species.xml" />
+    <tool file="maf/interval_maf_to_merged_fasta.xml" />
+    <tool file="maf/genebed_maf_to_fasta.xml" />
+    <tool file="maf/maf_stats.xml" />
+    <tool file="maf/maf_thread_for_species.xml" />
+    <tool file="maf/maf_limit_to_species.xml" />
+    <tool file="maf/maf_limit_size.xml" />
+    <tool file="maf/maf_by_block_number.xml" />
+    <tool file="maf/maf_reverse_complement.xml" />
+    <tool file="maf/maf_filter.xml" />
+  </section>
+  <section id="scores" name="Get Genomic Scores">
+    <tool file="stats/wiggle_to_simple.xml" />
+    <tool file="stats/aggregate_binned_scores_in_intervals.xml" />
+    <tool file="extract/phastOdds/phastOdds_tool.xml" />
+  </section>
+  <section id="bxops" name="Operate on Genomic Intervals">
+    <tool file="new_operations/intersect.xml" />
+    <tool file="new_operations/subtract.xml" />
+    <tool file="new_operations/merge.xml" />
+    <tool file="new_operations/concat.xml" />
+    <tool file="new_operations/basecoverage.xml" />
+    <tool file="new_operations/coverage.xml" />
+    <tool file="new_operations/complement.xml" />
+    <tool file="new_operations/cluster.xml" id="cluster" />
+    <tool file="new_operations/join.xml" />
+    <tool file="new_operations/get_flanks.xml" />
+    <tool file="new_operations/flanking_features.xml" />
+    <tool file="annotation_profiler/annotation_profiler.xml" />
+  </section>
+  <section id="stats" name="Statistics">
+    <tool file="stats/gsummary.xml" />
+    <tool file="filters/uniq.xml" />
+    <tool file="stats/cor.xml" />
+    <tool file="stats/generate_matrix_for_pca_lda.xml" />
+    <tool file="stats/lda_analy.xml" />
+    <tool file="stats/plot_from_lda.xml" />
+    <tool file="stats/MINE.xml" />
+    
+    <label id="gff" text="GFF" />
+    <tool file="stats/count_gff_features.xml" />
+  </section>
+  <section id="dwt" name="Wavelet Analysis">
+	  <tool file="discreteWavelet/execute_dwt_var_perFeature.xml" />
+	  -->
+    <!--
+    Keep this section/tools commented until all of the tools have functional tests
+    <tool file="discreteWavelet/execute_dwt_IvC_all.xml" />
+    <tool file="discreteWavelet/execute_dwt_cor_aVa_perClass.xml" />
+    <tool file="discreteWavelet/execute_dwt_cor_aVb_all.xml" />
+    <tool file="discreteWavelet/execute_dwt_var_perClass.xml" />
+    -->
+    <!--
+  </section>
+  <section id="plots" name="Graph/Display Data">
+    <tool file="plotting/histogram2.xml" />
+    <tool file="plotting/scatterplot.xml" />
+    <tool file="plotting/bar_chart.xml" />
+    <tool file="plotting/boxplot.xml" />
+    <tool file="visualization/GMAJ.xml" />
+    <tool file="visualization/LAJ.xml" />
+    <tool file="visualization/build_ucsc_custom_track.xml" />
+    <tool file="maf/vcf_to_maf_customtrack.xml" />
+    <tool file="mutation/visualize.xml" />
+  </section>
+  <section id="regVar" name="Regional Variation">
+    <tool file="regVariation/windowSplitter.xml" />
+    <tool file="regVariation/featureCounter.xml" />
+    <tool file="regVariation/WeightedAverage.xml" />
+    <tool file="regVariation/quality_filter.xml" />
+    <tool file="regVariation/maf_cpg_filter.xml" />
+    <tool file="regVariation/getIndels_2way.xml" />
+    <tool file="regVariation/getIndelRates_3way.xml" />
+    <tool file="regVariation/substitutions.xml" />
+    <tool file="regVariation/substitution_rates.xml" />
+    <tool file="regVariation/microsats_alignment_level.xml" />
+    <tool file="regVariation/microsats_mutability.xml" />
+  </section>
+  <section id="multReg" name="Multiple regression">
+    <tool file="regVariation/linear_regression.xml" />
+    <tool file="regVariation/logistic_regression_vif.xml" />
+    <tool file="regVariation/best_regression_subsets.xml" />
+    <tool file="regVariation/rcve.xml" />
+    <tool file="regVariation/partialR_square.xml" />
+  </section>
+  <section id="multVar" name="Multivariate Analysis">
+    <tool file="multivariate_stats/pca.xml" />
+    <tool file="multivariate_stats/cca.xml" />
+    <tool file="multivariate_stats/kpca.xml" />
+    <tool file="multivariate_stats/kcca.xml" />
+  </section>
+  <section id="hyphy" name="Evolution">
+    <tool file="hyphy/hyphy_branch_lengths_wrapper.xml" />
+    <tool file="hyphy/hyphy_nj_tree_wrapper.xml" />
+    <tool file="hyphy/hyphy_dnds_wrapper.xml" />
+    <tool file="evolution/codingSnps.xml" />
+    <tool file="evolution/add_scores.xml" />
+  </section>
+  <section id="motifs" name="Motif Tools">
+    <tool file="meme/meme.xml" />
+    <tool file="meme/fimo.xml" />
+    <tool file="rgenetics/rgWebLogo3.xml" />
+  </section>
   <section id="hgv" name="Phenotype Association">
     <tool file="evolution/codingSnps.xml" />
     <tool file="evolution/add_scores.xml" />
@@ -384,4 +398,5 @@
     <tool file="vcf_tools/filter.xml" />
     <tool file="vcf_tools/extract.xml" />
   </section>
+  -->
 </toolbox>
