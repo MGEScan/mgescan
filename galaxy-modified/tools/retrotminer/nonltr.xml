@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<tool name="MGEScan-nonLTR" id="mgescan-nonltr" version="0.0.1" workflow_compatible="false">
+<tool name="MGEScan-nonLTR" id="mgescan-nonltr" version="0.0.1"> <!--  workflow_compatible="false"> -->
 	<description>
 		computational identification and classification of non-LTR retroelements
 	</description>

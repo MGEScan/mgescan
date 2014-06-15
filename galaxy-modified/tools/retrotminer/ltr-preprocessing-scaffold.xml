@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
-
-<tool name="Step 1: Split scaffolds" id="ltr-preprocessing-scaffold" version="0.0.1" workflow_compatible="false">
+<tool name="Step 1: Split scaffolds" id="ltr-preprocessing-scaffold" version="0.0.1">
 	<description>
 		Step 1 of 4 in MGEScan-LTR: Split into separate sets of scaffolds of input genome sequences, if it is necessary.
 	</description>

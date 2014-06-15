@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<tool name="MGEScan-LTR" id="mgescan-ltr" version="0.0.1" workflow_compatible="false">
+<tool name="MGEScan-LTR" id="mgescan-ltr" version="0.0.1">
 	<description>
 		de novo identification of LTR retroelements
 	</description>

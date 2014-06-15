@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<tool name="MGEScan" id="mgescan" version="0.0.1" workflow_compatible="false">
+<tool name="MGEScan" id="mgescan" version="0.0.1">
 	<description>
 		MGEScan
 	</description>

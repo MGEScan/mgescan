@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<tool name="Step 3: Finding ltr" id="find-ltr" version="0.0.1" workflow_compatible="false">
+<tool name="Step 3: Finding ltr" id="find-ltr" version="0.0.1">
 	<description>
 		Step 3 of 4: Finding LTR is de novo identification of LTR retroelements
 	</description>

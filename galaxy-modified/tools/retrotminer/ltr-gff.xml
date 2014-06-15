@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<tool name="Step 4: gff converter" id="ltr-gff" version="0.0.1" workflow_compatible="false">
+<tool name="Step 4: gff converter" id="ltr-gff" version="0.0.1">
 	<description>
 		Step 4 of 4 in MGEScan-LTR: Generate gff3 for ltr.out to visualize.
 	</description>
