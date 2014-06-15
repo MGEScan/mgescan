@@ -3,7 +3,8 @@ RetroTMiner
 
 A Galaxy based system for identifying retrotransposons in genome
 
-.. image:: docs/source/images/rtm-retrotminer-image.svg
+![retrotminer workflow](https://raw.githubusercontent.com/MGEScan/retrotminer/master/docs/source/images/rtm-workflow-composing.png)
+
 
 **DEMO Version : [silo.cs.indiana.edu](http://silo.cs.indiana.edu:38080/)**
 
