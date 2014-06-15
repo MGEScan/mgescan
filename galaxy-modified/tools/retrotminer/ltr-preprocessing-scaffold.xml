@@ -12,7 +12,7 @@
 		<param name="scaffold" type="select" label="scaffolds exist">
 			<option selected="selected" value="No">No</option>
 			<option value="Yes">Yes</option>
-		</param-->
+		</param>
 	</inputs>
 	<outputs>
 		<data format="tarbular" name="output" />

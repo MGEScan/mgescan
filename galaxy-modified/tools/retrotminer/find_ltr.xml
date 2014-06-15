@@ -8,7 +8,8 @@
 		find_ltr.sh -genome=$input $min_dist $max_dist $min_len_ltr $max_len_ltr $ltr_sim_condition $cluster_sim_condition $len_condition
 	</command>
 	<inputs>
-		<param format="txt" name="input" type="data" label="From"/>
+		<param format="txt" name="input" type="data" label="genome sequences"/>
+		<param format="txt" name="input2" type="data" label="repeatmasker results"/>
 		<!-- value.conf -->
 		<param name="min_dist" type="text" value="2000" label="minimum distance(bp) between LTRs" />
 		<param name="max_dist" type="text" value="20000" label="maximum distance(bp) between LTRs" />
@@ -20,7 +21,6 @@
 	</inputs>
 	<outputs>
 		<data format="ltr.out" name="output" />
-		<data format="gff3" name="ltr_gff3" />
 	</outputs>
 	<help>
 Running the program
