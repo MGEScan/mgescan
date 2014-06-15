@@ -14,7 +14,7 @@
 		</param>
 	</inputs>
 	<outputs>
-		<data format="tarbular" name="output" />
+		<data format="tabular" name="output" />
 	</outputs>
 	<help>
 Running the program

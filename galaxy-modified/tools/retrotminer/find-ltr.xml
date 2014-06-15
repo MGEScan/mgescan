@@ -20,7 +20,7 @@
 		<param name="len_condition" type="text" value="70" label="minimum length(bp) for LTRs aligned in local alignment"/>
 	</inputs>
 	<outputs>
-		<data format="ltr.out" name="output" />
+		<data format="txt" name="output" />
 	</outputs>
 	<help>
 Running the program
