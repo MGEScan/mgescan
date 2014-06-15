@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<tool name="repeatmasker" id="repeatmasker" version="0.0.1" workflow_compatible="false">
+	<description>
+		RepeatMasker: screens DNA sequences for interspersed repeats and low complexity DNA sequences
+	</description>
+	<command interpreter="bash">
+		repeatmasker.sh -genome=$input
+	</command>
+	<inputs>
+		<param format="txt" name="input" type="data" label="From"/>
+	</inputs>
+	<outputs>
+		<data format="repeatmasker" name="output" />
+	</outputs>
+	<help>
+Running the program
+===================
+
+To run repeatmasker, follow the steps below,
+
+Click 'Execute'
+
+Output
+======
+
+License
+============
+
+Copyright 2014 Mina Rho, Haixu Tang.
+You may redistribute this software under the terms of the GNU General Public License.
+</help>
+</tool>
