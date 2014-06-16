@@ -722,7 +722,7 @@ void get_hydro(int start, int end, double *score, char *O){
   }
   fclose(fp);
 
-  strcpy(command, "transeq -frame=f ");
+  strcpy(command, "/u/lee212/retrotminer/EMBOSS/bin/transeq -frame=f ");
   strcat(command, temp_file1);
   strcat(command, " -outseq=");
   strcat(command, temp_file2);
