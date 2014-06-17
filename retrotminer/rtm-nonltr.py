@@ -37,10 +37,10 @@ class nonLTR(RetroTMiner):
     def set_defaults(self):
         super(nonLTR, self).set_defaults()
         self.plus_dir = self.genome_dir
-        self.minus_dir = self.get_abspath(self.genome_dir + "/../_reversed/")
+        self.minus_dir = self.get_abspath(self.genome_dir + "/../") + "/_reversed/"
 
-        self.plus_out_dir = self.get_abspath(self.data_dir + "/f/")
-        self.minus_out_dir = self.get_abspath(self.data_dir + "/b/")
+        self.plus_out_dir = self.data_dir + "/f/"
+        self.minus_out_dir = self.data_dir + "/b/"
 
     def run(self):
         p1 = Process(target=self.forward_strand)
