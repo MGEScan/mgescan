@@ -18,7 +18,7 @@ from multiprocessing import Process
 from subprocess import Popen, PIPE
 import os
 
-class RetroTMiner:
+class RetroTMiner(object):
     """ RetroTMiner runs mgescan for identifying ltr and nonltr in genome
     sequence """
 
