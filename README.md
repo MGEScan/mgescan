@@ -1,24 +1,24 @@
-RetroTMiner
+MGEScan
 ===========
 
 A Galaxy based system for identifying retrotransposons in genome
 
-![retrotminer workflow](https://raw.githubusercontent.com/MGEScan/retrotminer/master/docs/source/images/rtm-workflow-composing.png)
+![mgescan workflow](https://raw.githubusercontent.com/MGEScan/mgescan/master/docs/source/images/rtm-workflow-composing.png)
 
 
 **DEMO Version : [silo.cs.indiana.edu](http://silo.cs.indiana.edu:38080/)**
 
-* [Tutorial](http://retrotminer.readthedocs.org/en/latest/tutorial.html)
-* [Documentation](http://retrotminer.readthedocs.org/en/latest/index.html)
-* [Source](https://github.com/MGEScan/retrotminer/)
-* [Home Page](http://mgescan.github.io/retrotminer/)
+* [Tutorial](http://mgescan.readthedocs.org/en/latest/tutorial.html)
+* [Documentation](http://mgescan.readthedocs.org/en/latest/index.html)
+* [Source](https://github.com/MGEScan/mgescan/)
+* [Home Page](http://mgescan.github.io/mgescan/)
 
 Installation
 ------------
 
 ```sh
-git clone git@github.com:MGEScan/retrotminer.git
-cd retrotminer
+git clone git@github.com:MGEScan/mgescan.git
+cd mgescan
 python setup.py install
 ```
 
@@ -26,8 +26,8 @@ python setup.py install
 
 
 ```sh
-virtualenv ~/virtualenv/retrotminer
-source ~/virtualenv/retrotminer/bin/activate
+virtualenv ~/virtualenv/mgescan
+source ~/virtualenv/mgescan/bin/activate
 ```
 
 Command Line Tool (rtm)
@@ -35,16 +35,16 @@ Command Line Tool (rtm)
 
 ```sh
 Usage:
-    retrotminer.py <genome_dir> [--output=<data_dir>]
-    retrotminer.py ltr <genome_dir> [--output=<data_dir>]
-    retrotminer.py nonltr <genome_dir> [--output=<data_dir>]
-    retrotminer.py (-h | --help)
-    retrotminer.py --version
+    mgescan.py <genome_dir> [--output=<data_dir>]
+    mgescan.py ltr <genome_dir> [--output=<data_dir>]
+    mgescan.py nonltr <genome_dir> [--output=<data_dir>]
+    mgescan.py (-h | --help)
+    mgescan.py --version
 ```
 
 On Cloud (Amazon EC2)
 ---------------------
-retrotminer-alpha - ami-23d9c74a
+mgescan-alpha - ami-23d9c74a
 
 References
 -----------

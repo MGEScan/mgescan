@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <toolbox>
-	<label id="retrotminer_tools" text="RetroTMiner Tools" version="" /> 
+	<label id="mgescan_tools" text="MGEScan Tools" version="" /> 
 
   <section id="getext" name="Get Data">
-    <tool file="retrotminer/upload.xml" />
+    <tool file="mgescan/upload.xml" />
     <tool file="data_source/ucsc_tablebrowser.xml" />
     <tool file="data_source/ebi_sra.xml" />
     <!--
@@ -37,22 +37,22 @@
     -->
   </section>
   <section id="mgescan" name="MGEScan">
-	  <tool file="retrotminer/mgescan.xml" />
+	  <tool file="mgescan/mgescan.xml" />
   </section>
   <section id="mgescan-nonltr" name="nonLTR">
-	  <tool file="retrotminer/nonltr.xml" />
+	  <tool file="mgescan/nonltr.xml" />
   </section>
   <section id="mgescan-ltr" name="LTR">
-	  <tool file="retrotminer/ltr.xml" />
-	  <tool file="retrotminer/ltr-preprocessing-repeatmasker.xml" />
-	  <tool file="retrotminer/ltr-preprocessing-scaffold.xml" />
-	  <tool file="retrotminer/find-ltr.xml" />
-	  <tool file="retrotminer/ltr-gff.xml" />
+	  <tool file="mgescan/ltr.xml" />
+	  <tool file="mgescan/ltr-preprocessing-repeatmasker.xml" />
+	  <tool file="mgescan/ltr-preprocessing-scaffold.xml" />
+	  <tool file="mgescan/find-ltr.xml" />
+	  <tool file="mgescan/ltr-gff.xml" />
   </section>
   <!--section id="mgescan-tools" name="Tools">
-	  <tool file="retrotminer/trf.xml" />
-	  <tool file="retrotminer/emboss-matcher.xml" />
-	  <tool file="retrotminer/emboss-transeq.xml" />
+	  <tool file="mgescan/trf.xml" />
+	  <tool file="mgescan/emboss-matcher.xml" />
+	  <tool file="mgescan/emboss-transeq.xml" />
   </section-->
   <label id="basic_tools" text="Galaxy Tools" version="" />
   <!--section id="send" name="Send Data">
