@@ -1,7 +1,7 @@
-RetroTMiner
+MGEScan
 ===========
 
-Open a Galaxy/RetroTMiner web page
+Open a Galaxy/MGEScan web page
 -----------------------------------
 Galaxy workflow system is a web-based program. With a specialized galaxy tools for MGEScan, identifying LTR and non-LTR in genome sequences are available on the web.
 
@@ -11,7 +11,7 @@ http://silo.cs.indiana.edu:38080
 
 Login or Register
 -----------------
-To keep a user-based history, login is required in Galaxy/RetroTMiner. The guest user account is able to run MGEScan without the login but results or history data can be lost if the web browser session is closed.
+To keep a user-based history, login is required in Galaxy/MGEScan. The guest user account is able to run MGEScan without the login but results or history data can be lost if the web browser session is closed.
 
 Register
 ^^^^^^^^
@@ -47,7 +47,7 @@ UCSC Table Browser provides the easy way to download the database to Galaxy.
 
 Program Execution
 ------------------
-RetroTMiner provides simple and detailed steps to run program. With * MGEScan > MGEScan *, both LTR and non-LTR can be executed at once. In a separated tool such as LTR or nonLTR, you can choose more options and tools. 
+MGEScan provides simple and detailed steps to run program. With * MGEScan > MGEScan *, both LTR and non-LTR can be executed at once. In a separated tool such as LTR or nonLTR, you can choose more options and tools. 
 
 MGEScan
 ^^^^^^^^

@@ -1,11 +1,11 @@
-"""RetroTMiner: identifying ltr and non-ltr in genome sequences
+"""MGEScan: identifying ltr and non-ltr in genome sequences
 
 Usage:
-    retrotminer.py <genome_dir> [--output=<data_dir>]
-    retrotminer.py ltr <genome_dir> [--output=<data_dir>]
-    retrotminer.py nonltr <genome_dir> [--output=<data_dir>]
-    retrotminer.py (-h | --help)
-    retrotminer.py --version
+    mgescan.py <genome_dir> [--output=<data_dir>]
+    mgescan.py ltr <genome_dir> [--output=<data_dir>]
+    mgescan.py nonltr <genome_dir> [--output=<data_dir>]
+    mgescan.py (-h | --help)
+    mgescan.py --version
 
 Options:
     -h --help   Show this screen.
@@ -18,8 +18,8 @@ from multiprocessing import Process
 from subprocess import Popen, PIPE
 import os
 
-class RetroTMiner(object):
-    """ RetroTMiner runs mgescan for identifying ltr and nonltr in genome
+class MGEScan(object):
+    """ MGEScan runs mgescan for identifying ltr and nonltr in genome
     sequence """
 
     genome_dir = None
@@ -146,8 +146,8 @@ class RetroTMiner(object):
             new_path = path + ".1"
             return self.create_directory(new_path)
 def main():
-    arguments = docopt(__doc__, version='RetroTMiner 0.1')
-    rtm = RetroTMiner(arguments)
+    arguments = docopt(__doc__, version='MGEScan 0.1')
+    rtm = MGEScan(arguments)
     rtm.run()
 
 if __name__ == "__main__":
