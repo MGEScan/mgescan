@@ -9,6 +9,7 @@ Galaxy Workflow Canvas
 In Galaxy > Workflow > Edit, you can modify or update the MGEScan workflow on Galaxy Workflow Canvas.
 
 .. image:: images/rtm-workflow-final-large.png
+
  .. image:: images/rtm-workflow-composing-large.png
 
 Registered Workflow in local
