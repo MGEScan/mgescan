@@ -9,6 +9,7 @@
 	</command>
 	<inputs>
 		<param format="tabular" name="input" type="data" label="From"/>
+		<param format="tabular" name="input2" type="data" label="From"/>
 	</inputs>
 	<outputs>
 		<data format="tabular" name="output" />
