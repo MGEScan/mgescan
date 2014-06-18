@@ -1,4 +1,4 @@
-"""RetroTMiner-nonLTR: identifying non-ltr in genome sequences
+"""MGEScan-nonLTR: identifying non-ltr in genome sequences
 
 Usage:
     rtm-nonltr.py <genome_dir> [--output=<data_dir>]
@@ -15,11 +15,11 @@ Options:
 from docopt import docopt
 from multiprocessing import Process
 from subprocess import Popen, PIPE
-from retrotminer import RetroTMiner
+from mgescan import MGEScan
 import os
 from biopython import reverse_complement_fasta
 
-class nonLTR(RetroTMiner):
+class nonLTR(MGEScan):
 
     main_dir = "nonltr"
     cmd_hmm = main_dir + "/run_hmm.pl"
