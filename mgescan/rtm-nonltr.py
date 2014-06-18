@@ -2,6 +2,10 @@
 
 Usage:
     rtm-nonltr.py <genome_dir> [--output=<data_dir>]
+    rtm-nonltr.py forward <genome_dir> [--output=<data_dir>]
+    rtm-nonltr.py backward <genome_dir> [--output=<data_dir>]
+    rtm-nonltr.py reverseq <genome_dir> [--output=<data_dir>]
+    rtm-nonltr.py qvalue <genome_dir> [--output=<data_dir>]
     rtm-nonltr.py (-h | --help)
     rtm-nonltr.py --version
 

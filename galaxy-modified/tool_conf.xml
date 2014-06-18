@@ -41,11 +41,16 @@
   </section>
   <section id="mgescan-nonltr" name="nonLTR">
 	  <tool file="mgescan/nonltr.xml" />
+	  <tool file="mgescan/nonltr-forward-strand.xml" />
+	  <tool file="mgescan/nonltr-reverse-complement.xml" />
+	  <tool file="mgescan/nonltr-backward-strand.xml" />
+	  <tool file="mgescan/nonltr-post-processing2.xml" />
+	  <tool file="mgescan/nonltr-gff.xml" />
   </section>
   <section id="mgescan-ltr" name="LTR">
 	  <tool file="mgescan/ltr.xml" />
-	  <tool file="mgescan/ltr-preprocessing-repeatmasker.xml" />
 	  <tool file="mgescan/ltr-preprocessing-scaffold.xml" />
+	  <tool file="mgescan/ltr-preprocessing-repeatmasker.xml" />
 	  <tool file="mgescan/find-ltr.xml" />
 	  <tool file="mgescan/ltr-gff.xml" />
   </section>
