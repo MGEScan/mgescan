@@ -94,9 +94,9 @@ then
 	#compressed_file=$output_dir/$RANDOM.tar.gz
 	#/bin/tar cvzfP $compressed_file $output_dir/info
 	#/bin/cp $compressed_file $output_file
-	/bin/cp $output_dir/info/full/*/* $clade
-	/bin/cp $output_dir/info/validation/en $en
-	/bin/cp $output_dir/info/validation/rt $rt
+	RES=`/bin/cp $output_dir/info/full/*/* $clade 2> /dev/null`
+	RES=`/bin/cp $output_dir/info/validation/en $en 2> /dev/null`
+	RES=`/bin/cp $output_dir/info/validation/rt $rt 2> /dev/null`
 	if [ "$nonltr_gff3" != "None" ]
 	then
 		/bin/cp $output_dir/info/nonltr.gff3 $nonltr_gff3
