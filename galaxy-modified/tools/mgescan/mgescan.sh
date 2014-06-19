@@ -91,10 +91,13 @@ fi
 if [ "$program" != "L" ]
 then
 
-	#compressed_file=$output_dir/$RANDOM.tar.gz
-	#/bin/tar cvzfP $compressed_file $output_dir/info
+	tmp=`mktemp`
+	RANDOM=`basename $tmp`
+	compressed_file=$output_dir/$RANDOM.tar.gz
+	/bin/tar cvzfP $compressed_file $output_dir/info
 	#/bin/cp $compressed_file $output_file
-	RES=`/bin/cp $output_dir/info/full/*/* $clade 2> /dev/null`
+	#RES=`/bin/cp $output_dir/info/full/*/* $clade 2> /dev/null`
+	RES=`/bin/cp $compressed_file $clade 2> /dev/null`
 	RES=`/bin/cp $output_dir/info/validation/en $en 2> /dev/null`
 	RES=`/bin/cp $output_dir/info/validation/rt $rt 2> /dev/null`
 	if [ "$nonltr_gff3" != "None" ]
