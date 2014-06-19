@@ -82,7 +82,7 @@ then
 		/bin/cp $output_dir/ltr/ltr.gff3 $ltr_gff3
 	fi
 
-	if [ "$repeatmasker" != "None" ]
+	if [ "$repeatmasker" != "None" ] || [ "$repeatmasker" != "" ]
 	then
 		# chr2L.fa.cat.gz  chr2L.fa.masked  chr2L.fa.out  chr2L.fa.out.pos  chr2L.fa.tbl
 		/bin/cp $output_dir/repeatmasker/${input_file_name}.out $repeatmasker
