@@ -28,6 +28,7 @@
 		<param name="hmmsearch_options" type="text" label="hmmsearch options (e.g. -E 0.00001 reports sequences <= 0.00001 E-value threshold in output) " value="-E 0.00001"/> 
 		<param name="phmm_file" type="text" label="phmm file for RT signal" value="https://raw.githubusercontent.com/MGEScan/mgescan/master/mgescan/nonltr/pHMM/ebi_ds36752_seq.hmmc"/>
 		<param name="phmm_file2" type="text" label="phmm file for APE signal" value="https://raw.githubusercontent.com/MGEScan/mgescan/master/mgescan/nonltr/pHMM/ebi_ds36736_seq.hmmc" />
+		<param name="transeq_options" type="text" label="transeq options"/>
 	</inputs>
 	<outputs>
 		<data format="fasta" name="clade" />

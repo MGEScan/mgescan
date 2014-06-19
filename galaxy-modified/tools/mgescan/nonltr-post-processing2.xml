@@ -10,6 +10,7 @@
 	<inputs>
 		<param format="tabular" name="input" type="data" label="From"/>
 		<param format="tabular" name="input2" type="data" label="From"/>
+		<param name="transeq_options" type="text" label="transeq options"/>
 	</inputs>
 	<outputs>
 		<data format="tabular" name="output" />
