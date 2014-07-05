@@ -1,5 +1,5 @@
-MGEScan
-===========
+MGEScan on Galaxy Scientific Workflow
+=====================================
 
 A Galaxy based system for identifying retrotransposons in genome
 
