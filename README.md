@@ -48,7 +48,7 @@ mgescan-alpha - ami-23d9c74a
 Citation
 --------
 
-How to cite MGEScan on Galaxy
+How to cite MGEScan on Galaxy [here]
 
 References
 -----------
