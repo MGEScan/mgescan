@@ -31,7 +31,7 @@ virtualenv ~/virtualenv/mgescan
 source ~/virtualenv/mgescan/bin/activate
 ```
 
-Command Line Tool (rtm)
+Command Line Tool (mgescan)
 -----------------------
 
 ```sh
