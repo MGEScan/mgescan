@@ -32,7 +32,7 @@ source ~/virtualenv/mgescan/bin/activate
 ```
 
 Command Line Tool (mgescan)
------------------------
+---------------------------
 
 ```sh
 Usage:
