@@ -45,7 +45,7 @@ Usage:
 
 On Cloud (Amazon EC2)
 ---------------------
-mgescan-alpha - ami-23d9c74a
+mgescan-alpha - ami-23d9c74a (development version)
 
 Citation
 --------
