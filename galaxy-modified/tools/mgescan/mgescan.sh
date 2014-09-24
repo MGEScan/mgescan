@@ -121,7 +121,7 @@ fi
 
 if [ "$program" == "B" ]
 then
-	/bin/cat $output_dir/info/ltr.gff3 $output_dir/info/nonltr.gff3 > $both_gff3
+	/bin/cat $output_dir/ltr/ltr.gff3 $output_dir/info/nonltr.gff3 > $both_gff3
 fi
 
 # delete temp directory
