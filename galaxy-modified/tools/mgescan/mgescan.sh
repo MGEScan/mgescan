@@ -17,17 +17,18 @@ en=$7
 rt=$8
 ltr_gff3=$9
 nonltr_gff3=${10}
+both_gff3=${11}
 #### for ltr between $11 and $20
-sw_rm=${11}
-scaffold=${12}
-min_dist=${13}
-max_dist=${14}
-min_len_ltr=${15}
-max_len_ltr=${16}
-ltr_sim_condition=${17}
-cluster_sim_condition=${18}
-len_condition=${19}
-repeatmasker=${20}
+sw_rm=${12}
+scaffold=${13}
+min_dist=${14}
+max_dist=${15}
+min_len_ltr=${16}
+max_len_ltr=${17}
+ltr_sim_condition=${18}
+cluster_sim_condition=${19}
+len_condition=${20}
+repeatmasker=${21}
 
 # /nfs/nfs4/home/lee212/retrotminer/galaxy-dist/tools/retrotminer/find_ltr.sh /nfs/nfs4/home/lee212/retrotminer/galaxy-dist/database/files/000/dataset_1.dat /nfs/nfs4/home/lee212/retrotminer/galaxy-dist/database/files/000/dataset_3.dat
 
@@ -116,6 +117,11 @@ then
 	#compressed_file=$output_dir/$RANDOM.tar.gz
 	#/bin/tar cvzfP $compressed_file $output_dir
 	#/bin/cp $compressed_file $output_file
+fi
+
+if [ "$program" == "B" ]
+then
+	/bin/cat $output_dir/info/ltr.gff3 $output_dir/info/nonltr.gff3 > $both_gff3
 fi
 
 # delete temp directory

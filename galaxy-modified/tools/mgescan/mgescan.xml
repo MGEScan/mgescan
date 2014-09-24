@@ -5,7 +5,7 @@
 		MGEScan
 	</description>
 	<command interpreter="bash">
-		mgescan.sh $input '$input.name' 3 $output $program $clade $qvalue_en $qvalue_rt $ltr_gff3 $nonltr_gff3
+		mgescan.sh $input '$input.name' 3 $output $program $clade $qvalue_en $qvalue_rt $ltr_gff3 $nonltr_gff3 $both_gff3
 		<!-- mgescan.sh $input $input.name $hmmver $output $program $clade $qvalue_en $qvalue_rt $ltr_gff3 $nonltr_gff3 -->
 	</command>
 	<inputs>
@@ -38,6 +38,9 @@
 		</data>
 		<data format="gff3" name="nonltr_gff3">
 			<filter>program != "L"</filter>
+		</data>
+		<data format="gff3" name="both_gff3">
+			<filter>program == "B"</filter>
 		</data>
 
 	</outputs>
