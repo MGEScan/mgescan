@@ -1,5 +1,7 @@
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
+from Bio.Seq import Seq
+from Bio.Alphabet import generic_dna
 import ntpath
 import os
 
@@ -16,3 +18,16 @@ def reverse_complement_fasta(filepath, dest):
     dest_path = os.path.abspath(dest + "/" + filename)
     records = map(make_rc_record, SeqIO.parse(filepath, "fasta"))
     SeqIO.write(records, dest_path , "fasta")
+
+def read_file(filepath, format="fasta"):
+    res = []
+    handle = open(filepath, "rU")
+    for record in SeqIO.parse(handle, format) :
+        res.append(record)
+    return res
+
+def translate(seq, start=0):
+    coding_dna = Seq(str(seq[start:]), generic_dna)
+    res = coding_dna.translate()
+    return res
+
