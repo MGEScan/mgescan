@@ -33,7 +33,7 @@ def readFASTA(filename):
  return fastalines
 
 outfile = open(sys.argv[2], "w")
-print >>outfile, "##gff-version 3"
+#print >>outfile, "##gff-version 3"
  
 for cladeDir in glob.glob( os.path.join(sys.argv[1], '*') ):
 	basename = os.path.basename(cladeDir)

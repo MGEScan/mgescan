@@ -9,7 +9,7 @@ if len(sys.argv) < 3:
 infile = open(sys.argv[1], "r")
 outfile = open(sys.argv[2], "w")
 cluster = ""
-print >>outfile, "##gff-version 3"
+#print >>outfile, "##gff-version 3"
 for aline in infile:
 	aline = aline.strip()
 	words = aline.split(None)
