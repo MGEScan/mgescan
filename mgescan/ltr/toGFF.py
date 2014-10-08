@@ -1,5 +1,13 @@
 #!/usr/bin/env python
 
+# ltr.out looks like
+#
+# 1------*** (cluster)
+# chr2L 1614217 161492 16146090 1614365 + 276 276 5149 3.264e-19 AAAAT AAAAT TGT
+# (seqid) (start) .     .       (end)   (strand) 
+# ACA AGT
+# 2------*** 
+# ...
 import sys
 
 if len(sys.argv) < 3:
@@ -19,6 +27,7 @@ for aline in infile:
 		if len(words) == 0:
 			continue
 		seqid = words[0][:words[0].rfind("_")]
+        # id is cluster + seqid
 		id = cluster + "_" + words[0]
 		des = [seqid, "MGEScan_LTR", "mobile_genetic_element", words[1], words[4], ".", words[5], ".", "ID=" + id + ";name=cluster_"+cluster] 
 		print >>outfile, "\t".join(des)
