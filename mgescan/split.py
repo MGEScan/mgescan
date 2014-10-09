@@ -13,6 +13,8 @@ Options:
 """
 from docopt import docopt
 from Bio import SeqIO
+from os import listdir
+from os.path import isfile, join
 from mgescan import utils
 
 class Split(object):
@@ -21,14 +23,21 @@ class Split(object):
     result_path = None
     default_output = "./split-output"
 
-    def __init__(self, args):
+    def __init__(self, args=None):
         self.args = args
-        self.set_inputs()
-        self.set_defaults()
+        if args:
+            self.set_parameters()
+            self.set_defaults()
 
-    def set_inputs(self):
-        self.result_path = utils.get_abspath(self.args['--output'])
-        self.input_file = utils.get_abspath(self.args['<filename>'])
+    def set_parameters(self):
+        self.set_output(self.args['--output'])
+        self.set_input(self.args['<filename>'])
+
+    def set_output(self, path):
+        self.result_path = utils.get_abspath(path)
+
+    def set_input(self, path):
+        self.input_file = utils.get_abspath(path)
 
     def set_defaults(self):
         """Set default values to run programs"""
@@ -48,6 +57,17 @@ class Split(object):
             handle = open(output_path + "/" + filename, "w")
             SeqIO.write([val], handle, "fasta")
             handle.close()
+
+    def split_files(self, dirpath=None, output_path=None):
+
+        if not dirpath:
+            dirpath = self.input_file
+        if not output_path:
+            output_path = self.result_path
+
+        onlyfiles = [ f for f in listdir(dirpath) if isfile(join(dirpath,f)) ]
+        for file in onlyfiles:
+        self.split_file(file, output_path)
 
 def main():
     arguments = docopt(__doc__, version='split.py 0.1')

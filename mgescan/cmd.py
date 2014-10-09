@@ -18,6 +18,7 @@ from docopt import docopt
 from multiprocessing import Process
 from subprocess import Popen, PIPE
 from mgescan import utils
+from mgescan.split import Split
 
 class MGEScan(object):
     """ MGEScan runs mgescan for identifying ltr and nonltr in genome
@@ -73,7 +74,17 @@ class MGEScan(object):
         self.sw_rm = "No" # or Yes
         self.scaffold = "" # or directory
 
+    def split_files(self):
+        split = Split()
+        split.set_input(self.genome_dir)
+        new_genome_dir = split.set_output(self.genome_dir + "/divided-genome")
+        split.split_files()
+        self.genome_dir =  new_genome_dir
+
     def run(self):
+        # split a large file
+        self.split_files()
+
         # ltr
         p1 = Process(target=self.ltr)
         p1.start()
