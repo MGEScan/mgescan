@@ -35,9 +35,11 @@ class Split(object):
 
     def set_output(self, path):
         self.result_path = utils.get_abspath(path)
+        return self.result_path
 
     def set_input(self, path):
         self.input_file = utils.get_abspath(path)
+        return self.input_file
 
     def set_defaults(self):
         """Set default values to run programs"""
@@ -65,9 +67,11 @@ class Split(object):
         if not output_path:
             output_path = self.result_path
 
+        utils.create_directory(output_path,False)
+
         onlyfiles = [ f for f in listdir(dirpath) if isfile(join(dirpath,f)) ]
         for file in onlyfiles:
-        self.split_file(file, output_path)
+            self.split_file(dirpath + "/" + file, output_path)
 
 def main():
     arguments = docopt(__doc__, version='split.py 0.1')

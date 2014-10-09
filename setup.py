@@ -44,6 +44,6 @@ setup(
             [console_scripts]
             mgescan=mgescan.cmd:main
             ''',
-        cmdclass={'install': MyInstall},
+        cmdclass={'install': InstallOnly},
         )
 
