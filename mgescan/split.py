@@ -13,6 +13,7 @@ Options:
 """
 from docopt import docopt
 from Bio import SeqIO
+from mgescan import utils
 
 class Split(object):
 
@@ -25,16 +26,16 @@ class Split(object):
         self.set_defaults()
 
     def set_inputs(self):
-        self.data_dir = self.get_abspath(self.args['--output'])
-        self.input_file = self.get_abspath(self.args['<filename>'])
+        self.data_dir = utils.get_abspath(self.args['--output'])
+        self.input_file = utils.get_abspath(self.args['<filename>'])
 
     def set_defaults(self):
         """Set default values to run programs
 
         """
 
-        self.data_dir = self.data_dir or
-        self.create_directory(self.default_output)
+        self.data_dir = utils.create_directory(self.data_dir or
+                self.default_output)
 
     def run(self):
         print self.args

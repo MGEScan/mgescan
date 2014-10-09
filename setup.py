@@ -38,7 +38,7 @@ setup(
             ],
         entry_points='''
             [console_scripts]
-            mgescan=mgescan.mgescan:main
+            mgescan=mgescan.cmd:main
             ''',
         cmdclass={'install': MyInstall},
         )

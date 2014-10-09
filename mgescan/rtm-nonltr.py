@@ -19,7 +19,7 @@ Options:
 from docopt import docopt
 from multiprocessing import Process
 from subprocess import Popen, PIPE
-from mgescan import MGEScan
+from mgescan.cmd import MGEScan
 import os
 from biopython import reverse_complement_fasta
 
