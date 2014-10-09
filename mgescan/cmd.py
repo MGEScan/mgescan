@@ -23,6 +23,7 @@ class MGEScan(object):
     """ MGEScan runs mgescan for identifying ltr and nonltr in genome
     sequence """
 
+    default_output_path = "./output"
     genome_dir = None
     data_dir = None
     ltr_enabled = False
@@ -54,7 +55,11 @@ class MGEScan(object):
         len_condition: minimum length(bp) for LTRs aligned in local alignment.
         """
 
-        self.data_dir = self.data_dir or utils.create_directory("./output")
+        if self.data_dir:
+            self.data_dir = utils.create_directory(self.data_dir, False)
+        else:
+            self.data_dir = \
+            utils.create_directory(utils.get_abspath(self.default_output_path))
 
         self.hmmerv = 3
         self.min_dist = 2000

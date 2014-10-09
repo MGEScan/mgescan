@@ -7,10 +7,17 @@ def get_abspath(path):
         # print [DEBUG] Failed to convert a path to an absolute path
         return path
 
-def create_directory(path):
+def create_directory(path, skipifexists=True):
     if not os.path.exists(path):
         os.makedirs(path)
-        return get_abspath(path)
     else:
-        new_path = path + ".1"
-        return create_directory(new_path)
+        if skipifexists:
+            new_path = path + ".1"
+            return create_directory(new_path, skipifexists)
+    return get_abspath(path)
+
+def exists(path):
+    try:
+        return os.path.exists(path)
+    except:
+        return False

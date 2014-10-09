@@ -18,6 +18,7 @@ from mgescan import utils
 class Split(object):
 
     data = None
+    result_path = None
     default_output = "./split-output"
 
     def __init__(self, args):
@@ -31,8 +32,10 @@ class Split(object):
 
     def set_defaults(self):
         """Set default values to run programs"""
-        self.result_path = utils.create_directory(self.result_path or
-                self.default_output)
+        if self.result_path:
+            self.result_path = utils.create_directory(self.result_path, False)
+        else:
+            self.result_path = utils.create_directory(self.default_output)
 
     def run(self):
         self.split_file(self.input_file, self.result_path)

@@ -9,6 +9,10 @@ class MyInstall(DistutilsInstall):
         os.system("cd mgescan/nonltr/hmm;make clean; make")
         DistutilsInstall.run(self)
 
+class InstallOnly(DistutilsInstall):
+    def run(self):
+        DistutilsInstall.run(self)
+
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
@@ -16,7 +20,7 @@ reqs = [line.strip() for line in open('requirements.txt')]
 
 setup(
         name = "MGEScan",
-        version = "0.0.1",
+        version = "0.0.2",
         author = "Hyungro Lee",
         author_email = "hroe.lee@gmail.com",
         description = ("MGEScan on Galaxy Workflow System for identifying ltr and "
