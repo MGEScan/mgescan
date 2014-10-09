@@ -13,10 +13,11 @@ Options:
     --output=<data_dir> Directory results will be saved
 
 """
+import os
 from docopt import docopt
 from multiprocessing import Process
 from subprocess import Popen, PIPE
-import os
+from mgescan import utils
 
 class MGEScan(object):
     """ MGEScan runs mgescan for identifying ltr and nonltr in genome
@@ -35,8 +36,8 @@ class MGEScan(object):
         self.set_defaults()
 
     def set_inputs(self):
-        self.data_dir = self.get_abspath(self.args['--output'])
-        self.genome_dir = self.get_abspath(self.args['<genome_dir>'])
+        self.data_dir = utils.get_abspath(self.args['--output'])
+        self.genome_dir = utils.get_abspath(self.args['<genome_dir>'])
         self.ltr_enabled = self.args['ltr']
         self.nonltr_enabled = self.args['nonltr']
 
@@ -53,7 +54,7 @@ class MGEScan(object):
         len_condition: minimum length(bp) for LTRs aligned in local alignment.
         """
 
-        self.data_dir = self.data_dir or self.create_directory("./output")
+        self.data_dir = self.data_dir or utils.create_directory("./output")
 
         self.hmmerv = 3
         self.min_dist = 2000
@@ -104,8 +105,8 @@ class MGEScan(object):
         res1 = self.run_cmd(cmd1)
 
         # gff3
-        self.ltr_out_path = self.get_abspath(self.data_dir + "/ltr/ltr.out")
-        self.ltr_gff_path = self.get_abspath(self.data_dir + "/ltr/ltr.gff3")
+        self.ltr_out_path = utils.get_abspath(self.data_dir + "/ltr/ltr.out")
+        self.ltr_gff_path = utils.get_abspath(self.data_dir + "/ltr/ltr.gff3")
         cmd2 = "ltr/toGFF.py %(ltr_out_path)s %(ltr_gff_path)s"
         res2 = self.run_cmd(cmd2)
 
@@ -121,8 +122,8 @@ class MGEScan(object):
         res0 = self.run_cmd(cmd0)
         
         # gff3
-        self.nonltr_out_path = self.get_abspath(self.data_dir + "/info/full/")
-        self.nonltr_gff_path = self.get_abspath(self.data_dir + "/info/nonltr.gff3")
+        self.nonltr_out_path = utils.get_abspath(self.data_dir + "/info/full/")
+        self.nonltr_gff_path = utils.get_abspath(self.data_dir + "/info/nonltr.gff3")
         cmd1 = "nonltr/toGFF.py %(nonltr_out_path)s %(nonltr_gff_path)s"
         res1 = self.run_cmd(cmd1)
 
@@ -131,20 +132,6 @@ class MGEScan(object):
     def run_cmd(self, cmd):
         return Popen((cmd % vars(self)).split(), stdout=PIPE, stderr=PIPE).stdout.read()
 
-    def get_abspath(self, path):
-        try:
-            return os.path.abspath(path)
-        except:
-            # print [DEBUG] Failed to convert a path to an absolute path
-            return path
-
-    def create_directory(self, path):
-        if not os.path.exists(path):
-            os.makedirs(path)
-            return self.get_abspath(path)
-        else:
-            new_path = path + ".1"
-            return self.create_directory(new_path)
 def main():
     arguments = docopt(__doc__, version='MGEScan 0.1')
     rtm = MGEScan(arguments)
