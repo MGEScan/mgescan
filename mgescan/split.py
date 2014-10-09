@@ -26,26 +26,23 @@ class Split(object):
         self.set_defaults()
 
     def set_inputs(self):
-        self.data_dir = utils.get_abspath(self.args['--output'])
+        self.result_path = utils.get_abspath(self.args['--output'])
         self.input_file = utils.get_abspath(self.args['<filename>'])
 
     def set_defaults(self):
-        """Set default values to run programs
-
-        """
-
-        self.data_dir = utils.create_directory(self.data_dir or
+        """Set default values to run programs"""
+        self.result_path = utils.create_directory(self.data_dir or
                 self.default_output)
 
     def run(self):
-        print self.args
+        self.split_file(self.input_file, self.result_path)
 
     def split_file(self, filename, output_path):
 
-        record_iter = SeqIO.parse(open("large.fasta"),"fasta")
+        record_iter = SeqIO.parse(open(filename),"fasta")
         for val in record_iter:
             filename=val.id+".fa"
-            handle = open(filename, "w")
+            handle = open(output_path + "/" + filename, "w")
             SeqIO.write([val], handle, "fasta")
             handle.close()
 
