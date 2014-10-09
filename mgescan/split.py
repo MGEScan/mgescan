@@ -1,14 +1,14 @@
 """split.py: separate a large file
 
 Usage:
-    split.py <filename> [--output=<data_dir>]
+    split.py <filename> [--output=<results>]
     split.py (-h | --help)
     split.py --version
 
 Options:
     -h --help   Show this screen.
     --version   Show version.
-    --output=<data_dir> Directory results will be saved
+    --output=<results> Directory results will be saved
 
 """
 from docopt import docopt
@@ -31,7 +31,7 @@ class Split(object):
 
     def set_defaults(self):
         """Set default values to run programs"""
-        self.result_path = utils.create_directory(self.data_dir or
+        self.result_path = utils.create_directory(self.result_path or
                 self.default_output)
 
     def run(self):
