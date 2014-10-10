@@ -150,8 +150,8 @@ class MGEScan(object):
 
 def main():
     arguments = docopt(__doc__, version='MGEScan 0.1')
-    rtm = MGEScan(arguments)
-    rtm.run()
+    mge = MGEScan(arguments)
+    mge.run()
 
 if __name__ == "__main__":
     main()
