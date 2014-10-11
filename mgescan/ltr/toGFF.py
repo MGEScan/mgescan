@@ -31,9 +31,9 @@ for aline in infile:
         # remove file extension .fa
         seqid = seqid.replace(".fa", "")
         # id is cluster + seqid
-		id = cluster + "_" + words[0]
-		des = [seqid, "MGEScan_LTR", "mobile_genetic_element", words[1], words[4], ".", words[5], ".", "ID=" + id + ";name=cluster_"+cluster] 
-		print >>outfile, "\t".join(des)
+        id = cluster + "_" + words[0]
+        des = [seqid, "MGEScan_LTR", "mobile_genetic_element", words[1], words[4], ".", words[5], ".", "ID=" + id + ";name=cluster_"+cluster] 
+        print >>outfile, "\t".join(des)
 outfile.close()
 infile.close()
 		
