@@ -65,7 +65,7 @@ if [ "$program" == "L" ]
 then
 	program_name="ltr"
 else
-	programname="nonltr"
+	program_name="nonltr"
 fi
 
 #run

@@ -86,16 +86,16 @@ class MGEScan(object):
         self.split_files()
 
         # ltr
-        if self.ltr_enabled:
+        if not self.nonltr_enabled:
             p1 = Process(target=self.ltr)
             p1.start()
         # nonltr
-        if self.nonltr_enabled:
+        if not self.ltr_enabled:
             p2 = Process(target=self.nonltr)
             p2.start()
-        if self.ltr_enabled:
+        if 'p1' in locals():
             p1.join()
-        if self.nonltr_enabled:
+        if 'p2' in locals():
             p2.join()
 
     def ltr(self):
