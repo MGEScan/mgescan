@@ -86,13 +86,17 @@ class MGEScan(object):
         self.split_files()
 
         # ltr
-        p1 = Process(target=self.ltr)
-        p1.start()
+        if self.ltr_enabled:
+            p1 = Process(target=self.ltr)
+            p1.start()
         # nonltr
-        p2 = Process(target=self.nonltr)
-        p2.start()
-        p1.join()
-        p2.join()
+        if self.nonltr_enabled:
+            p2 = Process(target=self.nonltr)
+            p2.start()
+        if self.ltr_enabled:
+            p1.join()
+        if self.nonltr_enabled:
+            p2.join()
 
     def ltr(self):
         print 'ltr: starting'
