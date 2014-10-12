@@ -19,14 +19,14 @@ outfile = open(sys.argv[2], "w")
 cluster = ""
 #print >>outfile, "##gff-version 3"
 for aline in infile:
-	aline = aline.strip()
-	words = aline.split(None)
-	if len(words) == 1:
-		cluster = aline[:aline.find("-")]
-	else:
-		if len(words) == 0:
-			continue
-		seqid = words[0][:words[0].rfind("_")]
+    aline = aline.strip()
+    words = aline.split(None)
+    if len(words) == 1:
+        cluster = aline[:aline.find("-")]
+    else:
+        if len(words) == 0:
+            continue
+        seqid = words[0][:words[0].rfind("_")]
 
         # remove file extension .fa
         seqid = seqid.replace(".fa", "")
@@ -36,5 +36,5 @@ for aline in infile:
         print >>outfile, "\t".join(des)
 outfile.close()
 infile.close()
-		
+
 
