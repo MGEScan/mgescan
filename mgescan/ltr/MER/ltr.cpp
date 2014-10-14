@@ -47,28 +47,29 @@ int main(int argc, char *argv[])
 		printUsage();
       return 1;
    }
-
+   
    processArgument(argc-1, argv+1);
-	checkArgment();
+   checkArgment();
+   //NOW(stderr); 
+   //fprintf(stderr, ">>>Load sequences\n");
 
-	NOW(stderr); fprintf(stderr, ">>>Load sequences\n");
+   SequenceFactory sf;
+   MultipleSequence* seqs = sf.load(InputFileName, SequenceFactory::FASTA);
+   checkSequences(seqs);
 
-	SequenceFactory sf;
-	MultipleSequence* seqs = sf.load(InputFileName, SequenceFactory::FASTA);
-	checkSequences(seqs);
+   IntervalSet set;
+   MempSeed seed;
+   seed.find(seqs, MinSeed, MinDist, MaxDist, &set);
 
-	IntervalSet set;
-	MempSeed seed;
-	seed.find(seqs, MinSeed, MinDist, MaxDist, &set);
+   if (SortFlag) set.sort(Interval::xOrder());
+   saveFile(seqs, set);
 
-	if (SortFlag) set.sort(Interval::xOrder());
-	saveFile(seqs, set);
+   // clean
+   seqs->clearAll();
+   delete seqs;
 
-	// clean
-	seqs->clearAll();
-	delete seqs;
-
-	NOW(stderr); fprintf(stderr, ">>>END\n");
+   //NOW(stderr); 
+   //fprintf(stderr, ">>>END\n");
    return 0;
 }
 
@@ -125,7 +126,7 @@ void checkArgment()
 	{
 		fprintf(stderr, "Error: No input file\n");
 		printUsage();
-      exit(-1);
+		exit(-1);
 	}
 }
 

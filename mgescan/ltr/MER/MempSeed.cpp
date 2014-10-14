@@ -20,14 +20,16 @@ bool MempSeed::find(MultipleSequence* seq, int length, int minDist, int maxDist,
 	m_minDist = minDist;
 	m_maxDist = maxDist;
 
-	NOW(stderr); fprintf(stderr, ">>>Construct generalized suffix array\n");
+	//NOW(stderr); 
+	//fprintf(stderr, ">>>Construct generalized suffix array\n");
 
 	m_sa.accept('A'); m_sa.accept('C'); m_sa.accept('G'); m_sa.accept('T'); 
 	if ( !m_sa.sort(m_seq->at(0)->getSequence(), m_seq->at(0)->getLength())
 	  || !m_sa.computeLcp() )
 		return false;
 
-	NOW(stderr); fprintf(stderr, ">>>Compute MERs\n");
+	//NOW(stderr); 
+	//fprintf(stderr, ">>>Compute MERs\n");
 
 	m_sa.computeMaximalRepeat(this, length);
 
