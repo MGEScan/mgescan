@@ -64,8 +64,10 @@ fi
 if [ "$program" == "L" ]
 then
 	program_name="ltr"
-else
+elif [ "$program" == "N" ]
 	program_name="nonltr"
+else
+	program_name=""
 fi
 
 #run
