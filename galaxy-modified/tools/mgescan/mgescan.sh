@@ -65,6 +65,7 @@ if [ "$program" == "L" ]
 then
 	program_name="ltr"
 elif [ "$program" == "N" ]
+then
 	program_name="nonltr"
 else
 	program_name=""
