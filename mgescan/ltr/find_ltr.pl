@@ -367,7 +367,7 @@ sub get_ltr_ir_seq{ #$genome_dir, $ltr_data_dir, $ltr_seq_dir, $ir_seq_dir, $ele
                         $seq = substr($genome_seq_sub, $temp[1]+$temp[17], ($temp[2]+$temp[18])-($temp[1]+$temp[17])+1);
                         print OUT $seq."\n";
 			close(OUT);
-			system("transeq -sequence ".$file4." -outseq ".$file4.".pep -frame=f");
+			system("transeq -sequence ".$file4." -outseq ".$file4.".pep -frame=f 2> /dev/null");
 
 			open OUT, ">$file5";
                         print OUT $genome_head_sub."_".$count."\n";
@@ -401,7 +401,7 @@ sub get_ltr_ir_seq{ #$genome_dir, $ltr_data_dir, $ltr_seq_dir, $ir_seq_dir, $ele
 			$temp_seq = reverse($seq);
                         print OUT $temp_seq."\n";
 			close(OUT);
-			system("transeq -sequence ".$file4." -outseq ".$file4.".pep -frame=f");
+			system("transeq -sequence ".$file4." -outseq ".$file4.".pep -frame=f 2> /dev/null");
 
 
 			open OUT, ">$file5";
