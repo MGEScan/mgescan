@@ -36,7 +36,7 @@ def stop_err( msg, ret=1 ):
     sys.stderr.write( msg )
     sys.exit( ret )
 def file_err( msg, dataset, json_file ):
-    json_file.write( to_json_string( dict( type = 'dataset',
+    json_file.write( dumps( dict( type = 'dataset',
                                            ext = 'data',
                                            dataset_id = dataset.dataset_id,
                                            stderr = msg ) ) + "\n" )
@@ -126,7 +126,7 @@ def add_file( dataset, registry, json_file, output_path ):
         elif is_gzipped and is_valid:
             if link_data_only == 'copy_files':
                 # We need to uncompress the temp_name file, but BAM files must remain compressed in the BGZF format
-                CHUNK_SIZE = 2**20 # 1Mb   
+                CHUNK_SIZE = 2**20 # 1Mb
                 fd, uncompressed = tempfile.mkstemp( prefix='data_id_%s_upload_gunzip_' % dataset.dataset_id, dir=os.path.dirname( output_path ), text=False )
                 gzipped_file = gzip.GzipFile( dataset.path, 'rb' )
                 while 1:
@@ -159,7 +159,7 @@ def add_file( dataset, registry, json_file, output_path ):
             elif is_bzipped and is_valid:
                 if link_data_only == 'copy_files':
                     # We need to uncompress the temp_name file
-                    CHUNK_SIZE = 2**20 # 1Mb   
+                    CHUNK_SIZE = 2**20 # 1Mb
                     fd, uncompressed = tempfile.mkstemp( prefix='data_id_%s_upload_bunzip2_' % dataset.dataset_id, dir=os.path.dirname( output_path ), text=False )
                     bzipped_file = bz2.BZ2File( dataset.path, 'rb' )
                     while 1:
@@ -241,7 +241,11 @@ def add_file( dataset, registry, json_file, output_path ):
                         dataset.name = uncompressed_name
                 data_type = 'zip'
         if not data_type:
-            if check_binary( dataset.path ):
+            # TODO refactor this logic.  check_binary isn't guaranteed to be
+            # correct since it only looks at whether the first 100 chars are
+            # printable or not.  If someone specifies a known unsniffable
+            # binary datatype and check_binary fails, the file gets mangled.
+            if check_binary( dataset.path ) or Binary.is_ext_unsniffable(dataset.file_type):
                 # We have a binary dataset, but it is not Bam, Sff or Pdf
                 data_type = 'binary'
                 #binary_ok = False
@@ -264,10 +268,16 @@ def add_file( dataset, registry, json_file, output_path ):
             if link_data_only == 'copy_files':
                 if dataset.type in ( 'server_dir', 'path_paste' ) and data_type not in [ 'gzip', 'bz2', 'zip' ]:
                     in_place = False
-                if dataset.space_to_tab:
-                    line_count, converted_path = sniff.convert_newlines_sep2tabs( dataset.path, in_place=in_place )
-                else:
-                    line_count, converted_path = sniff.convert_newlines( dataset.path, in_place=in_place )
+                # Convert universal line endings to Posix line endings, but allow the user to turn it off,
+                # so that is becomes possible to upload gzip, bz2 or zip files with binary data without
+                # corrupting the content of those files.
+                if dataset.to_posix_lines:
+                    tmpdir = output_adjacent_tmpdir( output_path )
+                    tmp_prefix = 'data_id_%s_convert_' % dataset.dataset_id
+                    if dataset.space_to_tab:
+                        line_count, converted_path = sniff.convert_newlines_sep2tabs( dataset.path, in_place=in_place, tmp_dir=tmpdir, tmp_prefix=tmp_prefix )
+                    else:
+                        line_count, converted_path = sniff.convert_newlines( dataset.path, in_place=in_place, tmp_dir=tmpdir, tmp_prefix=tmp_prefix )
             if dataset.file_type == 'auto':
                 ext = sniff.guess_ext( dataset.path, registry.sniff_order )
             else:
@@ -309,7 +319,7 @@ def add_file( dataset, registry, json_file, output_path ):
                  line_count = line_count )
     if dataset.get('uuid', None) is not None:
         info['uuid'] = dataset.get('uuid')
-    json_file.write( to_json_string( info ) + "\n" )
+    json_file.write( dumps( info ) + "\n" )
 
     if link_data_only == 'copy_files' and datatype.dataset_content_needs_grooming( output_path ):
         # Groom the dataset content if necessary
@@ -335,10 +345,12 @@ def add_composite_file( dataset, registry, json_file, output_path, files_path ):
                        dataset.path = temp_name
                        dp = temp_name
                     if not value.is_binary:
+                        tmpdir = output_adjacent_tmpdir( output_path )
+                        tmp_prefix = 'data_id_%s_convert_' % dataset.dataset_id
                         if dataset.composite_file_paths[ value.name ].get( 'space_to_tab', value.space_to_tab ):
-                            sniff.convert_newlines_sep2tabs( dp )
+                            sniff.convert_newlines_sep2tabs( dp, tmp_dir=tmpdir, tmp_prefix=tmp_prefix )
                         else:
-                            sniff.convert_newlines( dp )
+                            sniff.convert_newlines( dp, tmp_dir=tmpdir, tmp_prefix=tmp_prefix )
                     shutil.move( dp, os.path.join( files_path, name ) )
         # Move the dataset to its "real" path
         shutil.move( dataset.primary_file, output_path )
@@ -346,7 +358,16 @@ def add_composite_file( dataset, registry, json_file, output_path, files_path ):
         info = dict( type = 'dataset',
                      dataset_id = dataset.dataset_id,
                      stdout = 'uploaded %s file' % dataset.file_type )
-        json_file.write( to_json_string( info ) + "\n" )
+        json_file.write( dumps( info ) + "\n" )
+
+
+def output_adjacent_tmpdir( output_path ):
+    """ For temp files that will ultimately be moved to output_path anyway
+    just create the file directly in output_path's directory so shutil.move
+    will work optimially.
+    """
+    return os.path.dirname( output_path )
+
 
 def __main__():
 
@@ -361,7 +382,7 @@ def __main__():
     registry.load_datatypes( root_dir=sys.argv[1], config=sys.argv[2] )
 
     for line in open( sys.argv[3], 'r' ):
-        dataset = from_json_string( line )
+        dataset = loads( line )
         dataset = util.bunch.Bunch( **safe_dict( dataset ) )
         try:
             output_path = output_paths[int( dataset.dataset_id )][0]
