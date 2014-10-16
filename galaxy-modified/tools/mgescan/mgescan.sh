@@ -7,7 +7,8 @@ source $user_dir/virtualenv/retrotminer/bin/activate
 script_program=`which python`
 script=$user_dir/github/retrotminer/retrotminer/retrotminer.py
 input_file=$1
-input_file_name=$2
+#input_file_name=$2
+input_file_name=`basename $input_file`
 hmmsearch_version=$3
 output_file=$4
 program=$5 # N is nonLTR, L is LTR and B is both
