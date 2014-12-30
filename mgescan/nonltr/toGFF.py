@@ -42,7 +42,17 @@ for cladeDir in glob.glob( os.path.join(sys.argv[1], '*') ):
 	for fastaitem in fastalist:
 		header = fastaitem[0]
 		seq = fastaitem[1]
-		seqid = header[:header.find("_")]
+		# seqid = header[:header.find("_")]
+        seqid = header[:header.rfind("_")]
+        try:
+            # dm3_gold_chr4_1
+            tmp = seqid.split("_")
+            if len(tmp) > 2:
+                # chr4
+                seqid = tmp[2]
+        except:
+            pass
+
         # remove the file extension .fa
         seqid = seqid.replace(".fa", "")
         if seqid[0].isdigit():
