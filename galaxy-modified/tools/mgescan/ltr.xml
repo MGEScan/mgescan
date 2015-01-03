@@ -31,7 +31,7 @@
 			<option value="2">2</option>
 		</param-->
 		<!-- path.conf -->
-		<param name="sw_rm" type="select" display="checkboxes" multiple="True" label="enable repeatmasker, if necessary" help="Use this option if you are enable repeatmasker"> 
+		<param name="sw_rm" type="select" display="checkboxes" multiple="True" label="enable repeatmasker, if necessary" help="Use this option if repeatmasker is required to identify and annotate repetitive elements in nucleotide sequences"> 
 			<option value="Yes">Yes</option>
 		</param>
 		<param name="scaffold" type="text" label="path for the big file that has all scaffolds"/>
