@@ -12,6 +12,14 @@ To run MGEScan-nonLTR, follow the steps below:
 * Select genome files a select box. You can upload your genome files through 'Get Data' at Tools menu bar.
 * Click 'Execute' button. This tool reads your genome files and runs the whole process.
 
+Options
+--------
+* hmmmsearch options e.g. -E 0.00001 
+  : reports sequences smaller than 0.00001 E-value threshold in output)
+
+
+
+
 Result
 ------
 Upon completion, MGEScan-nonLTR generates output, "info" in the data directory you specified. In this "info" directory, two sub-directories ("full" and "validation") are generated.
