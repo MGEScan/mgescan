@@ -1,7 +1,7 @@
 MGEScan-LTR
 ===========
 
-MGEScan-LTR program identifies long terminal repeats (LTR).
+MGEScan-LTR program identifies long terminal repeats (LTR). RepeatMasker can be used to identify repetitive elements in genomic sequences.
 
 .. image:: images/mgescan-ltr.png
 
@@ -30,8 +30,22 @@ To run MGEScan-LTR, follow the steps below,
   * len_condition: minimum length(bp) for LTRs aligned in local alignment.
 * Click 'Execute'
 
-Result
-------
+Options
+--------
+
+* RepeatMasker: Yes / No
+* file path for multiple sequences to divide
+* settings for LTRs
+  - minimum distance(bp) between LTRs
+  - maximum distance(bp) between LTRs
+  - minimum length(bp) of LTR
+  - maximum length(bp) of LTR
+  - minimum similarity(%) for LTRs in an element
+  - inimum similarity(%) for LTRs in a cluster
+  - minimum length(bp) for LTRs aligned in local alignment
+
+Results
+-------
 Upon completion, MGEScan-LTR generates a file ltr.out. This output file has information about clusters and coordinates of LTR retrotransposons identified. Each cluster of LTR retrotransposons starts with the head line of [cluster_number]---------, followed by the information of LTR retrotransposons in the cluster. The columns for LTR retrotransposons are as follows.
 
 * LTR_id: unique id of LTRs identified. It consist of two components, sequence file name and id in the file. For example, chr1_2 is the second LTR retrotransposon in the chr1 file.
