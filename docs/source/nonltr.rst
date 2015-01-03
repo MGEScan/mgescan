@@ -1,7 +1,7 @@
 MGEScan-nonLTR
 ==============
 
-MGEScan-nonLTR is a program to identify Non-long terminal repeat (non-LTR) retrotransposons in genomic sequences. In Galaxy workflow system, a few options are available to configure settings of the program, e.g. hmmsearch of protein sequence database with a profile hidden Markov model (HMM). 
+MGEScan-nonLTR is a program to identify non-long terminal repeat (non-LTR) retrotransposons in genomic sequences. In Galaxy workflow system, a few options are available to configure settings of the program, e.g. hmmsearch of protein sequence database with a profile hidden Markov model (HMM). 
 
 .. image:: images/rtm-nonltr.png
 
