@@ -20,6 +20,7 @@ To run MGEScan-nonLTR, follow the steps below:
 Options
 --------
 * hmmmsearch options 
+
   e.g. -E 0.00001 : reports sequences smaller than 0.00001 E-value threshold in output
 * URL of the profile files for RT and APE 
 * EMBOSS transeq options
