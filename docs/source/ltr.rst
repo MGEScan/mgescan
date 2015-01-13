@@ -18,9 +18,11 @@ Running the program
 To run MGEScan-LTR, follow the steps below,
 
 * Specify options that you like to have:
-  Check repeatmasker if you want to preprocess
-  Check scaffold if the input file has all scaffolds.
+
+  * Check repeatmasker if you want to preprocess
+  * Check scaffold if the input file has all scaffolds.
 * Update values:
+
   * min_dist: minimum distance(bp) between LTRs.
   * max_dist: maximum distance(bp) between LTRS
   * min_len_ltr: minimum length(bp) of LTR.
@@ -36,6 +38,7 @@ Options
 * RepeatMasker: Yes / No
 * file path for multiple sequences to divide
 * settings for LTRs
+
   - minimum distance(bp) between LTRs
   - maximum distance(bp) between LTRs
   - minimum length(bp) of LTR
