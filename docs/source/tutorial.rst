@@ -7,7 +7,7 @@ Galaxy workflow system is a web-based program. With a specialized galaxy tools f
 
 http://silo.cs.indiana.edu:38080
 
-.. image:: images/rtm-main.png
+.. image:: images/mgescan-main.png
 
 Login or Register
 -----------------
