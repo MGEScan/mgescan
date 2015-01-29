@@ -48,7 +48,7 @@ UCSC Table Browser provides the easy way to download the database to Galaxy. Ope
 
 Program Execution
 ------------------
-MGEScan provides simple and detailed steps to run program. With * MGEScan > MGEScan *, both LTR and non-LTR can be executed at once. In a separated tool such as LTR or nonLTR, you can choose more options and tools. 
+In our new version of MGEScan, MGEScan-LTR and MGEScan-nonLTR can be executed concurrently. Open the page at **"MGEScan > MGEScan"**, a simple command is available for LTR and nonLTR executions. In a separated menu such as **LTR** or **nonLTR**, you can choose other options to run them separately.
 
 MGEScan
 ^^^^^^^^
