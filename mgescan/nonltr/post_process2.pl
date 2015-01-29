@@ -189,8 +189,9 @@ sub get_domain_pep_seq{
 	my %result_end=();
 	my %uniq_head=();
 	if ($hmmerv == 3){
-		system("hmmconvert ".$_[1]." > ".$_[1]."c");
-		system("hmmsearch  --noali --domtblout ".$hmm_dir."tbl ".$_[1]."c ".$_[0]." > /dev/null");
+		#system("hmmconvert ".$_[1]." > ".$_[1]."c");
+		#system("hmmsearch  --noali --domtblout ".$hmm_dir."tbl ".$_[1]."c ".$_[0]." > /dev/null");
+		system("hmmsearch  --noali --domtblout ".$hmm_dir."tbl ".$_[1]."3 ".$_[0]." > /dev/null");
 		my $hmm_command = "cat ".$hmm_dir."tbl";
 		my $hmm_result = `$hmm_command`;
 		while ($hmm_result =~ /\n((?!#).*)\n/g){
@@ -274,8 +275,9 @@ sub get_domain_dna_seq{
 	my %result_end=();
 	my %uniq_head=();
 	if ($hmmerv == 3){
-		system("hmmconvert ".$_[1]." > ".$_[1]."c");
-		system("hmmsearch  --noali --domtblout ".$hmm_dir."tbl ".$_[1]."c ".$_[0]." > /dev/null");
+		#system("hmmconvert ".$_[1]." > ".$_[1]."c");
+		#system("hmmsearch  --noali --domtblout ".$hmm_dir."tbl ".$_[1]."c ".$_[0]." > /dev/null");
+		system("hmmsearch  --noali --domtblout ".$hmm_dir."tbl ".$_[1]."3 ".$_[0]." > /dev/null");
 		my $hmm_command = "cat ".$hmm_dir."tbl";
 		my $hmm_result = `$hmm_command`;
 
@@ -384,8 +386,9 @@ sub vote_hmmsearch{
     for ($i=0; $i<=$#line; $i++){
 
 		if ($hmmerv == 3){
-			system("hmmconvert ".$_[1].$line[$i].".".$_[2].".hmm "." > ".$_[1].$line[$i].".".$_[2].".hmmc");
-			system("hmmsearch --noali --domtblout ".$hmm_dir."tbl ".$_[1].$line[$i].".".$_[2].".hmmc ".$_[0]." > /dev/null");
+			#system("hmmconvert ".$_[1].$line[$i].".".$_[2].".hmm "." > ".$_[1].$line[$i].".".$_[2].".hmmc");
+			#system("hmmsearch --noali --domtblout ".$hmm_dir."tbl ".$_[1].$line[$i].".".$_[2].".hmmc ".$_[0]." > /dev/null");
+			system("hmmsearch --noali --domtblout ".$hmm_dir."tbl ".$_[1].$line[$i].".".$_[2].".hmm3 ".$_[0]." > /dev/null");
 			my $command = "cat ".$hmm_dir."tbl";
 			my $hmm_result = `$command`;
 

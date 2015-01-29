@@ -27,9 +27,10 @@ system("echo ".$seq." > ".$seq_file);
 system("/u/lee212/retrotminer/EMBOSS/bin/transeq -frame=f ".$seq_file." -outseq=".$pep_file." 2>/dev/null");
 
 if ($hmmerv == 3){
-	system("hmmconvert ".$phmm_file." > ".$phmm_file."c");
-	system("hmmsearch  --noali --domtblout ".$phmm_dir."tbl ".$phmm_file."c ".$pep_file." > /dev/null");
-	#print "hmmsearch  --noali --domtblout ".$phmm_dir."tbl ".$phmm_file."c ".$pep_file." > /dev/null";
+	#system("hmmconvert ".$phmm_file." > ".$phmm_file."c");
+	#system("hmmsearch  --noali --domtblout ".$phmm_dir."tbl ".$phmm_file."c ".$pep_file." > /dev/null");
+	system("hmmsearch  --noali --domtblout ".$phmm_dir."tbl ".$phmm_file."3 ".$pep_file." > /dev/null");
+	system("echo hmmsearch  --noali --domtblout ".$phmm_dir."tbl ".$phmm_file."3 ".$pep_file." >> /tmp/aaaaa");
 	my $command = "cat ".$phmm_dir."tbl";
 	my $hmm_result = `$command`;
 	@hmm_results = split(/\n/, $hmm_result);

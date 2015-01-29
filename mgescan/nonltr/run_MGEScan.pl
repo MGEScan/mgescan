@@ -80,6 +80,7 @@ foreach my $name (sort readdir(DIRHANDLE)) {
 	my $plus_dna_file = $plus_dna_dir.$name;
 	my $command = $program_dir."run_hmm.pl --dna=".$plus_dna_file."  --out=".$plus_out_dir." --hmmerv=".$hmmerv;
 	system($command);
+	#printf $command."\n";
     }
 }
 
@@ -90,7 +91,7 @@ system("rm -f ".$plus_out_dir."out1/ppppp");
 system("rm -f ".$plus_out_dir."out1/qqqqq");
 
 my $command = $program_dir."post_process.pl --dna=".$plus_dna_dir." --out=".$plus_out_dir." --rev=0";
-#print $command."\n";
+#printf $command."\n";
 system($command);
 
 
@@ -106,6 +107,7 @@ foreach my $name (sort readdir(DIRHANDLE)) {
 	my $minus_dna_file = $minus_dna_dir.$name;
 	my $command = $program_dir."run_hmm.pl --dna=".$minus_dna_file." --out=".$minus_out_dir." --hmmerv=".$hmmerv;
 	system($command);
+	#printf $command."\n";
     }
 }
 
@@ -115,7 +117,7 @@ system("rm -f ".$minus_out_dir."out1/ppppp");
 system("rm -f ".$minus_out_dir."out1/qqqqq");
 
 my $command = $program_dir."post_process.pl --dna=".$minus_dna_dir." --out=".$minus_out_dir." --rev=1";
-#print $command."\n";
+#printf $command."\n";
 system($command);
 
 ###########################################
@@ -124,6 +126,7 @@ system($command);
 
 my $command = $program_dir."post_process2.pl --data_dir=".$main_data_dir." --hmmerv=".$hmmerv;
 system($command);
+#printf $command."\n";
 
 
 
