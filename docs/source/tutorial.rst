@@ -29,17 +29,18 @@ Get Data (Upload input data)
 -----------------------------
 With a couple of options to upload your genome sequences, MGEScan is ready to conduct data analysis.
 
-Upload file from local
-^^^^^^^^^^^^^^^^^^^^^^^
+Upload file from local (Option I)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Single file upload from local is available at *Get Data > Upload File*
+Single file upload from local is available at *Get Data > Upload File*.
 
 .. image:: images/rtm-upload-file.png
 
-Get Data from UCSC Table Browser
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Get Data from UCSC Table Browser (Option II)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-UCSC Table Browser provides the easy way to download the database to Galaxy.
+You can also use UCSC to get input data instead of uploading files from local.
+UCSC Table Browser provides the easy way to download the database to Galaxy. Open "Get Data > UCSC Main".
 
 `Using UCSC Table Browser <http://genome.ucsc.edu/cgi-bin/hgTables?GALAXY_URL=http%3A//silo.cs.indiana.edu%3A38080/tool_runner&tool_id=ucsc_table_direct1&hgta_compressType=none&sendToGalaxy=1&hgta_outputType=bed#Help>`_
 
