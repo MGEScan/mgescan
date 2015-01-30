@@ -67,7 +67,7 @@ Web Sites
 
 License
 -------
-Copyright (C) 2014 Hyungro Lee, Wazim Mohammed Ismail, Mina Rho & Haixu Tang. See the LICENSE file for license rights and limitations (GPL v3).
+Copyright (C) 2015. See the LICENSE file for license rights and limitations (GPL v3).
 
 This program is part of MGEScan.
 

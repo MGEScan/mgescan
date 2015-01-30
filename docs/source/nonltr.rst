@@ -35,4 +35,4 @@ For example, >chr1_333 means that this element start at 333bp in the "chr1" file
 
 License
 -------
-Copyright 2014 Mina Rho, Haixu Tang. You may redistribute this software under the terms of the GNU General Public License.
+Copyright 2015. You may redistribute this software under the terms of the GNU General Public License.

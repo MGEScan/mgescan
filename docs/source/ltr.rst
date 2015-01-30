@@ -69,4 +69,4 @@ Upon completion, MGEScan-LTR generates a file ltr.out. This output file has info
 
 License
 -------
-Copyright 2014 Mina Rho, Haixu Tang. You may redistribute this software under the terms of the GNU General Public License.
+Copyright 2015. You may redistribute this software under the terms of the GNU General Public License.

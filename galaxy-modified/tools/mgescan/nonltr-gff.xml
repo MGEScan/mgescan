@@ -22,7 +22,7 @@ This step converts outputs to gff3 file so that the results can be displayed via
 License
 ============
 
-Copyright 2014 Mina Rho, Haixu Tang.
+Copyright 2015.
 You may redistribute this software under the terms of the GNU General Public License.
 </help>
 </tool>
