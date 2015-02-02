@@ -1221,8 +1221,8 @@ sub find_domain{ #$file3, $file4
 
     for (my $j=0; $j<=$#rt; $j++){
 		if ($hmmerv == 3){
-			system("hmmconvert ".$tool_pfam.$rt[$j]." > ".$tool_pfam."c_".$rt[$j]);
-			system("hmmsearch -E 0.000001 --noali --tblout ".$tool_pfam."tbl ".$tool_pfam."c_".$rt[$j]." ".$_[1]."> /dev/null");
+			#system("hmmconvert ".$tool_pfam.$rt[$j]." > ".$tool_pfam."c_".$rt[$j]);
+			system("hmmsearch -E 0.000001 --noali --tblout ".$tool_pfam."tbl ".$tool_pfam."".$rt[$j]."3 ".$_[1]."> /dev/null");
 			my $temp_tool = "cat ".$tool_pfam."tbl";
 			my $str = `$temp_tool`;
 			if ($str =~ /\n(\d+.*)\n/){
@@ -1299,8 +1299,8 @@ sub find_domain{ #$file3, $file4
 
 		for (my $j=0; $j<=$#pf; $j++){
 			if ($hmmerv == 3){
-				system("hmmconvert ".$tool_pfam.$pf[$j]." > ".$tool_pfam."c_".$pf[$j]);
-				system("hmmsearch -E 0.000001 --noali --tblout ".$tool_pfam."tbl ".$tool_pfam."c_".$pf[$j]." ".$_[1]."> /dev/null");
+				#system("hmmconvert ".$tool_pfam.$pf[$j]." > ".$tool_pfam."c_".$pf[$j]);
+				system("hmmsearch -E 0.000001 --noali --tblout ".$tool_pfam."tbl ".$tool_pfam."".$pf[$j]."3 ".$_[1]."> /dev/null");
 				my $temp_tool = "cat ".$tool_pfam."tbl";
 				my $str = `$temp_tool`;
 				if ($str =~ /\n(\d+.*)\n/){
