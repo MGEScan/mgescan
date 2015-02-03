@@ -106,7 +106,7 @@ sub get_signal_domain{
 	open (OUT, ">$temp_file");
 	if ($hmmerv == 3){
 		#system("hmmconvert ".${$_[1]}." > ".${$_[1]}."c");
-		system("hmmsearch  -E 0.00001 --noali --domtblout ".$phmm_dir."tbl ".${$_[1]}."c ".${$_[0]}." > /dev/null");
+		system("hmmsearch  -E 0.00001 --noali --domtblout ".$phmm_dir."tbl ".${$_[1]}."3 ".${$_[0]}." > /dev/null");
 		my $hmm_command = "cat ".$phmm_dir."tbl";
 		my $hmm_result = `$hmm_command`;
 		# run hmmsearch to find the domain and save it in the temprary file   
