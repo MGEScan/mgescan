@@ -1,0 +1,12 @@
+
+call_find_ltr_for_each_chr: (Run by a single file in a directory sequentially)
+  - find_ltr_pair: (SHOULD BE PARALLELIZED per file e.g. perl find_ltr_pair
+    2L.fa)
+    - get_sequence
+    - find_mem
+    - make_bin
+    - find_putative_ltr (Run each line)
+      - check_putative_ltr
+        - find_sim (matcher)
+	- find_domain (transeq, hmmsearch)
+
