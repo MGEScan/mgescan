@@ -104,7 +104,6 @@ typedef struct arguments {
 	char genome[BUFSIZ];
 	char data[BUFSIZ];
 	int hmmerv;
-	char cmd [BUFSIZ];
 } ARGS;
 
 void run_mgescan_cmd(char *flist, ARGS optarg, int nfiles) {
@@ -117,6 +116,7 @@ void run_mgescan_cmd(char *flist, ARGS optarg, int nfiles) {
 		char *params_all = (char *)malloc(sizeof(char) * BUFSIZ);
 		strcpy(params_all, "");
 
+		/* parsing commands
 		char **tokens = str_split(optarg.cmd, ' ');
 		char *cmd = tokens[0];
 		char **params = tokens + 1;
@@ -125,18 +125,19 @@ void run_mgescan_cmd(char *flist, ARGS optarg, int nfiles) {
 			strcat(params_all, params[i]);
 			strcat(params_all, " ");
 		}
+		*/
 		for( i = 0 ; i < nfiles ; i++ ){
 			if (strcmp(flist + (NAME_MAX * i) , "") != 0 ) {
 				//MPI_Comm_spawn("ls", argv, 1, MPI_INFO_NULL, 0, MPI_COMM_WORLD, &everyone, MPI_ERRCODES_IGNORE);
 				//res= system(tmp);
 				if (strcmp(optarg.program, "ltr") == 0) {
 					// NOT IMPLEMENTED
-					sprintf(tmp, "%s %s %s/%s", cmd, params_all, optarg.data, flist + (NAME_MAX * i));
+					//sprintf(tmp, "%s %s %s/%s", cmd, params_all, optarg.data, flist + (NAME_MAX * i));
 				} else { 
 					sprintf(tmp, "run_hmm.pl --genome=%s --data=%s --hmmerv=%d", flist + (NAME_MAX * i), optarg.data, optarg.hmmerv);
 				}
 				printf("%s\n",tmp);
-				res = system(tmp);
+				//res = system(tmp);
 				//printf ("%d", res);
 				fflush(stdout);
 			}
@@ -155,7 +156,6 @@ ARGS arg_parse(int argc, char** argv) {
 		{"genome",  required_argument, 0, 'g'},
 		{"data",    required_argument, 0, 'd'},
 		{"hmmerv",    required_argument, 0, 'v'},
-		{"cmd",    required_argument, 0, 'c'},
 		{0, 0, 0, 0}
 	};
 
@@ -165,7 +165,7 @@ ARGS arg_parse(int argc, char** argv) {
 	/* getopt_long stores the option index here. */
 	int option_index = 0;
 
-	while((c = getopt_long (argc, argv, "p:g:d:v:c:",
+	while((c = getopt_long (argc, argv, "p:g:d:v:",
 			long_options, &option_index)) != -1) {
 		switch (c)
 		{
@@ -186,10 +186,6 @@ ARGS arg_parse(int argc, char** argv) {
 				pargs.hmmerv = atoi(optarg);
 				break;
 
-			case 'c':
-				strcpy(pargs.cmd, optarg);
-				break;
-
 			case '?':
 				/* getopt_long already printed an error message. */
 				break;
@@ -207,8 +203,7 @@ int main(int argc, char** argv) {
 	ARGS optarg = arg_parse(argc, argv);
 	if (strcmp(optarg.program, "") == 0 ||
 			strcmp(optarg.genome, "") == 0 ||
-			strcmp(optarg.data, "") == 0 ||
-			strcmp(optarg.cmd, "") == 0) {
+			strcmp(optarg.data, "") == 0) {
 		echo_usage(argv);
 		return -1;
 	}
