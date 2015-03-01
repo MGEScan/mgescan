@@ -6,6 +6,7 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <unistd.h>
+#include <getopt.h>
 
 #define NAME_MAX         255
 #define FILE_MAX	 202747 // cat /proc/sys/fs/file-max
@@ -44,31 +45,6 @@ void list_filenames(char *flist, int world_rank, int nfiles) {
 			if (strcmp(flist + (NAME_MAX * i),"") != 0 )
 				printf ("[%d:%d]%s\n", world_rank, i, (flist + (NAME_MAX * i)));//, filename[i]);
 		}}
-}
-
-void run_system_command(char *flist, char *cmd, char **params, char *data_path, int world_rank, int nfiles) {
-
-	//MPI_Comm everyone;           /* intercommunicator */ 
-	if(flist){
-		int i;
-		int res;
-		char tmp[BUFSIZ];
-		char *params_all = (char *)malloc(sizeof(char) * BUFSIZ);
-		strcpy(params_all, "");
-		for (i = 0; params[i] ; i++) {
-			strcat(params_all, params[i]);
-			strcat(params_all, " ");
-		}
-		for( i = 0 ; i < nfiles ; i++ ){
-			if (strcmp(flist + (NAME_MAX * i) , "") != 0 ) {
-				//MPI_Comm_spawn("ls", argv, 1, MPI_INFO_NULL, 0, MPI_COMM_WORLD, &everyone, MPI_ERRCODES_IGNORE);
-				//res= system(tmp);
-				sprintf(tmp, "%s %s %s/%s", cmd, params_all, data_path, flist + (NAME_MAX * i));
-				printf("%s\n",tmp);
-				res = system(tmp);
-				//printf ("%d", res);
-				fflush(stdout);
-			}}}
 }
 
 char** str_split(char* a_str, const char a_delim)
@@ -119,16 +95,118 @@ char** str_split(char* a_str, const char a_delim)
 	return result;
 }
 
-int main(int argc, char** argv) {
-  
-	if (argc != 3) {
-		fprintf(stderr, "Usage: %s DATA_DIR COMMAND\n", argv[0]);
-		exit(1);
+void echo_usage(char** argv) {
+	fprintf(stderr, "Usage: %s -p ltr|nonltr -g GENOME_PATH -d OUTPUT_PATH -c COMMAND\n", argv[0]);
+}
+
+typedef struct arguments {
+	char program[7];
+	char genome[BUFSIZ];
+	char data[BUFSIZ];
+	int hmmerv;
+	char cmd [BUFSIZ];
+} ARGS;
+
+void run_mgescan_cmd(char *flist, ARGS optarg, int nfiles) {
+
+	//MPI_Comm everyone;           /* intercommunicator */ 
+	if(flist){
+		int i;
+		int res;
+		char tmp[BUFSIZ];
+		char *params_all = (char *)malloc(sizeof(char) * BUFSIZ);
+		strcpy(params_all, "");
+
+		char **tokens = str_split(optarg.cmd, ' ');
+		char *cmd = tokens[0];
+		char **params = tokens + 1;
+
+		for (i = 0; params[i] ; i++) {
+			strcat(params_all, params[i]);
+			strcat(params_all, " ");
+		}
+		for( i = 0 ; i < nfiles ; i++ ){
+			if (strcmp(flist + (NAME_MAX * i) , "") != 0 ) {
+				//MPI_Comm_spawn("ls", argv, 1, MPI_INFO_NULL, 0, MPI_COMM_WORLD, &everyone, MPI_ERRCODES_IGNORE);
+				//res= system(tmp);
+				sprintf(tmp, "%s %s %s/%s", cmd, params_all, optarg.data, flist + (NAME_MAX * i));
+				printf("%s\n",tmp);
+				res = system(tmp);
+				//printf ("%d", res);
+				fflush(stdout);
+			}
+		}
 	}
-	char *data_path = argv[1];
-	char **tokens = str_split(argv[2], ' ');
-	char *cmd = tokens[0];
-	char **params = tokens + 1;
+}
+
+ARGS arg_parse(int argc, char** argv) {
+
+	int c;
+	/* Flag set by ‘--verbose’. */
+	static int verbose_flag;
+	static struct option long_options[] =
+	{
+		{"prg",  required_argument, 0, 'p'},
+		{"genome",  required_argument, 0, 'g'},
+		{"data",    required_argument, 0, 'd'},
+		{"hmmerv",    required_argument, 0, 'v'},
+		{"cmd",    required_argument, 0, 'c'},
+		{0, 0, 0, 0}
+	};
+
+	ARGS pargs = {0};
+	pargs.hmmerv = 3; /* default HMMER 3.0 */
+
+	/* getopt_long stores the option index here. */
+	int option_index = 0;
+
+	while((c = getopt_long (argc, argv, "p:g:d:v:c:",
+			long_options, &option_index)) != -1) {
+		switch (c)
+		{
+
+			case 'p':
+				strcpy(pargs.program, optarg);
+				break;
+
+			case 'g':
+				strcpy(pargs.genome, optarg);
+				break;
+
+			case 'd':
+				strcpy(pargs.data, optarg);
+				break;
+
+			case 'v':
+				pargs.hmmerv = atoi(optarg);
+				break;
+
+			case 'c':
+				strcpy(pargs.cmd, optarg);
+				break;
+
+			case '?':
+				/* getopt_long already printed an error message. */
+				break;
+
+			default:
+				echo_usage(argv);
+				return;
+		}
+	}
+	return pargs;
+}
+
+int main(int argc, char** argv) {
+
+	ARGS optarg = arg_parse(argc, argv);
+	if (strcmp(optarg.program, "") == 0 ||
+			strcmp(optarg.genome, "") == 0 ||
+			strcmp(optarg.data, "") == 0 ||
+			strcmp(optarg.cmd, "") == 0) {
+		echo_usage(argv);
+		return -1;
+	}
 
 	MPI_Init(NULL, NULL);
 
@@ -144,7 +222,7 @@ int main(int argc, char** argv) {
 	char *flist;
 	int nfiles = 0;
 	if (world_rank == 0) {
-		_readdir(data_path, &flist, &nfiles);
+		_readdir(optarg.genome, &flist, &nfiles);
 		*nfiles_copy = nfiles;
 		//list_filenames(flist, world_rank, nfiles);
 	}
@@ -160,7 +238,7 @@ int main(int argc, char** argv) {
 
 	MPI_Scatter(flist, bytes_per_node , MPI_CHAR, sub_results,
 			bytes_per_node, MPI_CHAR, 0, MPI_COMM_WORLD);
-	run_system_command(sub_results, cmd, params, data_path, world_rank, num_per_node);
+	run_mgescan_cmd(sub_results, optarg, num_per_node);
 	//MPI_Gather(&sub_avg, 1, MPI_FLOAT, sub_avgs, 1, MPI_FLOAT, 0, MPI_COMM_WORLD);
 
 	// Clean up
