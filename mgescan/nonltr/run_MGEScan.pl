@@ -18,12 +18,14 @@ my $minus_out_dir;
 my $phmm_dir;
 my $genome_dir;
 my $hmmerv;
+my $nmpi;
 
 print "\n\n";
 GetOptions(
            'data=s' => \$main_data_dir,
            'genome=s' => \$genome_dir,
-		   'hmmerv=s' => \$hmmerv,
+	   'hmmerv=s' => \$hmmerv,
+	   'mpi=s' => \$nmpi,
            );
 
 if (length($genome_dir)==0){
@@ -75,16 +77,23 @@ printf "Running forward...\n";
 # IF MPI ENABLED
 # CALL MPI_MGESCAN
 #
-opendir(DIRHANDLE, $plus_dna_dir) || die ("Cannot open directory ".$plus_dna_dir);
-foreach my $name (sort readdir(DIRHANDLE)) {
-    #print STDERR $name."\n";
-    if ($name !~ /^\./){  
+if ($nmpi) {
+	my $mpi_program = $program_dir."/../mpi_mgescan";
+	my $command = "mpirun -n ".$nmpi." ".$mpi_program." --prg nonltr --genome ".$plus_dna_dir." --data ".$plus_out_dir." --hmmerv ".$hmmerv;
 
-	my $plus_dna_file = $plus_dna_dir.$name;
-	my $command = $program_dir."run_hmm.pl --dna=".$plus_dna_file."  --out=".$plus_out_dir." --hmmerv=".$hmmerv;
 	system($command);
-	#printf $command."\n";
-    }
+} else {
+	opendir(DIRHANDLE, $plus_dna_dir) || die ("Cannot open directory ".$plus_dna_dir);
+	foreach my $name (sort readdir(DIRHANDLE)) {
+		#print STDERR $name."\n";
+		if ($name !~ /^\./){  
+
+			my $plus_dna_file = $plus_dna_dir.$name;
+			my $command = $program_dir."run_hmm.pl --dna=".$plus_dna_file."  --out=".$plus_out_dir." --hmmerv=".$hmmerv;
+			system($command);
+			#printf $command."\n";
+		}
+	}
 }
 
 
