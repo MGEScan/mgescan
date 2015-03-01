@@ -129,7 +129,12 @@ void run_mgescan_cmd(char *flist, ARGS optarg, int nfiles) {
 			if (strcmp(flist + (NAME_MAX * i) , "") != 0 ) {
 				//MPI_Comm_spawn("ls", argv, 1, MPI_INFO_NULL, 0, MPI_COMM_WORLD, &everyone, MPI_ERRCODES_IGNORE);
 				//res= system(tmp);
-				sprintf(tmp, "%s %s %s/%s", cmd, params_all, optarg.data, flist + (NAME_MAX * i));
+				if (strcmp(optarg.program, "ltr") == 0) {
+					// NOT IMPLEMENTED
+					sprintf(tmp, "%s %s %s/%s", cmd, params_all, optarg.data, flist + (NAME_MAX * i));
+				} else { 
+					sprintf(tmp, "run_hmm.pl --genome=%s --data=%s --hmmerv=%d", flist + (NAME_MAX * i), optarg.data, optarg.hmmerv);
+				}
 				printf("%s\n",tmp);
 				res = system(tmp);
 				//printf ("%d", res);

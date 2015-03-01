@@ -72,6 +72,9 @@ $minus_out_dir=$main_data_dir."b/";
 ############################################ 
 printf "Running forward...\n";
 
+# IF MPI ENABLED
+# CALL MPI_MGESCAN
+#
 opendir(DIRHANDLE, $plus_dna_dir) || die ("Cannot open directory ".$plus_dna_dir);
 foreach my $name (sort readdir(DIRHANDLE)) {
     #print STDERR $name."\n";
