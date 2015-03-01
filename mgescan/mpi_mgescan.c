@@ -32,6 +32,9 @@ void _readdir(const char *path, char **flist_p, int *nfiles_p) {
 			}*/
 		}
 		closedir (dir);
+		// Initialize the empty set with \0 to prevent reading a garbage character.
+		memset(flist + (NAME_MAX * nfiles), '\0', NAME_MAX);
+
 		*flist_p= flist;
 		*nfiles_p = nfiles;
 	}
@@ -106,7 +109,7 @@ typedef struct arguments {
 	int hmmerv;
 } ARGS;
 
-void run_mgescan_cmd(char *flist, ARGS optarg, int nfiles) {
+void run_mgescan_cmd(char *flist, ARGS optarg, int per_node) {
 
 	//MPI_Comm everyone;           /* intercommunicator */ 
 	if(flist){
@@ -126,7 +129,7 @@ void run_mgescan_cmd(char *flist, ARGS optarg, int nfiles) {
 			strcat(params_all, " ");
 		}
 		*/
-		for( i = 0 ; i < nfiles ; i++ ){
+		for( i = 0 ; i < per_node ; i++ ){
 			if (strcmp(flist + (NAME_MAX * i) , "") != 0 ) {
 				//MPI_Comm_spawn("ls", argv, 1, MPI_INFO_NULL, 0, MPI_COMM_WORLD, &everyone, MPI_ERRCODES_IGNORE);
 				//res= system(tmp);
@@ -134,7 +137,7 @@ void run_mgescan_cmd(char *flist, ARGS optarg, int nfiles) {
 					// NOT IMPLEMENTED
 					//sprintf(tmp, "%s %s %s/%s", cmd, params_all, optarg.data, flist + (NAME_MAX * i));
 				} else { 
-					sprintf(tmp, "run_hmm.pl --genome=%s --data=%s --hmmerv=%d", flist + (NAME_MAX * i), optarg.data, optarg.hmmerv);
+					sprintf(tmp, "run_hmm.pl --genome=%s/%s --data=%s --hmmerv=%d", optarg.genome, flist + (NAME_MAX * i), optarg.data, optarg.hmmerv);
 				}
 				printf("%s\n",tmp);
 				//res = system(tmp);
@@ -230,14 +233,16 @@ int main(int argc, char** argv) {
 	MPI_Barrier(MPI_COMM_WORLD);
 	MPI_Bcast(nfiles_copy, 1, MPI_INT, 0, MPI_COMM_WORLD);
 
+	// add 1 to prevent missing a file when scatter splits entire memory.
 	int num_per_node = *nfiles_copy / world_size + 1;
 	int bytes_per_node = NAME_MAX;
 	bytes_per_node *= num_per_node;
 	char *sub_results = (char *)malloc(sizeof(char) * bytes_per_node);
 	assert(sub_results != NULL);
+	//memset(sub_results + (num_per_node - 1) * NAME_MAX, '\0', NAME_MAX);
 
-	MPI_Scatter(flist, bytes_per_node , MPI_CHAR, sub_results,
-			bytes_per_node, MPI_CHAR, 0, MPI_COMM_WORLD);
+	MPI_Scatter(flist, bytes_per_node , MPI_BYTE, sub_results,
+			bytes_per_node, MPI_BYTE, 0, MPI_COMM_WORLD);
 	run_mgescan_cmd(sub_results, optarg, num_per_node);
 	//MPI_Gather(&sub_avg, 1, MPI_FLOAT, sub_avgs, 1, MPI_FLOAT, 0, MPI_COMM_WORLD);
 
