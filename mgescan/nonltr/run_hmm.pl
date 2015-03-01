@@ -102,12 +102,19 @@ sub get_signal_domain{
     my $temp_file = ${$_[2]}."temp";
     my $temp_file2 = ${$_[2]}."temp2";
     my $output_file = ${$_[2]};
-	
+    my $fh;
+    my $tmpfile;
+    my $template;
+
+    use File::Temp qw/ tempfile tempdir /;
+    ($fh, $tmpfile) = tempfile( $template, DIR => $phmm_dir, SUFFIX => '.tbl');
+
 	open (OUT, ">$temp_file");
 	if ($hmmerv == 3){
 		#system("hmmconvert ".${$_[1]}." > ".${$_[1]}."c");
-		system("hmmsearch  -E 0.00001 --noali --domtblout ".$phmm_dir."tbl ".${$_[1]}."3 ".${$_[0]}." > /dev/null");
-		my $hmm_command = "cat ".$phmm_dir."tbl";
+		system("hmmsearch  -E 0.00001 --noali --domtblout ".$phmm_dir."$tmpfile ".${$_[1]}."3 ".${$_[0]}." > /dev/null");
+		my $hmm_command = "cat ".$tmpfile;
+		system("rm -rf ".$tmpfile);
 		my $hmm_result = `$hmm_command`;
 		# run hmmsearch to find the domain and save it in the temprary file   
 		while ($hmm_result =~ /\n((?!#).*)\n/g){
