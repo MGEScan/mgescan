@@ -234,7 +234,9 @@ int main(int argc, char** argv) {
 	MPI_Bcast(nfiles_copy, 1, MPI_INT, 0, MPI_COMM_WORLD);
 
 	// add 1 to prevent missing a file when scatter splits entire memory.
-	int num_per_node = *nfiles_copy / world_size + 1;
+	div_t div_result = div(*nfiles_copy, world_size);
+	int num_per_node = div_result.quot;
+	int remainder = div_result.rem;
 	int bytes_per_node = NAME_MAX;
 	bytes_per_node *= num_per_node;
 	char *sub_results = (char *)malloc(sizeof(char) * bytes_per_node);
@@ -244,6 +246,9 @@ int main(int argc, char** argv) {
 	MPI_Scatter(flist, bytes_per_node , MPI_BYTE, sub_results,
 			bytes_per_node, MPI_BYTE, 0, MPI_COMM_WORLD);
 	run_mgescan_cmd(sub_results, optarg, num_per_node);
+	if ( remainder && world_rank == 0) {
+		run_mgescan_cmd(flist + (bytes_per_node * world_size), optarg, remainder);
+	}
 	//MPI_Gather(&sub_avg, 1, MPI_FLOAT, sub_avgs, 1, MPI_FLOAT, 0, MPI_COMM_WORLD);
 
 	// Clean up
