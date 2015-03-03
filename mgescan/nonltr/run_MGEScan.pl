@@ -79,7 +79,8 @@ printf "Running forward...\n";
 #
 if ($nmpi) {
 	my $mpi_program = $program_dir."/../mpi_mgescan";
-	my $command = "mpirun -n ".$nmpi." ".$mpi_program." --prg nonltr --genome ".$plus_dna_dir." --data ".$plus_out_dir." --hmmerv ".$hmmerv;
+	my $mpi_option = "-mca btl ^openib"; # ignore finding infiniteband
+	my $command = "mpirun -n ".$nmpi." ".$mpi_option." ".$mpi_program." --prg nonltr --genome ".$plus_dna_dir." --data ".$plus_out_dir." --hmmerv ".$hmmerv;
 
 	system($command);
 } else {

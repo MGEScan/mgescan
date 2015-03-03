@@ -137,10 +137,10 @@ void run_mgescan_cmd(char *flist, ARGS optarg, int per_node) {
 					// NOT IMPLEMENTED
 					//sprintf(tmp, "%s %s %s/%s", cmd, params_all, optarg.data, flist + (NAME_MAX * i));
 				} else { 
-					sprintf(tmp, "run_hmm.pl --genome=%s/%s --data=%s --hmmerv=%d", optarg.genome, flist + (NAME_MAX * i), optarg.data, optarg.hmmerv);
+					sprintf(tmp, "nonltr/run_hmm.pl --dna=%s/%s --out=%s --hmmerv=%d", optarg.genome, flist + (NAME_MAX * i), optarg.data, optarg.hmmerv);
 				}
 				printf("%s\n",tmp);
-				//res = system(tmp);
+				res = system(tmp);
 				//printf ("%d", res);
 				fflush(stdout);
 			}
