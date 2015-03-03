@@ -1,9 +1,9 @@
 """MGEScan: identifying ltr and non-ltr in genome sequences
 
 Usage:
-    mgescan.py <genome_dir> [--output=<data_dir>]
-    mgescan.py ltr <genome_dir> [--output=<data_dir>]
-    mgescan.py nonltr <genome_dir> [--output=<data_dir>]
+    mgescan.py <genome_dir> [--output=<data_dir>] [--mpi=<num>]
+    mgescan.py ltr <genome_dir> [--output=<data_dir>] [--mpi=<num>]
+    mgescan.py nonltr <genome_dir> [--output=<data_dir>] [--mpi=<num>]
     mgescan.py (-h | --help)
     mgescan.py --version
 
@@ -40,6 +40,7 @@ class MGEScan(object):
     def set_inputs(self):
         self.data_dir = utils.get_abspath(self.args['--output'])
         self.genome_dir = utils.get_abspath(self.args['<genome_dir>'])
+        self.mpi_enabled = self.args['--mpi']
         self.ltr_enabled = self.args['ltr']
         self.nonltr_enabled = self.args['nonltr']
 
@@ -122,6 +123,8 @@ class MGEScan(object):
                 -ltr_sim_condition=%(ltr_sim_condition)s \
                 -cluster_sim_condition=%(cluster_sim_condition)s \
                 -len_condition=%(len_condition)s"
+#        if self.mpi_enabled:
+#            cmd0 = (cmd0 + " -mpi=%(mpi_enabled)s")
         res1 = self.run_cmd(cmd1)
 
         # gff3
@@ -139,6 +142,8 @@ class MGEScan(object):
                 -genome=%(genome_dir)s \
                 -data=%(data_dir)s \
                 -hmmerv=%(hmmerv)s"
+        if self.mpi_enabled:
+            cmd0 = (cmd0 + " -mpi=%(mpi_enabled)s")
         res0 = self.run_cmd(cmd0)
         
         # gff3
