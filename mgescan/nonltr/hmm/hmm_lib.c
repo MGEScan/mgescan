@@ -5,6 +5,7 @@
 #include <string.h>
 #include <values.h>
 #include <errno.h>
+#include <unistd.h>
 #include "hmm.h"
 #include "util_lib.h"
 
@@ -702,10 +703,14 @@ void get_hydro(int start, int end, double *score, char *O){
   memset(seq, '\0', 20000);
 
   strcpy(temp_file1, out_dir);
-  strcat(temp_file1, "ppppp");
+  strcat(temp_file1, "ppppp.XXXXXX");
+  int fd1;
+  fd1 = mkstemp(temp_file1);
 
   strcpy(temp_file2, out_dir);
-  strcat(temp_file2, "qqqqq");
+  strcat(temp_file2, "qqqqq.XXXXXX");
+  int fd2;
+  fd2 = mkstemp(temp_file2);
 
   if (end-start+5 > 10000){
     end = start + 9995;
@@ -728,7 +733,8 @@ void get_hydro(int start, int end, double *score, char *O){
   strcat(command, temp_file2);
   strcat(command, " 2>/dev/null");
   system(command);
-  
+
+  unlink(temp_file1); 
 
   temp_aa = 0;
   temp_stop = 0;
@@ -781,6 +787,7 @@ void get_hydro(int start, int end, double *score, char *O){
     }
   }
   fclose(fp);
+  unlink(temp_file2); 
 
   /* the last one */
   for (i=0; i<strlen(seq); i++){
