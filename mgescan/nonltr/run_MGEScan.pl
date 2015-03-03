@@ -124,8 +124,8 @@ foreach my $name (sort readdir(DIRHANDLE)) {
     }
 }
 
-system("rm ".$minus_out_dir."out1/aaaaa");
-system("rm ".$minus_out_dir."out1/bbbbb");
+system("rm -f ".$minus_out_dir."out1/aaaaa");
+system("rm -f ".$minus_out_dir."out1/bbbbb");
 system("rm -f ".$minus_out_dir."out1/ppppp");
 system("rm -f ".$minus_out_dir."out1/qqqqq");
 
