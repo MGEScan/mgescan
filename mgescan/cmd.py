@@ -19,6 +19,7 @@ from multiprocessing import Process
 from subprocess import Popen, PIPE
 from mgescan import utils
 from mgescan.split import Split
+import shutil
 
 class MGEScan(object):
     """ MGEScan runs mgescan for identifying ltr and nonltr in genome
@@ -98,6 +99,9 @@ class MGEScan(object):
             p1.join()
         if 'p2' in locals():
             p2.join()
+
+        # remove splitted files
+        shutil.rmtree(self.genome_dir)
 
     def ltr(self):
         print 'ltr: starting'
