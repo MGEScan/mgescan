@@ -113,17 +113,25 @@ system($command);
 ############################################
 printf "Running backward...\n";
 invert_seq($plus_dna_dir, $minus_dna_dir);
-opendir(DIRHANDLE, $minus_dna_dir) || die ("Cannot open directory ".$minus_dna_dir);
-foreach my $name (sort readdir(DIRHANDLE)) {
+if ($nmpi) {
+	my $mpi_program = $program_dir."/../mpi_mgescan";
+	my $mpi_option = "-mca btl ^openib"; # ignore finding infiniteband
+	my $command = "mpirun -n ".$nmpi." ".$mpi_option." ".$mpi_program." --prg nonltr --genome ".$minus_dna_dir." --data ".$minus_out_dir." --hmmerv ".$hmmerv;
 
-    if ($name !~ /^\./){  
-	my $minus_dna_file = $minus_dna_dir.$name;
-	my $command = $program_dir."run_hmm.pl --dna=".$minus_dna_file." --out=".$minus_out_dir." --hmmerv=".$hmmerv;
 	system($command);
-	#printf $command."\n";
-    }
-}
+} else {
 
+	opendir(DIRHANDLE, $minus_dna_dir) || die ("Cannot open directory ".$minus_dna_dir);
+	foreach my $name (sort readdir(DIRHANDLE)) {
+
+		if ($name !~ /^\./){  
+			my $minus_dna_file = $minus_dna_dir.$name;
+			my $command = $program_dir."run_hmm.pl --dna=".$minus_dna_file." --out=".$minus_out_dir." --hmmerv=".$hmmerv;
+			system($command);
+			#printf $command."\n";
+		}
+	}
+}
 system("rm -f ".$minus_out_dir."out1/*.aaaaa");
 system("rm -f ".$minus_out_dir."out1/*.bbbbb");
 system("rm -f ".$minus_out_dir."out1/ppppp.*");
