@@ -19,12 +19,12 @@ get_id(\$dna_file, \$dna_name);
 $out1_dir = $out_dir."out1/";
 if (-e $out1_dir){
 }else{
-    system("mkdir ".$out1_dir);
+	system("mkdir ".$out1_dir);
 }
 $pos_dir = $out_dir."pos/";
 if (-e $pos_dir){
 }else{
-    system("mkdir ".$pos_dir);
+	system("mkdir ".$pos_dir);
 }
 
 
@@ -54,35 +54,35 @@ get_signal_domain(\$pep_file, \$phmm_file, \$domain_ape_pos_file);
 # generate corresponsing empty domains files if either of them does not exist 
 ##############################################################################
 if (-e $domain_rt_pos_file  || -e $domain_ape_pos_file ){
-    
-    print $dna_name."\n";
 
-    if (! -e $domain_rt_pos_file){
-	open OUT, ">$domain_rt_pos_file";
-	print OUT "";
-	close(OUT);
-    }elsif (! -e $domain_ape_pos_file){
-	open OUT, ">$domain_ape_pos_file";
-	print OUT "";
-	close(OUT);
-    }
+	print $dna_name."\n";
 
-    $command = $pdir."match_pos.pl -rt=".$domain_rt_pos_file." -ape=".$domain_ape_pos_file;
-    #system($command);
-    ###########################################################
-    # run hmm
-    ###########################################################
-    #print "Running HMM...\n";
+	if (! -e $domain_rt_pos_file){
+		open OUT, ">$domain_rt_pos_file";
+		print OUT "";
+		close(OUT);
+	}elsif (! -e $domain_ape_pos_file){
+		open OUT, ">$domain_ape_pos_file";
+		print OUT "";
+		close(OUT);
+	}
 
-    $out_file = $out1_dir.$dna_name;
-    $command = $pdir."hmm/MGEScan -m ".$pdir."hmm/chr.hmm -s ".$dna_file." -r ".$domain_rt_pos_file." -a ".$domain_ape_pos_file." -o ".$out_file." -p ".$pdir." -d ".$out1_dir." -v ".$hmmerv;
-    #print $command."\n";
-    system($command); 
+	$command = $pdir."match_pos.pl -rt=".$domain_rt_pos_file." -ape=".$domain_ape_pos_file;
+	#system($command);
+	###########################################################
+	# run hmm
+	###########################################################
+	#print "Running HMM...\n";
+
+	$out_file = $out1_dir.$dna_name;
+	$command = $pdir."hmm/MGEScan -m ".$pdir."hmm/chr.hmm -s ".$dna_file." -r ".$domain_rt_pos_file." -a ".$domain_ape_pos_file." -o ".$out_file." -p ".$pdir." -d ".$out1_dir." -v ".$hmmerv;
+	#print $command."\n";
+	system($command); 
 }
 
- 
+
 if (-e $pep_file){
-    #system("rm ".$pep_file);
+	#system("rm ".$pep_file);
 }
 
 ###########################################################
@@ -92,22 +92,22 @@ if (-e $pep_file){
 
 sub get_signal_domain{
 
-    #$_[0]: pep seq file
-    #$_[1]: domain hmm file
-    #$_[2]: output domain dna position file
+	#$_[0]: pep seq file
+	#$_[1]: domain hmm file
+	#$_[2]: output domain dna position file
 
-    my %domain_start=();
-    my %domain_end=();
-    my $evalue;
-    my $temp_file = ${$_[2]}."temp";
-    my $temp_file2 = ${$_[2]}."temp2";
-    my $output_file = ${$_[2]};
-    my $fh;
-    my $tmpfile;
-    my $template;
+	my %domain_start=();
+	my %domain_end=();
+	my $evalue;
+	my $temp_file = ${$_[2]}."temp";
+	my $temp_file2 = ${$_[2]}."temp2";
+	my $output_file = ${$_[2]};
+	my $fh;
+	my $tmpfile;
+	my $template;
 
-    use File::Temp qw/ tempfile tempdir /;
-    ($fh, $tmpfile) = tempfile( $template, DIR => $phmm_dir, SUFFIX => '.tbl');
+	use File::Temp qw/ tempfile tempdir /;
+	($fh, $tmpfile) = tempfile( $template, DIR => $phmm_dir, SUFFIX => '.tbl');
 
 	open (OUT, ">$temp_file");
 	if ($hmmerv == 3){
@@ -124,7 +124,7 @@ sub get_signal_domain{
 				print OUT eval($temp[17]*3)."\t".eval($temp[18]*3)."\t".$temp[15]."\t".$temp[16]."\t".$temp[13]."\t".$temp[11]."\n";
 			}
 		}
-		
+
 	}else{
 		my $hmm_command = "hmmsearch  -E 0.00001 ".${$_[1]}." ".${$_[0]};
 		my $hmm_result = `$hmm_command`;
@@ -137,7 +137,7 @@ sub get_signal_domain{
 		}
 	}
 	close(OUT);
-    if (-s $temp_file >0){
+	if (-s $temp_file >0){
 		system("sort +0 -1n ".$temp_file." > ".$temp_file2);
 
 		my $start = -1;
@@ -173,61 +173,61 @@ sub get_signal_domain{
 
 sub get_id{
 
-    my @temp = split(/\//, ${$_[0]});
-    ${$_[1]} = $temp[$#temp];
+	my @temp = split(/\//, ${$_[0]});
+	${$_[1]} = $temp[$#temp];
 }
 
 
 sub usage {
-    die "Usage: run_hmm.pl --dna=<dna_file_path>  --out=<output_dir> --hmmerv=<2,3>";
+	die "Usage: run_hmm.pl --dna=<dna_file_path>  --out=<output_dir> --hmmerv=<2,3>";
 }
 
 
 sub get_parameter{
 
-    my ($dna, $out, $hmmerv);
+	my ($dna, $out, $hmmerv);
 
-    GetOptions(
-               'dna=s' => \$dna,
-               'out=s' => \$out,
-			   'hmmerv=s' => \$hmmerv,
-               );
+	GetOptions(
+		'dna=s' => \$dna,
+		'out=s' => \$out,
+		'hmmerv=s' => \$hmmerv,
+	);
 
-    if (! -e $dna){
-        print "ERROR: The file $dna does not exist.\n";
-        usage();
-    }
+	if (! -e $dna){
+		print "ERROR: The file $dna does not exist.\n";
+		usage();
+	}
 	if (length($hmmerv)==0){
 		print "ERROR: HMMER version not provided.\n";
 		usage();
 		exit;
 	}
-    if (! -d $out){
-	system("mkdir ".$out);
-    }
+	if (! -d $out){
+		system("mkdir ".$out);
+	}
 
-    ${$_[0]} = $dna;
-    ${$_[1]} = $out;
+	${$_[0]} = $dna;
+	${$_[1]} = $out;
 	${$_[2]} = $hmmerv;
 }
 
 
 
 sub get_sequence{  # file name, variable for seq, variable for head                                   \
-                                                                                                       
 
-    open(GENOME, $_[0])|| die("ERROR: Couldn't open genome_file $_[0]!\n");
-    while( my $each_line=<GENOME>)  {
 
-        if ($each_line =~ m/>/){
-            ${$_[1]} = "";
-            chomp($each_line);
-            ${$_[2]} = $each_line;
-        }else{
-            chomp($each_line);
-            ${$_[1]} .= $each_line;
-        }
-    }
-    close(GENOME);
+	open(GENOME, $_[0])|| die("ERROR: Couldn't open genome_file $_[0]!\n");
+	while( my $each_line=<GENOME>)  {
+
+		if ($each_line =~ m/>/){
+			${$_[1]} = "";
+			chomp($each_line);
+			${$_[2]} = $each_line;
+		}else{
+			chomp($each_line);
+			${$_[1]} .= $each_line;
+		}
+	}
+	close(GENOME);
 }
 
