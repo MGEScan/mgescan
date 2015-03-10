@@ -131,7 +131,7 @@ void viterbi(HMM *hmm_ptr, int T, char *O, double *pprob, int *vpath, char *sign
   int *ape, *rt;
   int *start, *end;
   int flag;
-  char state_flag[10];
+  char state_flag[20];
   int prev_state;
   int final_t;
 
@@ -163,7 +163,7 @@ void viterbi(HMM *hmm_ptr, int T, char *O, double *pprob, int *vpath, char *sign
 
   out_dir = out_dir1; 
   
-  memset(state_flag,0,10);
+  memset(state_flag,0,20);
 
   /***************************************************************/
   /* initialize viterbi array                                    */
