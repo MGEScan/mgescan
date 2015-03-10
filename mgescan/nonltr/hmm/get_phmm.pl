@@ -35,7 +35,7 @@ $seq_file = $tmpfile1;#$out_dir."aaaaa";
 $pep_file = $tmpfile2;#$out_dir."bbbbb";
 
 system("echo ".$seq." > ".$seq_file);
-system("/u/lee212/retrotminer/EMBOSS/bin/transeq -frame=f ".$seq_file." -outseq=".$pep_file." 2>/dev/null");
+system("transeq -frame=f ".$seq_file." -outseq=".$pep_file." 2>/dev/null");
 system("rm -f ".$seq_file);
 
 if ($hmmerv == 3){
