@@ -4,23 +4,22 @@ use Getopt::Long;
 use Cwd 'abs_path';
 use File::Basename;
 
-system("source /u/lee212/.bashrc");
-system("source /u/lee212/.bash_profile");
 ###################################################
 # path configuration
 ###################################################
-my $this_dir = dirname(abs_path($0));
-my $conf_file = $this_dir."/path.conf";
-my $value_file = $this_dir."/value.conf";
-my $tool_matrix = $this_dir."/matrix/EDNAFULL";
-my $tool_pfam = $this_dir."/pfam/";
-my $tool_ltr = $this_dir."/MER/ltr";
+my $program_dir = dirname(abs_path($0));
+my $conf_file = $program_dir."/path.conf";
+my $value_file = $program_dir."/value.conf";
+my $tool_matrix = $program_dir."/matrix/EDNAFULL";
+my $tool_pfam = $program_dir."/pfam/";
+my $tool_ltr = $program_dir."/MER/ltr";
 my $tool_trf;
 #my $tool_emboss;
 #my $tool_hmmer = "/nfs/nfs4/home/wazimoha/softwares/hmmer-3.1b1/src/";
 my $main_dir;           # directory of output data            
 my $main_genome_dir;    # directory of input genomes
 my $hmmerv;		# version of hmmer
+my $nmpi;
 
 
 ###################################################
@@ -67,6 +66,7 @@ GetOptions(
            'data=s' => \$main_dir,
            'genome=s' => \$main_genome_dir,
            'hmmerv=s' => \$hmmerv,
+	   'mpi=s' => \$nmpi,
  
 	'min_dist:s' => \$min_dist,
 	'max_dist:s' => \$max_dist,
@@ -128,9 +128,9 @@ if (length($main_dir) == 0 ){
 
 
 #if ($hmmerv > 2){
-#    $tool_pfam = $this_dir."/pfam_3/"; 
+#    $tool_pfam = $program_dir."/pfam_3/"; 
 #}else{
-#    $tool_pfam = $this_dir."/pfam_2/";
+#    $tool_pfam = $program_dir."/pfam_2/";
 #}
 
 #####################################################
@@ -182,24 +182,32 @@ system("rm -rf ".$ltr_data_dir);
 system("rm -rf ".$sim_file);
 
 sub call_find_ltr_for_each_chr{   #$genome_dir, $main_dir, $ltr_dir, $ltr_data_dir);
-
     system("mkdir ".$_[2]);
     system("mkdir ".$_[3]);   
-    opendir(DIRHANDLE, $_[0]) || die ("Cannot open directory ".$_[0]);
-    foreach my $name (sort readdir(DIRHANDLE)) {
-	
-	if ($name !~ /^\./){  
-	    print $name."\n";
+    if ($nmpi) {
+	    my $mpi_program = $program_dir."/../mpi_mgescan";
+	    my $mpi_option = "-mca btl ^openib"; # ignore finding infiniteband
+	    my $prg_name = "ltr";
+	    my $command = "mpirun -n ".$nmpi." ".$mpi_option." ".$mpi_program." --prg ".$prg_name." --genome ".$_[0]." --data ".$_[3]." --hmmerv ".$hmmerv;
+	    # mpirun -n 1 -mca btl ^openib /nfs/nfs4/home/lee212/github/mgescan/mgescan/ltr/../mpi_mgescan --prg ltr --genome /scratch/lee212/test-results/mgescan2/ltr/dmelanogaster/genome/ --data /scratch/lee212/test-results/mgescan2/ltr/dmelanogaster/ltr/ltr/ --hmmerv 3
+	    system($command);
+    } else {
+	    opendir(DIRHANDLE, $_[0]) || die ("Cannot open directory ".$_[0]);
+	    foreach my $name (sort readdir(DIRHANDLE)) {
 
-	    my $genome_path = $_[0].$name;
-	    if (! -e $genome_path){
-		print "ERROR: The file $genome_path does not exist.\n";
-		usage();
+		    if ($name !~ /^\./){  
+			    print $name."\n";
+
+			    my $genome_path = $_[0].$name;
+			    if (! -e $genome_path){
+				    print "ERROR: The file $genome_path does not exist.\n";
+				    usage();
+			    }
+			    find_ltr_pair($_[0], $_[3], $name, $run_hmm);
+		    }    
 	    }
-	    find_ltr_pair($_[0], $_[3], $name, $run_hmm);
-	}    
     }
-}    
+}
 
 
 sub get_path_conf{
@@ -587,7 +595,7 @@ sub usage {
 }
 
 sub find_ltr_pair{  #$path_genome, $path_ltr, $chr_name, $run_hmm
-   
+  
     my $path_genome = $_[0];
     my $path_ltr = $_[1];
     my $chr_name = $_[2];

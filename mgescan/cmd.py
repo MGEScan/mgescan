@@ -127,8 +127,8 @@ class MGEScan(object):
                 -ltr_sim_condition=%(ltr_sim_condition)s \
                 -cluster_sim_condition=%(cluster_sim_condition)s \
                 -len_condition=%(len_condition)s"
-#        if self.mpi_enabled:
-#            cmd0 = (cmd0 + " -mpi=%(mpi_enabled)s")
+        if self.mpi_enabled:
+            cmd1 = (cmd1 + " -mpi=%(mpi_enabled)s")
         res1 = self.run_cmd(cmd1)
 
         # gff3
@@ -159,7 +159,9 @@ class MGEScan(object):
         print 'nonltr: finishing'
 
     def run_cmd(self, cmd):
-        return Popen((cmd % vars(self)).split(), stdout=PIPE, stderr=PIPE).stdout.read()
+        cmd = cmd % vars(self)
+        #print (cmd)
+        return Popen(cmd.split(), stdout=PIPE, stderr=PIPE).stdout.read()
 
 def main():
     arguments = docopt(__doc__, version='MGEScan 0.1')
