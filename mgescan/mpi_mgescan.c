@@ -99,7 +99,7 @@ char** str_split(char* a_str, const char a_delim)
 }
 
 void echo_usage(char** argv) {
-	fprintf(stderr, "Usage: %s -p ltr|nonltr -g GENOME_PATH -d OUTPUT_PATH -c COMMAND\n", argv[0]);
+	fprintf(stderr, "Usage: %s -p ltr|nonltr -g GENOME_PATH -d OUTPUT_PATH -h 2|3 (HMMER_VERSION)\n", argv[0]);
 }
 
 typedef struct arguments {
@@ -135,8 +135,7 @@ void run_mgescan_cmd(char *flist, ARGS optarg, int per_node) {
 				//res= system(tmp);
 				if (strcmp(optarg.program, "ltr") == 0) {
 					// NOT IMPLEMENTED
-					sprintf(tmp, "ltr/find_ltr_pair.pl -path_genome=%s -path_ltr=%s -chr_name=%s run_hmm=%d", optarg.genome, optarg.data,  flist + (NAME_MAX * i), "1");
-
+					sprintf(tmp, "ltr/find_ltr_pair.pl -path_genome=%s -path_ltr=%s -chr_name=%s run_hmm=%d", optarg.genome, optarg.data, flist + (NAME_MAX * i), 1);
 				} else { 
 					sprintf(tmp, "nonltr/run_hmm.pl --dna=%s/%s --out=%s --hmmerv=%d", optarg.genome, flist + (NAME_MAX * i), optarg.data, optarg.hmmerv);
 				}
