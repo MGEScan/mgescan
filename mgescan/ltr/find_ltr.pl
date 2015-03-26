@@ -184,12 +184,15 @@ system("rm -rf ".$sim_file);
 sub call_find_ltr_for_each_chr{   #$genome_dir, $main_dir, $ltr_dir, $ltr_data_dir);
 	system("mkdir ".$_[2]);
 	system("mkdir ".$_[3]);   
+	print("mkdir ".$_[3]);   
 	if ($nmpi) {
 		my $mpi_program = $program_dir."/../mpi_mgescan";
 		my $mpi_option = "-mca btl ^openib"; # ignore finding infiniteband
 		my $prg_name = "ltr";
 		my $command = "mpirun -n ".$nmpi." ".$mpi_option." ".$mpi_program." --prg ".$prg_name." --genome ".$_[0]." --data ".$_[3]." --hmmerv ".$hmmerv;
 		# mpirun -n 1 -mca btl ^openib /nfs/nfs4/home/lee212/github/mgescan/mgescan/ltr/../mpi_mgescan --prg ltr --genome /scratch/lee212/test-results/mgescan2/ltr/dmelanogaster/genome/ --data /scratch/lee212/test-results/mgescan2/ltr/dmelanogaster/ltr/ltr/ --hmmerv 3
+		print $command;
+		sleep 100;
 		system($command);
 	} else {
 		opendir(DIRHANDLE, $_[0]) || die ("Cannot open directory ".$_[0]);

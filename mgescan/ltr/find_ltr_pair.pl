@@ -22,7 +22,6 @@ my $hmmerv;		# version of hmmer
 my $nmpi;
 
 
-print "1\n";
 ###################################################
 # parameter configuration
 ###################################################
@@ -38,8 +37,11 @@ my $LEN_CONDITION;              # length of LTRs to be in a cluster
 my $RANGE_BIN=500;         # range in the bin
 my $FLANKING_LEN=20;
 
+my $path_genome;
+my $path_ltr;
+my $chr_name;
+my $run_hmm;
 
-print "1\n";
 ###################################################
 # HMM for domain
 ###################################################
@@ -53,7 +55,6 @@ my @rt=("anno_nonLTR_rt.hmm","anno_dirs_rt.hmm",
 	"anno_gypsy_rt.hmm", "anno_copia_rt.hmm", "anno_bel_rt.hmm",     #rt
 	"anno_erv1_rt.hmm", "anno_erv2_rt.hmm", "anno_erv3_rt.hmm");
 
-print "1\n";
 
 ##################################################
 # get congifuration from input
@@ -528,7 +529,7 @@ sub get_sequence{  # file name, variable for seq, variable for head
 }
 
 sub usage {
-	die "Usage: find_ltr.pl -data=<> -genome=<> -hmmerv=<>";
+	die "Usage: find_ltr_pair.pl -data=<> -genome=<> -hmmerv=<>";
 }
 
 sub find_ltr_pair{  #$path_genome, $path_ltr, $chr_name, $run_hmm
