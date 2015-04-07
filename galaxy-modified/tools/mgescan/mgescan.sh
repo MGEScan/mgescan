@@ -20,16 +20,27 @@ ltr_gff3=$9
 nonltr_gff3=${10}
 both_gff3=${11}
 #### for ltr between $11 and $20
-sw_rm=${12}
-scaffold=${13}
-min_dist=${14}
-max_dist=${15}
-min_len_ltr=${16}
-max_len_ltr=${17}
-ltr_sim_condition=${18}
-cluster_sim_condition=${19}
-len_condition=${20}
-repeatmasker=${21}
+if [ "$program" == "L" ]
+then
+	sw_rm=${12}
+	scaffold=${13}
+	min_dist=${14}
+	max_dist=${15}
+	min_len_ltr=${16}
+	max_len_ltr=${17}
+	ltr_sim_condition=${18}
+	cluster_sim_condition=${19}
+	len_condition=${20}
+	repeatmasker=${21}
+elif [ "$program" == "B" ]
+then
+	nmpi=${12}
+	if [ ! -z $nmpi ] && [ $nmpi -ge 1 ]
+	then
+		mpi_enabled="--mpi=$nmpi"
+	fi
+
+fi
 
 # /nfs/nfs4/home/lee212/retrotminer/galaxy-dist/tools/retrotminer/find_ltr.sh /nfs/nfs4/home/lee212/retrotminer/galaxy-dist/database/files/000/dataset_1.dat /nfs/nfs4/home/lee212/retrotminer/galaxy-dist/database/files/000/dataset_3.dat
 
@@ -73,7 +84,7 @@ else
 fi
 
 #run
-$script_program $script $program_name $input_dir/ --output=$output_dir/ #-hmmerv=$hmmsearch_version -sw_rm=${11} -scaffold=${12} -min_dist=${13} -max_dist=${14} -min_len_ltr=${15} -max_len_ltr=${16} -ltr_sim_condition=${17} -cluster_sim_condition=${18} -len_condition=${19}
+$script_program $script $program_name $input_dir/ --output=$output_dir/ $mpi_enabled #-hmmerv=$hmmsearch_version -sw_rm=${11} -scaffold=${12} -min_dist=${13} -max_dist=${14} -min_len_ltr=${15} -max_len_ltr=${16} -ltr_sim_condition=${17} -cluster_sim_condition=${18} -len_condition=${19}
 #/usr/bin/perl $script -genome=$input_dir/ -data=$output_dir/ -hmmerv=$hmmsearch_version -program=$program -sw_rm=${11} -scaffold=${12} -min_dist=${13} -max_dist=${14} -min_len_ltr=${15} -max_len_ltr=${16} -ltr_sim_condition=${17} -cluster_sim_condition=${18} -len_condition=${19}
 
 #RES=`ssh -i $user_dir/.ssh/.internal silo.cs.indiana.edu "/usr/bin/perl $script -genome=$input_dir/ -data=$output_dir/ -hmmerv=$hmmsearch_version -program=$program > /dev/null"`
