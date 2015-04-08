@@ -42,9 +42,8 @@ sudo apt-get install python-dev
 
 * Galaxy
 ```sh
+cd ~/
 git clone https://github.com/galaxyproject/galaxy/
-cd galaxy
-sh run.sh
 ```
 
 * HMMER, EMBOSS
@@ -89,6 +88,22 @@ python setup.py install
 virtualenv ~/virtualenv/mgescan
 source ~/virtualenv/mgescan/bin/activate
 ```
+
+### Galaxy modification
+
+```sh
+cd ~/
+cp -pr ~/mgescan/galaxy-modified/* ~/galaxy
+```
+
+### Start Galaxy
+```sh
+cd ~/galaxy
+./run.sh &
+```
+
+Default port number : **38080**
+http://[IP ADDRESS]:38080
 
 Command Line Tool (mgescan)
 -------------------------------------------------------------------------------
