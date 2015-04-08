@@ -1,7 +1,7 @@
 """MGEScan: identifying ltr and non-ltr in genome sequences
 
 Usage:
-    mgescan.py <genome_dir> [--output=<data_dir>] [--mpi=<num>]
+    mgescan.py both <genome_dir> [--output=<data_dir>] [--mpi=<num>]
     mgescan.py ltr <genome_dir> [--output=<data_dir>] [--mpi=<num>]
     mgescan.py nonltr <genome_dir> [--output=<data_dir>] [--mpi=<num>]
     mgescan.py (-h | --help)

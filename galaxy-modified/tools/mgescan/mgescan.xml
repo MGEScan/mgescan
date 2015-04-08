@@ -5,7 +5,7 @@
 		MGEScan
 	</description>
 	<command interpreter="bash">
-		mgescan.sh $input '$input.name' 3 $output $program $clade $qvalue_en $qvalue_rt $ltr_gff3 $nonltr_gff3 $both_gff3
+		mgescan.sh $input '$input.name' 3 $output $program $clade $qvalue_en $qvalue_rt $ltr_gff3 $nonltr_gff3 $both_gff3 $nmpi
 		<!-- mgescan.sh $input $input.name $hmmver $output $program $clade $qvalue_en $qvalue_rt $ltr_gff3 $nonltr_gff3 -->
 	</command>
 	<inputs>
@@ -18,6 +18,8 @@
 			<option selected="selected" value="B">Both</option>
 			<option value="L">LTR</option>
 			<option value="N">nonLTR</option>
+		</param>
+		<param name="nmpi" format="txt" type="text" label="Number of MPI Processes">
 		</param>
 	</inputs>
 	<outputs>
@@ -50,6 +52,7 @@ Running the program
 
 * Select an input genome data from the select box, and choose a program. Both LTR and nonLTR of MGEScan is default.
 * Click 'Execute' button.
+* MPI will be enabled depending on your system support.
 
 If you like to have more options to run LTR or nonLTR program, use separated tools on the left panel.
 

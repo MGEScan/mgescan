@@ -1,7 +1,8 @@
 MGEScan on Galaxy Scientific Workflow
-=====================================
+===============================================================================
 
-**Under development. Contact me if you have any questions! (hroe.lee at gmail.com) **
+**Under development. Contact me if you have any questions! (hroe.lee at
+		gmail.com) **
 
 A Galaxy based system for identifying retrotransposons in genome
 
@@ -14,11 +15,35 @@ A Galaxy based system for identifying retrotransposons in genome
 * [Source](https://github.com/MGEScan/mgescan/)
 * [Home Page](http://mgescan.github.io/mgescan/)
 
-Installation
-------------
+Prerequisite
+-------------------------------------------------------------------------------
+
+* git
+* virtualenv
+* python-dev
 
 ```sh
-git clone git@github.com:MGEScan/mgescan.git
+sudo apt-get update
+sudo apt-get install virtualenv
+sudo apt-get install git
+sudo apt-get install python-dev
+```
+
+Virtualenv
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+```sh
+mkdir ~/virtualenv
+virtualenv ~/virtualenv/mgescan
+source ~/virtualenv/mgescan/bin/activate
+echo "source ~/virtualenv/mgescan/bin/activate" >> ~/.bash_profile
+```
+
+Installation
+-------------------------------------------------------------------------------
+
+```sh
+git clone https://github.com/MGEScan/mgescan.git
 cd mgescan
 python setup.py install
 ```
@@ -32,54 +57,63 @@ source ~/virtualenv/mgescan/bin/activate
 ```
 
 Command Line Tool (mgescan)
----------------------------
+-------------------------------------------------------------------------------
 
 ```sh
 Usage:
-    mgescan.py <genome_dir> [--output=<data_dir>]
-    mgescan.py ltr <genome_dir> [--output=<data_dir>]
-    mgescan.py nonltr <genome_dir> [--output=<data_dir>]
+    mgescan.py both <genome_dir> [--output=<data_dir>] [--mpi=<num>]
+    mgescan.py ltr <genome_dir> [--output=<data_dir>] [--mpi=<num>]
+    mgescan.py nonltr <genome_dir> [--output=<data_dir>] [--mpi=<num>]
     mgescan.py (-h | --help)
     mgescan.py --version
 ```
 
 On Cloud (Amazon EC2)
----------------------
+-------------------------------------------------------------------------------
+
 mgescan-alpha - ami-23d9c74a (development version)
 
 Citation
---------
+-------------------------------------------------------------------------------
 
 How to cite MGEScan on Galaxy [here]
 
 References
------------
+-------------------------------------------------------------------------------
 
-1. M. Rho, S. Schaack, X. Gao, S. Kim, M. Lynch and H. Tang (2010), LTR retroelements in the genome of Daphnia pulex, BMC Genomics, 11:425. Pubmed. 
-2. M. Rho and H. Tang (2009), MGEScan-nonLTR: computational identification and classification of Non-LTR retrotransposons in eukaryotic genomes. Nucleic Acid Res, 37(21):e143. Free fulltext at NAR online 
-3. M. Rho, J. H. Choi, S. Kim, M. Lynch and H. Tang (2007), De novo identification of LTR retrotransposons in eukaryotic genomes. BMC Genomics, 8:90. Pubmed. 
+1. M. Rho, S. Schaack, X. Gao, S. Kim, M. Lynch and H. Tang (2010), LTR
+   retroelements in the genome of Daphnia pulex, BMC Genomics, 11:425. Pubmed. 
+
+2. M. Rho and H. Tang (2009), MGEScan-nonLTR: computational identification and
+   classification of Non-LTR retrotransposons in eukaryotic genomes. Nucleic Acid
+   Res, 37(21):e143. Free fulltext at NAR online 
+
+3. M. Rho, J. H. Choi, S. Kim, M. Lynch and H. Tang (2007), De novo
+   identification of LTR retrotransposons in eukaryotic genomes. BMC Genomics,
+   8:90. Pubmed. 
 
 Web Sites
----------
+-------------------------------------------------------------------------------
 
 * [MGEScan-LTR](http://darwin.informatics.indiana.edu/cgi-bin/evolution/daphnia_ltr.pl)
 * [MGEScan-nonLTR](http://darwin.informatics.indiana.edu/cgi-bin/evolution/nonltr/nonltr.pl)
 
 License
--------
-Copyright (C) 2015. See the LICENSE file for license rights and limitations (GPL v3).
+-------------------------------------------------------------------------------
+
+Copyright (C) 2015. See the LICENSE file for license rights and limitations
+(GPL v3).
 
 This program is part of MGEScan.
 
-MGEScan is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+MGEScan is free software: you can redistribute it and/or modify it under the
+terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+You should have received a copy of the GNU General Public License along with
+this program.  If not, see <http://www.gnu.org/licenses/>.
