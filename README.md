@@ -18,6 +18,8 @@ A Galaxy based system for identifying retrotransposons in genome
 Prerequisite
 -------------------------------------------------------------------------------
 
+### Python
+
 * git
 * virtualenv
 * python-dev
@@ -29,8 +31,39 @@ sudo apt-get install git
 sudo apt-get install python-dev
 ```
 
-Virtualenv
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+### Tools
+
+* Galaxy
+* HMMER
+* EMBOSS
+* trf (Tandem Repeats Finder)
+
+#### Ubuntu
+
+* Galaxy
+```sh
+git clone https://github.com/galaxyproject/galaxy/
+cd galaxy
+sh run.sh
+```
+
+* HMMER, EMBOSS
+
+```sh
+sudo apt-get install hmmer
+sudo apt-get install emboss
+```
+
+* trf
+
+```sh
+wget http://tandem.bu.edu/trf/downloads/trf407b.linux64
+mv trf407b.linux64 ~/virtualenv/mgescan/bin/trf
+chmod 700 ~/virtualenv/mgescan/bin/trf
+```
+
+### Virtualenv
+
 
 ```sh
 mkdir ~/virtualenv
@@ -38,6 +71,7 @@ virtualenv ~/virtualenv/mgescan
 source ~/virtualenv/mgescan/bin/activate
 echo "source ~/virtualenv/mgescan/bin/activate" >> ~/.bash_profile
 ```
+
 
 Installation
 -------------------------------------------------------------------------------
