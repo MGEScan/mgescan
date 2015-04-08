@@ -1,7 +1,7 @@
 CC =	gcc
-CFLAGS = -O3 -Wall -lm -w
+CFLAGS = -O3 -Wall -w
 SRCS =	util_lib.c hmm_lib.c test_hmm.c
-OBJS = $(SRCS:.c=.o)
+OBJS = $(SRCS:.c=.o) -lm
 MAIN = MGEScan
 
 $(MAIN): $(OBJS) 

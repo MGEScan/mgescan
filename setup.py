@@ -1,17 +1,17 @@
 import os
 from setuptools import setup
-from distutils.command.install import install as DistutilsInstall
+from distutils.command.install import install
 
-class MyInstall(DistutilsInstall):
+class MyInstall(install):
     def run(self):
         os.system("cd mgescan/ltr/MER; make clean; make")
         os.system("cd mgescan/nonltr/; make clean; make translate")
         os.system("cd mgescan/nonltr/hmm;make clean; make")
-        DistutilsInstall.run(self)
+        install.run(self)
 
-class InstallOnly(DistutilsInstall):
+class InstallOnly(install):
     def run(self):
-        DistutilsInstall.run(self)
+        install.run(self)
 
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
@@ -44,6 +44,6 @@ setup(
             [console_scripts]
             mgescan=mgescan.cmd:main
             ''',
-        cmdclass={'install': InstallOnly},
+        cmdclass={'install': MyInstall},
         )
 
