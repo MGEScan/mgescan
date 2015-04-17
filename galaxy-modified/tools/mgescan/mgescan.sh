@@ -1,11 +1,11 @@
 #!/bin/bash
 # mgescan.sh $input $input.name 3 $output L None None None $ltr_gff3 None $sw_rm "$scaffold" $min_dist $max_dist $min_len_ltr $max_len_ltr $ltr_sim_condition $cluster_sim_condition $len_condition $repeatmasker
-user_dir=/u/lee212
-#script=$user_dir/retrotminer/wazim/MGEScan1.1/run_MGEScan.pl
-#script=$user_dir/retrotminer/wazim/MGEScan1.3.1/run_MGEScan2.pl
-source $user_dir/virtualenv/retrotminer/bin/activate
+user_dir=$HOME
+#script=$user_dir/mgescan/wazim/MGEScan1.1/run_MGEScan.pl
+#script=$user_dir/mgescan/wazim/MGEScan1.3.1/run_MGEScan2.pl
+source $user_dir/virtualenv/mgescan/bin/activate >> /dev/null
 script_program=`which python`
-script=$user_dir/github/retrotminer/retrotminer/retrotminer.py
+script=$user_dir/github/mgescan/mgescan/cmd.py
 input_file=$1
 #input_file_name=$2
 input_file_name=`basename $input_file`
@@ -42,14 +42,17 @@ then
 
 fi
 
-# /nfs/nfs4/home/lee212/retrotminer/galaxy-dist/tools/retrotminer/find_ltr.sh /nfs/nfs4/home/lee212/retrotminer/galaxy-dist/database/files/000/dataset_1.dat /nfs/nfs4/home/lee212/retrotminer/galaxy-dist/database/files/000/dataset_3.dat
-
-#load env?
-source $user_dir/.bashrc
-source $user_dir/.bash_profile
+# /nfs/nfs4/home/lee212/mgescan/galaxy-dist/tools/mgescan/find_ltr.sh /nfs/nfs4/home/lee212/mgescan/galaxy-dist/database/files/000/dataset_1.dat /nfs/nfs4/home/lee212/mgescan/galaxy-dist/database/files/000/dataset_3.dat
 
 #set path for transeq
-export PATH=$user_dir/retrotminer/EMBOSS/bin:/usr/bin:$PATH
+#export PATH=$user_dir/mgescan/EMBOSS/bin:/usr/bin:$PATH
+transeq --version 2> /dev/null
+res=$?
+if [ 0 -ne $res ]
+then
+	echo "EMBOSS is not available."
+	exit
+fi
 
 #move to the working directory
 work_dir=`dirname $script`
@@ -66,11 +69,17 @@ mkdir -p $output_dir
 #make a copy of input
 /bin/cp $input_file $input_dir/$input_file_name
 
-if [ "2" == "$hmmsearch_version" ]
+VERSION2=`hmmsearch -h|grep "HMMER 2" 2> /dev/null`
+VERSION3=`hmmsearch -h|grep "HMMER 3" 2> /dev/null`
+if [ "2" == "$hmmsearch_version" ] && [ "" != "$VERSION2" ]
 then
-	export PATH=$user_dir/retrotminer/HMMER2.0/bin:$PATH
+	echo $VERSION2 selected.
+elif [ "3" == "$hmmsearch_version" ] && [ "" != "$VERSION3" ]
+then
+	echo $VERSION3 selected.
 else
-	export PATH=/usr/bin:$PATH
+	echo HMMER is not available.
+	exit
 fi
 
 if [ "$program" == "L" ]
