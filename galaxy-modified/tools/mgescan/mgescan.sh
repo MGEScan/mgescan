@@ -5,7 +5,7 @@ user_dir=$HOME
 #script=$user_dir/mgescan/wazim/MGEScan1.3.1/run_MGEScan2.pl
 source $user_dir/virtualenv/mgescan/bin/activate >> /dev/null
 script_program=`which python`
-script=$user_dir/github/mgescan/mgescan/cmd.py
+script=$user_dir/mgescan/mgescan/cmd.py
 input_file=$1
 #input_file_name=$2
 input_file_name=`basename $input_file`
