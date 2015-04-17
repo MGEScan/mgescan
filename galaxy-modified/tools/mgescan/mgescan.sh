@@ -89,7 +89,7 @@ elif [ "$program" == "N" ]
 then
 	program_name="nonltr"
 else
-	program_name=""
+	program_name="both"
 fi
 
 #run
