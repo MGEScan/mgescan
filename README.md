@@ -26,9 +26,9 @@ Prerequisite
 
 ```sh
 sudo apt-get update
-sudo apt-get install virtualenv
-sudo apt-get install git
-sudo apt-get install python-dev
+sudo apt-get install python-virtualenv -y
+sudo apt-get install git -y
+sudo apt-get install python-dev -y
 ```
 
 ### Tools
