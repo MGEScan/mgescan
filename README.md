@@ -49,8 +49,8 @@ git clone https://github.com/galaxyproject/galaxy/
 * HMMER, EMBOSS
 
 ```sh
-sudo apt-get install hmmer
-sudo apt-get install emboss
+sudo apt-get install hmmer -y
+sudo apt-get install emboss -y
 ```
 
 * trf
