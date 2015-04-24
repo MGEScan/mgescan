@@ -1,17 +1,17 @@
 import os
 from setuptools import setup
-from distutils.command.install import install
+from setuptools.command.bdist_egg import bdist_egg 
 
-class MyInstall(install):
+class MGEScanInstall(bdist_egg):
     def run(self):
         os.system("cd mgescan/ltr/MER; make clean; make")
         os.system("cd mgescan/nonltr/; make clean; make translate")
         os.system("cd mgescan/nonltr/hmm;make clean; make")
-        install.run(self)
+        bdist_egg.run(self)
 
-class InstallOnly(install):
+class MGEScanInstallOnly(bdist_egg):
     def run(self):
-        install.run(self)
+        bdist_egg.run(self)
 
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
@@ -44,6 +44,7 @@ setup(
             [console_scripts]
             mgescan=mgescan.cmd:main
             ''',
-        cmdclass={'install': MyInstall},
+
+        cmdclass={'bdist_egg': MGEScanInstall},  # override bdist_egg
         )
 
