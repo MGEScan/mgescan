@@ -26,9 +26,9 @@ Prerequisite
 
 ```sh
 sudo apt-get update
-sudo apt-get install virtualenv
-sudo apt-get install git
-sudo apt-get install python-dev
+sudo apt-get install python-virtualenv -y
+sudo apt-get install git -y
+sudo apt-get install python-dev -y
 ```
 
 ### Tools
@@ -37,6 +37,16 @@ sudo apt-get install python-dev
 * HMMER
 * EMBOSS
 * trf (Tandem Repeats Finder)
+
+### Virtualenv
+
+
+```sh
+mkdir ~/virtualenv
+virtualenv ~/virtualenv/mgescan
+source ~/virtualenv/mgescan/bin/activate
+echo "source ~/virtualenv/mgescan/bin/activate" >> ~/.bash_profile
+```
 
 #### Ubuntu
 
@@ -49,8 +59,8 @@ git clone https://github.com/galaxyproject/galaxy/
 * HMMER, EMBOSS
 
 ```sh
-sudo apt-get install hmmer
-sudo apt-get install emboss
+sudo apt-get install hmmer -y
+sudo apt-get install emboss -y
 ```
 
 * trf
@@ -61,15 +71,6 @@ mv trf407b.linux64 ~/virtualenv/mgescan/bin/trf
 chmod 700 ~/virtualenv/mgescan/bin/trf
 ```
 
-### Virtualenv
-
-
-```sh
-mkdir ~/virtualenv
-virtualenv ~/virtualenv/mgescan
-source ~/virtualenv/mgescan/bin/activate
-echo "source ~/virtualenv/mgescan/bin/activate" >> ~/.bash_profile
-```
 
 
 Installation
