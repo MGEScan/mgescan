@@ -38,6 +38,16 @@ sudo apt-get install python-dev -y
 * EMBOSS
 * trf (Tandem Repeats Finder)
 
+### Virtualenv
+
+
+```sh
+mkdir ~/virtualenv
+virtualenv ~/virtualenv/mgescan
+source ~/virtualenv/mgescan/bin/activate
+echo "source ~/virtualenv/mgescan/bin/activate" >> ~/.bash_profile
+```
+
 #### Ubuntu
 
 * Galaxy
@@ -61,15 +71,6 @@ mv trf407b.linux64 ~/virtualenv/mgescan/bin/trf
 chmod 700 ~/virtualenv/mgescan/bin/trf
 ```
 
-### Virtualenv
-
-
-```sh
-mkdir ~/virtualenv
-virtualenv ~/virtualenv/mgescan
-source ~/virtualenv/mgescan/bin/activate
-echo "source ~/virtualenv/mgescan/bin/activate" >> ~/.bash_profile
-```
 
 
 Installation
