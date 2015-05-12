@@ -31,13 +31,6 @@ sudo apt-get install git -y
 sudo apt-get install python-dev -y
 ```
 
-### Tools
-
-* Galaxy
-* HMMER
-* EMBOSS
-* trf (Tandem Repeats Finder)
-
 ### Virtualenv
 
 
@@ -47,6 +40,13 @@ virtualenv ~/virtualenv/mgescan
 source ~/virtualenv/mgescan/bin/activate
 echo "source ~/virtualenv/mgescan/bin/activate" >> ~/.bash_profile
 ```
+
+### Tools
+
+* Galaxy
+* HMMER
+* EMBOSS
+* trf (Tandem Repeats Finder)
 
 #### Ubuntu
 
