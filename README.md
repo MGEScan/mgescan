@@ -48,22 +48,22 @@ echo "source ~/virtualenv/mgescan/bin/activate" >> ~/.bash_profile
 * EMBOSS
 * trf (Tandem Repeats Finder)
 
-#### Ubuntu
-
-* Galaxy
+#### Galaxy
 ```sh
 cd ~/
 git clone https://github.com/galaxyproject/galaxy/
 ```
 
-* HMMER, EMBOSS
+#### HMMER and EMBOSS
+
+*Ubuntu*
 
 ```sh
 sudo apt-get install hmmer -y
 sudo apt-get install emboss -y
 ```
 
-* trf
+#### trf
 
 ```sh
 wget http://tandem.bu.edu/trf/downloads/trf407b.linux64
