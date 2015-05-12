@@ -47,7 +47,7 @@
 
 	</outputs>
 	<help>
-Running the program
+How to Run MGEScan
 ===================
 
 * Select an input genome data from the select box, and choose a program. Both LTR and nonLTR of MGEScan is default.
