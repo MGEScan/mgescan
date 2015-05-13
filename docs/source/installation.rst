@@ -63,7 +63,13 @@ Then include it to your startup file (i.e. ``.bashrc``).
 ::
 
    echo "source ~/.mgescanrc" >> $HOME/.bashrc
-   source .mgescanrc
+
+Create a main directory
+
+::
+
+   source ~/.mgescanrc
+   mkdir $MGESCAN_HOME
 
 
 Software Packages
