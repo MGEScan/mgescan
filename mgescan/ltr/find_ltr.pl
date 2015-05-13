@@ -182,6 +182,10 @@ system("rm -rf ".$ltr_data_dir);
 system("rm -rf ".$sim_file);
 
 sub call_find_ltr_for_each_chr{   #$genome_dir, $main_dir, $ltr_dir, $ltr_data_dir);
+
+	system("mkdir ".$_[2]);
+	system("mkdir ".$_[3]);
+	print("mkdir ".$_[3]);   
 	if ($nmpi) {
 		my $mpi_program = $program_dir."/../mpi_mgescan";
 		my $mpi_option = "-mca btl ^openib"; # ignore finding infiniteband
