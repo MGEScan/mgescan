@@ -1,26 +1,26 @@
 MGEScan on Galaxy Installation
 ===============================================================================
 
-MGEScan on Galaxy provide local installation and cloud installation. 
+MGEScan on Galaxy provides local installation and cloud installation. 
 
 Local Installation
 -------------------------------------------------------------------------------
 
-This installation manual is for Ubuntu 14.04+ distribution. Others are not
-tested.
+The installation is for Ubuntu 14.04+ distribution. Others (e.g. OpenSUSE,
+Fedora) are not tested.
 
 Prerequisite
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Software packages and system packages are requied to run MGEScan.  You need to
-install system packages with ``sudo`` command. An admin ``root`` privilege is
-required.
+There are required software packages and system packages to run MGEScan. You
+need to install system packages with ``sudo`` command (admin ``root``
+privilege is required). virtualenv is used for Python package installation.
 
 System Packages
 *******************************************************************************
 
-If you have ``virtualenv``, ``git``, and ``python-dev``, you can skip this
-step.
+If ``virtualenv``, ``git``, and ``python-dev`` are available on your system,
+you can skip this step.
 
 **Ubuntu**
 
@@ -45,7 +45,7 @@ change it if you prefer other location to install MGEScan.
   export TRF_HOME=$MGESCAN_HOME/trf
   export MGESCAN_VENV=$MGESCAN_HOME/virtualenv/mgescan
 
-
+.. tip:: MGEScan on Galaxy uses version 3 in the naming like mgescan3.
 
 Create a MGESCan start file ``.mgescanrc`` 
 
