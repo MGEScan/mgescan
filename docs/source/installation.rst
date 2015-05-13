@@ -51,6 +51,7 @@ Create a MGESCan start file ``.mgescanrc``
 
    cat <<EOF > $HOME/.mgescanrc
    export MGESCAN_HOME=\$HOME/mgescan3
+   export MGESCAN_SRC=\$MGESCAN_HOME/src
    export GALAXY_HOME=\$MGESCAN_HOME/galaxy
    export TRF_HOME=\$MGESCAN_HOME/trf
    export MGESCAN_VENV=\$MGESCAN_HOME/virtualenv/mgescan
