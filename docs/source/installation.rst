@@ -143,7 +143,7 @@ From Github repository (source code):
   cd $MGESCAN_HOME
   git clone https://github.com/MGEScan/mgescan.git
   ln -s mgescan src 
-  cd mgescan
+  cd $MGESCAN_SRC
   python setup.py install
 
 Configuration
