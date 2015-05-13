@@ -27,9 +27,7 @@ you can skip this step.
 ::
 
   sudo apt-get update
-  sudo apt-get install python-virtualenv -y
-  sudo apt-get install git -y
-  sudo apt-get install python-dev -y
+  sudo apt-get install python-virtualenv python-dev git -y
 
 Environment Variables
 *******************************************************************************
@@ -102,8 +100,7 @@ If you have ``HMMER`` and ``EMBOSS`` on your system, you can skip this step.
 
 ::
 
-        sudo apt-get install hmmer -y
-        sudo apt-get install emboss -y
+        sudo apt-get install hmmer emboss -y
 
 Virtual Environments (virtualenv)
 *******************************************************************************
