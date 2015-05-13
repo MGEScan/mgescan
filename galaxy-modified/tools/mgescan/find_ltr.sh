@@ -8,7 +8,7 @@ then
 	exit
 fi
 . ~/.mgescanrc
-userdir=$MGESCAN_HOME
+user_dir=$MGESCAN_HOME
 #script=$user_dir/retrotminer/wazim/MGEScan1.0/run_MGEScan.pl
 input_file=$1
 hmmsearch_version=$2

@@ -8,7 +8,7 @@ then
 	exit
 fi
 . ~/.mgescanrc
-userdir=$MGESCAN_HOME
+user_dir=$MGESCAN_HOME
 script_program=`which perl`
 script=$user_dir/github/retrotminer/retrotminer/ltr/pre_processing.pl
 

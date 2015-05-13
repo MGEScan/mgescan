@@ -6,7 +6,7 @@ then
 	exit
 fi
 . ~/.mgescanrc
-userdir=$MGESCAN_HOME
+user_dir=$MGESCAN_HOME
 #user_dir=$HOME
 #script=$user_dir/mgescan/wazim/MGEScan1.1/run_MGEScan.pl
 #script=$user_dir/mgescan/wazim/MGEScan1.3.1/run_MGEScan2.pl

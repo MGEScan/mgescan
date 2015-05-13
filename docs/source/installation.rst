@@ -183,6 +183,21 @@ the ``bin`` directory.
    ln -s $TRF_HOME/trf407b.linux64 $MGESCAN_VENV/bin/trf
    chmod 700 $MGESCAN_VENV/bin/trf
 
+Galaxy Admin Users
+*******************************************************************************
+
+Declare your email address as a Galaxy admin user name.
+
+::
+
+   export GALAXY_ADMIN=mike@google.com
+
+.. warning:: REPLACE ``mike@google.com`` with your email address. You also have
+        to sign up Galaxy with this email address.
+
+::
+
+  sed -i "s/#admin_users = None/admin_users = $GALAXY_ADMIN/" $GALAXY_HOME/universe_wsgi.ini
 
 Start Galaxy
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -193,7 +208,6 @@ Start Galaxy
         nohup sh run.sh &
 
 .. note:: Default port number : 38080 http://[IP ADDRESS]:38080
-
 
 
 
