@@ -15,6 +15,7 @@ The documentation provides basic tutorials of using MGEScan with Galaxy Workflow
 
    tutorial
    .. `tutorial <tutorial.html>`_
+   installation
    aws
    ltr
    nonltr
