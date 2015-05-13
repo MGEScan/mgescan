@@ -1,7 +1,15 @@
 #!/bin/bash
 
-user_dir=/u/lee212/
-script=$user_dir/retrotminer/wazim/MGEScan1.0/run_MGEScan.pl
+#user_dir=/u/lee212/
+
+if [ ! -f ~/.mgescanrc ]
+then
+	".mgescanrc is not found."
+	exit
+fi
+. ~/.mgescanrc
+userdir=$MGESCAN_HOME
+#script=$user_dir/retrotminer/wazim/MGEScan1.0/run_MGEScan.pl
 input_file=$1
 hmmsearch_version=$2
 output_file=$3
@@ -12,7 +20,7 @@ input_dir=`mktemp -d`
 output_dir=`mktemp -d`
 
 #set path for transeq
-export PATH=$user_dir/retrotminer/EMBOSS/bin/:$PATH
+#export PATH=$user_dir/retrotminer/EMBOSS/bin/:$PATH
 
 #make a copy of input
 /bin/cp $input_file $input_dir
@@ -22,6 +30,6 @@ export PATH=$user_dir/retrotminer/EMBOSS/bin/:$PATH
 
 #make a coput of output
 #/bin/cp $output_dir/ltr/ltr.out $output_file
-tmp=/u/lee212/retrotminer/output/Dmel/ltr/ltr.out
+#tmp=/u/lee212/retrotminer/output/Dmel/ltr/ltr.out
 tmp=/tmp/Galaxy8-[Compare_two_Datasets_on_data_7_and_data_2].bed
 /bin/cp $tmp $output_file

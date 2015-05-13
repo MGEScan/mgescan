@@ -1,9 +1,16 @@
 #!/bin/bash
 # mgescan.sh $input $input.name 3 $output L None None None $ltr_gff3 None $sw_rm "$scaffold" $min_dist $max_dist $min_len_ltr $max_len_ltr $ltr_sim_condition $cluster_sim_condition $len_condition $repeatmasker
-user_dir=$HOME
+if [ ! -f ~/.mgescanrc ]
+then
+	".mgescanrc is not found."
+	exit
+fi
+. ~/.mgescanrc
+userdir=$MGESCAN_HOME
+#user_dir=$HOME
 #script=$user_dir/mgescan/wazim/MGEScan1.1/run_MGEScan.pl
 #script=$user_dir/mgescan/wazim/MGEScan1.3.1/run_MGEScan2.pl
-source $user_dir/virtualenv/mgescan/bin/activate >> /dev/null
+#source $user_dir/virtualenv/mgescan/bin/activate >> /dev/null
 script_program=`which python`
 script=$user_dir/mgescan/mgescan/cmd.py
 input_file=$1

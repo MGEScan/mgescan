@@ -57,11 +57,11 @@ Create a MGESCan start file ``.mgescanrc``
    export MGESCAN_VENV=\$MGESCAN_HOME/virtualenv/mgescan
    EOF
 
-Then include it to your startup file (i.e. ``.bashrc``).
+Then include it to your startup file (i.e. ``.bash_profile``).
 
 ::
 
-   echo "source ~/.mgescanrc" >> $HOME/.bashrc
+   echo "source ~/.mgescanrc" >> $HOME/.bash_profile
 
 Create a main directory
 
@@ -89,8 +89,6 @@ From Github repository (source code):
 
         cd $MGESCAN_HOME
         git clone https://github.com/galaxyproject/galaxy/
-        cd galaxy/
-        ./run.sh &
 
 HMMER and EMBOSS
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

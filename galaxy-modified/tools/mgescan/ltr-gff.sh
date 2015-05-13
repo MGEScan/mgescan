@@ -1,6 +1,14 @@
 #!/bin/bash
-user_dir=/u/lee212
+#user_dir=/u/lee212
 #source ~/virtualenv/retrotminer/bin/activate
+
+if [ ! -f ~/.mgescanrc ]
+then
+	".mgescanrc is not found."
+	exit
+fi
+. ~/.mgescanrc
+userdir=$MGESCAN_HOME
 script_program=`which python`
 script=$user_dir/github/retrotminer/retrotminer/ltr/toGFF.py
 
