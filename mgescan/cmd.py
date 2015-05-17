@@ -20,6 +20,7 @@ from subprocess import Popen, PIPE
 from mgescan import utils
 from mgescan.split import Split
 import shutil
+import time
 
 class MGEScan(object):
     """ MGEScan runs mgescan for identifying ltr and nonltr in genome
@@ -105,6 +106,7 @@ class MGEScan(object):
 
     def ltr(self):
         print 'ltr: starting'
+        start = time.clock()
 
         # scaffold
         # repeatmasker
@@ -137,10 +139,13 @@ class MGEScan(object):
         cmd2 = "ltr/toGFF.py %(ltr_out_path)s %(ltr_gff_path)s"
         res2 = self.run_cmd(cmd2)
 
-        print 'ltr: finishing'
+        end = time.clock()
+        print ('ltr: finishing (elapsed time: {0})'.format(end - start))
 
     def nonltr(self):
         print 'nonltr: starting'
+        start = time.clock()
+
         # nonltr
         cmd0 = "nonltr/run_MGEScan.pl \
                 -genome=%(genome_dir)s \
@@ -156,7 +161,8 @@ class MGEScan(object):
         cmd1 = "nonltr/toGFF.py %(nonltr_out_path)s %(nonltr_gff_path)s"
         res1 = self.run_cmd(cmd1)
 
-        print 'nonltr: finishing'
+        end = time.clock()
+        print ('nonltr: finishing (elapsed time: {0})'.format(end - start))
 
     def run_cmd(self, cmd):
         cmd = cmd % vars(self)
