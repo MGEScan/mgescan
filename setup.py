@@ -43,6 +43,7 @@ setup(
         entry_points='''
             [console_scripts]
             mgescan=mgescan.cmd:main
+            nonltr=mgescan.nonltr:main
             ''',
 
         cmdclass={'bdist_egg': MGEScanInstall},  # override bdist_egg
