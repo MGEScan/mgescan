@@ -148,10 +148,10 @@ class nonLTR(MGEScan):
         self.post_processing(self.minus_out_dir, self.minus_dir, 1)
 
     def post_processing(self, out_dir, dir, reverse_yn):
-        os.remove(utils.get_abspath(out_dir + "/out1/aaaaa"))
-        os.remove(utils.get_abspath(out_dir + "out1/bbbbb"))
-        os.remove(utils.get_abspath(out_dir + "out1/ppppp"))
-        os.remove(utils.get_abspath(out_dir + "out1/qqqqq"))
+        utils.silentremove(utils.get_abspath(out_dir + "/out1/aaaaa"))
+        utils.silentremove(utils.get_abspath(out_dir + "out1/bbbbb"))
+        utils.silentremove(utils.get_abspath(out_dir + "out1/ppppp"))
+        utils.silentremove(utils.get_abspath(out_dir + "out1/qqqqq"))
         cmd = self.cmd_post_process + (" --dna=%s --out=%s --rev=%s" %
                 (dir, out_dir, reverse_yn))
         self.run_cmd(cmd)
