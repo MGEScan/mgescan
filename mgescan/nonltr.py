@@ -63,8 +63,8 @@ class nonLTR(MGEScan):
     def run(self):
 
         # Step 1
+        p1 = Process(target=self.forward_strand)
         if (self.all_enabled) or (self.forward_enabled):
-            p1 = Process(target=self.forward_strand)
             p1.start()
 
         # Step 2
@@ -74,13 +74,13 @@ class nonLTR(MGEScan):
             self.reverse_complement()
 
         # Step 3
+        p2 = Process(target=self.backward_strand)
         if (self.all_enabled) or (self.backward_enabled):
-            p2 = Process(target=self.backward_strand)
             p2.start()
 
-        if (p1):
+        if (self.all_enabled) or (self.forward_enabled):
             p1.join()
-        if (p2):
+        if (self.all_enabled) or (self.backward_enabled):
             p2.join()
 
         # Step 4
