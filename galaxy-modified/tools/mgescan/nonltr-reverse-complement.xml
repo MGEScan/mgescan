@@ -5,7 +5,8 @@
 		Step 2 of 5: Reverse Complement
 	</description>
 	<command interpreter="bash">
-			mgescan.sh $input $input.name 3 None N $clade $qvalue_en $qvalue_rt None $nonltr_gff3
+			nonltr.sh reverseq $input '$input.name' 3 $clade
+			<!--mgescan.sh $input $input.name 3 None N $clade $qvalue_en $qvalue_rt None $nonltr_gff3-->
 	</command>
 	<inputs>
 		<param format="fasta" name="input" type="data" label="From"/>
