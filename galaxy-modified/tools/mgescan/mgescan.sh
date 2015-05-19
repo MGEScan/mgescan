@@ -74,7 +74,8 @@ mkdir -p $input_dir
 mkdir -p $output_dir
 
 #make a copy of input
-/bin/cp $input_file $input_dir/$input_file_name
+#/bin/cp $input_file $input_dir/$input_file_name
+/bin/ln -s $input_file $input_dir/$input_file_name
 
 VERSION2=`hmmsearch -h|grep "HMMER 2" 2> /dev/null`
 VERSION3=`hmmsearch -h|grep "HMMER 3" 2> /dev/null`
