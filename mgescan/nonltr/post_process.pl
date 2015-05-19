@@ -241,7 +241,7 @@ sub get_parameter{
         usage();
     }
 
-    ${$_[0]} = $dna;
+    ${$_[0]} = $dna."/";
     ${$_[1]} = $out;
     ${$_[2]} = $rev;
 }
