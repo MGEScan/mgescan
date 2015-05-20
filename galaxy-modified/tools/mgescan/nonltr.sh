@@ -7,6 +7,7 @@ fi
 . ~/.mgescanrc
 
 user_dir=$MGESCAN_HOME
+source $user_dir/virtualenv/mgescan/bin/activate >> /dev/null
 script_program=`which python`
 script=$user_dir/mgescan/mgescan/nonltr.py
 program_name=$1
@@ -16,7 +17,6 @@ input_file_name=`basename $input_file`
 hmmsearch_version=$4
 output_file=$5
 
-source $user_dir/virtualenv/mgescan/bin/activate >> /dev/null
 
 if [ "$program_name" == "qvalue" ]
 then
@@ -42,9 +42,9 @@ tar tf $input_file 2> /dev/null
 ISGZ=$?
 if [ -z $ISGZ ]
 then
-	/bin/ln -s $input_file $input_dir/$input_file_name
-else
 	tar xzf $input_file -C $input_dir
+else
+	/bin/ln -s $input_file $input_dir/$input_file_name
 fi
 
 $script_program $script $program_name $input_dir --output=$output_dir
