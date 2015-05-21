@@ -55,7 +55,8 @@ class nonLTR(MGEScan):
     def set_defaults(self):
         super(nonLTR, self).set_defaults()
         self.plus_dir = self.genome_dir
-        self.minus_dir = utils.get_abspath(self.genome_dir + "/../") + "/_reversed/"
+        # minus_dir used to be genome_dir + "_b"
+        self.minus_dir = self.data_dir + "/_reversed/" 
 
         self.plus_out_dir = self.data_dir + "/f/"
         self.minus_out_dir = self.data_dir + "/b/"
