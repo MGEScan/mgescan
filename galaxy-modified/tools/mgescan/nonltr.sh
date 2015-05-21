@@ -38,9 +38,9 @@ mkdir -p $input_dir
 mkdir -p $output_dir
 
 # Check tar.gz
-tar tf $input_file 2> /dev/null
+tar tf $input_file &> /dev/null
 ISGZ=$?
-if [ -z $ISGZ ]
+if [ 0 -eq $ISGZ ]
 then
 	tar xzf $input_file -C $input_dir
 else
