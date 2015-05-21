@@ -69,8 +69,7 @@ class nonLTR(MGEScan):
             p1.start()
 
         # Step 2
-        if (self.all_enabled) or (self.reverseq_enabled) or \
-                (self.backward_enabled):
+        if (self.all_enabled) or (self.reverseq_enabled):
             # Reverse complement before backward strand
             self.reverse_complement()
 
