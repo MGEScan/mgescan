@@ -39,14 +39,14 @@ class nonLTR(MGEScan):
 
     def __init__(self, args):
         self.args = args
-        self.set_inputs()
-        self.set_defaults()
         self.all_enabled = self.args['all']
         self.forward_enabled = self.args['forward']
         self.backward_enabled = self.args['backward']
         self.reverseq_enabled = self.args['reverseq']
         self.qvalue_enabled = self.args['qvalue']
         self.gff3_enabled = self.args['gff3']
+        self.set_inputs()
+        self.set_defaults()
 
     def set_inputs(self):
         self.data_dir = utils.get_abspath(self.args['--output'])
