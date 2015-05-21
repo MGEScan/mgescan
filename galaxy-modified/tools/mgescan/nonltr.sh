@@ -47,6 +47,18 @@ else
 	/bin/ln -s $input_file $input_dir/$input_file_name
 fi
 
+if [ "$program_name" == "qvalue" ]
+then
+	tar tf $input_file2 &> /dev/null
+	ISGZ=$?
+	if [ 0 -eq $ISGZ ]
+	then
+		tar xzf $input_file2 -C $input_dir
+	else
+		/bin/ln -s $input_file2 $input_dir/$input_file_name2
+	fi
+fi
+
 $script_program $script $program_name $input_dir --output=$output_dir
 FILES=`ls $output_dir`
 tar czf $output_file --directory=$output_dir $FILES
