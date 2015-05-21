@@ -89,7 +89,7 @@ sub get_parameter{
 		exit;
 	}
 
-    ${$_[0]} = $dir;
+    ${$_[0]} = $dir."/";
 	${$_[1]} = $hmmerv;
 }
 
