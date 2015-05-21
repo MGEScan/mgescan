@@ -25,6 +25,7 @@ from mgescan import utils
 from biopython import reverse_complement_fasta
 import os
 import time
+import shutil
 
 class nonLTR(MGEScan):
 
@@ -172,8 +173,12 @@ class nonLTR(MGEScan):
 
     def post_processing2(self):
 
+        if self.qvalue_enabled:
+            shutil.move(self.genome_dir, self.data_dir)
+
         cmd = self.cmd_validate_q_value + \
                 " --data_dir=%(data_dir)s --hmmerv=%(hmmerv)s"
+
         self.run_cmd(cmd)
 
     def toGFF(self):
