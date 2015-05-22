@@ -67,5 +67,5 @@ tar czf $output_file --directory=$output_dir $FILES
 # Exception for gff3
 if [ "$program_name" == "gff3" ]
 then
-	$script_program $script_gff3 $output_dir/info/full $output_file
+	$script_program $script_gff3 $output_dir/seq/info/full $output_file
 fi
