@@ -174,7 +174,8 @@ class nonLTR(MGEScan):
     def post_processing2(self):
 
         if self.qvalue_enabled:
-            shutil.move(self.genome_dir, self.data_dir)
+            shutil.move(self.genome_dir + "/b", self.data_dir)
+            shutil.move(self.genome_dir + "/f", self.data_dir)
 
         cmd = self.cmd_validate_q_value + \
                 " --data_dir=%(data_dir)s --hmmerv=%(hmmerv)s"
@@ -182,6 +183,9 @@ class nonLTR(MGEScan):
         self.run_cmd(cmd)
 
     def toGFF(self):
+
+        if self.gff3_enabled:
+            shutil.move(self.genome_dir, self.data_dir)
 
         # gff3
         self.nonltr_out_path = utils.get_abspath(self.data_dir + "/info/full/")
