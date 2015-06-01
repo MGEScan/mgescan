@@ -173,8 +173,14 @@ sub get_signal_domain{
 
 sub get_id{
 
-	my @temp = split(/\//, ${$_[0]});
-	${$_[1]} = $temp[$#temp];
+	use Bio::SeqIO;
+	my $seqio_obj = Bio::SeqIO->new(-file => ${$_[0]}, -format => "fasta" );
+	my $seq = $seqio_obj->next_seq;
+	${$_[1]} = $seq->display_id;
+
+
+	#my @temp = split(/\//, ${$_[0]});
+	#${$_[1]} = $temp[$#temp];
 }
 
 

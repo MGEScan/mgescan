@@ -60,7 +60,11 @@ then
 	fi
 fi
 
+#####################################################################
+# Main Script
+#####################################################################
 $script_program $script $program_name $input_dir --output=$output_dir
+
 FILES=`ls $output_dir`
 tar czf $output_file --directory=$output_dir $FILES
 
