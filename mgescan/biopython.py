@@ -32,3 +32,7 @@ def translate(seq, start=0):
     res = coding_dna.translate()
     return res
 
+def getid(filepath):
+    handle = open(filepath, "rU")
+    for record in SeqIO.parse(handle, "fasta") :
+        return record.id

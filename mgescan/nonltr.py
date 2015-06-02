@@ -22,7 +22,7 @@ from multiprocessing import Process
 from subprocess import Popen, PIPE
 from mgescan.cmd import MGEScan
 from mgescan import utils
-from biopython import reverse_complement_fasta
+from biopython import reverse_complement_fasta, getid
 import os
 import time
 import shutil
@@ -105,8 +105,14 @@ class nonLTR(MGEScan):
             break
         for name in filenames:
             file_path = utils.get_abspath(dirpath + "/" + name)
+
+            # Rename to sequence id
+            sid = getid(file_path)
+            new_path = utils.get_abspath(dirpath + "/" + sid)
+            os.rename(file_path, new_path)
+
             command = self.cmd_hmm + (" --dna=%s --out=%s --hmmerv=%s" % 
-                    (file_path, out_dir, self.hmmerv))
+                    (new_path, out_dir, self.hmmerv))
             command = command.split()
             self.processes.add(Popen(command, stdout=PIPE,
                 stderr=PIPE))
@@ -129,6 +135,12 @@ class nonLTR(MGEScan):
             break
         for name in filenames:
             file_path = utils.get_abspath(dirpath + "/" + name)
+
+            # Rename to sequence id
+            sid = getid(file_path)
+            new_path = utils.get_abspath(dirpath + "/" + sid)
+            os.rename(file_path, new_path)
+
             command = self.cmd_hmm + (" --dna=%s --out=%s --hmmerv=%s" % 
                     (file_path, out_dir, self.hmmerv))
             command = command.split()
