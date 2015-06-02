@@ -142,7 +142,7 @@ class nonLTR(MGEScan):
             os.rename(file_path, new_path)
 
             command = self.cmd_hmm + (" --dna=%s --out=%s --hmmerv=%s" % 
-                    (file_path, out_dir, self.hmmerv))
+                    (new_path, out_dir, self.hmmerv))
             command = command.split()
             self.processes.add(Popen(command, stdout=PIPE,
                 stderr=PIPE))
