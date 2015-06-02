@@ -251,7 +251,7 @@ sub get_parameter{
 sub get_sequence{  # file name, variable for seq, variable for head                                   \
                                                                                                        
 
-    open(GENOME, $_[0])|| die("ERROR: Couldn't open genome_file $_[0]!\n");
+    open(GENOME, $_[0])|| die("ERROR: Couldn't open genome_file $_[0]\n");
     while( my $each_line=<GENOME>)  {
 
         if ($each_line =~ m/>/){
