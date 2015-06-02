@@ -173,14 +173,23 @@ sub get_signal_domain{
 
 sub get_id{
 
-	use Bio::SeqIO;
-	my $seqio_obj = Bio::SeqIO->new(-file => ${$_[0]}, -format => "fasta" );
-	my $seq = $seqio_obj->next_seq;
-	${$_[1]} = $seq->display_id;
+	my @temp = split(/\//, ${$_[0]});
+	${$_[1]} = $temp[$#temp];
+	
+	# use Bio::SeqIO;
+	# my $seqio_obj = Bio::SeqIO->new(-file => ${$_[0]}, -format => "fasta" );
+	# my $seq = $seqio_obj->next_seq;
+	# ${$_[1]} = $seq->display_id;
 
 
-	#my @temp = split(/\//, ${$_[0]});
-	#${$_[1]} = $temp[$#temp];
+	# post_process.pl searches original sequence files with its id. The file
+	# name, because of that, needs to be changed to id.
+	# my $name;
+	# my $path;
+	# my $suffix;
+	# ($name,$path,$suffix) = fileparse(${$_[0]});
+	# rename(${$_[0]}, $path ."/".${$_[1]});
+	# ${$_[0]} = $path ."/".${$_[1]};
 }
 
 
