@@ -18,6 +18,7 @@ def reverse_complement_fasta(filepath, dest):
     dest_path = os.path.abspath(dest + "/" + filename)
     records = map(make_rc_record, SeqIO.parse(filepath, "fasta"))
     SeqIO.write(records, dest_path , "fasta")
+    return dest_path
 
 def read_file(filepath, format="fasta"):
     res = []
