@@ -15,9 +15,12 @@ output_file=$3
 min_dist=$4
 max_dist=$5
 min_len_ltr=$6
-ltr_sim_condition=$7
-cluster_sim_condition=$8
-len_condition=$9
+max_len_ltr=$7
+ltr_sim_condition=$8
+cluster_sim_condition=$9
+len_condition=${10}
+hmmsearch_version=3 # version 3 fixed
+
 # $HOME/mgescan/galaxy-dist/tools/mgescan/find_ltr.sh /$HOME/mgescan/galaxy-dist/database/files/000/dataset_1.dat /$HOME/mgescan/galaxy-dist/database/files/000/dataset_3.dat
 
 #move to the working directory
@@ -41,14 +44,7 @@ else
 	/bin/ln -s $input_file $input_dir/$input_file_name
 fi
 
-#run
-$script -genome=$input_dir/ -data=$output_dir/ -hmmerv=$hmmsearch_version -program=$program
+$script -genome=$input_dir/ -data=$output_dir/ -hmmerv=$hmmsearch_version -min_dist=$min_dist -max_dist=$max_dist -min_len_ltr=$min_len_ltr -max_len_ltr=$max_len_ltr -ltr_sim_condition=$ltr_sim_condition -cluster_sim_condition=$cluster_sim_condition -len_condition=$len_condition
 
 FILES=`ls $output_dir`
 tar czf $output_file --directory=$output_dir $FILES
-
-# Exception for gff3
-if [ "$program_name" == "gff3" ]
-then
-	cp $output_dir/info/nonltr.gff3 $output_file
-fi
