@@ -10,7 +10,7 @@ fi
 . ~/.mgescanrc
 user_dir=$MGESCAN_HOME
 script_program=`which perl`
-script=$user_dir/github/retrotminer/retrotminer/ltr/pre_processing.pl
+script=$MGESCAN_SRC/mgescan/ltr/pre_process.pl
 
 program_name=$1
 input_file=$2
