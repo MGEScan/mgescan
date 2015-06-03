@@ -5,7 +5,7 @@
 		Step 2 of 4: RepeatMasker screens DNA sequences for interspersed repeats and low complexity DNA sequences
 	</description>
 	<command interpreter="bash">
-		ltr-preprocessing.sh $input '$input.name' $output No Yes
+		ltr-preprocessing.sh repeatmasker $input '$input.name' $output
 	</command>
 	<inputs>
 		<param format="txt" name="input" type="data" label="genome sequence"/>

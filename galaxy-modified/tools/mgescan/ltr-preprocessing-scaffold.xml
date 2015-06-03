@@ -4,7 +4,7 @@
 		Step 1 of 4 in MGEScan-LTR: Split into separate sets of scaffolds of input genome sequences, if it is necessary.
 	</description>
 	<command interpreter="bash">
-		ltr.sh $input '$input.name' $output $scaffold No
+		ltr-preprocessing.sh scaffold $input '$input.name' $output $scaffold
 	</command>
 	<inputs>
 		<param format="txt" name="input" type="data" label="From"/>

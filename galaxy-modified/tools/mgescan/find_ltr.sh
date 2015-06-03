@@ -1,7 +1,4 @@
 #!/bin/bash
-
-#user_dir=/u/lee212/
-
 if [ ! -f ~/.mgescanrc ]
 then
 	".mgescanrc is not found."
@@ -9,27 +6,49 @@ then
 fi
 . ~/.mgescanrc
 user_dir=$MGESCAN_HOME
-#script=$user_dir/retrotminer/wazim/MGEScan1.0/run_MGEScan.pl
+source $user_dir/virtualenv/mgescan/bin/activate >> /dev/null
+script_program=`which perl`
+script=$user_dir/mgescan/mgescan/ltr/find_ltr.pl
 input_file=$1
-hmmsearch_version=$2
+input_file_name=$2
 output_file=$3
-program=L # N is nonLTR, L is LTR and B is both
-# /nfs/nfs4/home/lee212/retrotminer/galaxy-dist/tools/retrotminer/find_ltr.sh /nfs/nfs4/home/lee212/retrotminer/galaxy-dist/database/files/000/dataset_1.dat /nfs/nfs4/home/lee212/retrotminer/galaxy-dist/database/files/000/dataset_3.dat
+min_dist=$4
+max_dist=$5
+min_len_ltr=$6
+ltr_sim_condition=$7
+cluster_sim_condition=$8
+len_condition=$9
+# $HOME/mgescan/galaxy-dist/tools/mgescan/find_ltr.sh /$HOME/mgescan/galaxy-dist/database/files/000/dataset_1.dat /$HOME/mgescan/galaxy-dist/database/files/000/dataset_3.dat
 
-input_dir=`mktemp -d`
-output_dir=`mktemp -d`
+#move to the working directory
+work_dir=$MGESCAN_SRC/mgescan
+cd $work_dir
+#create directory for input and output
+mkdir -p input
+t_dir=`mktemp -p input -d` #relative path
+input_dir="$work_dir/$t_dir/seq" # full path
+output_dir="$work_dir/$t_dir/data"
+mkdir -p $input_dir
+mkdir -p $output_dir
 
-#set path for transeq
-#export PATH=$user_dir/retrotminer/EMBOSS/bin/:$PATH
-
-#make a copy of input
-/bin/cp $input_file $input_dir
+# Check tar.gz
+tar tf $input_file &> /dev/null
+ISGZ=$?
+if [ 0 -eq $ISGZ ]
+then
+	tar xzf $input_file -C $input_dir
+else
+	/bin/ln -s $input_file $input_dir/$input_file_name
+fi
 
 #run
-#$script -genome=$input_dir/ -data=$output_dir/ -hmmerv=$hmmsearch_version -program=$program
+$script -genome=$input_dir/ -data=$output_dir/ -hmmerv=$hmmsearch_version -program=$program
 
-#make a coput of output
-#/bin/cp $output_dir/ltr/ltr.out $output_file
-#tmp=/u/lee212/retrotminer/output/Dmel/ltr/ltr.out
-tmp=/tmp/Galaxy8-[Compare_two_Datasets_on_data_7_and_data_2].bed
-/bin/cp $tmp $output_file
+FILES=`ls $output_dir`
+tar czf $output_file --directory=$output_dir $FILES
+
+# Exception for gff3
+if [ "$program_name" == "gff3" ]
+then
+	cp $output_dir/info/nonltr.gff3 $output_file
+fi
