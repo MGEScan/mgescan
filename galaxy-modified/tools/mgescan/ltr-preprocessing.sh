@@ -47,32 +47,30 @@ else
 	/bin/ln -s $input_file $input_dir/$input_file_name
 fi
 
-#run
-$script_program $script -genome=$input_dir/ -data=$output_dir/ -sw_rm=${repeatmasker_YN} -scaffold=${scaffold_YN} 
-
 if [ "$scaffold_YN" == "Yes" ]
 then
-	temp_file=`mktemp -p ./`
-	tar cvzf ${temp_file}.tar.gz $output_dir/genome/
-	/bin/mv ${temp_file}.tar.gz $output_file
-	rm -rf $temp_file
-	#rm -rf ${temp_file}.tar.gz
+	scaffold=$input_dir
 fi
+
+#run
+$script_program $script -genome=$input_dir/ -data=$output_dir/ -sw_rm=${repeatmasker_YN} -scaffold=${scaffold} 
+
+#if [ "$scaffold_YN" == "Yes" ]
+#then
+	tar cvzf $output_file --directory=$output_dir genome
+#fi
 
 if [ "$repeatmasker_YN" == "Yes" ]
 then
 	# chr2L.fa.cat.gz  chr2L.fa.masked  chr2L.fa.out  chr2L.fa.out.pos  chr2L.fa.tbl
-	temp_file=`mktemp -p ./`
-	tar cvzf ${temp_file}.tar.gz $output_dir/repeatmasker/
-	/bin/mv ${temp_file}.tar.gz $output_file
-	rm -rf $temp_file
+	tar cvzf $output_file --directory=$output_dir repeatmasker
 	#rm -rf ${temp_file}.tar.gz
 fi
 
 if [ $? -eq 0 ]
 then
 	rm -rf $work_dir/$t_dir
-else
+#else
 	# DEBUG CODE
 	# cp -pr $work_dir/$t_dir $work_dir/error-cases/
 fi
