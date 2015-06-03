@@ -197,7 +197,8 @@ class nonLTR(MGEScan):
     def toGFF(self):
 
         if self.gff3_enabled:
-            shutil.move(self.genome_dir, self.data_dir)
+            # Assume info is a only directory in genome_dir
+            shutil.move(self.genome_dir + "/info", self.data_dir)
 
         # gff3
         self.nonltr_out_path = utils.get_abspath(self.data_dir + "/info/full/")

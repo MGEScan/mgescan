@@ -4,7 +4,7 @@
 		Step 1 of 4 in MGEScan-LTR: Split into separate sets of scaffolds of input genome sequences, if it is necessary.
 	</description>
 	<command interpreter="bash">
-		ltr-preprocessing.sh $input '$input.name' $output $scaffold No
+		ltr.sh $input '$input.name' $output $scaffold No
 	</command>
 	<inputs>
 		<param format="txt" name="input" type="data" label="From"/>
@@ -22,8 +22,8 @@ Running the program
 
 Scaffold input genome sequences will be divided into several files for each genome sequence as a pre-processing of MGEScan-LTR.
 
-No: The input won't be separated.
-Yes: The input will be divided for each genome sequence.
+No: The input file won't be separated.
+Yes: The input file will be divided for each genome sequence.
 
 License
 ============

@@ -10,7 +10,6 @@ user_dir=$MGESCAN_HOME
 source $user_dir/virtualenv/mgescan/bin/activate >> /dev/null
 script_program=`which python`
 script=$user_dir/mgescan/mgescan/nonltr.py
-script_gff3=$user_dir/mgescan/mgescan/nonltr/toGFF.py
 program_name=$1
 input_file=$2
 input_file_name=$3
@@ -71,5 +70,5 @@ tar czf $output_file --directory=$output_dir $FILES
 # Exception for gff3
 if [ "$program_name" == "gff3" ]
 then
-	$script_program $script_gff3 $output_dir/seq/info/full $output_file
+	cp $output_dir/info/nonltr.gff3 $output_file
 fi
