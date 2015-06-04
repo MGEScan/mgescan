@@ -153,9 +153,9 @@ fi
 
 if [ "$program" == "B" ]
 then
-	echo "track name=LTR description=\"MGEScan-LTR\" color=0,0,255," > $both_gff3
+	#echo "track name=LTR description=\"MGEScan-LTR\" color=0,0,255," > $both_gff3
 	/bin/cat $output_dir/ltr/ltr.gff3 >> $both_gff3
-	echo "track name=nonLTR description=\"MGEScan-nonLTR\" color=255,0,0" >> $both_gff3
+	#echo "track name=nonLTR description=\"MGEScan-nonLTR\" color=255,0,0" >> $both_gff3
 	/bin/cat $output_dir/info/nonltr.gff3 >> $both_gff3
 fi
 

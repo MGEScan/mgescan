@@ -18,6 +18,8 @@ infile = open(sys.argv[1], "r")
 outfile = open(sys.argv[2], "w")
 cluster = ""
 #print >>outfile, "##gff-version 3"
+print >>outfile, "track name=LTR description=\"MGEScan-LTR\" color=0,0,255,"
+
 for aline in infile:
     aline = aline.strip()
     words = aline.split(None)
