@@ -9,6 +9,7 @@
 # 2------*** 
 # ...
 import sys
+import re
 
 if len(sys.argv) < 3:
 	print sys.argv[0], "LTRout new-GFF-file"
@@ -34,8 +35,15 @@ for aline in infile:
         seqid = seqid.replace(".fa", "")
         if seqid[0].isdigit():
             seqid = "chr" + seqid
+        searchObj=re.search(r'([^.]*).([^.]*).([^.]*).([^.]*).([^.]*).fa(.*)',
+                header, re.M|re.I)
+        if len(searchObj.groups()) > 5:
+            seqid = searchObj.group(5);
+            if searchObj.group(4) == "chromosome":
+                seqid = "chr" + seqid
         # id is cluster + seqid
-        id = cluster + "_" + words[0]
+        #id = cluster + "_" + words[0]
+        id = seqid + "_" + cluster 
         des = [seqid, "MGEScan_LTR", "mobile_genetic_element", words[1], words[4], ".", words[5], ".", "ID=" + id + ";name=cluster_"+cluster] 
         print >>outfile, "\t".join(des)
 outfile.close()

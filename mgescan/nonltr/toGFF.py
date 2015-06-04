@@ -35,13 +35,18 @@ def readFASTA(filename):
 outfile = open(sys.argv[2], "w")
 #print >>outfile, "##gff-version 3"
 print >>outfile, "track name=nonLTR description=\"MGEScan-nonLTR\" color=255,0,0"
- 
+
+# Example ltr.out
+
+# 1----------***
+# Drosophila_melanogaster.BDGP5.dna.chromosome.2L.fa_51   16141217        16141492 16146090        16146365        +       276     276     5149    6.02e-129 AAAAT   AAAAT   TGT     ACA     TGT     ACA D
+#
 for cladeDir in glob.glob( os.path.join(sys.argv[1], '*') ):
 	basename = os.path.basename(cladeDir)
 	filepath = cladeDir + "/" + basename + ".dna"
 	fastalist = readFASTA(filepath)
 	for fastaitem in fastalist:
-		header = fastaitem[0]
+		header = fastaitem[0] # Drosophila_melanogaster.BDGP5.dna.chromosome.2L.fa_51
 		seq = fastaitem[1]
 		# seqid = header[:header.find("_")]
         seqid = header[:header.rfind("_")]
@@ -58,6 +63,12 @@ for cladeDir in glob.glob( os.path.join(sys.argv[1], '*') ):
         seqid = seqid.replace(".fa", "")
         if seqid[0].isdigit():
             seqid = "chr" + seqid
+        searchObj=re.search(r'([^.]*).([^.]*).([^.]*).([^.]*).([^.]*).fa(.*)',
+                header, re.M|re.I)
+        if len(searchObj.groups()) > 5:
+            seqid = searchObj.group(5);
+            if searchObj.group(4) == "chromosome":
+                seqid = "chr" + seqid
         start = int(header[header.rfind("_")+1:])
         des = [seqid, "MGEScan_nonLTR", "mobile_genetic_element", str(start), str(start+len(seq)), ".", ".", ".", "ID=" + header] 
         print >>outfile, "\t".join(des)
