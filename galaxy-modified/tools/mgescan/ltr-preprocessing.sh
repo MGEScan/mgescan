@@ -57,13 +57,15 @@ $script_program $script -genome=$input_dir/ -data=$output_dir/ -sw_rm=${repeatma
 
 #if [ "$scaffold_YN" == "Yes" ]
 #then
-	tar cvzf $output_file --directory=$output_dir genome
+	FILES=`ls $output_dir/genome`
+	tar czf $output_file --directory=$output_dir/genome/ $FILES
 #fi
 
 if [ "$repeatmasker_YN" == "Yes" ]
 then
 	# chr2L.fa.cat.gz  chr2L.fa.masked  chr2L.fa.out  chr2L.fa.out.pos  chr2L.fa.tbl
-	tar cvzf $output_file --directory=$output_dir repeatmasker
+	FILES=`ls $output_dir/repeatmasker`
+	tar czf $output_file --directory=$output_dir/repeatmasker/ $FILES
 	#rm -rf ${temp_file}.tar.gz
 fi
 
