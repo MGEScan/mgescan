@@ -5,7 +5,7 @@
 		Step 3 of 4: Finding LTR is de novo identification of LTR retroelements
 	</description>
 	<command interpreter="bash">
-		find_ltr.sh $input '$input.name' $output $min_dist $max_dist $min_len_ltr $max_len_ltr $ltr_sim_condition $cluster_sim_condition $len_condition
+		find_ltr.sh $input '$input.name' $output $min_dist $max_dist $min_len_ltr $max_len_ltr $ltr_sim_condition $cluster_sim_condition $len_condition $nmpi
 	</command>
 	<inputs>
 		<param format="txt" name="input" type="data" label="genome sequences"/>
@@ -18,6 +18,7 @@
 		<param name="ltr_sim_condition" type="text" value="70" label="minimum similarity(%) for LTRs in an element"/>
 		<param name="cluster_sim_condition" type="text" value="70" label="inimum similarity(%) for LTRs in a cluster"/>
 		<param name="len_condition" type="text" value="70" label="minimum length(bp) for LTRs aligned in local alignment"/>
+		<param name="nmpi" format="txt" type="text" value="0" label="Number of MPI Processes"/>
 	</inputs>
 	<outputs>
 		<data format="txt" name="output" />
@@ -37,6 +38,7 @@ To run find_ltr, follow the steps below,
    * ltr_sim_condition: minimum similarity(%) for LTRs in an element.
    * cluster_sim_condition: minimum similarity(%) for LTRs in a cluster
    * len_condition: minimum length(bp) for LTRs aligned in local alignment.
+   * MPI will be enabled depending on your system support.
 
 4. Click 'Execute'
 

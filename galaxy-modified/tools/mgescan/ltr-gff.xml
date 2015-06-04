@@ -5,7 +5,7 @@
 		Step 4 of 4 in MGEScan-LTR: Generate gff3 for ltr.out to visualize.
 	</description>
 	<command interpreter="bash">
-		ltr-gff.sh $input $output
+		ltr-gff.sh $input '$input.name' $output
 	</command>
 	<inputs>
 		<param format="txt" name="input" type="data" label="ltr.out"/>
