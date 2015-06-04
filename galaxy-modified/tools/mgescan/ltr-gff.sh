@@ -10,7 +10,7 @@ fi
 . ~/.mgescanrc
 user_dir=$MGESCAN_HOME
 script_program=`which python`
-script=$user_dir/github/retrotminer/retrotminer/ltr/toGFF.py
+script=$MGESCAN_SRC/mgescan/ltr/toGFF.py
 
 input_file=$1
 input_file_name=$2
