@@ -5,14 +5,14 @@
 		Step 2 of 4: RepeatMasker screens DNA sequences for interspersed repeats and low complexity DNA sequences
 	</description>
 	<command interpreter="bash">
-		ltr-preprocessing.sh repeatmasker $input '$input.name' $output
+		ltr-preprocessing.sh repeatmasker $input '$input.name' $genome_sequences $repeatmasker_results
 	</command>
 	<inputs>
 		<param format="txt" name="input" type="data" label="genome sequence"/>
 	</inputs>
 	<outputs>
-		<data format="tabular" name="genome sequences" />
-		<data format="tabular" name="repeatmasker results" />
+		<data format="tabular" name="genome_sequences" />
+		<data format="tabular" name="repeatmasker_results" />
 	</outputs>
 	<help>
 Running the program

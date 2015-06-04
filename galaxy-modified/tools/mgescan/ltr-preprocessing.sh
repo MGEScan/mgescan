@@ -21,6 +21,7 @@ scaffold_YN=$5
 if [ "$program_name" == "repeatmasker" ]
 then
 	repeatmasker_YN="Yes"
+	repeatmasker_output=$5
 else
 	repeatmasker_YN="No"
 fi
@@ -65,7 +66,7 @@ if [ "$repeatmasker_YN" == "Yes" ]
 then
 	# chr2L.fa.cat.gz  chr2L.fa.masked  chr2L.fa.out  chr2L.fa.out.pos  chr2L.fa.tbl
 	FILES=`ls $output_dir/repeatmasker`
-	tar czf $output_file --directory=$output_dir/repeatmasker/ $FILES
+	tar czf $repeatmasker_output --directory=$output_dir/repeatmasker/ $FILES
 	#rm -rf ${temp_file}.tar.gz
 fi
 
