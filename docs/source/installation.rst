@@ -112,6 +112,7 @@ RepeatMasker
    wget http://www.repeatmasker.org/RepeatMasker-open-4-0-5.tar.gz
    tar xvzf RepeatMasker-open-4-0-5.tar.gz
    mv RepeatMasker/* $RM_HOME
+   ln -s $RM_HOME/RepeatMasker $MGESCAN_VENV/bin/
 
 Virtual Environments (virtualenv)
 *******************************************************************************
