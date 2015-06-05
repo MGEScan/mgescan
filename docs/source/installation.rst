@@ -55,7 +55,7 @@ Create a MGESCan start file ``.mgescanrc``
    export MGESCAN_SRC=\$MGESCAN_HOME/src
    export GALAXY_HOME=\$MGESCAN_HOME/galaxy
    export TRF_HOME=\$MGESCAN_HOME/trf
-   export RM_HOME=$MGESCAN_HOME/RepeatMasker
+   export RM_HOME=\$MGESCAN_HOME/RepeatMasker
    export MGESCAN_VENV=\$MGESCAN_HOME/virtualenv/mgescan
    EOF
 
