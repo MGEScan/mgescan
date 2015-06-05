@@ -41,6 +41,7 @@ change it if you prefer other location to install MGEScan.
   export MGESCAN_SRC=$MGESCAN_HOME/src
   export GALAXY_HOME=$MGESCAN_HOME/galaxy
   export TRF_HOME=$MGESCAN_HOME/trf
+  export RM_HOME=$MGESCAN_HOME/RepeatMasker
   export MGESCAN_VENV=$MGESCAN_HOME/virtualenv/mgescan
 
 .. tip:: MGEScan on Galaxy uses version 3 in the naming like mgescan3.
@@ -54,6 +55,7 @@ Create a MGESCan start file ``.mgescanrc``
    export MGESCAN_SRC=\$MGESCAN_HOME/src
    export GALAXY_HOME=\$MGESCAN_HOME/galaxy
    export TRF_HOME=\$MGESCAN_HOME/trf
+   export RM_HOME=$MGESCAN_HOME/RepeatMasker
    export MGESCAN_VENV=\$MGESCAN_HOME/virtualenv/mgescan
    EOF
 
@@ -100,6 +102,15 @@ If you have ``HMMER`` and ``EMBOSS`` on your system, you can skip this step.
 ::
 
         sudo apt-get install hmmer emboss -y
+        
+RepeatMasker
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+::
+
+   wget http://www.repeatmasker.org/RepeatMasker-open-4-0-5.tar.gz
+   tar xvzf RepeatMasker-open-4-0-5.tar.gz
+   mv RepeatMasker/* $RM_HOME
 
 Virtual Environments (virtualenv)
 *******************************************************************************
