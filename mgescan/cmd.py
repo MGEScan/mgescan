@@ -77,7 +77,7 @@ class MGEScan(object):
         self.sw_rm = "No" # or Yes
         self.scaffold = "" # or directory
 
-    def split_files(self):
+    def wrapper_split_files(self):
         split = Split()
         split.set_input(self.genome_dir)
         new_genome_dir = split.set_output(self.genome_dir + "/divided-genome")
@@ -86,7 +86,7 @@ class MGEScan(object):
 
     def run(self):
         # split a large file
-        self.split_files()
+        self.wrapper_split_files()
 
         # ltr
         if not self.nonltr_enabled:
