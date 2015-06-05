@@ -103,6 +103,35 @@ If you have ``HMMER`` and ``EMBOSS`` on your system, you can skip this step.
 
         sudo apt-get install hmmer emboss -y
         
+
+Virtual Environments (virtualenv)
+*******************************************************************************
+
+It is recommended to have an isolated environment for MGEScan Python
+libraries. virtualenv creates a separated space for MGEScan, and issues from
+dependencies and versions of Python libraries can be avoided. Note that you
+have to be in the virtualenv of MGEScan before to run any MGEScan command line
+tools. The following commands create a virtualenv for MGEScan and enable it on
+your account.
+
+::
+
+  mkdir -p $MGESCAN_VENV
+  virtualenv $MGESCAN_VENV
+  source $MGESCAN_VENV/bin/activate
+  echo "source $MGESCAN_VENV/bin/activate" >> ~/.bash_profile
+
+
+Tandem Repeats Finder (trf)
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+``trf`` is a single binary executable file.
+
+::
+ 
+   mkdir -p $TRF_HOME
+   wget http://tandem.bu.edu/trf/downloads/trf407b.linux64 -P $TRF_HOME
+   
 RepeatMasker (Optional)
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -133,35 +162,7 @@ Outputs like so:
    installation will be ready to use.
 
     <PRESS ENTER TO CONTINUE>
-
-Virtual Environments (virtualenv)
-*******************************************************************************
-
-It is recommended to have an isolated environment for MGEScan Python
-libraries. virtualenv creates a separated space for MGEScan, and issues from
-dependencies and versions of Python libraries can be avoided. Note that you
-have to be in the virtualenv of MGEScan before to run any MGEScan command line
-tools. The following commands create a virtualenv for MGEScan and enable it on
-your account.
-
-::
-
-  mkdir -p $MGESCAN_VENV
-  virtualenv $MGESCAN_VENV
-  source $MGESCAN_VENV/bin/activate
-  echo "source $MGESCAN_VENV/bin/activate" >> ~/.bash_profile
-
-
-Tandem Repeats Finder (trf)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-``trf`` is a single binary executable file.
-
-::
- 
-   mkdir -p $TRF_HOME
-   wget http://tandem.bu.edu/trf/downloads/trf407b.linux64 -P $TRF_HOME
-
+    
 MGEScan Installation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
