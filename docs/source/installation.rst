@@ -120,6 +120,8 @@ RepeatMasker also requires configuration.
 
    $RM_HOME/configure
 
+Outputs like so:
+
 ::
 
    RepeatMasker Configuration Program
