@@ -143,27 +143,6 @@ RepeatMasker (Optional)
    mv RepeatMasker/* $RM_HOME
    ln -s $RM_HOME/RepeatMasker $MGESCAN_VENV/bin/
   
-RepeatMasker also requires configuration.
-
-::
-
-   cd $RM_HOME
-   $RM_HOME/configure
-
-Outputs like so:
-
-::
-
-   RepeatMasker Configuration Program
-
-   This program assists with the configuration of the
-   RepeatMasker program.  The next set of screens will ask
-   you to enter information pertaining to your system
-   configuration.  At the end of the program your RepeatMasker
-   installation will be ready to use.
-
-    <PRESS ENTER TO CONTINUE>
-    
 MGEScan Installation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -217,6 +196,31 @@ the ``bin`` directory.
 
    ln -s $TRF_HOME/trf407b.linux64 $MGESCAN_VENV/bin/trf
    chmod 700 $MGESCAN_VENV/bin/trf
+
+RepeatMasker
+*******************************************************************************
+
+RepeatMasker also requires configuration.
+
+::
+
+   cd $RM_HOME
+   $RM_HOME/configure
+
+Outputs like so:
+
+::
+
+   RepeatMasker Configuration Program
+
+   This program assists with the configuration of the
+   RepeatMasker program.  The next set of screens will ask
+   you to enter information pertaining to your system
+   configuration.  At the end of the program your RepeatMasker
+   installation will be ready to use.
+
+    <PRESS ENTER TO CONTINUE>
+
 
 Galaxy Admin Users
 *******************************************************************************
