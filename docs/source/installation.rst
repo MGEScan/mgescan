@@ -147,6 +147,7 @@ RepeatMasker also requires configuration.
 
 ::
 
+   cd $RM_HOME
    $RM_HOME/configure
 
 Outputs like so:
