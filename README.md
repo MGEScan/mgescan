@@ -71,7 +71,15 @@ mv trf407b.linux64 ~/virtualenv/mgescan/bin/trf
 chmod 700 ~/virtualenv/mgescan/bin/trf
 ```
 
+#### RepeatMasker
 
+```sh
+cd ~
+wget http://www.repeatmasker.org/RepeatMasker-open-4-0-5.tar.gz
+tar xvzf RepeatMasker-open-4-0-5.tar.gz
+```
+
+.. note:: Find the latest at: http://www.repeatmasker.org/RMDownload.html
 
 Installation
 -------------------------------------------------------------------------------
