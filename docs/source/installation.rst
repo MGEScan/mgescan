@@ -103,7 +103,7 @@ If you have ``HMMER`` and ``EMBOSS`` on your system, you can skip this step.
 
         sudo apt-get install hmmer emboss -y
         
-RepeatMasker
+RepeatMasker (Optional)
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 ::
@@ -113,6 +113,23 @@ RepeatMasker
    tar xvzf RepeatMasker-open-4-0-5.tar.gz
    mv RepeatMasker/* $RM_HOME
    ln -s $RM_HOME/RepeatMasker $MGESCAN_VENV/bin/
+  
+RepeatMasker also requires configuration.
+
+::
+   $RM_HOME/configure
+
+::
+
+   RepeatMasker Configuration Program
+
+   This program assists with the configuration of the
+   RepeatMasker program.  The next set of screens will ask
+   you to enter information pertaining to your system
+   configuration.  At the end of the program your RepeatMasker
+   installation will be ready to use.
+
+    <PRESS ENTER TO CONTINUE>
 
 Virtual Environments (virtualenv)
 *******************************************************************************
