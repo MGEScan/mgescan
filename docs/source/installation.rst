@@ -117,6 +117,7 @@ RepeatMasker (Optional)
 RepeatMasker also requires configuration.
 
 ::
+
    $RM_HOME/configure
 
 ::
