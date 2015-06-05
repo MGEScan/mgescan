@@ -320,6 +320,7 @@ sub select_putative_family{
 	close(IN);
 	close(OUT);
 	system("rm -rf ".$_[0]);
+	# "/data/ltr/ltr.out.temp"
 }
 
 

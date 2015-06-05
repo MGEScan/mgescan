@@ -65,10 +65,13 @@ for cladeDir in glob.glob( os.path.join(sys.argv[1], '*') ):
             seqid = "chr" + seqid
         searchObj=re.search(r'([^.]*).([^.]*).([^.]*).([^.]*).([^.]*).fa(.*)',
                 header, re.M|re.I)
-        if len(searchObj.groups()) > 5:
-            seqid = searchObj.group(5);
-            if searchObj.group(4) == "chromosome":
-                seqid = "chr" + seqid
+        try:
+            if len(searchObj.groups()) > 5:
+                seqid = searchObj.group(5);
+                if searchObj.group(4) == "chromosome":
+                    seqid = "chr" + seqid
+        except:
+            pass
         start = int(header[header.rfind("_")+1:])
         des = [seqid, "MGEScan_nonLTR", "mobile_genetic_element", str(start), str(start+len(seq)), ".", ".", ".", "ID=" + header] 
         print >>outfile, "\t".join(des)

@@ -37,10 +37,13 @@ for aline in infile:
             seqid = "chr" + seqid
         searchObj=re.search(r'([^.]*).([^.]*).([^.]*).([^.]*).([^.]*).fa(.*)',
                 words[0], re.M|re.I)
-        if len(searchObj.groups()) > 5:
-            seqid = searchObj.group(5);
-            if searchObj.group(4) == "chromosome":
-                seqid = "chr" + seqid
+        try:
+            if len(searchObj.groups()) > 5:
+                seqid = searchObj.group(5);
+                if searchObj.group(4) == "chromosome":
+                    seqid = "chr" + seqid
+        except:
+            pass
         # id is cluster + seqid
         id = cluster + "_" + words[0]
         des = [seqid, "MGEScan_LTR", "mobile_genetic_element", words[1], words[4], ".", words[5], ".", "ID=" + id + ";name=cluster_"+cluster] 
