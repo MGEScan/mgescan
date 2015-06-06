@@ -3,7 +3,6 @@ use strict;
 use Getopt::Long;
 use Cwd 'abs_path';
 use File::Basename;
-use File::Which;
 
 ###################################################
 # path configuration
@@ -14,7 +13,7 @@ my $value_file = $program_dir."/value.conf";
 my $tool_matrix = $program_dir."/matrix/EDNAFULL";
 my $tool_pfam = $program_dir."/pfam/";
 my $tool_ltr = $program_dir."/MER/ltr";
-my $tool_trf = which 'trf';
+my $tool_trf = `which trf`;
 #my $tool_emboss;
 #my $tool_hmmer = "/nfs/nfs4/home/wazimoha/softwares/hmmer-3.1b1/src/";
 my $main_dir;           # directory of output data            
