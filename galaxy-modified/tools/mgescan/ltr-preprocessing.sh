@@ -14,7 +14,8 @@ script=$MGESCAN_SRC/mgescan/ltr/pre_process.pl
 
 program_name=$1
 input_file=$2
-input_file_name=$3
+input_file_name=${3// /_}
+#input_file_name=`basename $input_file`
 output_file=$4
 scaffold_YN=$5
 
