@@ -5,7 +5,11 @@
 		Step 3 of 4: Finding LTR is de novo identification of LTR retroelements
 	</description>
 	<command interpreter="bash">
-		find_ltr.sh $input '$input.name' $output $min_dist $max_dist $min_len_ltr $max_len_ltr $ltr_sim_condition $cluster_sim_condition $len_condition $nmpi
+		#if $rm_yn.rm_select=="no_rm"
+			find_ltr.sh $input '$input.name' $output $min_dist $max_dist $min_len_ltr $max_len_ltr $ltr_sim_condition $cluster_sim_condition $len_condition $nmpi
+		#else
+			find_ltr.sh $input '$input.name' $output $min_dist $max_dist $min_len_ltr $max_len_ltr $ltr_sim_condition $cluster_sim_condition $len_condition $nmpi
+		#end if
 	</command>
 	<inputs>
 		<param format="txt" name="input" type="data" label="genome sequences"/>
