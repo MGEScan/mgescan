@@ -89,7 +89,8 @@ if (length($rm_dir)>0){
     call_mask_repeat($genome_dir, $rm_dir, $ltr_genome_dir);
 }else{
     system("mkdir ".$ltr_genome_dir);
-    system("ln -s ".$genome_dir."* ".$ltr_genome_dir);
+    system("mv ".$genome_dir."* ".$ltr_genome_dir);
+    system("for file in `ls ".$ltr_genome_dir."`; do ln -s ".$ltr_genome_dir."/\$file ".$genome_dir."; done");
 }
 
 
