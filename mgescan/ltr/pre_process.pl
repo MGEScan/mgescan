@@ -15,7 +15,8 @@ my $data_dir;
 my ($scaffold_file, $genome_dir, $tool_rm, $rm_dir, $data_dir);
 my ($sw_rm, $scaffold);
 get_path($conf_file, \$scaffold_file, \$tool_rm, \$rm_dir);
-
+$tool_rm=`which RepeatMasker`;
+chomp $tool_rm;
 GetOptions(
            'data=s' => \$data_dir,
            'genome=s' => \$genome_dir,
@@ -26,8 +27,10 @@ GetOptions(
 ###########################################
 ### get values in path.conf from parameters
 if ($sw_rm eq "Yes"){
-	$tool_rm = "/u/lee212/retrotminer/MGEScan_LTR/RepeatMasker/RepeatMasker";
-	$rm_dir = $data_dir."/repeatmasker/";
+	# If RepeatMasker exists
+	if (length($tool_rm)!=0) {
+		$rm_dir = $data_dir."/repeatmasker/";
+	}
 }
 if (length($scaffold) > 0){
 	$scaffold_file = $scaffold;
