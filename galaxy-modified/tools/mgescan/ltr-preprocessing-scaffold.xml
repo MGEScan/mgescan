@@ -7,7 +7,7 @@
 		ltr-preprocessing.sh scaffold $input '$input.name' $output $scaffold
 	</command>
 	<inputs>
-		<param format="txt" name="input" type="data" label="From"/>
+		<param format="fasta" name="input" type="data" label="From"/>
 		<param name="scaffold" type="select" label="scaffolds exist">
 			<option selected="selected" value="No">No</option>
 			<option value="Yes">Yes</option>
