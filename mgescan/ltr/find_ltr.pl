@@ -199,7 +199,7 @@ sub call_find_ltr_for_each_chr{   #$genome_dir, $main_dir, $ltr_dir, $ltr_data_d
 		foreach my $name (sort readdir(DIRHANDLE)) {
 
 			if ($name !~ /^\./){  
-				print $name."\n";
+				#print $name."\n";
 
 				my $genome_path = $_[0].$name;
 				if (! -e $genome_path){
