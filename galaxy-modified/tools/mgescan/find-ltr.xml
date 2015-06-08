@@ -10,7 +10,7 @@
 	<inputs>
 		<param format="txt" name="input" type="data" label="genome sequences"/>
 		<conditional name="rm_yn">
-			<param name="rm_select" type="select" label="Target source">
+			<param name="rm_select" type="select" label="Results from RepeatMasker">
 				<option value="no_rm">No RepeatMasker</option>
 				<option value="yes_rm">RepeatMasker</option>
 			</param>
