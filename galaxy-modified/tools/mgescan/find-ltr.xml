@@ -9,7 +9,15 @@
 	</command>
 	<inputs>
 		<param format="txt" name="input" type="data" label="genome sequences"/>
-		<param format="txt" name="input2" type="data" label="repeatmasker results"/>
+		<conditional name="rm_yn">
+			<param name="rm_select" type="select" label="Target source">
+				<option value="no_rm">No RepeatMasker</option>
+				<option value="yes_rm">RepeatMasker</option>
+			</param>
+			<when value="yes_rm">
+				<param format="txt" name="input2" type="data" label="repeatmasker results"/>
+			</when>
+		</conditional> 
 		<!-- value.conf -->
 		<param name="min_dist" type="text" value="2000" label="minimum distance(bp) between LTRs" />
 		<param name="max_dist" type="text" value="20000" label="maximum distance(bp) between LTRs" />
