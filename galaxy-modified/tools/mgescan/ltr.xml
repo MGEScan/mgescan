@@ -25,7 +25,7 @@
 		<param name="genome" type="text" label="directory where input genome data exists" />
 		<param name="data" type="text" label="directory of the output" />
 		-->
-		<param format="txt" name="input" type="data" label="From"/>
+		<param format="fasta" name="input" type="data" label="From"/>
 		<!--param name="hmmver" type="select" label="Hmmsearch version">
 			<option selected="selected" value="3">3</option>
 			<option value="2">2</option>
