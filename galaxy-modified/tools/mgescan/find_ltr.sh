@@ -20,6 +20,7 @@ ltr_sim_condition=$8
 cluster_sim_condition=$9
 len_condition=${10}
 nmpi=${11}
+rm_input_file=${12}
 hmmsearch_version=3 # version 3 fixed
 if [ "$nmpi" -gt 0 ]
 then

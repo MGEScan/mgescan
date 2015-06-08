@@ -6,9 +6,9 @@
 	</description>
 	<command interpreter="bash">
 		#if $rm_yn.rm_select=="no_rm"
-			find_ltr.sh $input '$input.name' $output $min_dist $max_dist $min_len_ltr $max_len_ltr $ltr_sim_condition $cluster_sim_condition $len_condition $nmpi
+			find_ltr.sh $input '$input.name' $output $min_dist $max_dist $min_len_ltr $max_len_ltr $ltr_sim_condition $cluster_sim_condition $len_condition $mpi_yn.nmpi $rm_yn.input2
 		#else
-			find_ltr.sh $input '$input.name' $output $min_dist $max_dist $min_len_ltr $max_len_ltr $ltr_sim_condition $cluster_sim_condition $len_condition $nmpi
+			find_ltr.sh $input '$input.name' $output $min_dist $max_dist $min_len_ltr $max_len_ltr $ltr_sim_condition $cluster_sim_condition $len_condition $mpi_yn.nmpi $rm_yn.input2
 		#end if
 	</command>
 	<inputs>
@@ -21,6 +21,9 @@
 			<when value="yes_rm">
 				<param format="txt" name="input2" type="data" label="repeatmasker results"/>
 			</when>
+			<when value="no_rm">
+				<param name="input2" type="hidden"/>
+			</when>
 		</conditional> 
 		<!-- value.conf -->
 		<param name="min_dist" type="text" value="2000" label="minimum distance(bp) between LTRs" />
@@ -30,7 +33,18 @@
 		<param name="ltr_sim_condition" type="text" value="70" label="minimum similarity(%) for LTRs in an element"/>
 		<param name="cluster_sim_condition" type="text" value="70" label="inimum similarity(%) for LTRs in a cluster"/>
 		<param name="len_condition" type="text" value="70" label="minimum length(bp) for LTRs aligned in local alignment"/>
-		<param name="nmpi" format="txt" type="text" value="0" label="Number of MPI Processes"/>
+		<conditional name="mpi_yn">
+			<param name="mpi_select" type="select" label="Enable MPI">
+				<option value="no_mpi">No</option>
+				<option value="yes_mpi">Yes</option>
+			</param>
+			<when value="yes_mpi">
+				<param name="nmpi" format="txt" type="text" value="1" label="Number of MPI Processes"/>
+			</when>
+			<when value="no_mpi">
+				<param name="nmpi" type="hidden" value="0"/>
+			</when>
+		</conditional>
 	</inputs>
 	<outputs>
 		<data format="txt" name="output" />
