@@ -61,4 +61,7 @@ $script -genome=$input_dir/ -data=$output_dir/ -hmmerv=$hmmsearch_version -min_d
 FILES=`ls $output_dir`
 tar czf $output_file --directory=$output_dir $FILES
 
-rm -rf $work_dir/$t_dir 2> /dev/null
+if [ -d $workdir/$t_dir ]
+then
+	rm -rf $work_dir/$t_dir 2> /dev/null
+fi
