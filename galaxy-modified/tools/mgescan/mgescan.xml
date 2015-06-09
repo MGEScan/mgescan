@@ -5,7 +5,7 @@
 		MGEScan
 	</description>
 	<command interpreter="bash">
-		mgescan.sh $input '$input.name' 3 $output $program $clade $qvalue_en $qvalue_rt $ltr_gff3 $nonltr_gff3 $both_gff3 $nmpi
+		mgescan.sh $input '$input.name' 3 $output $program $clade $qvalue_en $qvalue_rt $ltr_gff3 $nonltr_gff3 $both_gff3 $mpi_yn.nmpi
 		<!-- mgescan.sh $input $input.name $hmmver $output $program $clade $qvalue_en $qvalue_rt $ltr_gff3 $nonltr_gff3 -->
 	</command>
 	<inputs>
@@ -19,8 +19,18 @@
 			<option value="L">LTR</option>
 			<option value="N">nonLTR</option>
 		</param>
-		<param name="nmpi" format="txt" type="text" label="Number of MPI Processes">
-		</param>
+		<conditional name="mpi_yn">
+			<param name="mpi_select" type="select" label="Enable MPI">
+				<option value="no_mpi">No</option>
+				<option value="yes_mpi">Yes</option>
+			</param>
+			<when value="yes_mpi">
+				<param name="nmpi" format="txt" type="text" value="1" label="Number of MPI Processes"/>
+			</when>
+			<when value="no_mpi">
+				<param name="nmpi" type="hidden" value="0"/>
+			</when>
+		</conditional>
 	</inputs>
 	<outputs>
 		<data format="ltr.out" name="output">
