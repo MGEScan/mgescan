@@ -54,11 +54,14 @@
 	  <tool file="mgescan/find-ltr.xml" />
 	  <tool file="mgescan/ltr-gff.xml" />
   </section>
-  <!--section id="mgescan-tools" name="Tools">
+  <section id="mgescan-tools" name="Tools">
+	  <tool file="mgescan/symWrapper.xml" />
+	  <!--
 	  <tool file="mgescan/trf.xml" />
 	  <tool file="mgescan/emboss-matcher.xml" />
 	  <tool file="mgescan/emboss-transeq.xml" />
-  </section-->
+	  -->
+  </section>
   <label id="basic_tools" text="Galaxy Tools" version="" />
   <!--section id="send" name="Send Data">
     <tool file="data_destination/epigraph.xml" />
