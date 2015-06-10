@@ -75,7 +75,22 @@ mkdir -p $output_dir
 
 #make a copy of input
 #/bin/cp $input_file $input_dir/$input_file_name
-/bin/ln -s $input_file $input_dir/$input_file_name
+
+# Check tar.gz
+tar tf $input_file &> /dev/null
+ISGZ=$?
+if [ 0 -eq $ISGZ ]
+then
+	# It seems pre_process.pl creates ./data/genome directory and makes a copy of a genome file.
+	# Due to this reason, extracts compressed inputs to output directory.
+	tar xzf $input_file -C $input_dir 2> /dev/null
+	if [ $? -ne 0 ]
+	then
+		tar xf $input_file -C $input_dir 2> /dev/null
+	fi
+else
+	/bin/ln -s $input_file $input_dir/$input_file_name
+fi
 
 VERSION2=`hmmsearch -h|grep "HMMER 2" 2> /dev/null`
 VERSION3=`hmmsearch -h|grep "HMMER 3" 2> /dev/null`
