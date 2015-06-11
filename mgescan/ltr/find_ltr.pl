@@ -3,6 +3,7 @@ use strict;
 use Getopt::Long;
 use Cwd 'abs_path';
 use File::Basename;
+use Sys::Hostname;
 
 ###################################################
 # path configuration
@@ -21,7 +22,7 @@ my $main_dir;           # directory of output data
 my $main_genome_dir;    # directory of input genomes
 my $hmmerv;		# version of hmmer
 my $nmpi;
-
+my $host = hostname;
 
 ###################################################
 # parameter configuration
@@ -193,6 +194,10 @@ sub call_find_ltr_for_each_chr{   #$genome_dir, $main_dir, $ltr_dir, $ltr_data_d
 		my $prg_name = "ltr";
 		my $command = "mpirun -n ".$nmpi." ".$mpi_option." ".$mpi_program." --prg ".$prg_name." --genome ".$_[0]." --data ".$_[3]." --hmmerv ".$hmmerv;
 		# mpirun -n 1 -mca btl ^openib /nfs/nfs4/home/lee212/github/mgescan/mgescan/ltr/../mpi_mgescan --prg ltr --genome /scratch/lee212/test-results/mgescan2/ltr/dmelanogaster/genome/ --data /scratch/lee212/test-results/mgescan2/ltr/dmelanogaster/ltr/ltr/ --hmmerv 3
+		#
+		if ($host eq "silo.soic.indiana.edu") {
+			$command = "module load openmpi-x64_64;" . $command;
+		}
 		system($command);		
 	} else {
 		opendir(DIRHANDLE, $_[0]) || die ("Cannot open directory ".$_[0]);

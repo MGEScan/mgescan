@@ -3,6 +3,7 @@ use strict;
 use Getopt::Long;
 use Cwd 'abs_path';
 use File::Basename;
+use Sys::Hostname;
 
 my $program_dir = dirname(abs_path($0))."/";
 
@@ -19,6 +20,8 @@ my $phmm_dir;
 my $genome_dir;
 my $hmmerv;
 my $nmpi;
+my $host = hostname;
+
 
 print "\n\n";
 GetOptions(
@@ -81,7 +84,9 @@ if ($nmpi) {
 	my $mpi_program = $program_dir."/../mpi_mgescan";
 	my $mpi_option = "-mca btl ^openib"; # ignore finding infiniteband
 	my $command = "mpirun -n ".$nmpi." ".$mpi_option." ".$mpi_program." --prg nonltr --genome ".$plus_dna_dir." --data ".$plus_out_dir." --hmmerv ".$hmmerv;
-
+	if ($host eq "silo.soic.indiana.edu") {
+		$command = "module load openmpi-x64_64;" . $command;
+	}
 	system($command);
 } else {
 	opendir(DIRHANDLE, $plus_dna_dir) || die ("Cannot open directory ".$plus_dna_dir);
@@ -117,7 +122,9 @@ if ($nmpi) {
 	my $mpi_program = $program_dir."/../mpi_mgescan";
 	my $mpi_option = "-mca btl ^openib"; # ignore finding infiniteband
 	my $command = "mpirun -n ".$nmpi." ".$mpi_option." ".$mpi_program." --prg nonltr --genome ".$minus_dna_dir." --data ".$minus_out_dir." --hmmerv ".$hmmerv;
-
+	if ($host eq "silo.soic.indiana.edu") {
+		$command = "module load openmpi-x64_64;" . $command;
+	}
 	system($command);
 } else {
 
