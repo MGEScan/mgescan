@@ -39,7 +39,10 @@ then
 	cluster_sim_condition=${19}
 	len_condition=${20}
 	repeatmasker=${21}
-elif [ "$program" == "B" ]
+
+
+#elif [ "$program" == "B" ]
+if [ $# -eq 12 ]
 then
 	nmpi=${12}
 	if [ ! -z $nmpi ] && [ $nmpi -ge 1 ]
