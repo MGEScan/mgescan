@@ -11,6 +11,11 @@ user_dir=$MGESCAN_HOME
 #script=$user_dir/mgescan/wazim/MGEScan1.1/run_MGEScan.pl
 #script=$user_dir/mgescan/wazim/MGEScan1.3.1/run_MGEScan2.pl
 source $user_dir/virtualenv/mgescan/bin/activate >> /dev/null
+if [ "$HOSTNAME" == "silo.soic.indiana.edu" ]
+then
+	module load openmpi-x86_64
+fi
+
 script_program=`which python`
 script=$user_dir/mgescan/mgescan/cmd.py
 input_file=$1
@@ -39,7 +44,7 @@ then
 	cluster_sim_condition=${19}
 	len_condition=${20}
 	repeatmasker=${21}
-
+fi
 
 #elif [ "$program" == "B" ]
 if [ $# -eq 12 ]
