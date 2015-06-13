@@ -7,6 +7,7 @@ class MGEScanInstall(bdist_egg):
         os.system("cd mgescan/ltr/MER; make clean; make")
         os.system("cd mgescan/nonltr/; make clean; make translate")
         os.system("cd mgescan/nonltr/hmm;make clean; make")
+        os.system("cd mgescan;mpicc mpi_mgescan.c -o mpi_mgescan")
         bdist_egg.run(self)
 
 class MGEScanInstallOnly(bdist_egg):
