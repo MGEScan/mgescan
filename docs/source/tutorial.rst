@@ -27,7 +27,7 @@ Galaxy/MGEScan Server
 
 Open the Galaxy/MGEScan web server at your web browser:
 
-http://silo.cs.indiana.edu:38080
+* http://silo.cs.indiana.edu:38080
 
 .. image:: images/mgescan-main.png
 
@@ -44,7 +44,7 @@ Register
 
 First-time user need to register to the Galaxy system.
 
-http://silo.cs.indiana.edu:38080/user/create
+* http://silo.cs.indiana.edu:38080/user/create
 
 .. image:: images/galaxy-register.png
 
@@ -54,12 +54,37 @@ Login
 If you already have an account, you can use your user id and password at
 the *User > Login* page.
 
-http://silo.cs.indiana.edu:38080/user/login
+* http://silo.cs.indiana.edu:38080/user/login
 
 .. image:: images/galaxy-login.png
 
 Shared Data
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can find same datasets at ``Shared Data`` menu on top. Click "Shared Data"
+> "Data Libraries" and find "Sample datasets for MGEScan".
+
+* http://silo.cs.indiana.edu:38080/library/index
+
+Drosophila melanogaster
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In the Data Library, enable the checkbox for ``d.melanogaster`` and click
+"Select datasets for import into selected histories" from the down arrow at
+the end.
+
+.. image:: images/galaxy-importing-from-dataset.png
+
+You will find 8 fasta files are available. We need to import all of them, make
+them all checked and click "Import library datasets" in the middle of the page.
+
+.. image:: images/galaxy-importing-from-dataset2.png
+
+Once you imported the D. melanogaster datasets into your history, you are ready
+to run MGEScan tools on Galaxy. Go to the main page, and checkout imported
+datasets (8 files) on the right frame of the page.
+
+.. note:: You can select where datasets to be imported.
 
 .. comment::
 
@@ -87,23 +112,61 @@ Shared Data
 
         .. image:: images/rtm-upload-ucsc.png
 
-Program Execution
+MGEScan for LTR and nonLTR
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In our new version of MGEScan, MGEScan-LTR and MGEScan-nonLTR can be executed
-concurrently. Open the page at **"MGEScan > MGEScan"**, a simple command is
-available for LTR and nonLTR executions. In a separated menu such as **LTR** or
-**nonLTR**, you can choose other options to run them separately.
+concurrently. Open the page at **"MGEScan > MGEScan"**, a simple tool is
+available for LTR and nonLTR executions with MPI option to enable parallel
+processing. 
+
+.. note:: Find **LTR** or **nonLTR** page if you'd like to choose other options
+          to run MGEScan tools in detail.
+
+Create a single link to multiple inputs
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In this example, we have 8 fasta files as parts of d. melanogaster sequences.
+To run them all at the same time, we need to create a single link to the files
+prior to running MGEScan tool on Galaxy.
+
+FInd "Tools > Create a symlink to multiple datasets" on the left frame.
+
+We will add 8 fasta files each by clicking "Add new Dataset" from "8:
+Drosophila_melanogaster.BDGP6.dna.chromosome.dmel_mitochondrion_genome.fa" to
+"1: Drosophila_melanogaster.BDGP6.dna.chromosome.2L.fa"
+
+.. image:: images/galaxy-create-a-symlink.png
+
+Make sure you added all of the files without duplication. The added order is
+not important though. File(s) will be placed in a same directory without
+order.
 
 MGEScan
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-MGEScan runs LTR and nonLTR both with a selected input genome sequences.
-Default value settings and configurations are used.
+MGEScan runs both LTR and nonLTR with a selected input genome sequence.
+Find "MGEScan > MGEScan" tool on the left frame and confirm that the symlink
+dataset we created in the previous step is loaded in "From" select form.
 
-.. image:: images/rtm-mgescan.png
+Enable MPI
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+To accelerate processing time, select "Yes" at "Enable MPI" select form and
+specify **4** at "Number of MPI Processes".
+
+Our options are:
+
+* From: Create a symlink to multiple datasets on data 2 and data 8, and others
+* MGEScan: Both
+* Enable MPI: Yes
+* Number of MPI Processes: 4
+
+And click "Execute".
 
 .. comment::
+
+   .. image:: images/rtm-mgescan.png
 
         LTR
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
