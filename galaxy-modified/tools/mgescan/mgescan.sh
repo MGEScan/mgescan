@@ -14,6 +14,7 @@ source $user_dir/virtualenv/mgescan/bin/activate >> /dev/null
 if [ "$HOSTNAME" == "silo.soic.indiana.edu" ]
 then
 	module load openmpi-x86_64
+	echo module load openmpi-x86_64 loaded.
 fi
 
 script_program=`which python`

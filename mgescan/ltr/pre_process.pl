@@ -15,7 +15,7 @@ my $data_dir;
 my ($scaffold_file, $genome_dir, $tool_rm, $rm_dir, $data_dir);
 my ($sw_rm, $scaffold);
 get_path($conf_file, \$scaffold_file, \$tool_rm, \$rm_dir);
-$tool_rm=`which RepeatMasker`;
+$tool_rm=`which RepeatMasker 2> /dev/null`;
 chomp $tool_rm;
 GetOptions(
            'data=s' => \$data_dir,
