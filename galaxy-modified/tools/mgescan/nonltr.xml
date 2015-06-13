@@ -13,7 +13,7 @@
 	-->
 	<command interpreter="bash">
 		<!--	mgescan.sh $input $input.name $hmmver None N $clade $qvalue_en $qvalue_rt None $nonltr_gff3 -->
-			mgescan.sh $input $input.name 3 None N $clade $qvalue_en $qvalue_rt None $nonltr_gff3
+			mgescan.sh $input '$input.name' 3 None N $clade $qvalue_en $qvalue_rt None $nonltr_gff3
 	</command>
 	<inputs>
 		<!--
