@@ -1,9 +1,6 @@
 MGEScan on Galaxy Scientific Workflow
 ===============================================================================
 
-**Under development. Contact me if you have any questions! (hroe.lee at
-		gmail.com) **
-
 A Galaxy based system for identifying retrotransposons in genome
 
 ![mgescan workflow](https://raw.githubusercontent.com/MGEScan/mgescan/master/docs/source/images/rtm-workflow-final.png)
