@@ -1235,13 +1235,21 @@ sub find_domain{ #$file3, $file4
 	my $sign = "";
 	my $class_strand=0;
 	my $class_name="-";
+	my $fh;
+	my $tmpfile;
+	my $template;
+
+	use File::Temp qw/ tempfile tempdir /;
 
 	for (my $j=0; $j<=$#rt; $j++){
 		if ($hmmerv == 3){
+			($fh, $tmpfile) = tempfile( $template, DIR => $tool_pfam, SUFFIX => '.tbl');
 			#system("hmmconvert ".$tool_pfam.$rt[$j]." > ".$tool_pfam."c_".$rt[$j]);
-			system("hmmsearch -E 0.000001 --noali --tblout ".$tool_pfam."tbl ".$tool_pfam."".$rt[$j]."3 ".$_[1]."> /dev/null");
-			my $temp_tool = "cat ".$tool_pfam."tbl";
+			system("hmmsearch -E 0.000001 --noali --tblout ".$tmpfile." ".$tool_pfam."".$rt[$j]."3 ".$_[1]."> /dev/null");
+			my $temp_tool = "cat ".$tmpfile;
 			my $str = `$temp_tool`;
+			unlink($tmpfile);
+		
 			if ($str =~ /\n(\d+.*)\n/){
 				my @temp_plus = split(/\s+/, $1);
 				if ($temp_plus[4]<$evalue){
@@ -1313,13 +1321,20 @@ sub find_domain{ #$file3, $file4
 	}
 
 	if ($class > 1 || $class <0 ){
+		my $fh;
+		my $tmpfile;
+		my $template;
+
+		use File::Temp qw/ tempfile tempdir /;
 
 		for (my $j=0; $j<=$#pf; $j++){
 			if ($hmmerv == 3){
+				($fh, $tmpfile) = tempfile( $template, DIR => $tool_pfam, SUFFIX => '.tbl');
 				#system("hmmconvert ".$tool_pfam.$pf[$j]." > ".$tool_pfam."c_".$pf[$j]);
-				system("hmmsearch -E 0.000001 --noali --tblout ".$tool_pfam."tbl ".$tool_pfam."".$pf[$j]."3 ".$_[1]."> /dev/null");
-				my $temp_tool = "cat ".$tool_pfam."tbl";
+				system("hmmsearch -E 0.000001 --noali --tblout ".$tmpfile." ".$tool_pfam."".$pf[$j]."3 ".$_[1]."> /dev/null");
+				my $temp_tool = "cat ".$tmpfile;
 				my $str = `$temp_tool`;
+				unlink($tmpfile);
 				if ($str =~ /\n(\d+.*)\n/){
 					my @temp_plus = split(/\s+/, $1);
 
