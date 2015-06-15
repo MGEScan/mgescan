@@ -135,7 +135,7 @@ void run_mgescan_cmd(char *flist, ARGS optarg, int per_node) {
 				//res= system(tmp);
 				if (strcmp(optarg.program, "ltr") == 0) {
 					// NOT IMPLEMENTED
-					sprintf(tmp, "ltr/find_ltr_pair.pl -path_genome=%s -path_ltr=%s -chr_name=%s run_hmm=%d", optarg.genome, optarg.data, flist + (NAME_MAX * i), 1);
+					sprintf(tmp, "ltr/find_ltr_pair.pl -path_genome=%s -path_ltr=%s -chr_name=%s -run_hmm=%d", optarg.genome, optarg.data, flist + (NAME_MAX * i), 1);
 				} else { 
 					sprintf(tmp, "nonltr/run_hmm.pl --dna=%s/%s --out=%s --hmmerv=%d", optarg.genome, flist + (NAME_MAX * i), optarg.data, optarg.hmmerv);
 				}
