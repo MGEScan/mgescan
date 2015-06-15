@@ -19,7 +19,7 @@ chomp $tool_trf;
 #my $tool_hmmer = "/nfs/nfs4/home/wazimoha/softwares/hmmer-3.1b1/src/";
 my $main_dir;           # directory of output data            
 my $main_genome_dir;    # directory of input genomes
-my $hmmerv;		# version of hmmer
+my $hmmerv = 3;		# version of hmmer
 my $nmpi;
 
 

@@ -19,7 +19,7 @@ Run MGEScan-LTR and MGEScan-nonLTR for D. melanogaster
 -------------------------------------------------------------------------------
 
 In this tutorial, we will try to run both MGEScan-LTR and MGEScan-nonLTR with
-D. melanogaster genome dataset. You can find the dataset at the ``Shard Data``
+D. melanogaster genome dataset. You can find the dataset at the ``Shared Data``
 menu to import into your workflow history and MGEScan tools on the left frame.
 
 Galaxy/MGEScan Server
