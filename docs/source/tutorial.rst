@@ -192,6 +192,26 @@ And click "Execute".
 
         .. image:: images/rtm-nonltr.png
 
+Computation Time
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Our test case took 3 hours for analyzing LTR and nonLTR of ``D. melanogaster``:
+
+* nonLTR: 19 minutes
+* LTR: 3 hours
+* Total: 3 hours
+
+Results
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can find the color of your tools has been changed to green like so::
+
+.. image:: images/mgescan-result.png
+
+You can download the output files to your local storage, or get access to
+Genome Browser with provided links.
+
+
 Visualization: UCSC or Ensembl Genome Browser
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
