@@ -20,12 +20,12 @@ Run MGEScan-LTR and MGEScan-nonLTR for D. melanogaster
 
 In this tutorial, we will try to run both MGEScan-LTR and MGEScan-nonLTR with
 D. melanogaster genome dataset. You can find the dataset at the ``Shared Data``
-menu to import into your workflow history and MGEScan tools on the left frame.
+menu on top and MGEScan tools on the left frame.
 
 Galaxy/MGEScan Server
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Open the Galaxy/MGEScan web server at your web browser:
+Open Galaxy/MGEScan at your web browser:
 
 * http://silo.cs.indiana.edu:38080
 
@@ -36,13 +36,13 @@ Login or Register (Optional)
 
 You can save your work if you have account on Galaxy workflow. The user-based
 history in Galaxy/MGEScan stores your data and launched tasks. The guest user
-account is able to run MGEScan without the login but results or history data
-won't be saved if the web browser session is closed.
+account is able to run the MGEScan tools without the login but results or
+history data won't be saved if the web browser session is closed.
 
 Register
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-First-time user need to register to the Galaxy system.
+Email address is required to sign up.
 
 * http://silo.cs.indiana.edu:38080/user/create
 
@@ -61,8 +61,9 @@ the *User > Login* page.
 Shared Data
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can find same datasets at ``Shared Data`` menu on top. Click "Shared Data"
-> "Data Libraries" and find "Sample datasets for MGEScan".
+You can find same datasets (e.g. D.melanogaster) at ``Shared Data`` menu on
+top. Click "Shared Data" > "Data Libraries" and find "Sample datasets for
+MGEScan".
 
 * http://silo.cs.indiana.edu:38080/library/index
 
