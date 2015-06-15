@@ -58,10 +58,10 @@ the *User > Login* page.
 
 .. image:: images/galaxy-login.png
 
-Shared Data
+Get Dataset from ``Shared Data``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can find same datasets (e.g. D.melanogaster) at ``Shared Data`` menu on
+You can find sample datasets (e.g. D.melanogaster) at ``Shared Data`` menu on
 top. Click "Shared Data" > "Data Libraries" and find "Sample datasets for
 MGEScan".
 
@@ -113,7 +113,7 @@ datasets (8 files) on the right frame of the page.
 
         .. image:: images/rtm-upload-ucsc.png
 
-MGEScan for LTR and nonLTR
+Run MGEScan for LTR and nonLTR
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In the new version of MGEScan, two programs, MGEScan-LTR and MGEScan-nonLTR,
@@ -128,10 +128,13 @@ Create a single link to multiple inputs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In the example of ``d. melanogaster``, we have 8 fasta files as its sequences.
-To run them all at the same time, we need to create a single link to the files
-prior to running MGEScan tool on Galaxy.
+To analyze them all at the same time, we create a single link to the files
+prior to running MGEScan tool on Galaxy. One archive file to many files (e.g.
+file.tar) will be used as an input of MGEScan tool on Galaxy. Note that Galaxy
+workflow does not support multiple arbitrary inputs but this symlink tool
+allows you to have dynamic inputs as a Galaxy input dataset.
 
-FInd "Tools > Create a symlink to multiple datasets" on the left frame.
+* FInd "Tools > Create a symlink to multiple datasets" on the left frame.
 
 We will add 8 fasta files each by clicking "Add new Dataset" from "8:
 Drosophila_melanogaster.BDGP6.dna.chromosome.dmel_mitochondrion_genome.fa" to
@@ -143,18 +146,23 @@ Make sure you have added all the files without duplication. The added order is
 not important though. File(s) will be placed in a same directory without
 order.
 
-MGEScan
+MGEScan Tool
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 MGEScan runs both LTR and nonLTR with a selected input genome sequence.
 Find "MGEScan > MGEScan" tool on the left frame and confirm that the symlink
-dataset we created in the previous step is loaded in "From" select form.
+dataset we created in the previous step is loaded in "From" select form like so:
+
+.. image:: images/mgescan-tool.png
 
 Enable MPI
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 To accelerate processing time, select "Yes" at "Enable MPI" select form and
-specify **4** at "Number of MPI Processes".
+specify "Number of MPI Processes". If you have a multi-core system, use up to
+the number of cores.  silo.cs.indiana.edu has 24 cores but we will use **4** in
+this tutorial to avoid being a noisy neighbor.
+
 
 Our options are:
 
