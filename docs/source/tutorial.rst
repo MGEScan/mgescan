@@ -67,7 +67,7 @@ MGEScan".
 
 * http://silo.cs.indiana.edu:38080/library/index
 
-Drosophila melanogaster
+Example: Drosophila melanogaster
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In the Data Library, enable the checkbox for ``d.melanogaster`` and click
@@ -116,10 +116,10 @@ datasets (8 files) on the right frame of the page.
 MGEScan for LTR and nonLTR
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In our new version of MGEScan, MGEScan-LTR and MGEScan-nonLTR can be executed
-concurrently. Open the page at **"MGEScan > MGEScan"**, a simple tool is
-available for LTR and nonLTR executions with MPI option to enable parallel
-processing. 
+In the new version of MGEScan, two programs, MGEScan-LTR and MGEScan-nonLTR,
+can be ran at the same time with a merged result. Open the page at **"MGEScan >
+MGEScan"**, a simple tool is available for LTR and nonLTR executions with MPI
+option for parallel processing. 
 
 .. note:: Find **LTR** or **nonLTR** page if you'd like to choose other options
           to run MGEScan tools in detail.
@@ -127,7 +127,7 @@ processing.
 Create a single link to multiple inputs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In this example, we have 8 fasta files as parts of d. melanogaster sequences.
+In the example of ``d. melanogaster``, we have 8 fasta files as its sequences.
 To run them all at the same time, we need to create a single link to the files
 prior to running MGEScan tool on Galaxy.
 
@@ -135,11 +135,11 @@ FInd "Tools > Create a symlink to multiple datasets" on the left frame.
 
 We will add 8 fasta files each by clicking "Add new Dataset" from "8:
 Drosophila_melanogaster.BDGP6.dna.chromosome.dmel_mitochondrion_genome.fa" to
-"1: Drosophila_melanogaster.BDGP6.dna.chromosome.2L.fa"
+"1: Drosophila_melanogaster.BDGP6.dna.chromosome.2L.fa" like so:
 
 .. image:: images/galaxy-create-a-symlink.png
 
-Make sure you added all of the files without duplication. The added order is
+Make sure you have added all the files without duplication. The added order is
 not important though. File(s) will be placed in a same directory without
 order.
 
