@@ -204,20 +204,25 @@ Our test case took 3 hours for analyzing LTR and nonLTR of ``D. melanogaster``:
 Results
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can find the color of your tools has been changed to green like so:
+Upon the MGEScan tools completion, the output files are accessible via Galaxy
+in `gff3` format, a plain text, or an archived (e.g. tar.gz) file.  You will
+notice that the color of your tools has been changed to green like so:
 
 .. image:: images/mgescan-result.png
 
 You can download the output files to your local storage, or get access to
 Genome Browser with provided links.
 
-
 Visualization: UCSC or Ensembl Genome Browser
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Upon completion of LTR or nonLTR, the output is generated in a gff3 format as
-well. In Galaxy, UCSC or Ensembl Genome Browser link is provided for a gff3
-file to support interactive graphical display of genome sequence data.
+Your genomic data in a Generic Feature Format Version 3 (gff3) can be displayed
+by a well known visualization tool such as UCSC or Ensembl Genome Browser on
+Galaxy with custom annotation of MGEScan for LTR and nonLTR.  Find the link
+provided for gff3 to view interactive graphical display of genome sequence
+data.
+
+.. image:: images/mgescan-genome-browser.png
 
 UCSC Genome Browser
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
