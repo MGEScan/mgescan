@@ -1,9 +1,11 @@
-Tutorial: Using MGEScan on Galaxy Workflow
+.. _ref-mgescan-tutorial:
+
+QuickStart
 ===============================================================================
 
-Galaxy workflow is a web-based system to support data analysis on the web.
 MGEScan, identifying LTR and non-LTR in genome sequences are available on the
-Galaxy workflow with additional tools.
+Galaxy scientific workflow which is a web-based workflow software to support
+data analysis with various tools.
 
 Overview
 -------------------------------------------------------------------------------
@@ -13,7 +15,8 @@ with a sample dataset, D. melanogaster genome. A public server at Indiana
 University (http://silo.cs.indiana.edu:38080) provides sample datasets and
 MGEScan tools to try MGEScan on Galaxy without installation hassle.
 
-.. tip:: Approximate 30 minutes
+.. tip:: Approximate 3 hours and 30 minutes (including 3 hours computation
+         time)
 
 Run MGEScan-LTR and MGEScan-nonLTR for D. melanogaster
 -------------------------------------------------------------------------------
@@ -22,7 +25,7 @@ In this tutorial, we will try to run both MGEScan-LTR and MGEScan-nonLTR with
 D. melanogaster genome dataset. You can find the dataset at the ``Shared Data``
 menu on top and MGEScan tools on the left frame.
 
-Galaxy/MGEScan Server
+Access to Galaxy/MGEScan
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Open Galaxy/MGEScan at your web browser:
@@ -193,7 +196,7 @@ And click "Execute".
         .. image:: images/rtm-nonltr.png
 
 Computation Time
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------------------------------------------------------
 
 Our test case took 3 hours for analyzing LTR and nonLTR of ``D. melanogaster``:
 
@@ -202,7 +205,7 @@ Our test case took 3 hours for analyzing LTR and nonLTR of ``D. melanogaster``:
 * Total: 3 hours
 
 Results
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------------------------------------------------------
 
 Upon the MGEScan tools completion, the output files are accessible via Galaxy
 in `gff3` format, a plain text, or an archived (e.g. tar.gz) file.  You will
@@ -214,7 +217,7 @@ You can download the output files to your local storage, or get access to
 Genome Browser with provided links.
 
 Visualization: UCSC or Ensembl Genome Browser
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Your genomic data in a Generic Feature Format Version 3 (gff3) can be displayed
 by a well known visualization tool such as UCSC or Ensembl Genome Browser on
@@ -235,7 +238,7 @@ Ensembl (Example View)
 .. image:: images/rtm-ltr-gff3-ensembl.png
 
 Additional Options
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 There are other options to view results on a web interface or local.
 
@@ -247,13 +250,8 @@ There are other options to view results on a web interface or local.
 
 .. image:: images/galaxy-download.png
 
-Download Results
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Galaxy provides a dowload option to results of tools via a download icon. 
-
 Description of tools
--------------------------------------------------------------------------------
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Each tool in Galaxy has its description to explain how to use.
 
