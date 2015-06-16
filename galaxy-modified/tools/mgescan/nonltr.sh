@@ -42,7 +42,11 @@ tar tf $input_file &> /dev/null
 ISGZ=$?
 if [ 0 -eq $ISGZ ]
 then
-	tar xzf $input_file -C $input_dir
+	tar xf $input_file -C $input_dir
+	if [ 0 -ne $? ]
+	then
+		tar xzf $input_file -C $input_dir
+	fi
 else
 	/bin/ln -s $input_file $input_dir/$input_file_name
 fi
@@ -53,7 +57,11 @@ then
 	ISGZ=$?
 	if [ 0 -eq $ISGZ ]
 	then
-		tar xzf $input_file2 -C $input_dir
+		tar xf $input_file2 -C $input_dir
+		if [ 0 -ne $? ]
+		then
+			tar xzf $input_file2 -C $input_dir
+		fi
 	else
 		/bin/ln -s $input_file2 $input_dir/$input_file_name2
 	fi

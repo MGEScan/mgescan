@@ -14,12 +14,11 @@ The documentation provides basic tutorials of using MGEScan with Galaxy Workflow
    :maxdepth: 1
 
    tutorial
-   .. `tutorial <tutorial.html>`_
+   workflow
    installation
    aws
    ltr
    nonltr
-   workflow
    visualization
 
 

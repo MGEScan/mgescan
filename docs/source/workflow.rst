@@ -3,8 +3,11 @@
 MGEScan Workflow
 ===============================================================================
 
-With Galaxy Workflow tools, each procedure of MGEScan can be described with
-input and output as its steps.
+MGEScan tools for LTR and nonLTR consist of a series of computational steps in
+Galaxy Workflow.  With the drawing canvas, you can compose sub-processes of
+MGEScan with other Galaxy tools and run entire workflow applications (steps) or
+just find out the details of processes of MGEScan tools.  Each application 
+normally has both input and output connected to the input of the next.
 
 Galaxy Workflow Canvas
 -------------------------------------------------------------------------------
