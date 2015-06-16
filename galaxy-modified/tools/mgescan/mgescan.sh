@@ -151,7 +151,7 @@ then
 	tmp=`mktemp`
 	RANDOM=`basename $tmp`
 	compressed_file=$output_dir/$RANDOM.tar.gz
-	/bin/tar cvzfP $compressed_file $output_dir/info
+	/bin/tar czfP $compressed_file $output_dir/info
 	#/bin/cp $compressed_file $output_file
 	#RES=`/bin/cp $output_dir/info/full/*/* $clade 2> /dev/null`
 	RES=`/bin/cp $compressed_file $clade 2> /dev/null`
@@ -171,7 +171,7 @@ then
 #else
 	# Both LTR, nonLTR executed
 	#compressed_file=$output_dir/$RANDOM.tar.gz
-	#/bin/tar cvzfP $compressed_file $output_dir
+	#/bin/tar czfP $compressed_file $output_dir
 	#/bin/cp $compressed_file $output_file
 fi
 
