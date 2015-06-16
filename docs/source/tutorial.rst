@@ -204,7 +204,7 @@ Our test case took 3 hours for analyzing LTR and nonLTR of ``D. melanogaster``:
 Results
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can find the color of your tools has been changed to green like so::
+You can find the color of your tools has been changed to green like so:
 
 .. image:: images/mgescan-result.png
 
