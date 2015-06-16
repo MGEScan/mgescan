@@ -214,25 +214,38 @@ You can download the output files to your local storage, or get access to
 Genome Browser with provided links.
 
 Visualization: UCSC or Ensembl Genome Browser
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Your genomic data in a Generic Feature Format Version 3 (gff3) can be displayed
 by a well known visualization tool such as UCSC or Ensembl Genome Browser on
-Galaxy with custom annotation of MGEScan for LTR and nonLTR.  Find the link
+Galaxy with custom annotations of MGEScan for LTR and nonLTR.  Find the link
 provided for gff3 to view interactive graphical display of genome sequence
 data.
 
 .. image:: images/mgescan-genome-browser.png
 
-UCSC Genome Browser
+UCSC Genome Browser (Example View)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 .. image:: images/rtm-ltr-gff3-ucsc-browser.png
 
-Ensembl
+Ensembl (Example View)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 .. image:: images/rtm-ltr-gff3-ensembl.png
+
+Additional Options
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+There are other options to view results on a web interface or local.
+
+* View data: Content of the result file
+
+.. image:: images/galaxy-view-data.png
+
+* Download: Download the file
+
+.. image:: images/galaxy-download.png
 
 Download Results
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
