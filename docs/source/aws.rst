@@ -1,51 +1,106 @@
-MGESCan on Amazon EC2
-=========================
+.. _ref-mgescan-ec2:
 
-With Amazon Cloud Web Services, a virtual single or distributed system for MGEScan can be easily deployed. mgescan-alpha (Amazon machine image ID: ami-23d9c74a) is available to create our Galaxy-based system for MGEScan which is identifying long terminal repeats (LTR) and non-LTR retroelements in eukaryotic genomic sequences. More cloud options will be available soon including Google Compute Engine, Microsoft Windows Azure or private cloudplatforms such as OpenStack and Eucalyptus.
+MGESCan on Amazon Cloud (EC2)
+===============================================================================
 
-Deploying MGEScan on the cloud
-----------------------------------
+With Amazon Cloud Web Services, a virtual single or distributed system for
+MGEScan can be easily deployed. MGEScan (Amazon machine image ID: ami-394ebd52)
+is available to create our Galaxy-based system for MGEScan which is identifying
+long terminal repeats (LTR) and non-LTR retroelements in eukaryotic genomic
+sequences. More cloud options will be available soon including Google Compute
+Engine, Microsoft Windows Azure or private cloudplatforms such as OpenStack and
+Eucalyptus.
 
-First step is getting an Amazon account to launch virtual instances on Amazon IaaS platform EC2.
+Deploying MGEScan on Galaxy
+-------------------------------------------------------------------------------
+
+First step is getting an Amazon account to launch virtual instances on Amazon
+IaaS platform EC2.
 
 AWS EC2 Account
-^^^^^^^^^^^^^^^
-If you already have an account of Amazon AWS EC2, open AWS Management Console to launch our MGEScan image on EC2. Otherwise, create an AWS Account.
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-http://aws.amazon.com
+If you already have an account of Amazon AWS EC2, open AWS Management Console
+to launch our MGEScan image on EC2. Otherwise, create an AWS Account.
+
+* http://aws.amazon.com
 
 .. image:: images/aws-management-console.png
 
-MGEScan Image
-^^^^^^^^^^^^^^^^^^^^^^^^^
+MGEScan Machine Image
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In AWS Management Console, open *EC2 Dashboard > Launch Instance*. To choose an Amazon Machine Image (AMI) of MGEScan, select *Community AMIs* on the left tab, and search by name or id, e.g. mgescan or ami-23d9c74a.
+In AWS Management Console, open *EC2 Dashboard > Launch Instance*. To choose an
+Amazon Machine Image (AMI) of MGEScan, select *Community AMIs* on the left tab,
+and search by name or id, e.g. mgescan or ami-394ebd52.
 
 .. image:: images/aws-finding-image.png
 
 MGEScan EC2 Image Information
-""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-* Image Name:mgescan-alpha
-* ID: ami-23d9c74a
+* Image Name: MGEScan
+* ID: ami-394ebd52
 * Server type: 64bit
-* Description: mgescan - MGEscan for LTR and nonLTR
+* Description: MGEscan on Galaxy for identifying LTR and nonLTR
 * Root device type: ebs 
-* Virtualization type: paravirtual
+* Virtualization type: hvm
+
+Choose an Instance Type for ``MGEScan`` Instance
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Once you choose **MGEScan** image as a  base image, you need to select the size
+of instance. ``t2.micro`` uses 1 vCPUs and 1 GB memory which is in free tier.
+Ohter options are available to have large instance e.g. 40 vCPUs. Click
+**Review and Launch** icon at bottom of the page.
+
+.. tip:: t2.micro: (Variable ECUs, 1 vCPUs, 2.5 GHz, Intel Xeon Family, 1 GiB
+         memory, EBS only)
+
+Security Group for Web
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+MGEscan / Galaxy uses ``38080`` default web port. We need to add a rule to have
+this port opened on the new instance. 
+
+There are a few steps you have to follow.
+
+* Find "Security Groups" section and click "Edit security groups". "Create a new
+security group" is selected as a default with a 22 SSH port opened to anywhere.
+
+* We will add ``38080`` tcp port. Click "Add Rule" and type ``38080`` in the
+  "Port Range" input box.
+
+* Don't forget to update "Source" to **"Anywhere"** from "Custom IP".
+
+* Once you're done, click "Reivew and Launch".
+
+* Click "Launch" again.
+
+* Choose a SSH keypair from existing or new one.
+
+* Click "Launch Instance" and wait.
+
+* Find out public IP address and open a web browser with the address. e.g.
+  http://[IP address]:38080
+  *Don't forget port number 38080*
 
 Access to MGEScan Instance
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Once the MGEScan instance is launched and accessible, galaxy scientific workflow system for MGEScan and SSH connection are avabilable through given dns name.
+Once the MGEScan instance is launched and accessible, galaxy scientific
+workflow system for MGEScan and SSH connection are avabilable through given dns
+name.
 
 [screenshot]
 
 Ready To Use
-^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The MGEScan is now ready to conduct your experiment on Amazon EC2.
 
-Note. Do not forget to terminate your virtual instance after all analysis completed. Amazon Cloud charges use of VM instances hourly.
+.. Note:: Do not forget to terminate your virtual instance after all analysis
+   completed. Amazon Cloud charges use of VM instances hourly.
 
 Note
 -------------------------------------------------------------------------------
