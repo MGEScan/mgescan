@@ -235,8 +235,18 @@ RepeatMasker
 
 RepeatMasker also requires configuration.
 
+**Ubuntu**
+
 ::
 
+   cd $RM_HOME
+   $RM_HOME/configure
+
+**Fedora**
+
+::
+
+   sudo yum install perl-Data-Dumper -y
    cd $RM_HOME
    $RM_HOME/configure
 
