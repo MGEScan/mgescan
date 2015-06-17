@@ -46,3 +46,12 @@ Ready To Use
 The MGEScan is now ready to conduct your experiment on Amazon EC2.
 
 Note. Do not forget to terminate your virtual instance after all analysis completed. Amazon Cloud charges use of VM instances hourly.
+
+Note
+-------------------------------------------------------------------------------
+
+Add a script to auto-start Galaxy after reboot in ``/etc/rc.local``
+
+::
+
+   su ec2-user -c 'source ~/.mgescanrc;cd $GALAXY_HOME;nohup sh run.sh &'
