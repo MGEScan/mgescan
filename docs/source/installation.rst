@@ -272,9 +272,9 @@ Declare your email address as a Galaxy admin user name.
 
 ::
 
-   export GALAXY_ADMIN=mike@google.com
+   export GALAXY_ADMIN=mgescan_admin@mgescan.com
 
-.. warning:: REPLACE ``mike@google.com`` with your email address. You also have
+.. warning:: REPLACE ``mgescan_admin@mgescan.com`` with your email address. You also have
         to sign up Galaxy with this email address.
 
 ::
