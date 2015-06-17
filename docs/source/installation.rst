@@ -29,6 +29,13 @@ you can skip this step.
   sudo apt-get update
   sudo apt-get install python-virtualenv python-dev git -y
 
+**Fedora**
+
+::
+ 
+  sudo yum update
+  sudo yum install python-virtualenv python-devel git -y
+
 Environment Variables
 *******************************************************************************
 
@@ -102,7 +109,33 @@ If you have ``HMMER`` and ``EMBOSS`` on your system, you can skip this step.
 ::
 
         sudo apt-get install hmmer emboss -y
-        
+
+**Fedora**
+
+* HMMER v3.1b2
+
+::
+
+        sudo yum install gcc -y
+        wget ftp://selab.janelia.org/pub/software/hmmer3/3.1b2/hmmer-3.1b2-linux-intel-x86_64.tar.gz
+        tar xvzf hmmer-3.1b2-linux-intel-x86_64.tar.gz
+        cd  hmmer-3.1b2-linux-intel-x86_64
+        ./configure
+        make
+        make check
+        make install
+
+* EMBOSS 6.6.0 (latest)
+
+::
+
+        wget ftp://emboss.open-bio.org/pub/EMBOSS/emboss-latest.tar.gz
+        tar xvzf emboss-latest.tar.gz
+        cd EMBOSS-*
+        ./configure
+        make
+        make check
+        make install
 
 Virtual Environments (virtualenv)
 *******************************************************************************
