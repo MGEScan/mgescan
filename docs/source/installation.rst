@@ -246,7 +246,7 @@ RepeatMasker also requires configuration.
 
 ::
 
-   sudo yum install perl-Data-Dumper -y
+   sudo yum install perl-Data-Dumper perl-Text-Soundex -y
    cd $RM_HOME
    $RM_HOME/configure
 
