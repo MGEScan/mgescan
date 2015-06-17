@@ -123,10 +123,10 @@ Usage:
     mgescan.py --version
 ```
 
-On Cloud (Amazon EC2)
+Amazon Cloud Image (EC2)
 -------------------------------------------------------------------------------
 
-mgescan-alpha - ami-23d9c74a (development version)
+MGEScan - ami-394ebd52 (latest version)
 
 Citation
 -------------------------------------------------------------------------------
