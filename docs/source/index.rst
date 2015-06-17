@@ -3,12 +3,19 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to MGEScan's documentation!
-=======================================
+MGEScan on Galaxy Workflow
+===============================================================================
 
-MGEScan on Galaxy workflow system is for MGEScan which is identifying long terminal repeats (LTR) and non-LTR retroelements in eukaryotic genomic sequences.
+MGEScan on Galaxy is the latest version of MGEScan software to identify long
+terminal repeats (LTR) and non-LTR retroelements in eukaryotic genomic
+sequences on a web interface or on a command line. HMMER v3.1b1 and openMPI are
+supported for MGEScan-LTR and MGEScan-nonLTR programs so the better performance
+is guaranteed than previous version of MGEScan. Cloud image is available on
+Amazon Cloud (EC2) to utilize on-demand computing resources for data analysis.
 
-The documentation provides basic tutorials of using MGEScan with Galaxy Workflow system and detailed information of source code.
+The documentation provides basic tutorials of using MGEScan on Galaxy
+Workflow system and additional information such as installation and use of
+MGEScan on Amazon Cloud (AWS EC2).
 
 .. toctree::
    :maxdepth: 1
@@ -22,10 +29,12 @@ The documentation provides basic tutorials of using MGEScan with Galaxy Workflow
    visualization
 
 
-Indices and tables
-==================
+.. comment::
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+        Indices and tables
+        ==================
+
+        * :ref:`genindex`
+        * :ref:`modindex`
+        * :ref:`search`
 
