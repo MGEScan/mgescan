@@ -1,5 +1,8 @@
+function package-install() {
+	sudo apt-get install $@
+}
 sudo apt-get update
-sudo apt-get install python-virtualenv python-dev git -y
+package-install python-virtualenv python-dev git -y
 cat <<EOF > $HOME/.mgescanrc
 export MGESCAN_HOME=\$HOME/mgescan3
 export MGESCAN_SRC=\$MGESCAN_HOME/src
@@ -13,7 +16,7 @@ source ~/.mgescanrc
 mkdir $MGESCAN_HOME
 cd $MGESCAN_HOME
 git clone https://github.com/galaxyproject/galaxy/
-sudo apt-get install hmmer emboss -y
+package-install hmmer emboss -y
 mkdir -p $MGESCAN_VENV
 virtualenv $MGESCAN_VENV
 source $MGESCAN_VENV/bin/activate
