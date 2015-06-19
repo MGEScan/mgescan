@@ -1,5 +1,6 @@
 function package-install() {
-	sudo apt-get install $@
+	sudo apt-get install $@;
+	return $?
 }
 sudo apt-get update
 package-install python-virtualenv python-dev git -y
