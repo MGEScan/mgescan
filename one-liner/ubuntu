@@ -2,7 +2,11 @@ function package-install() {
 	sudo apt-get install $@;
 	return $?
 }
-sudo apt-get update
+function package-update() {
+	sudo apt-get update
+	return $?
+}
+package-update
 package-install python-virtualenv python-dev git -y
 cat <<EOF > $HOME/.mgescanrc
 export MGESCAN_HOME=\$HOME/mgescan3
