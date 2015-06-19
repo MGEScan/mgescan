@@ -137,6 +137,15 @@ If you have ``HMMER`` and ``EMBOSS`` on your system, you can skip this step.
         make check
         make install
 
+Open MPI
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Ubuntu**
+
+::
+
+        sudo apt-get install openmpi-bin libopenmpi-dev -y
+
 Virtual Environments (virtualenv)
 *******************************************************************************
 
