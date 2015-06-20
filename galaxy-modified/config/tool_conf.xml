@@ -75,6 +75,7 @@
   <section id="liftOver" name="Lift-Over">
     <tool file="extract/liftOver_wrapper.xml" />
   </section>
+-->
   <section id="filter" name="Filter and Sort">
     <tool file="stats/filtering.xml" />
     <tool file="filters/sorter.xml" />
@@ -92,7 +93,7 @@
     <tool file="new_operations/subtract_query.xml" />
     <tool file="stats/grouping.xml" />
     <tool file="new_operations/column_join.xml" />
-  </section-->
+  </section>
   <section id="convert" name="Convert Formats">
     <tool file="filters/axt_to_concat_fasta.xml" />
     <tool file="filters/axt_to_fasta.xml" />
@@ -272,9 +273,10 @@
     <tool file="taxonomy/poisson2test.xml" />
   </section>
 
-  <!--section id="features" name="Extract Features">
+  <section id="features" name="Extract Features">
     <tool file="filters/ucsc_gene_bed_to_exon_bed.xml" />
   </section>
+  <!--
   <section id="fetchSeq" name="Fetch Sequences">
     <tool file="extract/extract_genomic_dna.xml" />
   </section>
@@ -297,6 +299,8 @@
     <tool file="stats/aggregate_binned_scores_in_intervals.xml" />
     <tool file="extract/phastOdds/phastOdds_tool.xml" />
   </section>
+-->
+
   <section id="bxops" name="Operate on Genomic Intervals">
     <tool file="new_operations/intersect.xml" />
     <tool file="new_operations/subtract.xml" />
@@ -311,6 +315,7 @@
     <tool file="new_operations/flanking_features.xml" />
     <tool file="annotation_profiler/annotation_profiler.xml" />
   </section>
+<!--
   <section id="stats" name="Statistics">
     <tool file="stats/gsummary.xml" />
     <tool file="filters/uniq.xml" />
