@@ -4,8 +4,6 @@ MGEScan Command Line Interface
 MGEScan provides Command Line Interface (CLI) along with Galaxy Web Interface.
 You can run MGEScan-LTR and MGEScan-nonLTR programs on your shell terminal.
 
-.. tip:: Approximate: 20 minutes
-
 Installation
 -------------------------------------------------------------------------------
 
