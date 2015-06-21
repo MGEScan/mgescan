@@ -116,11 +116,11 @@ Command Line Tool (mgescan)
 
 ```sh
 Usage:
-    mgescan.py both <genome_dir> [--output=<data_dir>] [--mpi=<num>]
-    mgescan.py ltr <genome_dir> [--output=<data_dir>] [--mpi=<num>]
-    mgescan.py nonltr <genome_dir> [--output=<data_dir>] [--mpi=<num>]
-    mgescan.py (-h | --help)
-    mgescan.py --version
+    mgescan both <genome_dir> [--output=<data_dir>] [--mpi=<num>]
+    mgescan ltr <genome_dir> [--output=<data_dir>] [--mpi=<num>]
+    mgescan nonltr <genome_dir> [--output=<data_dir>] [--mpi=<num>]
+    mgescan (-h | --help)
+    mgescan --version
 ```
 
 Amazon Cloud Image (EC2)

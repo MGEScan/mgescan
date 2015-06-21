@@ -22,6 +22,7 @@ MGEScan on Amazon Cloud (AWS EC2).
 
    tutorial
    workflow
+   tutorial-cmd
    installation
    aws
    ltr
