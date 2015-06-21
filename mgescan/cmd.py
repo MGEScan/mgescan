@@ -170,7 +170,7 @@ class MGEScan(object):
         return Popen(cmd.split(), stdout=PIPE, stderr=PIPE).stdout.read()
 
 def main():
-    arguments = docopt(__doc__, version='MGEScan 0.1')
+    arguments = docopt(__doc__, version='MGEScan 0.0.3')
     mge = MGEScan(arguments)
     mge.run()
 
