@@ -43,7 +43,10 @@ Start a Galaxy/MGEscan web server with a default port ``38080``.
 .. note:: RepeatMasker is not included.
 .. note:: Default admin account is ``mgescan_admin@mgescan.com``. Sign up with
           this account name and your password.
- 
+
+Normal Installation
+-------------------------------------------------------------------------------
+
 Software for Python
 -------------------------------------------------------------------------------
 
