@@ -13,7 +13,7 @@ Options:
     --output=<data_dir> Directory results will be saved
 
 """
-import os
+import os, sys
 from docopt import docopt
 from multiprocessing import Process
 from subprocess import Popen, PIPE
@@ -38,6 +38,7 @@ class MGEScan(object):
         self.args = args
         self.set_inputs()
         self.set_defaults()
+        self.set_env()
 
     def set_inputs(self):
         self.data_dir = utils.get_abspath(self.args['--output'])
@@ -77,6 +78,12 @@ class MGEScan(object):
         self.sw_rm = "No" # or Yes
         self.scaffold = "" # or directory
 
+    def set_env(self):
+        self.base_path = os.environ.get('MGESCAN_SRC') + "/mgescan"
+        if not self.base_path:
+            print ("MGEScan environment (.mgescanrc) is not defined")
+            sys.exit(-1)
+            
     def wrapper_split_files(self):
         split = Split()
         split.set_input(self.genome_dir)
@@ -110,7 +117,7 @@ class MGEScan(object):
 
         # scaffold
         # repeatmasker
-        cmd0 = "ltr/pre_process.pl \
+        cmd0 = self.base_path + "/ltr/pre_process.pl \
                 -genome=%(genome_dir)s \
                 -data=%(data_dir)s \
                 -sw_rm=%(sw_rm)s \
@@ -118,7 +125,7 @@ class MGEScan(object):
         res0 = self.run_cmd(cmd0)
 
         # find-ltr
-        cmd1 = "ltr/find_ltr.pl \
+        cmd1 = self.base_path + "/ltr/find_ltr.pl \
                 -genome=%(genome_dir)s \
                 -data=%(data_dir)s \
                 -hmmerv=%(hmmerv)s \
@@ -136,7 +143,7 @@ class MGEScan(object):
         # gff3
         self.ltr_out_path = utils.get_abspath(self.data_dir + "/ltr/ltr.out")
         self.ltr_gff_path = utils.get_abspath(self.data_dir + "/ltr/ltr.gff3")
-        cmd2 = "ltr/toGFF.py %(ltr_out_path)s %(ltr_gff_path)s"
+        cmd2 = self.base_path + "/ltr/toGFF.py %(ltr_out_path)s %(ltr_gff_path)s"
         res2 = self.run_cmd(cmd2)
 
         end = time.time()
@@ -147,7 +154,7 @@ class MGEScan(object):
         start = time.time()
 
         # nonltr
-        cmd0 = "nonltr/run_MGEScan.pl \
+        cmd0 = self.base_path + "/nonltr/run_MGEScan.pl \
                 -genome=%(genome_dir)s \
                 -data=%(data_dir)s \
                 -hmmerv=%(hmmerv)s"
@@ -158,7 +165,7 @@ class MGEScan(object):
         # gff3
         self.nonltr_out_path = utils.get_abspath(self.data_dir + "/info/full/")
         self.nonltr_gff_path = utils.get_abspath(self.data_dir + "/info/nonltr.gff3")
-        cmd1 = "nonltr/toGFF.py %(nonltr_out_path)s %(nonltr_gff_path)s"
+        cmd1 = self.base_path + "/nonltr/toGFF.py %(nonltr_out_path)s %(nonltr_gff_path)s"
         res1 = self.run_cmd(cmd1)
 
         end = time.time()
