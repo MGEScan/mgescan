@@ -1,23 +1,49 @@
 MGEScan on Galaxy Installation
 ===============================================================================
 
-MGEScan on Galaxy provides local installation and cloud installation. 
+MGEScan on Galaxy can be installed on a local machine or on the cloud e.g.
+Amazon EC2. The local installation is for Ubuntu 14.04+ distribution. Others
+(e.g. OpenSUSE, Fedora) are not verified.
 
-Local Installation
+.. tip:: approximate time: 20 minutes
+
+Preparation
 -------------------------------------------------------------------------------
 
-The installation is for Ubuntu 14.04+ distribution. Others (e.g. OpenSUSE,
-Fedora) are not tested.
+There are required software to be installed prior to run MGEScan. You need to
+install system packages with ``sudo`` command (admin ``root`` privilege is
+required). ``virtualenv`` is used for Python package installation.
 
-Prerequisite
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* ``root`` privilege to install packages with **sudo**
 
-There are required software packages and system packages to run MGEScan. You
-need to install system packages with ``sudo`` command (admin ``root``
-privilege is required). virtualenv is used for Python package installation.
+Quick Installation
+-------------------------------------------------------------------------------
 
-System Packages
-*******************************************************************************
+One-liner command provides a quick installation of required software and
+configuration.
+
+.. warning:: This one-liner installation script runs several commands without
+             any further confirmation from you. If you'd like to verify each
+             step, skip this quick installation and follow the installation
+             instuctions below.
+
+::
+
+  curl -L https://raw.githubusercontent.com/MGEScan/mgescan/master/one-liner/ubuntu | sh
+
+Start a Galaxy/MGEscan web server with a default port ``38080``.
+
+::
+
+  cd $GALAXY_HOME
+  nohup sh run.sh &
+
+.. note:: RepeatMasker is not included.
+.. note:: Default admin account is ``mgescan_admin@mgescan.com``. Sign up with
+          this account name and your password.
+ 
+Software for Python
+-------------------------------------------------------------------------------
 
 If ``virtualenv``, ``git``, and ``python-dev`` are available on your system,
 you can skip this step.
@@ -37,7 +63,7 @@ you can skip this step.
   sudo yum install python-virtualenv python-devel git -y
 
 Environment Variables
-*******************************************************************************
+-------------------------------------------------------------------------------
 
 MGEScan will be installed on a default directory ``$HOME/mgescan3``. You can
 change it if you prefer other location to install MGEScan.
@@ -72,7 +98,7 @@ Then include it to your startup file (i.e. ``.bash_profile``).
 
    echo "source ~/.mgescanrc" >> $HOME/.bash_profile
 
-Create a main directory
+Create a main directory.
 
 ::
 
@@ -80,13 +106,14 @@ Create a main directory
    mkdir $MGESCAN_HOME
 
 
-Software Packages
-*******************************************************************************
+Software for MGEScan
+-------------------------------------------------------------------------------
 
 Galaxy Workflow, HMMER (3.1b1), EMBOSS Suite and TRF are required.
+RepeatMasker is optional.
 
 Galaxy
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. tip:: Make sure that $MGESCAN_HOME is set by ``echo $MGESCAN_HOME`` command.
         If you don't see a path similar to ``/home/.../mgescan3/``, you have to
@@ -100,7 +127,7 @@ From Github repository (source code):
         git clone https://github.com/galaxyproject/galaxy/
 
 HMMER and EMBOSS
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If you have ``HMMER`` and ``EMBOSS`` on your system, you can skip this step.
 
@@ -138,7 +165,7 @@ If you have ``HMMER`` and ``EMBOSS`` on your system, you can skip this step.
         make install
 
 Open MPI
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 **Ubuntu**
 
@@ -146,8 +173,8 @@ Open MPI
 
         sudo apt-get install openmpi-bin libopenmpi-dev -y
 
-Virtual Environments (virtualenv)
-*******************************************************************************
+Virtual Environments (virtualenv) for Python Packages
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 It is recommended to have an isolated environment for MGEScan Python
 libraries. virtualenv creates a separated space for MGEScan, and issues from
@@ -163,11 +190,15 @@ your account.
   source $MGESCAN_VENV/bin/activate
   echo "source $MGESCAN_VENV/bin/activate" >> ~/.bash_profile
 
+.. note:: Skip the last line ``echo "source ..."``, if you'd like to enable
+          ``mgescan`` virtualenv manually.
+
 
 Tandem Repeats Finder (trf)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-``trf`` is a single binary executable file.
+``trf`` is a single binary executable file to locate and display tandem repeats
+in DNA sequences. MGEScan-LTR requires ``trf`` program.
 
 ::
  
@@ -175,7 +206,11 @@ Tandem Repeats Finder (trf)
    wget http://tandem.bu.edu/trf/downloads/trf407b.linux64 -P $TRF_HOME
    
 RepeatMasker (Optional)
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+RepeatMasker is a program that screens DNA sequences for interspersed repeats
+and low complexity DNA sequences. MGEScan-LTR has an option to use
+RepeatMasker.
 
 ::
 
@@ -186,9 +221,9 @@ RepeatMasker (Optional)
    ln -s $RM_HOME/RepeatMasker $MGESCAN_VENV/bin/
   
 MGEScan Installation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------------------------------------------------
 
-From Github repository (source code):
+MGEScan can be installed from Github repository (source code):
 
 ::
 
@@ -199,26 +234,21 @@ From Github repository (source code):
   python setup.py install
 
 Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------------------------------------------------
 
 Virtual Environments (virtualenv)
-*******************************************************************************
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-It is recommended to have an isolated environment for MGEScan Python
-libraries. virtualenv creates a separated space for MGEScan, and issues from
-dependencies and versions of Python libraries can be avoided. Note that you
-have to be in the virtualenv of MGEScan before to run any MGEScan command line
-tools. The following commands create a virtualenv for MGEScan and enable it on
-your account.
+Make sure you have loaded your virtual environment for MGEScan by:
 
 ::
 
   source $MGESCAN_VENV/bin/activate
 
-Make sure that you see ``(mgescan)`` label on your prompt.
+You will see ``(mgescan)`` label on your prompt.
 
 Galaxy Configurations for MGEScan
-*******************************************************************************
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 MGEScan github repository contains codes and toolkits for MGEScan on Galaxy.
 Prior to run a Galaxy Workflow web server, the codes and toolkits should be
@@ -229,7 +259,7 @@ installed in the ``galaxy`` main directory.
   cp -pr $MGESCAN_SRC/galaxy-modified/* $GALAXY_HOME
 
 trf
-*******************************************************************************
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To run ``trf`` anywhere under ``mgescan`` virtualenv, we create a symlink in
 the ``bin`` directory.
@@ -240,7 +270,7 @@ the ``bin`` directory.
    chmod 700 $MGESCAN_VENV/bin/trf
 
 RepeatMasker
-*******************************************************************************
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 RepeatMasker also requires configuration.
 
@@ -274,8 +304,8 @@ Outputs like so:
     <PRESS ENTER TO CONTINUE>
 
 
-Galaxy Admin Users
-*******************************************************************************
+Galaxy Admin User
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Declare your email address as a Galaxy admin user name.
 
@@ -283,15 +313,18 @@ Declare your email address as a Galaxy admin user name.
 
    export GALAXY_ADMIN=mgescan_admin@mgescan.com
 
-.. warning:: REPLACE ``mgescan_admin@mgescan.com`` with your email address. You also have
-        to sign up Galaxy with this email address.
+.. warning:: REPLACE ``mgescan_admin@mgescan.com`` with your email address. You
+             also have to sign up Galaxy with this email address.
 
 ::
 
   sed -i "s/#admin_users = None/admin_users = $GALAXY_ADMIN/" $GALAXY_HOME/universe_wsgi.ini
 
 Start Galaxy
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------------------------------------------------
+
+Simple ``run.sh`` script starts a Galaxy web server. First run of the script
+takes some time to initialize database.
 
 ::
 
