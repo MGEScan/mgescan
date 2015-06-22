@@ -33,25 +33,25 @@
 		</conditional>
 	</inputs>
 	<outputs>
-		<data format="ltr.out" name="output">
+		<data format="ltr.out" name="output" label="LTR Results (ltr.out)">
 			<filter>program != "N"</filter>
 		</data>
-		<data format="fasta" name="clade">
+		<data format="fasta" name="clade" label="clade file (FASTA)">
 			<filter>program != "L"</filter>
 		</data>
-		<data format="qfile" name="qvalue_en">
+		<data format="qfile" name="qvalue_en" label="qvalue_en">
 			<filter>program != "L"</filter>
 		</data>
-		<data format="qfile" name="qvalue_rt">
+		<data format="qfile" name="qvalue_rt" label="qvalue_rt">
 			<filter>program != "L"</filter>
 		</data>
-		<data format="gff3" name="ltr_gff3">
+		<data format="gff3" name="ltr_gff3" label="GFF3 for LTR">
 			<filter>program != "N"</filter>
 		</data>
-		<data format="gff3" name="nonltr_gff3">
+		<data format="gff3" name="nonltr_gff3" label="GFF3 for nonLTR">
 			<filter>program != "L"</filter>
 		</data>
-		<data format="gff3" name="both_gff3">
+		<data format="gff3" name="both_gff3" label="GFF3 for LTR and nonLTR">
 			<filter>program == "B"</filter>
 		</data>
 
