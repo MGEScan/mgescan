@@ -27,28 +27,32 @@ my $tmpfile2;
 my $template1;
 my $template2;
 
-use File::Temp qw/ tempfile tempdir /;
-($fh1, $tmpfile1) = tempfile( $template1, DIR => $out_dir, SUFFIX => '.aaaaa');
-($fh2, $tmpfile2) = tempfile( $template2, DIR => $out_dir, SUFFIX => '.bbbbb');
+use File::Temp qw/ tempfile unlink0 /;
+($fh1, $tmpfile1) = tempfile( UNLINK => 1, SUFFIX => '.aaaaa');
+($fh2, $tmpfile2) = tempfile( UNLINK => 1, SUFFIX => '.bbbbb');
 
 $seq_file = $tmpfile1;#$out_dir."aaaaa";
 $pep_file = $tmpfile2;#$out_dir."bbbbb";
 
-system("echo ".$seq." > ".$seq_file);
+#system("echo ".$seq." > ".$seq_file);
+print $fh1 "$seq\n";
+close $fh1;
 system("transeq -frame=f ".$seq_file." -outseq=".$pep_file." 2>/dev/null");
-system("rm -f ".$seq_file);
+#system("rm -f ".$seq_file);
+unlink0($fh1, $tmpfile1);
 
 if ($hmmerv == 3){
 	my $fh;
 	my $tmpfile;
 	my $template;
-	($fh, $tmpfile) = tempfile( $template, DIR => $phmm_dir, SUFFIX => '.tbl');
+	($fh, $tmpfile) = tempfile( UNLINK => 1, SUFFIX => '.tbl');
 	#system("hmmconvert ".$phmm_file." > ".$phmm_file."c");
 	#system("hmmsearch  --noali --domtblout ".$phmm_dir."tbl ".$phmm_file."c ".$pep_file." > /dev/null");
 	system("hmmsearch  --noali --domtblout ".$tmpfile." ".$phmm_file."3 ".$pep_file." > /dev/null");
-	my $command = "cat ".$tmpfile;
-	my $hmm_result = `$command`;
-	system("rm -f ".$tmpfile);
+	local $/ = undef;
+	my $hmm_result = <$fh>;
+	close $fh;
+	unlink0($fh, $tmpfile);
 	@hmm_results = split(/\n/, $hmm_result);
 	for (my $i=0; $i<=$#hmm_results; $i++){
 		
@@ -82,4 +86,5 @@ if ($hmmerv == 3){
 	}	
 }
 
-system("rm -f ".$pep_file);
+#system("rm -f ".$pep_file);
+unlink0($fh2, $tmpfile2);
