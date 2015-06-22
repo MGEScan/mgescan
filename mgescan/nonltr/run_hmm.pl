@@ -3,6 +3,7 @@ use strict;
 use Getopt::Long;
 use Cwd 'abs_path';
 use File::Basename;
+use File::Temp qw/ tempfile unlink0 /;
 
 my $pdir = dirname(abs_path($0))."/";
 my $phmm_dir = $pdir."pHMM/";
@@ -104,19 +105,21 @@ sub get_signal_domain{
 	my $output_file = ${$_[2]};
 	my $fh;
 	my $tmpfile;
-	my $template;
+	my $hmm_result;
 
-	use File::Temp qw/ tempfile tempdir /;
-	($fh, $tmpfile) = tempfile( $template, DIR => $phmm_dir, SUFFIX => '.tbl');
+	($fh, $tmpfile) = tempfile( UNLINK => 1, SUFFIX => '.tbl');
 
 	open (OUT, ">$temp_file");
 	if ($hmmerv == 3){
 		#system("hmmconvert ".${$_[1]}." > ".${$_[1]}."c");
 		my $hmm_command = "hmmsearch  -E 0.00001 --noali --domtblout ".$tmpfile." ".${$_[1]}."3 ".${$_[0]}." > /dev/null";
 		system($hmm_command);
-		$hmm_command = "cat ".$tmpfile;
-		my $hmm_result = `$hmm_command`;
-		system("rm -rf ".$tmpfile);
+		#$hmm_command = "cat ".$tmpfile;
+		local $/ = undef;
+		$hmm_result = <$fh>;
+		close $fh;
+		#system("rm -rf ".$tmpfile);
+		unlink0($fh, $tmpfile);
 		# run hmmsearch to find the domain and save it in the temprary file   
 		while ($hmm_result =~ /\n((?!#).*)\n/g){
 			my @temp = split(/\s+/, $1);
