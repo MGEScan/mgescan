@@ -9,7 +9,7 @@ Installation
 
 If you have installed MGEScan on Galaxy, MGEScan CLI tools are available on your system. 
 
-.. note:: Do you need to install MGEScan? See here for :ref:`Installation <ref-mgescan-installation>`. Follow the instructions except the Galaxy installation step. You can skip the Galaxy installation.
+.. note:: Do you need to install MGEScan? See here for :ref:`Installation <ref-mgescan-installation>`. Follow the instructions except the Galaxy installation step. You can skip the Galaxy installation if you need MGEScan CLI tools only.
 
 Usage
 -------------------------------------------------------------------------------
