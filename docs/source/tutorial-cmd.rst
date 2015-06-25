@@ -1,4 +1,4 @@
-MGEScan Command Line Interface
+MGEScan Command Line Interface (In Progress)
 ===============================================================================
 
 MGEScan provides Command Line Interface (CLI) along with Galaxy Web Interface.
@@ -7,9 +7,9 @@ You can run MGEScan-LTR and MGEScan-nonLTR programs on your shell terminal.
 Installation
 -------------------------------------------------------------------------------
 
-If you have installed MGEScan on Galaxy, you have MGEScan CLI tools. 
+If you have installed MGEScan on Galaxy, MGEScan CLI tools are available on your system. 
 
-.. note:: Do you need to install MGEScan? See here: :ref:`Installation <ref-mgescan-installation>`
+.. note:: Do you need to install MGEScan? See here for :ref:`Installation <ref-mgescan-installation>`. Follow the instructions except the Galaxy installation step. You can skip the Galaxy installation.
 
 Usage
 -------------------------------------------------------------------------------
