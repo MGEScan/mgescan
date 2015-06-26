@@ -96,7 +96,7 @@ if (length($rm_dir)>0){
     my @gfiles;
     my $gfile;
     my $gfilename;
-    @gfiles = </home/ubuntu/mgescan3/mgescan/mgescan/input/tmp.ZOrEbYwjFF/data/genome/*>;
+    @gfiles = <$ltr_genome_dir/*>;
     foreach $gfile (@gfiles) {
 	    $gfilename = basename($gfile);
 	    symlink($gfile, $genome_dir."/".$gfilename);
