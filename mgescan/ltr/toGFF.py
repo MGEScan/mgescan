@@ -38,8 +38,8 @@ for aline in infile:
         searchObj=re.search(r'([^.]*).([^.]*).([^.]*).([^.]*).([^.]*).fa(.*)',
                 words[0], re.M|re.I)
         try:
-            if len(searchObj.groups()) > 5:
-                seqid = searchObj.group(5);
+            if len(searchObj.groups()) > 5 and searchObj.group(5) != "":
+                seqid = searchObj.group(5)
                 if searchObj.group(4) == "chromosome":
                     seqid = "chr" + seqid
         except:

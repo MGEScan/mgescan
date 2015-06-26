@@ -66,8 +66,8 @@ for cladeDir in glob.glob( os.path.join(sys.argv[1], '*') ):
         searchObj=re.search(r'([^.]*).([^.]*).([^.]*).([^.]*).([^.]*).fa(.*)',
                 header, re.M|re.I)
         try:
-            if len(searchObj.groups()) > 5:
-                seqid = searchObj.group(5);
+            if len(searchObj.groups()) > 5 and searchObj.group(5) != "" :
+                seqid = searchObj.group(5)
                 if searchObj.group(4) == "chromosome":
                     seqid = "chr" + seqid
         except:
