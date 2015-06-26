@@ -3,6 +3,8 @@ use strict;
 use Cwd 'abs_path';
 use File::Basename;
 use Getopt::Long;
+use File::Copy;
+use File::Basename;
 
 ###################################################
 # path configuration
@@ -88,9 +90,13 @@ if (length($rm_dir)>0){
     call_remove_ltr_and_short_rm_result($rm_dir);
     call_mask_repeat($genome_dir, $rm_dir, $ltr_genome_dir);
 }else{
-    system("mkdir ".$ltr_genome_dir);
-    system("mv ".$genome_dir."* ".$ltr_genome_dir);
-    system("for file in `ls ".$ltr_genome_dir."`; do ln -s ".$ltr_genome_dir."/\$file ".$genome_dir."; done");
+    move ($genome_dir, $ltr_genome_dir);
+    mkdir $genome_dir, 0755;
+    #system("for file in `ls ".$ltr_genome_dir."`; do ln -s ".$ltr_genome_dir."/\$file ".$genome_dir."; done");
+    @files = </home/ubuntu/mgescan3/mgescan/mgescan/input/tmp.ZOrEbYwjFF/data/genome/*>;
+    foreach $file (@files) {
+	    $filename = basename($file);
+	    symlink($file, $genome_dir."/".$filename);
 }
 
 
