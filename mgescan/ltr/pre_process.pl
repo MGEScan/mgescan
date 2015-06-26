@@ -93,10 +93,14 @@ if (length($rm_dir)>0){
     move ($genome_dir, $ltr_genome_dir);
     mkdir $genome_dir, 0755;
     #system("for file in `ls ".$ltr_genome_dir."`; do ln -s ".$ltr_genome_dir."/\$file ".$genome_dir."; done");
-    @files = </home/ubuntu/mgescan3/mgescan/mgescan/input/tmp.ZOrEbYwjFF/data/genome/*>;
-    foreach $file (@files) {
-	    $filename = basename($file);
-	    symlink($file, $genome_dir."/".$filename);
+    my @gfiles;
+    my $gfile;
+    my $gfilename;
+    @gfiles = </home/ubuntu/mgescan3/mgescan/mgescan/input/tmp.ZOrEbYwjFF/data/genome/*>;
+    foreach $gfile (@gfiles) {
+	    $gfilename = basename($gfile);
+	    symlink($gfile, $genome_dir."/".$gfilename);
+    }
 }
 
 
