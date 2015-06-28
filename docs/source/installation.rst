@@ -31,7 +31,7 @@ configuration.
 
 ::
 
-  curl -L https://raw.githubusercontent.com/MGEScan/mgescan/master/one-liner/ubuntu | sh
+  curl -L https://raw.githubusercontent.com/MGEScan/mgescan/master/one-liner/ubuntu | bash
 
 Start a Galaxy/MGEscan web server with a default port ``38080``.
 
