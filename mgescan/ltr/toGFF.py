@@ -33,8 +33,8 @@ for aline in infile:
 
         # remove file extension .fa
         seqid = seqid.replace(".fa", "")
-        if seqid[0].isdigit():
-            seqid = "chr" + seqid
+        #if seqid[0].isdigit():
+        seqid = "chr" + seqid
         searchObj=re.search(r'([^.]*).([^.]*).([^.]*).([^.]*).([^.]*).fa(.*)',
                 words[0], re.M|re.I)
         try:
