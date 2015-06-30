@@ -147,7 +147,8 @@ class MGEScan(object):
         res2 = self.run_cmd(cmd2)
 
         end = time.time()
-        print ('ltr: finishing (elapsed time: {0})'.format(end - start))
+        print ('ltr: finishing (elapsed time: {0} secs)'.format(int(round(end -
+            start))))
 
     def nonltr(self):
         print 'nonltr: starting'
@@ -169,7 +170,8 @@ class MGEScan(object):
         res1 = self.run_cmd(cmd1)
 
         end = time.time()
-        print ('nonltr: finishing (elapsed time: {0})'.format(end - start))
+        print ('nonltr: finishing (elapsed time: {0} secs)'.format(int(round(end -
+            start))))
 
     def run_cmd(self, cmd):
         cmd = cmd % vars(self)
