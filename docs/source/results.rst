@@ -14,6 +14,7 @@ Four sample genomes were tested with MGEScan-LTR and MGEScan-nonLTR programs.
    - 8 vCPUs
    - 16 GB DDR3 1333 MHz
    - 160GB 7200RPM SATA
+* Operating System:
    - Ubuntu 14.04 LTS
 
 D. melanogaster (dm3)
