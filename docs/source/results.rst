@@ -16,7 +16,7 @@ Four sample genomes were tested with MGEScan-LTR and MGEScan-nonLTR programs.
    - 160GB 7200RPM SATA
    - Ubuntu 14.04 LTS
 
-D. melanogaster
+D. melanogaster (dm3)
 -------------------------------------------------------------------------------
 
 * :download:`dm3.gff3 <sample/dm3.gff3.txt>`
@@ -87,7 +87,7 @@ Extra Files
 * :download:`CR1.en.pep <sample/dm3/data/info/full/CR1/CR1.en.pep.txt>`
 * :download:`nonltr.gff3 <sample/dm3/data/info/nonltr.gff3.txt>`
 
-C. intestinalis
+C. intestinalis (KH)
 -------------------------------------------------------------------------------
 
 * :download:`KH.gff3 <sample/KH.gff3.txt>`
