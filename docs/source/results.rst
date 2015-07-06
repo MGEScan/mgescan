@@ -4,8 +4,12 @@ Test Results
 Four sample genomes were tested with MGEScan-LTR and MGEScan-nonLTR programs.
 
 * Test Environment: India Cluster on Futuresystems Cloud
-* Hardware Spec: Intel Xeon X5550 2.66GHz, 8 vCPUs, 16 GB DDR3 1333 MHz,
-  160GB 7200RPM SATA
+* Hardware Spec: 
+  - Intel Xeon X5550 2.66GHz
+  - 8 vCPUs
+  - 16 GB DDR3 1333 MHz
+  - 160GB 7200RPM SATA
+  - Ubuntu 14.04 LTS
 
 .. sidebar:: Page Contents
 
