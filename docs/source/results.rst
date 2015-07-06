@@ -108,20 +108,21 @@ Evaluation
      - LTR
      - Options
    * - MGEScan1.3.1
-     - 4 hrs 5mins (14,697 secs)
-     - 1hr 8mins (4,127 secs)
-     - 2 hrs 57 mins (10,570 secs)
+     - 3 hrs 34 mins (12,837 secs)
+     - 21 mins (1,256 secs)
+     - 3hrs 13 mins (11,581 secs)
      - HMMER 2.3.2, no MPI
    * - MGEScan2
-     - 2 hrs 36 mins (9,414 secs)
-     - 46 mins (2,780 secs)
-     - 2 hrs 36 mins (9,414 secs)
+     - 4 hrs 5 mins (14,727 secs)
+     - 9 mins (503 secs)
+     - 4hrs 5 mins (14,727 secs)
      - HMMER 3.1b1, no MPI
    * - MGEScan2 with MPI
-     - 1hr 3mins (3,823 secs)
-     - 4 mins  (222 secs)
-     - 1 hr 3mins (3,823 secs)
+     - 1hr 22mins (4,897 secs)
+     - 3 mins  (182 secs)
+     - 1 hr 22 mins (4,897 secs)
      - HMMER 3.1b1, MPI with 4 processors
+
 
 Extra Files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -148,22 +149,55 @@ Evaluation
      - LTR
      - Options
    * - MGEScan1.3.1
-     - 3 hrs 34 mins (12,837 secs)
-     - 21 mins (1,256 secs)
-     - 3hrs 13 mins (11,581 secs)
+     - 45 hrs 12 mins (162,723 secs)
+     - 6 hrs 34 mins  (23,644 secs)
+     - 38 hrs 37 mins (139,079 secs)
+     - HMMER 2.3.2
+   * - MGEScan2
+     - 67 hrs 13 mins (242,002 secs)
+     - 7 hrs 53 mins (28,392 secs)
+     - 67 hrs 13 mins (242,002 secs)
+     - HMMER 3.1b1, no MPI
+   * - MGEScan2 with MPI 
+     - 12 hrs 55 mins (46,550 secs)
+     - 2 hrs 36 mins (9,411 secs)
+     - 12 hrs 55 mins (46,550 secs)
+     - HMMER 3.1b1, MPI with 4 processors
+
+D. pulex (GCA_000187875.1)
+-------------------------------------------------------------------------------
+
+* :download:`dpulex.gff3 <sample/dpulex.gff3.txt>`
+* :download:`dpulex.ltr.out <sample/dpulex.ltr.out.txt>`
+* :download:`dpulex.en <sample/dpulex.en.txt>`
+* :download:`dpulex.rt <sample/dpulex.rt.txt>`
+
+Evaluation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table:: Elapsed time for MGEScan (dpulex)
+   :header-rows: 1
+
+   * - Program
+     - Total
+     - nonLTR
+     - LTR
+     - Options
+   * - MGEScan1.3.1
+     - 4 hrs 5mins (14,697 secs)
+     - 1hr 8mins (4,127 secs)
+     - 2 hrs 57 mins (10,570 secs)
      - HMMER 2.3.2, no MPI
    * - MGEScan2
-     - 4 hrs 5 mins (14,727 secs)
-     - 9 mins (503 secs)
-     - 4hrs 5 mins (14,727 secs)
+     - 2 hrs 36 mins (9,414 secs)
+     - 46 mins (2,780 secs)
+     - 2 hrs 36 mins (9,414 secs)
      - HMMER 3.1b1, no MPI
    * - MGEScan2 with MPI
-     - 1hr 22mins (4,897 secs)
-     - 3 mins  (182 secs)
-     - 1 hr 22 mins (4,897 secs)
+     - 1hr 3mins (3,823 secs)
+     - 4 mins  (222 secs)
+     - 1 hr 3mins (3,823 secs)
      - HMMER 3.1b1, MPI with 4 processors
 
 
-s. purpuratus   MGEScan1.3.1    No MPI  45 hrs 12 mins  162,723 secs    6 hrs 34 mins   23,644 secs     38 hrs 37 mins  139,079 secs
-MGEScan2        No MPI  67 hrs 13 mins  242,002 secs    7 hrs 53 mins   28,392 secs     67 hrs 13 mins  242,002 secs
-MGEScan2        MPI (4 Proc)    12 hrs 55 mins  46,550 secs     2 hrs 36 mins   9,411 secs      12 hrs 55 mins  46,550 secs
+
