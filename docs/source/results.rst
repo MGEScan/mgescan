@@ -128,13 +128,42 @@ Extra Files
 
 * :download:`KH.tar.gz <sample/KH.tar.gz>`
 
+S. purpuratus (strPur2)
+-------------------------------------------------------------------------------
 
-c. intestinalis exp1    MGEScan1.3.1    No MPI  3 hrs 34 mins   12,837 secs     21 mins 1,256 secs      3hrs 13 mins    11,581 secs
-MGEScan2        No MPI  2 hrs 23 mins   8,604 secs      　      42 secs 2 hrs 23 mins   8,604 secs
-MGEScan2        MPI (4 Proc)    50 mins 2,949 secs      　      13 secs 50 mins 2,949 secs
-c. intestinalis exp2    MGEScan1.3.1    No MPI  3 hrs 34 mins   12,837 secs     21 mins 1,256 secs      3hrs 13 mins    11,581 secs
-MGEScan2        No MPI  4 hrs 5 mins    14,727 secs     9 mins  503 secs        4hrs 5 mins     14,727 secs
-MGEScan2        MPI (4 Proc)    1hr 22mins      4,897 secs      3 mins  182 secs        1 hr 22 mins    4,897 secs
+* :download:`strPur2.gff3 <sample/strPur2.gff3.txt>`
+* :download:`strPur2.ltr.out <sample/strPur2.ltr.out.txt>`
+* :download:`strPur2.en <sample/strPur2.en.txt>`
+* :download:`strPur2.rt <sample/strPur2.rt.txt>`
+
+Evaluation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table:: Elapsed time for MGEScan (strPur2)
+   :header-rows: 1
+
+   * - Program
+     - Total
+     - nonLTR
+     - LTR
+     - Options
+   * - MGEScan1.3.1
+     - 3 hrs 34 mins (12,837 secs)
+     - 21 mins (1,256 secs)
+     - 3hrs 13 mins (11,581 secs)
+     - HMMER 2.3.2, no MPI
+   * - MGEScan2
+     - 4 hrs 5 mins (14,727 secs)
+     - 9 mins (503 secs)
+     - 4hrs 5 mins (14,727 secs)
+     - HMMER 3.1b1, no MPI
+   * - MGEScan2 with MPI
+     - 1hr 22mins (4,897 secs)
+     - 3 mins  (182 secs)
+     - 1 hr 22 mins (4,897 secs)
+     - HMMER 3.1b1, MPI with 4 processors
+
+
 s. purpuratus   MGEScan1.3.1    No MPI  45 hrs 12 mins  162,723 secs    6 hrs 34 mins   23,644 secs     38 hrs 37 mins  139,079 secs
 MGEScan2        No MPI  67 hrs 13 mins  242,002 secs    7 hrs 53 mins   28,392 secs     67 hrs 13 mins  242,002 secs
 MGEScan2        MPI (4 Proc)    12 hrs 55 mins  46,550 secs     2 hrs 36 mins   9,411 secs      12 hrs 55 mins  46,550 secs
