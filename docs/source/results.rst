@@ -87,9 +87,48 @@ Extra Files
 * :download:`CR1.en.pep <sample/dm3/data/info/full/CR1/CR1.en.pep.txt>`
 * :download:`nonltr.gff3 <sample/dm3/data/info/nonltr.gff3.txt>`
 
-d. pulex        MGEScan1.3.1    No MPI  4 hrs 5mins     14,697 secs     1hr 8mins       4,127 secs      2 hrs 57 mins   10,570 secs
-MGEScan2        No MPI  2 hrs 36 mins   9,414 secs      46 mins 2,780 secs      2 hrs 36 mins   9,414 secs
-MGEScan2        MPI (4 Proc)    1hr 3mins       3,823 secs      4 mins  222 secs        1 hr 3mins      3,823 secs
+C. intestinalis
+-------------------------------------------------------------------------------
+
+* :download:`KH.gff3 <sample/KH.gff3.txt>`
+* :download:`KH.ltr.out <sample/KH.ltr.out.txt>`
+* :download:`KH.en <sample/KH.en.txt>`
+* :download:`KH.rt <sample/KH.rt.txt>`
+
+
+Evaluation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table:: Elapsed time for MGEScan (KH)
+   :header-rows: 1
+
+   * - Program
+     - Total
+     - nonLTR
+     - LTR
+     - Options
+   * - MGEScan1.3.1
+     - 4 hrs 5mins (14,697 secs)
+     - 1hr 8mins (4,127 secs)
+     - 2 hrs 57 mins (10,570 secs)
+     - HMMER 2.3.2, no MPI
+   * - MGEScan2
+     - 2 hrs 36 mins (9,414 secs)
+     - 46 mins (2,780 secs)
+     - 2 hrs 36 mins (9,414 secs)
+     - HMMER 3.1b1, no MPI
+   * - MGEScan2 with MPI
+     - 1hr 3mins (3,823 secs)
+     - 4 mins  (222 secs)
+     - 1 hr 3mins (3,823 secs)
+     - HMMER 3.1b1, MPI with 4 processors
+
+Extra Files
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* :download:`KH.tar.gz <sample/KH.tar.gz>`
+
+
 c. intestinalis exp1    MGEScan1.3.1    No MPI  3 hrs 34 mins   12,837 secs     21 mins 1,256 secs      3hrs 13 mins    11,581 secs
 MGEScan2        No MPI  2 hrs 23 mins   8,604 secs      　      42 secs 2 hrs 23 mins   8,604 secs
 MGEScan2        MPI (4 Proc)    50 mins 2,949 secs      　      13 secs 50 mins 2,949 secs
