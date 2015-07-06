@@ -164,6 +164,12 @@ Evaluation
      - 12 hrs 55 mins (46,550 secs)
      - HMMER 3.1b1, MPI with 4 processors
 
+Extra Files
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* :download:`strPur2.tar.gz <sample/strPur2.tar.gz>`
+
+
 D. pulex (GCA_000187875.1)
 -------------------------------------------------------------------------------
 
@@ -199,5 +205,10 @@ Evaluation
      - 1 hr 3mins (3,823 secs)
      - HMMER 3.1b1, MPI with 4 processors
 
+
+Extra Files
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* :download:`dpulex.tar.gz <sample/dpulex.tar.gz>`
 
 
