@@ -1,6 +1,11 @@
 Test Results
 ===============================================================================
 
+.. sidebar:: Page Contents
+
+   .. contents::
+         :local:
+
 Four sample genomes were tested with MGEScan-LTR and MGEScan-nonLTR programs.
 
 * Test Environment: India Cluster on Futuresystems Cloud
@@ -10,11 +15,6 @@ Four sample genomes were tested with MGEScan-LTR and MGEScan-nonLTR programs.
    - 16 GB DDR3 1333 MHz
    - 160GB 7200RPM SATA
    - Ubuntu 14.04 LTS
-
-.. sidebar:: Page Contents
-
-   .. contents::
-         :local:
 
 D. melanogaster
 -------------------------------------------------------------------------------
