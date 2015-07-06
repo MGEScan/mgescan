@@ -15,38 +15,38 @@ Four sample genomes were tested with MGEScan-LTR and MGEScan-nonLTR programs.
 D. melanogaster
 -------------------------------------------------------------------------------
 
+* :download:`dm3.gff3 <sample/dm3.gff3.txt>`
+* :download:`dm3.ltr.out <sample/dm3.ltr.out.txt>`
+* :download:`dm3.en <sample/dm3.en.txt>`
+* :download:`dm3.rt <sample/dm3.rt.txt>`
+
+Evaluation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 .. list-table:: Elapsed time for MGEScan (dm3)
    :header-rows: 1
 
-   * - Dataset
-     - Program
+   * - Program
      - Total
      - nonLTR
      - LTR
      - Options
-   * - d. melanogaster
-     - MGEScan1.3.1
+   * - MGEScan1.3.1
      - 3 hrs 40 mins (13,220 secs)
      - 55 mins (3,320 secs)
      - 2 hrs 45 mins  (9,900 secs)
      - HMMER2, no MPI
-   * - d. melanogaster
-     - MGEScan2
+   * - MGEScan2
      - 2 hrs 35 mins (9,304 secs)
      - 19 mins (1,170 secs)
      - 2 hrs 35 mins (9,304 secs)
      - HMMER3.1b1, no MPI
-   * - d. melanogaster
-     - MGEScan2 with MPI
+   * - MGEScan2 with MPI
      - 1 hr 48 mins (6,502 secs)
      - 15 mins (929 secs)
      - 1 hr 48 mins (6,502 secs)
      - HMMER3.1b1, MPI with 4 processors
 
-* :download:`dm3.en <sample/dm3.en.txt>`
-* :download:`dm3.gff3 <sample/dm3.gff3.txt>`
-* :download:`dm3.rt <sample/dm3.rt.txt>`
-* :download:`dm3.ltr.out <sample/dm3.ltr.out.txt>`
 
 Extra Files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
