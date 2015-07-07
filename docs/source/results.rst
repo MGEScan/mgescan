@@ -213,3 +213,12 @@ Extra Files
 * :download:`dpulex.tar.gz <sample/dpulex.tar.gz>`
 
 
+Test Results with Previous MGEScan 1.3.1
+===============================================================================
+
+* d. melanogaster: :download:`dmelanogaster.old.tar.gz <sample/old/dm3.old.tar.gz>`
+* d. pulex: :download:`dpulex.old.tar.gz <sample/old/dpulex.old.tar.gz>`
+* c. intestinalis: :download:`KH.old.tar.gz <sample/old/KH.old.tar.gz>`
+* s. purpuratus: :download:`strPur2.old.tar.gz <sample/old/strPur2.old.tar.gz>`
+
+
