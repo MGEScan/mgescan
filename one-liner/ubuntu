@@ -1,6 +1,10 @@
 function package-install() {
+bash <<+END
 	sudo apt-get install $@;
+	exit $?
++END
 	return $?
+
 }
 function package-update() {
 	sudo apt-get update
