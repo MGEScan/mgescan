@@ -65,7 +65,7 @@ Evaluation
 Extra Files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* :download:`KH.tar.gz <sample/KH.tar.gz>` (Compressed file)
+* :download:`dm3.tar.gz <sample/dm3.tar.gz>` (Compressed file)
 * :download:`en <sample/dm3/data/info/validation/en.txt>`
 * :download:`rt <sample/dm3/data/info/validation/rt.txt>`
 * :download:`R2.rt.pep <sample/dm3/data/info/full/R2/R2.rt.pep.txt>`
