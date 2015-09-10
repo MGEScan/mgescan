@@ -12,8 +12,8 @@ Four sample genomes were tested with MGEScan-LTR and MGEScan-nonLTR programs.
    - D. melanogaster (dm3): `chromFa.tar.gz[ucsc] <http://hgdownload.soe.ucsc.edu/goldenPath/dm3/bigZips/chromFa.tar.gz>`
    - C. intestinalis (ci2): `ScaffoldFa.zip[ucsc] <http://hgdownload.soe.ucsc.edu/goldenPath/ci2/bigZips/ScaffoldFa.zip>`
    - D. pulex (GCA_000187875.1): `Daphnia_pulex[ensemblgenomes] <ftp://ftp.ensemblgenomes.org/pub/metazoa/release-28/fasta/daphnia_pulex/dna/Daphnia_pulex.GCA_000187875.1.28.dna.genome.fa.gz>`
-
-* Test Environment: Cloud instances of FutureSystems at Indiana University (http://futuresystems.org). 
+* Test Environment: 
+   Cloud instances of FutureSystems at Indiana University (http://futuresystems.org). 
 * Hardware Spec: 
    - Intel Xeon X5550 2.66GHz
    - 8 vCPUs
@@ -21,7 +21,6 @@ Four sample genomes were tested with MGEScan-LTR and MGEScan-nonLTR programs.
    - 160GB 7200RPM SATA
 * Operating System:
    - Ubuntu 14.04 LTS
-
 
 Table 1. Experimental results on throughput improvement
 
@@ -66,14 +65,7 @@ Evaluation
 Extra Files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Compressed file
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-* :download:`KH.tar.gz <sample/KH.tar.gz>`
-
-Single files (View on the web)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+* :download:`KH.tar.gz <sample/KH.tar.gz>` (Compressed file)
 * :download:`en <sample/dm3/data/info/validation/en.txt>`
 * :download:`rt <sample/dm3/data/info/validation/rt.txt>`
 * :download:`R2.rt.pep <sample/dm3/data/info/full/R2/R2.rt.pep.txt>`
