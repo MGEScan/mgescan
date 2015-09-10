@@ -8,10 +8,10 @@ Test Results
 
 Four sample genomes were tested with MGEScan-LTR and MGEScan-nonLTR programs.
 
-:download:`chromFa.tar.gz <http://hgdownload.soe.ucsc.edu/goldenPath/dm3/bigZips/chromFa.tar.gz>`_
+:download: `chromFa.tar.gz <http://hgdownload.soe.ucsc.edu/goldenPath/dm3/bigZips/chromFa.tar.gz>`_
 
 * Test genome sequences:
-   - D. melanogaster (dm3): :download:`chromFa.tar.gz <http://hgdownload.soe.ucsc.edu/goldenPath/dm3/bigZips/chromFa.tar.gz>`_
+   - D. melanogaster (dm3) :download: `chromFa.tar.gz <http://hgdownload.soe.ucsc.edu/goldenPath/dm3/bigZips/chromFa.tar.gz>`_
    - C. intestinalis (ci2): :download:`ScaffoldFa.zip <http://hgdownload.soe.ucsc.edu/goldenPath/ci2/bigZips/ScaffoldFa.zip>`_
    - D. pulex (GCA_000187875.1): :download:`Daphnia_pulex <ftp://ftp.ensemblgenomes.org/pub/metazoa/release-28/fasta/daphnia_pulex/dna/Daphnia_pulex.GCA_000187875.1.28.dna.genome.fa.gz>`_
 * Test Environment: 
