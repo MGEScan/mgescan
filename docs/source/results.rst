@@ -8,7 +8,12 @@ Test Results
 
 Four sample genomes were tested with MGEScan-LTR and MGEScan-nonLTR programs.
 
-* Test Environment: India Cluster on Futuresystems Cloud
+* Test genome sequences:
+   - D. melanogaster (dm3): http://hgdownload.soe.ucsc.edu/goldenPath/dm3/bigZips/chromFa.tar.gz
+   - C. intestinalis (ci2): http://hgdownload.soe.ucsc.edu/goldenPath/ci2/bigZips/ScaffoldFa.zip
+   - D. pulex (GCA_000187875.1): ftp://ftp.ensemblgenomes.org/pub/metazoa/release-28/fasta/daphnia_pulex/dna/Daphnia_pulex.GCA_000187875.1.28.dna.genome.fa.gz
+
+* Test Environment: Cloud instances of FutureSystems at Indiana University (http://futuresystems.org). 
 * Hardware Spec: 
    - Intel Xeon X5550 2.66GHz
    - 8 vCPUs
@@ -16,6 +21,11 @@ Four sample genomes were tested with MGEScan-LTR and MGEScan-nonLTR programs.
    - 160GB 7200RPM SATA
 * Operating System:
    - Ubuntu 14.04 LTS
+
+
+Table 1. Experimental results on throughput improvement
+
+.. image:: images/mgescan-test-results.png
 
 D. melanogaster (dm3)
 -------------------------------------------------------------------------------
@@ -55,6 +65,14 @@ Evaluation
 
 Extra Files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Compressed file
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+* :download:`KH.tar.gz <sample/KH.tar.gz>`
+
+Single files (View on the web)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 * :download:`en <sample/dm3/data/info/validation/en.txt>`
 * :download:`rt <sample/dm3/data/info/validation/rt.txt>`
@@ -100,7 +118,7 @@ C. intestinalis (KH)
 Evaluation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. list-table:: Elapsed time for MGEScan (KH)
+.. list-table:: Elapsed time for C. intestinalis
    :header-rows: 1
 
    * - Program
@@ -109,19 +127,19 @@ Evaluation
      - LTR
      - Options
    * - MGEScan1.3.1
-     - 3 hrs 34 mins (12,837 secs)
-     - 21 mins (1,256 secs)
-     - 3hrs 13 mins (11,581 secs)
+     - 5 hours 18 minutes 36 seconds
+     - 34 minutes 47 seconds
+     - 4 hours 43 minutes 49 seconds
      - HMMER 2.3.2, no MPI
    * - MGEScan2
-     - 4 hrs 5 mins (14,727 secs)
-     - 9 mins (503 secs)
-     - 4hrs 5 mins (14,727 secs)
+     - 4 hours 5 minutes 27 seconds
+     - 9 minutes 23 seconds
+     - 4 hours 5 minutes 27 seconds
      - HMMER 3.1b1, no MPI
    * - MGEScan2 with MPI
-     - 1hr 22mins (4,897 secs)
-     - 3 mins  (182 secs)
-     - 1 hr 22 mins (4,897 secs)
+     - 1 hour 22 minutes 37 seconds
+     - 3 minutes 2 seconds
+     - 1 hour 22 minutes 37 seconds
      - HMMER 3.1b1, MPI with 4 processors
 
 
@@ -138,32 +156,34 @@ S. purpuratus (strPur2)
 * :download:`strPur2.en <sample/strPur2.en.txt>`
 * :download:`strPur2.rt <sample/strPur2.rt.txt>`
 
-Evaluation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..
 
-.. list-table:: Elapsed time for MGEScan (strPur2)
-   :header-rows: 1
+        Evaluation
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-   * - Program
-     - Total
-     - nonLTR
-     - LTR
-     - Options
-   * - MGEScan1.3.1
-     - 45 hrs 12 mins (162,723 secs)
-     - 6 hrs 34 mins  (23,644 secs)
-     - 38 hrs 37 mins (139,079 secs)
-     - HMMER 2.3.2
-   * - MGEScan2
-     - 67 hrs 13 mins (242,002 secs)
-     - 7 hrs 53 mins (28,392 secs)
-     - 67 hrs 13 mins (242,002 secs)
-     - HMMER 3.1b1, no MPI
-   * - MGEScan2 with MPI 
-     - 12 hrs 55 mins (46,550 secs)
-     - 2 hrs 36 mins (9,411 secs)
-     - 12 hrs 55 mins (46,550 secs)
-     - HMMER 3.1b1, MPI with 4 processors
+        .. list-table:: Elapsed time for MGEScan (strPur2)
+           :header-rows: 1
+
+           * - Program
+             - Total
+             - nonLTR
+             - LTR
+             - Options
+           * - MGEScan1.3.1
+             - 45 hrs 12 mins (162,723 secs)
+             - 6 hrs 34 mins  (23,644 secs)
+             - 38 hrs 37 mins (139,079 secs)
+             - HMMER 2.3.2
+           * - MGEScan2
+             - 67 hrs 13 mins (242,002 secs)
+             - 7 hrs 53 mins (28,392 secs)
+             - 67 hrs 13 mins (242,002 secs)
+             - HMMER 3.1b1, no MPI
+           * - MGEScan2 with MPI 
+             - 12 hrs 55 mins (46,550 secs)
+             - 2 hrs 36 mins (9,411 secs)
+             - 12 hrs 55 mins (46,550 secs)
+             - HMMER 3.1b1, MPI with 4 processors
 
 Extra Files
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
