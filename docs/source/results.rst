@@ -8,6 +8,8 @@ Test Results
 
 Four sample genomes were tested with MGEScan-LTR and MGEScan-nonLTR programs.
 
+:download:`chromFa.tar.gz <http://hgdownload.soe.ucsc.edu/goldenPath/dm3/bigZips/chromFa.tar.gz>`_
+
 * Test genome sequences:
    - D. melanogaster (dm3): :download:`chromFa.tar.gz <http://hgdownload.soe.ucsc.edu/goldenPath/dm3/bigZips/chromFa.tar.gz>`_
    - C. intestinalis (ci2): :download:`ScaffoldFa.zip <http://hgdownload.soe.ucsc.edu/goldenPath/ci2/bigZips/ScaffoldFa.zip>`_
