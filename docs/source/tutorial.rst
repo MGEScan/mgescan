@@ -230,12 +230,12 @@ data.
 UCSC Genome Browser (Example View)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-.. image:: images/rtm-ltr-gff3-ucsc-browser.png
+.. image:: images/mgescan-ltr-gff3-ucsc-browser.png
 
 Ensembl (Example View)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-.. image:: images/rtm-ltr-gff3-ensembl.png
+.. image:: images/mgescan-ltr-gff3-ensembl.png
 
 Additional Options
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -255,5 +255,5 @@ Description of tools
 
 Each tool in Galaxy has its description to explain how to use.
 
-.. image:: images/rtm-description.png
+.. image:: images/mgescan-description.png
 
