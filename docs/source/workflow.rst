@@ -64,7 +64,7 @@ Registered Workflow in Local
 Once you completed composing/updating workflow, you can save your work on
 local. You can download and store workflow file on your storage.
 
-.. image:: images/rtm-private-workflow.png
+.. image:: images/mgescan-private-workflow.png
 
 Registered Workflow in Public Server (usegalaxy.org)
 -------------------------------------------------------------------------------
