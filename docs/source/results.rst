@@ -140,15 +140,16 @@ Extra Files
 
 * :download:`KH.tar.gz <sample/KH.tar.gz>`
 
-S. purpuratus (strPur2)
--------------------------------------------------------------------------------
+.. comment::
 
-* :download:`strPur2.gff3 <sample/strPur2.gff3.txt>`
-* :download:`strPur2.ltr.out <sample/strPur2.ltr.out.txt>`
-* :download:`strPur2.en <sample/strPur2.en.txt>`
-* :download:`strPur2.rt <sample/strPur2.rt.txt>`
+        S. purpuratus (strPur2)
+        -------------------------------------------------------------------------------
 
-..
+        * :download:`strPur2.gff3 <sample/strPur2.gff3.txt>`
+        * :download:`strPur2.ltr.out <sample/strPur2.ltr.out.txt>`
+        * :download:`strPur2.en <sample/strPur2.en.txt>`
+        * :download:`strPur2.rt <sample/strPur2.rt.txt>`
+
 
         Evaluation
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
