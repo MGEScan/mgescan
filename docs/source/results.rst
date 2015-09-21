@@ -9,9 +9,9 @@ Test Results
 Four sample genomes were tested with MGEScan-LTR and MGEScan-nonLTR programs.
 
 * Test genome sequences:
-   - D. melanogaster (dm3): http://hgdownload.soe.ucsc.edu/goldenPath/dm3/bigZips/chromFa.tar.gz
-   - C. intestinalis (ci2): http://hgdownload.soe.ucsc.edu/goldenPath/ci2/bigZips/ScaffoldFa.zip
-   - D. pulex (GCA_000187875.1): ftp://ftp.ensemblgenomes.org/pub/metazoa/release-28/fasta/daphnia_pulex/dna/Daphnia_pulex.GCA_000187875.1.28.dna.genome.fa.gz
+   - D. melanogaster (dm3): `ucsc <http://hgdownload.soe.ucsc.edu/goldenPath/dm3/bigZips/chromFa.tar.gz>`_
+   - C. intestinalis (ci2): `ucsc <http://hgdownload.soe.ucsc.edu/goldenPath/ci2/bigZips/ScaffoldFa.zip>`_
+   - D. pulex (GCA_000187875.1): `Ensembl Genomes <ftp://ftp.ensemblgenomes.org/pub/metazoa/release-28/fasta/daphnia_pulex/dna/Daphnia_pulex.GCA_000187875.1.28.dna.genome.fa.gz>`_
 * Test Environment: 
    Cloud instances of FutureSystems at Indiana University (http://futuresystems.org). 
 * Hardware Spec: 
@@ -22,7 +22,8 @@ Four sample genomes were tested with MGEScan-LTR and MGEScan-nonLTR programs.
 * Operating System:
    - Ubuntu 14.04 LTS
 
-Table 1. Experimental results on throughput improvement
+.. Table 1. Experimental results on throughput improvement
+**Test Genome Sequences**
 
 .. image:: images/mgescan-test-results.png
 
