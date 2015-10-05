@@ -6,12 +6,16 @@ Galaxy Workflow System helps display results using genome browsers such as UCSC 
 UCSC Genome Browser
 -------------------
 
-.. image:: images/mgescan-ltr-gff3-ensembl.png
-
-Ensembl
--------
-
 .. image:: images/mgescan-ltr-gff3-ucsc-browser.png
+
+
+.. comment:
+
+ Ensembl
+ -------
+
+ .. image:: images/mgescan-ltr-gff3-ensembl.png
+
 
 Source Code
 -----------
