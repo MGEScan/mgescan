@@ -197,7 +197,7 @@ sub call_find_ltr_for_each_chr{   #$genome_dir, $main_dir, $ltr_dir, $ltr_data_d
 		# mpirun -n 1 -mca btl ^openib /nfs/nfs4/home/lee212/github/mgescan/mgescan/ltr/../mpi_mgescan --prg ltr --genome /scratch/lee212/test-results/mgescan2/ltr/dmelanogaster/genome/ --data /scratch/lee212/test-results/mgescan2/ltr/dmelanogaster/ltr/ltr/ --hmmerv 3
 		#
 		if ($host eq "silo.soic.indiana.edu") {
-			$command = "module load openmpi-x86_64;" . $command;
+			$command = "module load mpi/openmpi-x86_64;" . $command;
 		}
 		system($command);		
 	} else {
