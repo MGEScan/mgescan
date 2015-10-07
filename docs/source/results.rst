@@ -219,7 +219,7 @@ Evaluation
      - HMMER 3.1b1, no MPI
    * - MGEScan2 with MPI
      - 1hr 3mins (3,823 secs)
-     - 4 mins  (222 secs)
+     - 15 mins  (878 secs)
      - 1 hr 3mins (3,823 secs)
      - HMMER 3.1b1, MPI with 4 processors
 
