@@ -209,7 +209,7 @@ sub get_domain_pep_seq{
 			#	}
 		}
 	}else{
-		my $hmm_command = "hmmsearch  ".$_[1]." ".$_[0];
+		my $hmm_command = "hmm2search  ".$_[1]." ".$_[0];
 		my $hmm_result = `$hmm_command`;
 		while ($hmm_result =~ /((\d|\w|\-|\_|\#|\/|\.)+\s+\d+\/\d+\s+\d+\s+\d+\s+(\[|\.)(\]|\.)\s+\d+\s+\d+\s+(\[|\.)(\]|\.)\s+(\-)*\d+\.\d+\s+((\d|\-|\.|e)+))\s*/g){
 			my @temp = split(/\s+/, $1);
@@ -299,7 +299,7 @@ sub get_domain_dna_seq{
 			}
 		}
 	}else{
-		my $hmm_command = "hmmsearch  ".$_[1]." ".$_[0];
+		my $hmm_command = "hmm2search  ".$_[1]." ".$_[0];
 		my $hmm_result = `$hmm_command`;
 
 		while ($hmm_result =~ /((\d|\w|\-|\_|\#|\/|\.)+\s+\d+\/\d+\s+\d+\s+\d+\s+(\[|\.)(\]|\.)\s+\d+\s+\d+\s+(\[|\.)(\]|\.)\s+(\-)*\d+\.\d+\s+((\d|\-|\.|e)+))\s*/g){
@@ -408,7 +408,7 @@ sub vote_hmmsearch{
 				}
 			}
 		}else{
-			my $command = "hmmsearch ".$_[1].$line[$i].".".$_[2].".hmm ".$_[0];
+			my $command = "hmm2search ".$_[1].$line[$i].".".$_[2].".hmm ".$_[0];
 			my $hmm_result = `$command`;
 
 			while ($hmm_result =~ /((\d|\w|\-|\_|\#|\/|\.)+\s+\d+\/\d+\s+\d+\s+\d+\s+(\[|\.)(\]|\.)\s+\d+\s+\d+\s+(\[|\.)(\]|\.)\s+\-*\d+\.\d+\s+((\d|\-|\.|e)+))\s*/g){

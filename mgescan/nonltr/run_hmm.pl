@@ -129,7 +129,7 @@ sub get_signal_domain{
 		}
 
 	}else{
-		my $hmm_command = "hmmsearch  -E 0.00001 ".${$_[1]}." ".${$_[0]};
+		my $hmm_command = "hmm2search  -E 0.00001 ".${$_[1]}." ".${$_[0]};
 		my $hmm_result = `$hmm_command`;
 		# run hmmsearch to find the domain and save it in the temprary file    
 		while ($hmm_result =~ /((\S)+\s+\d+\/\d+\s+\d+\s+\d+\s+(\[|\.)(\]|\.)\s+\d+\s+\d+\s+(\[|\.)(\]|\.)\s+(-)*\d+\.\d+\s+((\d|\-|\.|e)+))\s*/g){

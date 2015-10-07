@@ -1265,7 +1265,7 @@ sub find_domain{ #$file3, $file4
 
 		}else{
 			#system("hmmconvert -F ".$tool_pfam.$rt[$j]." ".$tool_pfam."c_".$rt[$j]);
-			my $temp_tool="hmmsearch -E 0.000001 ".$tool_pfam."".$rt[$j]." ".$_[1];
+			my $temp_tool="hmm2search -E 0.000001 ".$tool_pfam."".$rt[$j]." ".$_[1];
 			my $str = `$temp_tool`;
 
 			if ($str =~ /\s---\n(\d+\_\d\s+\d+\.\d+\s+((\d|\-|\.|e)+))\s/){
@@ -1344,7 +1344,7 @@ sub find_domain{ #$file3, $file4
 				}
 			}else{
 				#system("hmmconvert -F ".$tool_pfam.$pf[$j]." ".$tool_pfam."c_".$pf[$j]);
-				my $temp_tool="hmmsearch -E 0.000001 ".$tool_pfam."".$pf[$j]." ".$_[1];
+				my $temp_tool="hmm2search -E 0.000001 ".$tool_pfam."".$pf[$j]." ".$_[1];
 				my $str = `$temp_tool`;
 
 				if ($str =~ /\s---\n(\d+\_\d\s+\d+\.\d+\s+((\d|\-|\.|e)+))\s/){

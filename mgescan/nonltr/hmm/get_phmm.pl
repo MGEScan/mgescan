@@ -67,7 +67,7 @@ if ($hmmerv == 3){
 		}
 	}
 }else{
-	$command = "hmmsearch ".$phmm_file." ".$pep_file;
+	$command = "hmm2search ".$phmm_file." ".$pep_file;
 	#print $command;
 	$hmm_result = `$command`;
 	 
