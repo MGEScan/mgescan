@@ -33,13 +33,14 @@ MGEScan Machine Image
 
 In AWS Management Console, open *EC2 Dashboard > Launch Instance*. To choose an
 Amazon Machine Image (AMI) of MGEScan, select *Community AMIs* on the left tab,
-and search by name or id, e.g. mgescan or ami-394ebd52.
+and search by name or id, e.g. mgescan or ami-394ebd52. (US East Region Only)
 
 .. image:: images/aws-finding-image.png
 
 MGEScan EC2 Image Information
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+* Region: US East
 * Image Name: MGEScan
 * ID: ami-394ebd52
 * Server type: 64bit
