@@ -10,7 +10,8 @@ Four sample genomes were tested with MGEScan-LTR and MGEScan-nonLTR programs.
 
 * Test genome sequences:
    - D. melanogaster (dm3): `ucsc <http://hgdownload.soe.ucsc.edu/goldenPath/dm3/bigZips/chromFa.tar.gz>`_
-   - C. intestinalis (ci2): `ucsc <http://hgdownload.soe.ucsc.edu/goldenPath/ci2/bigZips/ScaffoldFa.zip>`_
+   - C. intestinalis (KH): `Ensembl <ftp://ftp.ensembl.org/pub/release-82/fasta/ciona_intestinalis/dna/Ciona_intestinalis.KH.dna.toplevel.fa.gz>`_   
+..   - C. intestinalis (ci2): `ucsc <http://hgdownload.soe.ucsc.edu/goldenPath/ci2/bigZips/ScaffoldFa.zip>`_
    - D. pulex (GCA_000187875.1): `Ensembl Genomes <ftp://ftp.ensemblgenomes.org/pub/metazoa/release-28/fasta/daphnia_pulex/dna/Daphnia_pulex.GCA_000187875.1.28.dna.genome.fa.gz>`_
 * Test Environment: 
    Cloud instances of FutureSystems at Indiana University (http://futuresystems.org). 
