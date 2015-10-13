@@ -126,6 +126,7 @@ Usage:
 Amazon Cloud Image (EC2)
 -------------------------------------------------------------------------------
 
+* US East Region Only
 * MGEScan - ami-394ebd52 (latest version)
 * retrotminer-alpha - ami-23d9c74a (created at 2014)
 
