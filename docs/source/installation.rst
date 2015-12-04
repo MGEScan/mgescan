@@ -37,6 +37,7 @@ Start a Galaxy/MGEscan web server with a default port ``38080``.
 
 ::
 
+  source ~/.mgescanrc
   cd $GALAXY_HOME
   nohup sh run.sh &
 
