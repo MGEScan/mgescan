@@ -4,7 +4,7 @@ MGESCan on Amazon Cloud (EC2)
 ===============================================================================
 
 With Amazon Cloud Web Services, a virtual single or distributed system for
-MGEScan can be easily deployed. MGEScan (Amazon machine image ID: ami-394ebd52 
+MGEScan can be easily deployed. MGEScan (Amazon machine image ID: ami-10672b7a 
 on 'US East' region)
 is available to create our Galaxy-based system for MGEScan which is identifying
 long terminal repeats (LTR) and non-LTR retroelements in eukaryotic genomic
@@ -33,7 +33,7 @@ MGEScan Machine Image
 
 In AWS Management Console, open *EC2 Dashboard > Launch Instance*. To choose an
 Amazon Machine Image (AMI) of MGEScan, select *Community AMIs* on the left tab,
-and search by name or id, e.g. mgescan or ami-394ebd52. (US East Region Only)
+and search by name or id, e.g. mgescan or ami-10672b7a. (US East Region Only)
 
 .. image:: images/aws-finding-image.png
 
@@ -42,7 +42,7 @@ MGEScan EC2 Image Information
 
 * Region: US East
 * Image Name: MGEScan
-* ID: ami-394ebd52
+* ID: ami-10672b7a
 * Server type: 64bit
 * Description: MGEscan on Galaxy for identifying LTR and nonLTR
 * Root device type: ebs 
@@ -85,7 +85,7 @@ security group" is selected as a default with a 22 SSH port opened to anywhere.
 
 * Find out public IP address and open a web browser with the address. e.g.
   http://[IP address]:38080
-  *Don't forget port number 38080*
+  *Don't forget the port number 38080*
 
 Access to MGEScan Instance
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -94,7 +94,7 @@ Once the MGEScan instance is launched and accessible, galaxy scientific
 workflow system for MGEScan and SSH connection are avabilable through given dns
 name.
 
-[screenshot]
+.. [screenshot]
 
 Ready To Use
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
