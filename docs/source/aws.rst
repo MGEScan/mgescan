@@ -59,6 +59,8 @@ Ohter options are available to have large instance e.g. 40 vCPUs. Click
 .. tip:: t2.micro: (Variable ECUs, 1 vCPUs, 2.5 GHz, Intel Xeon Family, 1 GiB
          memory, EBS only)
 
+.. image:: images/EC-3.JPG
+
 Security Group for Web
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
