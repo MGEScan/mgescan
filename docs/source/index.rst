@@ -13,11 +13,11 @@ supported for MGEScan-LTR and MGEScan-nonLTR programs so the better performance
 is guaranteed than previous version of MGEScan. Cloud image is available on
 Amazon Cloud (EC2) to utilize on-demand computing resources for data analysis.
 
-Try MGEScan on Futuresystems.org here: |Click|.
+**Try MGEScan here: |Click|.**
 
 .. |Click| raw:: html
 
-   <a href="http://149.165.159.125:38080/" target="_blank">MGEScan on OpenStack Cloud</a>
+   <a href="http://149.165.159.125:38080/" target="_blank">MGEScan on OpenStack Cloud (on Futuresystems.org)</a>
    
 The documentation provides basic tutorials of using MGEScan on Galaxy
 Workflow system and additional information such as installation and use of
