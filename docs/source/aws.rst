@@ -111,6 +111,10 @@ The MGEScan is now ready to conduct your experiment on Amazon EC2.
 .. Note:: Do not forget to terminate your virtual instance after all analysis
    completed. Amazon Cloud charges use of VM instances hourly.
 
+Terminating AWS Instance:
+
+.. image:: images/EC-11.JPG
+
 Note
 -------------------------------------------------------------------------------
 
