@@ -73,7 +73,7 @@ Through Galaxy Public Workflow Website, your workflow can be shared with other
 scientists and researchers. MGEScan workflow has been registed on
 https://usegalaxy.org/workflow/list_published.
 
-.. image:: images/rtm-public-workflow.png
+.. image:: images/mgescan-public-workflow.png
 
 Overview of MGEScan Workflow (Draft)
 -------------------------------------------------------------------------------
