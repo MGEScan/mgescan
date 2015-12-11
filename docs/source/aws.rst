@@ -87,6 +87,11 @@ security group" is selected as a default with a 22 SSH port opened to anywhere.
   http://[IP address]:38080
   *Don't forget the port number 38080*
 
+
+.. image:: images/EC-5.JPG
+
+.. image:: images/EC-9.JPG
+
 Access to MGEScan Instance
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -94,7 +99,7 @@ Once the MGEScan instance is launched and accessible, galaxy scientific
 workflow system for MGEScan and SSH connection are avabilable through given dns
 name.
 
-.. [screenshot]
+.. image:: images/EC-10.JPG
 
 Ready To Use
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
