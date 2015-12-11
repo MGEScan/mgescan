@@ -13,7 +13,7 @@ supported for MGEScan-LTR and MGEScan-nonLTR programs so the better performance
 is guaranteed than previous version of MGEScan. Cloud image is available on
 Amazon Cloud (EC2) to utilize on-demand computing resources for data analysis.
 
-**Try MGEScan here: |Click|.**
+**Try MGEScan here:** |Click|.
 
 .. |Click| raw:: html
 
