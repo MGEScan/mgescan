@@ -11,7 +11,7 @@ function package-update() {
 	return $?
 }
 package-update
-package-install python-virtualenv python-dev git -y
+package-install python-virtualenv python-dev git gcc -y
 cat <<EOF > $HOME/.mgescanrc
 export MGESCAN_HOME=\$HOME/mgescan3
 export MGESCAN_SRC=\$MGESCAN_HOME/src
