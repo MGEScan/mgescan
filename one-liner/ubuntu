@@ -34,9 +34,9 @@ mkdir -p $TRF_HOME
 wget http://tandem.bu.edu/trf/downloads/trf407b.linux64 -P $TRF_HOME
 cd $MGESCAN_HOME
 git clone https://github.com/MGEScan/mgescan.git
-ln -s mgescan src
+ln -sf mgescan src
 cd $MGESCAN_SRC
 python setup.py install
 cp -pr $MGESCAN_SRC/galaxy-modified/* $GALAXY_HOME
-ln -s $TRF_HOME/trf407b.linux64 $MGESCAN_VENV/bin/trf
+ln -sf $TRF_HOME/trf407b.linux64 $MGESCAN_VENV/bin/trf
 chmod 700 $MGESCAN_VENV/bin/trf
