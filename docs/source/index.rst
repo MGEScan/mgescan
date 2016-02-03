@@ -18,6 +18,8 @@ Amazon Cloud (EC2) to utilize on-demand computing resources for data analysis.
 .. |Click| raw:: html
 
    <a href="http://149.165.159.125:38080/" target="_blank">MGEScan on OpenStack Cloud (on Futuresystems.org)</a>
+
+.. note:: Every first Tuesday of the month is a maintenance day on FutureSystems and MGEScan is unavailable until it's completed.
    
 The documentation provides basic tutorials of using MGEScan on Galaxy
 Workflow system and additional information such as installation and use of
