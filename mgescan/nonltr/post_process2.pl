@@ -3,6 +3,7 @@ use strict;
 use Getopt::Long;
 use Cwd 'abs_path';
 use File::Basename;
+use File::Temp qw/ tempfile unlink0 /;
 
 my $pdir = dirname(abs_path($0))."/";
 my $hmm_dir = $pdir."pHMM/";
@@ -188,12 +189,23 @@ sub get_domain_pep_seq{
 	my %result_start=();
 	my %result_end=();
 	my %uniq_head=();
+	my $fh;
+	my $tmpfile;
+	my $hmm_result;
+
+	($fh, $tmpfile) = tempfile( UNLINK => 1, SUFFIX => '.tbl');
+
 	if ($hmmerv == 3){
 		#system("hmmconvert ".$_[1]." > ".$_[1]."c");
 		#system("hmmsearch  --noali --domtblout ".$hmm_dir."tbl ".$_[1]."c ".$_[0]." > /dev/null");
-		system("hmmsearch  --noali --domtblout ".$hmm_dir."tbl ".$_[1]."3 ".$_[0]." > /dev/null");
-		my $hmm_command = "cat ".$hmm_dir."tbl";
-		my $hmm_result = `$hmm_command`;
+		#system("hmmsearch  --noali --domtblout ".$hmm_dir."tbl ".$_[1]."3 ".$_[0]." > /dev/null");
+		system("hmmsearch --noali --domtblout ".$tmpfile." ".$_[1]."3 ".$_[0]." > /dev/null");
+		#my $hmm_command = "cat ".$hmm_dir."tbl";
+		#my $hmm_result = `$hmm_command`;
+		local $/ = undef;
+		$hmm_result = <$fh>;
+		close $fh;
+		unlink0($fh, $tmpfile);
 		while ($hmm_result =~ /\n((?!#).*)\n/g){
 			my @temp = split(/\s+/, $1);
 			#	if ($temp[9]<0.000001 ){
@@ -274,12 +286,23 @@ sub get_domain_dna_seq{
 	my %result_start=();
 	my %result_end=();
 	my %uniq_head=();
+	my $fh;
+	my $tmpfile;
+	my $hmm_result;
+
+	($fh, $tmpfile) = tempfile( UNLINK => 1, SUFFIX => '.tbl');
+
 	if ($hmmerv == 3){
 		#system("hmmconvert ".$_[1]." > ".$_[1]."c");
 		#system("hmmsearch  --noali --domtblout ".$hmm_dir."tbl ".$_[1]."c ".$_[0]." > /dev/null");
-		system("hmmsearch  --noali --domtblout ".$hmm_dir."tbl ".$_[1]."3 ".$_[0]." > /dev/null");
-		my $hmm_command = "cat ".$hmm_dir."tbl";
-		my $hmm_result = `$hmm_command`;
+		#system("hmmsearch  --noali --domtblout ".$hmm_dir."tbl ".$_[1]."3 ".$_[0]." > /dev/null");
+		system("hmmsearch  --noali --domtblout ".$tmpfile." ".$_[1]."3 ".$_[0]." > /dev/null");
+		#my $hmm_command = "cat ".$hmm_dir."tbl";
+		#my $hmm_result = `$hmm_command`;
+		local $/ = undef;
+		$hmm_result = <$fh>;
+		close $fh;
+		unlink0($fh, $tmpfile);
 
 		while ($hmm_result =~ /\n((?!#).*)\n/g){
 			my @temp = split(/\s+/, $1);
@@ -358,39 +381,47 @@ sub get_domain_dna_seq{
 
 sub vote_hmmsearch{
 
-    my @line = @{$_[5]};
-    my %evalue;
-    my %save_evalue;
-    my %clade;
-    my %sig;
-    my $i;
-    my $anno_clade; 
-    
-    if (-z $_[0]){
-	return;
-    }
+	my @line = @{$_[5]};
+	my %evalue;
+	my %save_evalue;
+	my %clade;
+	my %sig;
+	my $i;
+	my $anno_clade; 
 
-    open (IN, $_[0]);
-    while(my $each_line=<IN>){
-	if ($each_line=~ /\>/){
-	    chomp($each_line);
-	    my $uniq_key = substr($each_line,1,length($each_line)-1);
-	    $evalue{$uniq_key} = 1000;
-	    $save_evalue{$uniq_key} = 1000;
-	    $clade{$uniq_key} = "-";
-	    $sig{$uniq_key} = 1;
+	if (-z $_[0]){
+		return;
 	}
-    }
-    close(IN);
 
-    for ($i=0; $i<=$#line; $i++){
+	open (IN, $_[0]);
+	while(my $each_line=<IN>){
+		if ($each_line=~ /\>/){
+			chomp($each_line);
+			my $uniq_key = substr($each_line,1,length($each_line)-1);
+			$evalue{$uniq_key} = 1000;
+			$save_evalue{$uniq_key} = 1000;
+			$clade{$uniq_key} = "-";
+			$sig{$uniq_key} = 1;
+		}
+	}
+	close(IN);
 
+	my $fh;
+	my $tmpfile;
+	my $hmm_result;
+
+	for ($i=0; $i<=$#line; $i++){
+		($fh, $tmpfile) = tempfile( UNLINK => 1, SUFFIX => '.tbl');
 		if ($hmmerv == 3){
 			#system("hmmconvert ".$_[1].$line[$i].".".$_[2].".hmm "." > ".$_[1].$line[$i].".".$_[2].".hmmc");
 			#system("hmmsearch --noali --domtblout ".$hmm_dir."tbl ".$_[1].$line[$i].".".$_[2].".hmmc ".$_[0]." > /dev/null");
-			system("hmmsearch --noali --domtblout ".$hmm_dir."tbl ".$_[1].$line[$i].".".$_[2].".hmm3 ".$_[0]." > /dev/null");
-			my $command = "cat ".$hmm_dir."tbl";
-			my $hmm_result = `$command`;
+			system("hmmsearch --noali --domtblout ".$tmpfile." ".$_[1].$line[$i].".".$_[2].".hmm3 ".$_[0]." > /dev/null");
+			#my $command = "cat ".$hmm_dir."tbl";
+			#my $hmm_result = `$command`;
+			local $/ = undef;
+			$hmm_result = <$fh>;
+			close $fh;
+			unlink0($fh, $tmpfile);
 
 			while ($hmm_result =~ /\n((?!#).*)\n/g){
 				my @temp = split(/\s+/, $1);
