@@ -22,6 +22,8 @@ my $hmmerv;
 my $nmpi;
 my $host = hostname;
 
+my $debug;
+$debug = $ENV{'MGESCAN_DEBUG'};
 
 print "\n\n";
 GetOptions(
@@ -96,8 +98,8 @@ if ($nmpi) {
 
 			my $plus_dna_file = $plus_dna_dir.$name;
 			my $command = $program_dir."run_hmm.pl --dna=".$plus_dna_file."  --out=".$plus_out_dir." --hmmerv=".$hmmerv;
-			system($command);
-			#printf $command."\n";
+			printf $command."\n" if ($debug);
+			#system($command);
 		}
 	}
 }
@@ -109,8 +111,8 @@ system("rm -f ".$plus_out_dir."out1/ppppp.*");
 system("rm -f ".$plus_out_dir."out1/qqqqq.*");
 
 my $command = $program_dir."post_process.pl --dna=".$plus_dna_dir." --out=".$plus_out_dir." --rev=0";
-#printf $command."\n";
-system($command);
+printf $command."\n" if ($debug);
+#system($command);
 
 
 ############################################
@@ -134,8 +136,8 @@ if ($nmpi) {
 		if ($name !~ /^\./){  
 			my $minus_dna_file = $minus_dna_dir.$name;
 			my $command = $program_dir."run_hmm.pl --dna=".$minus_dna_file." --out=".$minus_out_dir." --hmmerv=".$hmmerv;
-			system($command);
-			#printf $command."\n";
+			#system($command);
+			printf $command."\n" if ($debug);
 		}
 	}
 }
@@ -145,18 +147,18 @@ system("rm -f ".$minus_out_dir."out1/ppppp.*");
 system("rm -f ".$minus_out_dir."out1/qqqqq.*");
 
 my $command = $program_dir."post_process.pl --dna=".$minus_dna_dir." --out=".$minus_out_dir." --rev=1";
-#printf $command."\n";
-system($command);
+printf $command."\n";
+#system($command);
 
 ###########################################
 #validation for Q value
 ###########################################
 
 my $command = $program_dir."post_process2.pl --data_dir=".$main_data_dir." --hmmerv=".$hmmerv;
-system($command);
-#printf $command."\n";
+#system($command);
+printf $command."\n" if ($debug);
 
-
+system("rm -rf ".$minus_dna_dir);
 
 sub invert_seq{
 

@@ -1,9 +1,9 @@
 """MGEScan: identifying ltr and non-ltr in genome sequences
 
 Usage:
-    mgescan both <genome_dir> [--output=<data_dir>] [--mpi=<num>]
-    mgescan ltr <genome_dir> [--output=<data_dir>] [--mpi=<num>]
-    mgescan nonltr <genome_dir> [--output=<data_dir>] [--mpi=<num>]
+    mgescan both <genome_dir> [--output=<data_dir>] [--mpi=<num>] [--debug]
+    mgescan ltr <genome_dir> [--output=<data_dir>] [--mpi=<num>] [--debug]
+    mgescan nonltr <genome_dir> [--output=<data_dir>] [--mpi=<num>] [--debug]
     mgescan (-h | --help)
     mgescan --version
 
@@ -11,6 +11,7 @@ Options:
     -h --help   Show this screen.
     --version   Show version.
     --output=<data_dir> Directory results will be saved
+    --debug     Enable debugging messages
 
 """
 import os, sys
@@ -31,6 +32,7 @@ class MGEScan(object):
     data_dir = None
     ltr_enabled = False
     nonltr_enabled = False
+    debug = False
 
     args = None
 
@@ -46,6 +48,7 @@ class MGEScan(object):
         self.mpi_enabled = self.args['--mpi']
         self.ltr_enabled = self.args['ltr']
         self.nonltr_enabled = self.args['nonltr']
+        self.debug = self.args['--debug']
 
     def set_defaults(self):
         """Set default values to run programs
@@ -83,6 +86,8 @@ class MGEScan(object):
         if not self.base_path:
             print ("MGEScan environment (.mgescanrc) is not defined")
             sys.exit(-1)
+        if self.debug:
+            os.environ["MGESCAN_DEBUG"] = "True"
             
     def wrapper_split_files(self):
         split = Split()
@@ -175,8 +180,12 @@ class MGEScan(object):
 
     def run_cmd(self, cmd):
         cmd = cmd % vars(self)
-        #print (cmd)
-        return Popen(cmd.split(), stdout=PIPE, stderr=PIPE).stdout.read()
+        if self.debug:
+            print (cmd)
+        p = Popen(cmd.split(), stdout=PIPE, stderr=PIPE)
+        if self.debug:
+            print p.communicate()
+	return p
 
 def main():
     arguments = docopt(__doc__, version='MGEScan 0.0.3')
