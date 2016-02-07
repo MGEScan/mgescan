@@ -4,8 +4,11 @@ use Getopt::Long;
 use Cwd 'abs_path';
 use File::Basename;
 use Sys::Hostname;
+use lib (dirname abs_path $0) . '/lib';
+use Prompt qw(prompt_yn);
 
 my $program_dir = dirname(abs_path($0))."/";
+
 
 ############################################
 # INPUT
@@ -99,7 +102,10 @@ if ($nmpi) {
 			my $plus_dna_file = $plus_dna_dir.$name;
 			my $command = $program_dir."run_hmm.pl --dna=".$plus_dna_file."  --out=".$plus_out_dir." --hmmerv=".$hmmerv;
 			printf $command."\n" if ($debug);
-			#system($command);
+			if ($debug and not prompt_yn("continue?")) {
+				exit;
+			}
+			system($command);
 		}
 	}
 }
@@ -112,7 +118,10 @@ system("rm -f ".$plus_out_dir."out1/qqqqq.*");
 
 my $command = $program_dir."post_process.pl --dna=".$plus_dna_dir." --out=".$plus_out_dir." --rev=0";
 printf $command."\n" if ($debug);
-#system($command);
+if ($debug and not prompt_yn("continue?")) {
+	exit;
+}
+system($command);
 
 
 ############################################
@@ -136,8 +145,12 @@ if ($nmpi) {
 		if ($name !~ /^\./){  
 			my $minus_dna_file = $minus_dna_dir.$name;
 			my $command = $program_dir."run_hmm.pl --dna=".$minus_dna_file." --out=".$minus_out_dir." --hmmerv=".$hmmerv;
-			#system($command);
 			printf $command."\n" if ($debug);
+			if ($debug and not prompt_yn("continue?")) {
+				exit;
+			}
+			system($command);
+
 		}
 	}
 }
@@ -147,16 +160,22 @@ system("rm -f ".$minus_out_dir."out1/ppppp.*");
 system("rm -f ".$minus_out_dir."out1/qqqqq.*");
 
 my $command = $program_dir."post_process.pl --dna=".$minus_dna_dir." --out=".$minus_out_dir." --rev=1";
-printf $command."\n";
-#system($command);
+printf $command."\n" if ($debug);
+if ($debug and not prompt_yn("continue?")) {
+	exit;
+}
+system($command);
 
 ###########################################
 #validation for Q value
 ###########################################
 
 my $command = $program_dir."post_process2.pl --data_dir=".$main_data_dir." --hmmerv=".$hmmerv;
-#system($command);
 printf $command."\n" if ($debug);
+if ($debug and not prompt_yn("continue?")) {
+	exit;
+}
+system($command);
 
 system("rm -rf ".$minus_dna_dir);
 

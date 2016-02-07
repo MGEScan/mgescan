@@ -4,6 +4,7 @@ use Getopt::Long;
 use Cwd 'abs_path';
 use File::Basename;
 use File::Temp qw/ tempfile unlink0 /;
+user prompt;
 
 my $pdir = dirname(abs_path($0))."/";
 my $phmm_dir = $pdir."pHMM/";
@@ -68,16 +69,9 @@ if (-e $domain_rt_pos_file  || -e $domain_ape_pos_file ){
 		close(OUT);
 	}
 
-	$command = $pdir."match_pos.pl -rt=".$domain_rt_pos_file." -ape=".$domain_ape_pos_file;
-	#system($command);
-	###########################################################
-	# run hmm
-	###########################################################
-	#print "Running HMM...\n";
-
 	$out_file = $out1_dir.$dna_name;
 	$command = $pdir."hmm/MGEScan -m ".$pdir."hmm/chr.hmm -s ".$dna_file." -r ".$domain_rt_pos_file." -a ".$domain_ape_pos_file." -o ".$out_file." -p ".$pdir." -d ".$out1_dir." -v ".$hmmerv;
-	#print $command."\n";
+	print $command."\n" if ($debug);
 	system($command); 
 }
 
@@ -248,4 +242,5 @@ sub get_sequence{  # file name, variable for seq, variable for head             
 	}
 	close(GENOME);
 }
+
 
