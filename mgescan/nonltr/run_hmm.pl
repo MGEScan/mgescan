@@ -4,11 +4,16 @@ use Getopt::Long;
 use Cwd 'abs_path';
 use File::Basename;
 use File::Temp qw/ tempfile unlink0 /;
-user prompt;
+use lib (dirname abs_path $0) . '/lib';
+use Prompt qw(prompt_yn);
 
 my $pdir = dirname(abs_path($0))."/";
 my $phmm_dir = $pdir."pHMM/";
 my $hmmerv;
+
+my $debug;
+$debug = $ENV{'MGESCAN_DEBUG'};
+
 ##########################################################
 # get input parameter of dna file, pep file, output dir
 ##########################################################
