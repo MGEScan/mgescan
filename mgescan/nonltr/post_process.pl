@@ -80,7 +80,9 @@ sub merge_thmm{
 		if ($name !~ /^\./){
 
 			my $result_file = $_[0].$name;
-			#print $result_file."\n";
+			print "Read".$result_file."\n" if ($debug);
+			# result_file has a same filename with its original genome file name
+			# e.g. NC_003070.9.fa
 			my ($end, $start, $te, $te_name,$count);
 			$end = -1000;
 			$start = -1000;
@@ -88,9 +90,16 @@ sub merge_thmm{
 			$te_name ="";
 			$count=0;
 			open (IN, $result_file)|| die "Couldn't open ".$result_file;
+			# Content looks like:
+			# 19196109 3 167.544204
+			# 19195187 0 159.845651
+			# ...
 			while(my $each_line=<IN>){
 				chomp($each_line);
 				my @temp = split(/\s+/, $each_line);
+				# temp[0]
+				# temp[1]
+				# temp[2]
 				if ($te == $temp[1] + 1 && $temp[1] != 0){
 					$start = $temp[0];
 					$te = $temp[1];
@@ -194,8 +203,10 @@ sub merge_thmm{
 
 					}
 
+					# $temp[0] == 0 but count != 3 || count != 1 || !(count == 1 && te > 30)
 					$te = 0;
 				}else{
+					# First line falls into here?
 					$start = $temp[0];
 					$end = $temp[0];
 					$te = $temp[1];
