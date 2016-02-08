@@ -13,6 +13,7 @@ Options:
 """
 from docopt import docopt
 from Bio import SeqIO
+import os
 from os import listdir
 from os.path import isfile, join
 from mgescan import utils
@@ -53,7 +54,7 @@ class Split(object):
         self.split_file(self.input_file, self.result_path)
        
     def check_param(self):
-        if(not os.path.isfile(self.input_file)):
+        if(not isfile(self.input_file)):
             print ("%s is not valid filename" % self.input_file);
             os.rmdir(self.result_path)
             os.sys.exit()
