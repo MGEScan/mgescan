@@ -29,13 +29,39 @@ my $seq;
 get_parameter(\$dir, \$hmmerv);
 
 # copy seq from out2 dir into info dir
-system("mkdir ".$dir."info/");
-system("mkdir ".$dir."info/full");
+system("mkdir -p ".$dir."info/full");
+
+# get_full_frag()
+# Description: First function to collect full fragmentations from results in
+#              forward and backward (complement and reverse complement)
+#
+# Inputs: f/out2/[@all_clade]_full
+#        b/out2/[@all_clade]_full
+#
+# Outputs: info/full/[@all_clade]/[@all_clade].dna
+#         info/full/[@all_clade]/[@all_clade].pep
+#
+# Tips: No *_full files produce no results
+#
 get_full_frag($genome, $dir, \@all_clade);
 
 # get domain seq
+#
+# Desciption: If .pep files exist, then run hmmsearch for searching protein sequences in a database
+#
+# Inputs: info/full/[@all_clade]/[@all_clade].pep
+#         info/full/[@all_clade]/[@all_clade].dna
+#
+# Outputs: info/full/[@all_clade]/[@all_clade].[en|rt].pep
+#
+# Tips: "en", "rt" can be executed in parallel
+#
 get_domain_for_full_frag($genome, "en", \@en_clade, $dir, $hmm_dir);
 get_domain_for_full_frag($genome, "rt", \@all_clade, $dir, $hmm_dir);
+
+#######################################################
+# Should be a function call for en|rt
+#######################################################
 
 # get Q value after running pHMM for EN in full elements
 $validation_dir = $dir."info/validation/";
@@ -48,6 +74,7 @@ $evalue_file = $validation_dir.$domain."_evalue";
 
 opendir(DIRHANDLE, $seq_dir) || die ("Cannot open directory ".$seq_dir);
 foreach my $name (sort readdir(DIRHANDLE)) {
+	# Exception for R2 and CRE (skipping)
     if ($name !~ /^\./ && $name ne "R2" && $name ne "CRE" ){
 	$seq = $seq_dir.$name."/".$name.".".$domain.".pep";
 	vote_hmmsearch($seq, $hmm_dir, $domain, $validation_file, $evalue_file, \@en_clade);
@@ -74,7 +101,6 @@ close(DIRHANDLE);
 #system("rm ".$seq_dir."*/*.en.*");
 system("rm -r ".$dir."b") if (not $debug);
 system("rm -r ".$dir."f") if (not $debug);
-
 
 sub get_parameter{
 
@@ -104,9 +130,9 @@ sub get_parameter{
 sub get_domain_for_full_frag{
 
     my $genome = $_[0];
-    my $domain = $_[1];
+    my $domain = $_[1]; # en|rt
     my @all_clade = @{$_[2]};
-    my $hmm_dir = $_[4];
+    my $hmm_dir = $_[4]; # ./pHMM
     my ($dir);
     my ($pep_file, $dna_file);
     my ($phmm_file, $result_pep_file, $result_dna_file);
