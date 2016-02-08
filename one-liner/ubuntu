@@ -12,7 +12,7 @@ function package-update() {
 }
 package-update
 package-install python-virtualenv python-dev git gcc g++ -y
-package-install libopenmpi-dev openmpi-bin
+package-install libopenmpi-dev openmpi-bin -y
 cat <<EOF > $HOME/.mgescanrc
 export MGESCAN_HOME=\$HOME/mgescan3
 export MGESCAN_SRC=\$MGESCAN_HOME/src
