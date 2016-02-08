@@ -55,7 +55,7 @@ class Split(object):
        
     def check_param(self):
         if(not isfile(self.input_file)):
-            print ("%s is not valid filename" % self.input_file);
+            print ("%s is not a valid filename" % self.input_file);
             os.rmdir(self.result_path)
             os.sys.exit()
 
