@@ -44,6 +44,7 @@ setup(
         entry_points='''
             [console_scripts]
             mgescan=mgescan.cmd:main
+            mg_split=mgescan.split:main
             nonltr=mgescan.nonltr:main
             ''',
 

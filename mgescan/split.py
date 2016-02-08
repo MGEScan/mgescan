@@ -49,7 +49,14 @@ class Split(object):
             self.result_path = utils.create_directory(self.default_output)
 
     def run(self):
+        self.check_param()
         self.split_file(self.input_file, self.result_path)
+       
+    def check_param(self):
+        if(not os.path.isfile(self.input_file)):
+            print ("%s is not valid filename" % self.input_file);
+            os.rmdir(self.result_path)
+            os.sys.exit()
 
     def split_file(self, filename, output_path):
 
