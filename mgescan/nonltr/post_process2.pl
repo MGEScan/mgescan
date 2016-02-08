@@ -75,10 +75,10 @@ $evalue_file = $validation_dir.$domain."_evalue";
 opendir(DIRHANDLE, $seq_dir) || die ("Cannot open directory ".$seq_dir);
 foreach my $name (sort readdir(DIRHANDLE)) {
 	# Exception for R2 and CRE (skipping)
-    if ($name !~ /^\./ && $name ne "R2" && $name ne "CRE" ){
-	$seq = $seq_dir.$name."/".$name.".".$domain.".pep";
-	vote_hmmsearch($seq, $hmm_dir, $domain, $validation_file, $evalue_file, \@en_clade);
-    }
+	if ($name !~ /^\./ && $name ne "R2" && $name ne "CRE" ){
+		$seq = $seq_dir.$name."/".$name.".".$domain.".pep";
+		vote_hmmsearch($seq, $hmm_dir, $domain, $validation_file, $evalue_file, \@en_clade);
+	}
 }
 closedir(DIRHANDLE);
 
@@ -90,10 +90,10 @@ $evalue_file = $validation_dir.$domain."_evalue";
 
 opendir(DIRHANDLE, $seq_dir) || die ("Cannot open directory ".$seq_dir);
 foreach my $name (sort readdir(DIRHANDLE)) {
-    if ($name !~ /^\./){
-	$seq = $seq_dir.$name."/".$name.".".$domain.".pep";
-	vote_hmmsearch($seq, $hmm_dir, $domain, $validation_file, $evalue_file, \@all_clade);
-    }
+	if ($name !~ /^\./){
+		$seq = $seq_dir.$name."/".$name.".".$domain.".pep";
+		vote_hmmsearch($seq, $hmm_dir, $domain, $validation_file, $evalue_file, \@all_clade);
+	}
 }
 close(DIRHANDLE);
 #system("rm ".$seq_dir."*/*.pep");
@@ -102,26 +102,30 @@ close(DIRHANDLE);
 system("rm -r ".$dir."b") if (not $debug);
 system("rm -r ".$dir."f") if (not $debug);
 
+###############################################################################
+# Subroutines
+###############################################################################
+
 sub get_parameter{
 
-    my ($dir, $hmmerv);
+	my ($dir, $hmmerv);
 
-    GetOptions(
-               'data_dir=s' => \$dir,
-			   'hmmerv=s' => \$hmmerv,
-               );
+	GetOptions(
+		'data_dir=s' => \$dir,
+		'hmmerv=s' => \$hmmerv,
+	);
 
-    if (! -e $dir){
-        print "ERROR: The directory $dir does not exist.\n";
-        usage();
-    }
+	if (! -e $dir){
+		print "ERROR: The directory $dir does not exist.\n";
+		usage();
+	}
 	if (length($hmmerv)==0){
 		print "ERROR: HMMER version not provided.\n";
 		usage();
 		exit;
 	}
 
-    ${$_[0]} = $dir."/";
+	${$_[0]} = $dir."/";
 	${$_[1]} = $hmmerv;
 }
 
@@ -129,44 +133,44 @@ sub get_parameter{
 
 sub get_domain_for_full_frag{
 
-    my $genome = $_[0];
-    my $domain = $_[1]; # en|rt
-    my @all_clade = @{$_[2]};
-    my $hmm_dir = $_[4]; # ./pHMM
-    my ($dir);
-    my ($pep_file, $dna_file);
-    my ($phmm_file, $result_pep_file, $result_dna_file);
+	my $genome = $_[0];
+	my $domain = $_[1]; # en|rt
+	my @all_clade = @{$_[2]};
+	my $hmm_dir = $_[4]; # ./pHMM
+	my ($dir);
+	my ($pep_file, $dna_file);
+	my ($phmm_file, $result_pep_file, $result_dna_file);
 
-    print "get_domain_for_full_frag" if ($debug);
+	print "get_domain_for_full_frag" if ($debug);
 
-    for (my $i=0; $i<=$#all_clade; $i++){
+	for (my $i=0; $i<=$#all_clade; $i++){
 
-	my $clade = $all_clade[$i];
+		my $clade = $all_clade[$i];
 
-	$dir = $_[3]."info/full/".$clade."/";
-	$pep_file = $dir.$clade.".pep";
-	$dna_file = $dir.$clade.".dna";
-	
-	if (-e $pep_file ){
+		$dir = $_[3]."info/full/".$clade."/";
+		$pep_file = $dir.$clade.".pep";
+		$dna_file = $dir.$clade.".dna";
 
-	    $phmm_file = $hmm_dir.$clade.".".$domain.".hmm";
-	    $result_pep_file = $dir.$clade.".".$domain.".pe";
-	    $result_dna_file = $dir.$clade.".".$domain.".dna";
-	    
-	    my $flag = 2;  #1: protein-protein, 2: protein-dna 
-	    get_domain_pep_seq($pep_file, $phmm_file, $result_pep_file);
-	    get_domain_dna_seq($pep_file, $phmm_file, $result_dna_file, $dna_file, $flag);
+		if (-e $pep_file ){
 
-	    my $command = "sed 's/>/>".$clade."_/' ".$result_pep_file." > ".$result_pep_file."p";
-            print $command if ($debug);
-            if ($debug && not prompt_yn("Continue?")) {
-		exit;
-	    }
-	    system($command);
-	    system("rm ".$result_pep_file) if (not $debug);
+			$phmm_file = $hmm_dir.$clade.".".$domain.".hmm";
+			$result_pep_file = $dir.$clade.".".$domain.".pe";
+			$result_dna_file = $dir.$clade.".".$domain.".dna";
 
+			my $flag = 2;  #1: protein-protein, 2: protein-dna 
+			get_domain_pep_seq($pep_file, $phmm_file, $result_pep_file);
+			get_domain_dna_seq($pep_file, $phmm_file, $result_dna_file, $dna_file, $flag);
+
+			my $command = "sed 's/>/>".$clade."_/' ".$result_pep_file." > ".$result_pep_file."p";
+			print $command if ($debug);
+			if ($debug && not prompt_yn("Continue?")) {
+				exit;
+			}
+			system($command);
+			system("rm ".$result_pep_file) if (not $debug);
+
+		}
 	}
-    }
 }
 
 
@@ -174,57 +178,59 @@ sub get_domain_for_full_frag{
 
 sub get_full_frag{
 
-    my $genome=$_[0];
-    my $dir = $_[1];
-    my @all_clade = @{$_[2]};
-    my $file;
-    my $clade_dir;
-    my ($dna_file, $pep_file, $file_f, $file_b);
+	my $genome=$_[0];
+	my $dir = $_[1];
+	my @all_clade = @{$_[2]};
+	my $file;
+	my $clade_dir;
+	my ($dna_file, $pep_file, $file_f, $file_b);
 
-    print "get_full_frag" if ($debug);
+	print "get_full_frag" if ($debug);
 
-    for (my $i=0; $i<=$#all_clade; $i++){
+	for (my $i=0; $i<=$#all_clade; $i++){
 
-	# create a clade dir
-	$clade_dir = $dir."info/full/".$all_clade[$i]."/";
-	$file_f = $dir."f/out2/".$all_clade[$i]."_full";
-	$file_b = $dir."b/out2/".$all_clade[$i]."_full";
-	if (-e $file_f || -e $file_b){
-	    system("mkdir ".$clade_dir);
+		# create a clade dir
+		$clade_dir = $dir."info/full/".$all_clade[$i]."/";
+		$file_f = $dir."f/out2/".$all_clade[$i]."_full";
+		$file_b = $dir."b/out2/".$all_clade[$i]."_full";
+		if (-e $file_f || -e $file_b){
+			system("mkdir ".$clade_dir);
+		}
+
+		# copy full length in + strand
+		if (-e $file_f){
+			my $command = "cat ".$file_f." > ".$clade_dir.$all_clade[$i].".dna";
+			print $command if ($debug);
+			system($command);
+		}
+
+		# copy full length in - strand
+		if (-e $file_b){
+			my $command = "cat ".$file_b." >> ".$clade_dir.$all_clade[$i].".dna";
+			print $command if ($debug);
+			system($command);
+		}
+
+		# translate
+		$dna_file = $dir."info/full/".$all_clade[$i]."/".$all_clade[$i].".dna";
+		$pep_file = $dir."info/full/".$all_clade[$i]."/".$all_clade[$i].".pep";	   
+		if (-e $dna_file){
+			my $command = "transeq -frame=f -sequence=".$dna_file." -outseq=".$pep_file." 2>/dev/null";
+			print $command if ($debug);
+			system($command);
+		}
 	}
-
-	# copy full length in + strand
-	if (-e $file_f){
-	    my $command = "cat ".$file_f." > ".$clade_dir.$all_clade[$i].".dna";
-            print $command if ($debug);
-	    system($command);
-	}
-
-	# copy full length in - strand
-	if (-e $file_b){
-	    my $command = "cat ".$file_b." >> ".$clade_dir.$all_clade[$i].".dna";
-            print $command if ($debug);
-	    system($command);
-	}
-
-	# translate
-	$dna_file = $dir."info/full/".$all_clade[$i]."/".$all_clade[$i].".dna";
-	$pep_file = $dir."info/full/".$all_clade[$i]."/".$all_clade[$i].".pep";	   
-	if (-e $dna_file){
-	    my $command = "transeq -frame=f -sequence=".$dna_file." -outseq=".$pep_file." 2>/dev/null";
-            print $command if ($debug);
-	    system($command);
-	}
-    }
 }
 
-
+#
+# Almost identical to get_domain_dna_seq
+#
 sub get_domain_pep_seq{
-    
-    #$_[0]: pep seq file
-    #$_[1]: domain hmm file
-    #$_[2]: output domain pep seq file 
-    
+
+	#$_[0]: pep seq file
+	#$_[1]: domain hmm file
+	#$_[2]: output domain pep seq file 
+
 	my %domain_start=();
 	my %domain_end=();
 	my %result_start=();
@@ -241,7 +247,7 @@ sub get_domain_pep_seq{
 		#system("hmmsearch  --noali --domtblout ".$hmm_dir."tbl ".$_[1]."c ".$_[0]." > /dev/null");
 		#system("hmmsearch  --noali --domtblout ".$hmm_dir."tbl ".$_[1]."3 ".$_[0]." > /dev/null");
 		my $command = ("hmmsearch --noali --domtblout ".$tmpfile." ".$_[1]."3 ".$_[0]." > /dev/null");
-                print $command if ($debug);
+		print $command if ($debug);
 		system($command);
 		#my $hmm_command = "cat ".$hmm_dir."tbl";
 		#my $hmm_result = `$hmm_command`;
@@ -281,49 +287,49 @@ sub get_domain_pep_seq{
 			#	}
 		}
 	}
-    
 
-    my $flag=0;
-    my $head="";
-    my $seq="";
-    open (IN, $_[0]);
-    open OUT, ">$_[2]";
-    while(my $each_line=<IN>){
-	chomp($each_line);
-	if ($each_line =~ /\>/){
-	    if (length($head)>0 && $flag==1 ){
+
+	my $flag=0;
+	my $head="";
+	my $seq="";
+	open (IN, $_[0]);
+	open OUT, ">$_[2]";
+	while(my $each_line=<IN>){
+		chomp($each_line);
+		if ($each_line =~ /\>/){
+			if (length($head)>0 && $flag==1 ){
+				print OUT ">".$head."\n";
+				print OUT substr($seq, $result_start{$head}, eval($result_end{$head}-$result_start{$head}+1))."\n";
+			}
+			my @temp = split(/\s+/, $each_line);
+			if (exists $result_start{substr($temp[0], 1, length($temp[0])-1)}){
+				$flag=1;
+				$head = substr($temp[0], 1, length($temp[0])-1);
+			}else{
+				$flag=0;
+			}
+			$seq="";
+		}else{
+			if($flag==1){
+				$seq .= $each_line;
+			}
+		}
+	}
+	if($flag==1){
 		print OUT ">".$head."\n";
 		print OUT substr($seq, $result_start{$head}, eval($result_end{$head}-$result_start{$head}+1))."\n";
-	    }
-	    my @temp = split(/\s+/, $each_line);
-	    if (exists $result_start{substr($temp[0], 1, length($temp[0])-1)}){
-		$flag=1;
-		$head = substr($temp[0], 1, length($temp[0])-1);
-	    }else{
-		$flag=0;
-	    }
-	    $seq="";
-	}else{
-	    if($flag==1){
-	        $seq .= $each_line;
-	    }
 	}
-    }
-    if($flag==1){
-	print OUT ">".$head."\n";
-	print OUT substr($seq, $result_start{$head}, eval($result_end{$head}-$result_start{$head}+1))."\n";
-    }
-    close(IN);
-    close(OUT);
+	close(IN);
+	close(OUT);
 }
 
 
 sub get_domain_dna_seq{
-    
-    #$_[0]: pep seq file
-    #$_[1]: domain hmm file
-    #$_[2]: output domain dna seq file 
-    #$_[3]: dna seq file
+
+	#$_[0]: pep seq file
+	#$_[1]: domain hmm file
+	#$_[2]: output domain dna seq file 
+	#$_[3]: dna seq file
 	my %domain_start=();
 	my %domain_end=();
 	my %result_start=();
@@ -391,38 +397,38 @@ sub get_domain_dna_seq{
 			}
 		}
 	}
-    my $flag=0;
-    my $head="";
-    my $seq="";
-    open (IN, $_[3]);
-    open OUT, ">$_[2]";
-    while(my $each_line=<IN>){
-	chomp($each_line);
-	if ($each_line =~ /\>/){
-	    if (length($head)>0 && $flag==1 ){
+	my $flag=0;
+	my $head="";
+	my $seq="";
+	open (IN, $_[3]);
+	open OUT, ">$_[2]";
+	while(my $each_line=<IN>){
+		chomp($each_line);
+		if ($each_line =~ /\>/){
+			if (length($head)>0 && $flag==1 ){
+				print OUT ">".$head."\n";
+				print OUT substr($seq, $result_start{$head}*3-3, eval(($result_end{$head}-$result_start{$head}+1)*3+3))."\n";
+			}
+			my @temp = split(/\s+/, $each_line);
+			if (exists $result_start{substr($temp[0], 1, length($temp[0])-1)}){
+				$flag=1;
+				$head = substr($temp[0], 1, length($temp[0])-1);
+			}else{
+				$flag=0;
+			}
+			$seq="";
+		}else{
+			if($flag==1){
+				$seq .= $each_line;
+			}
+		}
+	}
+	if($flag==1){
 		print OUT ">".$head."\n";
 		print OUT substr($seq, $result_start{$head}*3-3, eval(($result_end{$head}-$result_start{$head}+1)*3+3))."\n";
-	    }
-	    my @temp = split(/\s+/, $each_line);
-	    if (exists $result_start{substr($temp[0], 1, length($temp[0])-1)}){
-		$flag=1;
-		$head = substr($temp[0], 1, length($temp[0])-1);
-	    }else{
-		$flag=0;
-	    }
-	    $seq="";
-	}else{
-	    if($flag==1){
-	        $seq .= $each_line;
-	    }
 	}
-    }
-    if($flag==1){
-	print OUT ">".$head."\n";
-	print OUT substr($seq, $result_start{$head}*3-3, eval(($result_end{$head}-$result_start{$head}+1)*3+3))."\n";
-    }
-    close(IN);
-    close(OUT);
+	close(IN);
+	close(OUT);
 }
 
 
@@ -511,20 +517,20 @@ sub vote_hmmsearch{
 				}
 			}
 		}
-        
-    }
-    open (OUT, ">>$_[3]");
+
+	}
+	open (OUT, ">>$_[3]");
 #    open (OUT1, ">>$_[4]");
-    if ($_[0] =~ /\/((\w|\d)+)\./){
-	$anno_clade = $1;
-    }
-    print OUT "$anno_clade-------------------------------------\n";
-    for my $key (keys %evalue){
-        print OUT $key."\t".$clade{$key}."\t".$evalue{$key}."\t";
-	printf OUT "%.1e\n", $sig{$key};
+	if ($_[0] =~ /\/((\w|\d)+)\./){
+		$anno_clade = $1;
+	}
+	print OUT "$anno_clade-------------------------------------\n";
+	for my $key (keys %evalue){
+		print OUT $key."\t".$clade{$key}."\t".$evalue{$key}."\t";
+		printf OUT "%.1e\n", $sig{$key};
 #	print OUT1 $key."\t".$save_evalue{$key}."\n";
-    }
-    close(OUT);
+	}
+	close(OUT);
 #    close(OUT1);
 
 }

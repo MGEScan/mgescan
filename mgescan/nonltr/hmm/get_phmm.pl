@@ -67,15 +67,15 @@ if ($hmmerv == 3){
 	unlink0($fh, $tmpfile);
 	@hmm_results = split(/\n/, $hmm_result);
 	for (my $i=0; $i<=$#hmm_results; $i++){
-		
+
 		if ($hmm_results[$i] =~ /^\#\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\s\-\-\-\-\-\-\-\-\-\-\s/){
-		if ($hmm_results[$i+1] =~ /^\S/){
-			my @temp = split(/\s+/, $hmm_results[$i+1]);
-			print $temp[11];
-		}else{
-			print "1";
-		}
-		last;
+			if ($hmm_results[$i+1] =~ /^\S/){
+				my @temp = split(/\s+/, $hmm_results[$i+1]);
+				print $temp[11];
+			}else{
+				print "1";
+			}
+			last;
 		}
 	}
 }else{
@@ -85,18 +85,18 @@ if ($hmmerv == 3){
 	#	exit;
 	#}
 	$hmm_result = `$command`;
-	 
+
 	@hmm_results = split(/\n/, $hmm_result);
 	for (my $i=0; $i<=$#hmm_results; $i++){
-		
+
 		if ($hmm_results[$i] =~ /^\-\-\-\-\-\-\-\-\s\-\-\-\-\-\-\-\s/){
-		if ($hmm_results[$i+1] =~ /^\S/){
-			my @temp = split(/\s+/, $hmm_results[$i+1]);
-			print $temp[9];
-		}else{
-			print "1";
-		}
-		last;
+			if ($hmm_results[$i+1] =~ /^\S/){
+				my @temp = split(/\s+/, $hmm_results[$i+1]);
+				print $temp[9];
+			}else{
+				print "1";
+			}
+			last;
 		}
 	}	
 }

@@ -1248,7 +1248,7 @@ sub find_domain{ #$file3, $file4
 			my $str = <$fh>;
 			close $fh;
 			unlink0($fh, $tmpfile);
-		
+
 			if ($str =~ /\n(\d+.*)\n/){
 				my @temp_plus = split(/\s+/, $1);
 				if ($temp_plus[4]<$evalue){
