@@ -57,9 +57,9 @@ if ($hmmerv == 3){
 	#system("hmmsearch  --noali --domtblout ".$phmm_dir."tbl ".$phmm_file."c ".$pep_file." > /dev/null");
 	my $hmm_command = ("hmmsearch  --noali --domtblout ".$tmpfile." ".$phmm_file."3 ".$pep_file." > /dev/null");
 	print $hmm_command if ($debug);
-	if ($debug && not prompt_yn("Continue?")) {
-		exit;
-	}
+	#if ($debug && not prompt_yn("Continue?")) {
+	#	exit;
+	#}
 	system($hmm_command);
 	local $/ = undef;
 	my $hmm_result = <$fh>;
@@ -81,9 +81,9 @@ if ($hmmerv == 3){
 }else{
 	$command = "hmm2search ".$phmm_file." ".$pep_file;
 	print $command if ($debug);
-	if ($debug && not prompt_yn("Continue?")) {
-		exit;
-	}
+	#if ($debug && not prompt_yn("Continue?")) {
+	#	exit;
+	#}
 	$hmm_result = `$command`;
 	 
 	@hmm_results = split(/\n/, $hmm_result);

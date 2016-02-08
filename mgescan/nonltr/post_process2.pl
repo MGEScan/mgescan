@@ -4,6 +4,11 @@ use Getopt::Long;
 use Cwd 'abs_path';
 use File::Basename;
 use File::Temp qw/ tempfile unlink0 /;
+use lib (dirname abs_path $0) . '/lib';
+use Prompt qw(prompt_yn);
+
+my $debug;
+$debug = $ENV{'MGESCAN_DEBUG'};
 
 my $pdir = dirname(abs_path($0))."/";
 my $hmm_dir = $pdir."pHMM/";
@@ -67,8 +72,8 @@ close(DIRHANDLE);
 #system("rm ".$seq_dir."*/*.pep");
 #system("rm ".$seq_dir."*/*.rt.*");
 #system("rm ".$seq_dir."*/*.en.*");
-system("rm -r ".$dir."b");
-system("rm -r ".$dir."f");
+system("rm -r ".$dir."b") if (not $debug);
+system("rm -r ".$dir."f") if (not $debug);
 
 
 sub get_parameter{
@@ -106,6 +111,8 @@ sub get_domain_for_full_frag{
     my ($pep_file, $dna_file);
     my ($phmm_file, $result_pep_file, $result_dna_file);
 
+    print "get_domain_for_full_frag" if ($debug);
+
     for (my $i=0; $i<=$#all_clade; $i++){
 
 	my $clade = $all_clade[$i];
@@ -125,8 +132,12 @@ sub get_domain_for_full_frag{
 	    get_domain_dna_seq($pep_file, $phmm_file, $result_dna_file, $dna_file, $flag);
 
 	    my $command = "sed 's/>/>".$clade."_/' ".$result_pep_file." > ".$result_pep_file."p";
+            print $command if ($debug);
+            if ($debug && not prompt_yn("Continue?")) {
+		exit;
+	    }
 	    system($command);
-	    system("rm ".$result_pep_file);
+	    system("rm ".$result_pep_file) if (not $debug);
 
 	}
     }
@@ -144,6 +155,7 @@ sub get_full_frag{
     my $clade_dir;
     my ($dna_file, $pep_file, $file_f, $file_b);
 
+    print "get_full_frag" if ($debug);
 
     for (my $i=0; $i<=$#all_clade; $i++){
 
@@ -158,12 +170,14 @@ sub get_full_frag{
 	# copy full length in + strand
 	if (-e $file_f){
 	    my $command = "cat ".$file_f." > ".$clade_dir.$all_clade[$i].".dna";
+            print $command if ($debug);
 	    system($command);
 	}
 
 	# copy full length in - strand
 	if (-e $file_b){
 	    my $command = "cat ".$file_b." >> ".$clade_dir.$all_clade[$i].".dna";
+            print $command if ($debug);
 	    system($command);
 	}
 
@@ -172,6 +186,7 @@ sub get_full_frag{
 	$pep_file = $dir."info/full/".$all_clade[$i]."/".$all_clade[$i].".pep";	   
 	if (-e $dna_file){
 	    my $command = "transeq -frame=f -sequence=".$dna_file." -outseq=".$pep_file." 2>/dev/null";
+            print $command if ($debug);
 	    system($command);
 	}
     }
@@ -199,7 +214,9 @@ sub get_domain_pep_seq{
 		#system("hmmconvert ".$_[1]." > ".$_[1]."c");
 		#system("hmmsearch  --noali --domtblout ".$hmm_dir."tbl ".$_[1]."c ".$_[0]." > /dev/null");
 		#system("hmmsearch  --noali --domtblout ".$hmm_dir."tbl ".$_[1]."3 ".$_[0]." > /dev/null");
-		system("hmmsearch --noali --domtblout ".$tmpfile." ".$_[1]."3 ".$_[0]." > /dev/null");
+		my $command = ("hmmsearch --noali --domtblout ".$tmpfile." ".$_[1]."3 ".$_[0]." > /dev/null");
+                print $command if ($debug);
+		system($command);
 		#my $hmm_command = "cat ".$hmm_dir."tbl";
 		#my $hmm_result = `$hmm_command`;
 		local $/ = undef;
@@ -296,7 +313,12 @@ sub get_domain_dna_seq{
 		#system("hmmconvert ".$_[1]." > ".$_[1]."c");
 		#system("hmmsearch  --noali --domtblout ".$hmm_dir."tbl ".$_[1]."c ".$_[0]." > /dev/null");
 		#system("hmmsearch  --noali --domtblout ".$hmm_dir."tbl ".$_[1]."3 ".$_[0]." > /dev/null");
-		system("hmmsearch  --noali --domtblout ".$tmpfile." ".$_[1]."3 ".$_[0]." > /dev/null");
+		my $command = ("hmmsearch  --noali --domtblout ".$tmpfile." ".$_[1]."3 ".$_[0]." > /dev/null");
+		print $command if ($debug);
+		if ($debug && not prompt_yn("Continue?")) {
+			exit;
+		}
+		system($command);
 		#my $hmm_command = "cat ".$hmm_dir."tbl";
 		#my $hmm_result = `$hmm_command`;
 		local $/ = undef;
@@ -415,7 +437,12 @@ sub vote_hmmsearch{
 		if ($hmmerv == 3){
 			#system("hmmconvert ".$_[1].$line[$i].".".$_[2].".hmm "." > ".$_[1].$line[$i].".".$_[2].".hmmc");
 			#system("hmmsearch --noali --domtblout ".$hmm_dir."tbl ".$_[1].$line[$i].".".$_[2].".hmmc ".$_[0]." > /dev/null");
-			system("hmmsearch --noali --domtblout ".$tmpfile." ".$_[1].$line[$i].".".$_[2].".hmm3 ".$_[0]." > /dev/null");
+			my $command = ("hmmsearch --noali --domtblout ".$tmpfile." ".$_[1].$line[$i].".".$_[2].".hmm3 ".$_[0]." > /dev/null");
+			system($command);
+			print $command if ($debug);
+			if ($debug && not prompt_yn("Continue?")) {
+				exit;
+			}
 			#my $command = "cat ".$hmm_dir."tbl";
 			#my $hmm_result = `$command`;
 			local $/ = undef;
