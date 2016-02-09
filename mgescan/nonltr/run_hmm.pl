@@ -47,6 +47,7 @@ $pep_file = $out_dir.$dna_name.".pep";
 $command = $pdir."translate -d ".$dna_file." -h ".$dna_name." -p ".$pep_file;
 system($command);
 
+# RT|APE can be run in parallel
 print "    RT signal...\n";
 $phmm_file = $phmm_dir."ebi_ds36752_seq.hmm";
 $domain_rt_pos_file = $pos_dir.$dna_name.".rt.pos";
@@ -93,6 +94,9 @@ if (-e $pep_file){
 
 sub get_signal_domain{
 
+	# Inputs $_[0], $_[1]
+	# Outputs $_[2], $_[2]'temp', $_[2]'temp2'
+	#
 	#$_[0]: pep seq file
 	#$_[1]: domain hmm file
 	#$_[2]: output domain dna position file
@@ -121,9 +125,16 @@ sub get_signal_domain{
 		#system("rm -rf ".$tmpfile);
 		unlink0($fh, $tmpfile);
 		# run hmmsearch to find the domain and save it in the temprary file   
+		# e.g.
+		# target name        accession   tlen query name           accession   qlen   E-value  score  bias   #  of  c-Evalue  i-Evalue  score  bias  from    to  from    to  from    to  acc description of target
+		# ------------------- ---------- ----- -------------------- ---------- ----- --------- ------ ----- --- --- --------- --------- ------ ----- ----- ----- ----- ----- ----- ----- ---- ---------------------
+		#
+		# NC_003070.9.fa_3     -          10142556 ebi_ds36752_seq      -            437         0 1118.0   6.0   3  11   1.5e-70   1.5e-70  225.5   0.0     2   435 3453451 3453883 3453450 3453885 0.91 -
+		#
 		while ($hmm_result =~ /\n((?!#).*)\n/g){
 			my @temp = split(/\s+/, $1);
 			if ($temp[11]<0.001 ){
+				# from to from(first one) to(first) score c-Evalue
 				print OUT eval($temp[17]*3)."\t".eval($temp[18]*3)."\t".$temp[15]."\t".$temp[16]."\t".$temp[13]."\t".$temp[11]."\n";
 			}
 		}
@@ -131,10 +142,19 @@ sub get_signal_domain{
 	}else{
 		my $hmm_command = "hmm2search  -E 0.00001 ".${$_[1]}." ".${$_[0]};
 		my $hmm_result = `$hmm_command`;
+		print $hmm_result if($debug);
 		# run hmmsearch to find the domain and save it in the temprary file    
+		# e.g.
+		#
+		# Sequence         Domain  seq-f seq-t    hmm-f hmm-t      score  E-value
+		# --------         ------- ----- -----    ----- -----      -----  -------
+		#
+		# NC_003070.9.fa_2   3/3   4698218 4698604 ..     1   492 []    61.4    1e-18
+		#
 		while ($hmm_result =~ /((\S)+\s+\d+\/\d+\s+\d+\s+\d+\s+(\[|\.)(\]|\.)\s+\d+\s+\d+\s+(\[|\.)(\]|\.)\s+(-)*\d+\.\d+\s+((\d|\-|\.|e)+))\s*/g){
 			my @temp = split(/\s+/, $1);
 			if ($temp[9]<0.001 ){
+				# seq-f seq-t hmm-?(1)  hmm-?(492) score E-value
 				print OUT eval($temp[2]*3)."\t".eval($temp[3]*3)."\t".$temp[5]."\t".$temp[6]."\t".$temp[8]."\t".$temp[9]."\n";
 			}
 		}
