@@ -2,6 +2,7 @@
 use strict;
 use Getopt::Long;
 
+my $debug;
 ##########################################################
 # get input parameter of dna file, pep file, output dir
 ##########################################################

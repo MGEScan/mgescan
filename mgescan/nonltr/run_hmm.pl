@@ -75,6 +75,7 @@ if (-e $domain_rt_pos_file  || -e $domain_ape_pos_file ){
 	}
 
 	$out_file = $out1_dir.$dna_name;
+	# MGEScan -m ./hmm/chr.hmm -s ./aaa/NC_003070.9.fa -r ./test/f/pos/NC_003070.9.fa.rt.pos -a ./test/f/pos/NC_003070.9.fa.ape.pos -o ./test/f/out1/NC_003070.9.fa -p ./ -d ./test/f/out1/ -v 3
 	$command = $pdir."hmm/MGEScan -m ".$pdir."hmm/chr.hmm -s ".$dna_file." -r ".$domain_rt_pos_file." -a ".$domain_ape_pos_file." -o ".$out_file." -p ".$pdir." -d ".$out1_dir." -v ".$hmmerv;
 	print $command."\n" if ($debug);
 	system($command); 
