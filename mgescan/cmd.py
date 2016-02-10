@@ -40,6 +40,7 @@ class MGEScan(object):
         self.args = args
         self.set_inputs()
         self.set_defaults()
+        self.get_env()
         self.set_env()
 
     def set_inputs(self):
@@ -80,6 +81,18 @@ class MGEScan(object):
 
         self.sw_rm = "No" # or Yes
         self.scaffold = "" # or directory
+
+    def get_env(self):
+        self.hmmerv = os.environ.get("MGESCAN_HMMER_VERSION") or self.hmmerv
+        self.min_dist = os.environ.get("MGESCAN_MIN_DISTANCE") or self.min_dist
+        self.max_dist = os.environ.get("MGESCAN_MAX_DISTANCE") or self.max_dist
+        self.min_len_ltr = os.environ.get("MGESCAN_MIN_LENGTH_LTR") or self.min_len_ltr
+        self.max_len_ltr = os.environ.get("MGESCAN_MAX_LENGTH_LTR") or self.max_len_ltr
+        self.ltr_sim_condition = os.environ.get("MGESCAN_LTR_SIMILARITY") or self.ltr_sim_condition
+        self.cluster_sim_condition = os.environ.get("MGESCAN_LTR_SIMILARITY_CLUSTER") or self.cluster_sim_condition
+        self.len_condition = os.environ.get("MGESCAN_MIN_LENGTH") or self.len_condition
+        self.sw_rm = os.environ.get("MGESCAN_REPEATMASKER") or self.sw_rm
+        self.scaffold = os.environ.get("MGESCAN_SCAFFOLD_DIR") or self.scaffold
 
     def set_env(self):
         self.base_path = os.environ.get('MGESCAN_SRC') + "/mgescan"
