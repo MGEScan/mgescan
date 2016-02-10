@@ -63,8 +63,8 @@ for cladeDir in glob.glob( os.path.join(sys.argv[1], '*') ):
         seqid = seqid.replace(".fa", "")
         #if seqid[0].isdigit():
         if seqid[:3] != "chr":
-        
-            seqid = "chr" + seqid
+            if seqid.isdigit():        
+                seqid = "chr" + seqid
         searchObj=re.search(r'([^.]*).([^.]*).([^.]*).([^.]*).([^.]*).fa(.*)',
                 header, re.M|re.I)
         try:
