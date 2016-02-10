@@ -183,8 +183,9 @@ class MGEScan(object):
         if self.debug:
             print (cmd)
         p = Popen(cmd.split(), stdout=PIPE, stderr=PIPE)
+        std_msgs = p.communicate()
         if self.debug:
-            print p.communicate()
+            print std_msgs
 	return p
 
 def main():
