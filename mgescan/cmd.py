@@ -17,7 +17,7 @@ Options:
 import os, sys
 from docopt import docopt
 from multiprocessing import Process
-from subprocess import Popen, PIPE
+from subprocess import check_call, Popen, PIPE
 from mgescan import utils
 from mgescan.split import Split
 import shutil
@@ -195,11 +195,17 @@ class MGEScan(object):
         cmd = cmd % vars(self)
         if self.debug:
             print (cmd)
-        p = Popen(cmd.split(), stdout=PIPE, stderr=PIPE)
-        std_msgs = p.communicate()
-        if self.debug:
-            print std_msgs
-	return p
+        #p = Popen(cmd.split(), stdin=PIPE, stdout=PIPE, stderr=PIPE)
+        #std_msgs = p.communicate()
+        try:
+            retcode = check_call(cmd.split())
+            if retcode < 0:
+                print >>sys.stderr, "%s was terminated by signal" % cmd, -retcode
+            else:
+                print >>sys.stderr, "Returned", retcode
+        except OSError as e:
+            print >>sys.stderr, "Failed:", e
+	return retcode
 
 def main():
     arguments = docopt(__doc__, version='MGEScan 0.0.3')

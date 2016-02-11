@@ -347,9 +347,6 @@ sub get_domain_dna_seq{
 		#system("hmmsearch  --noali --domtblout ".$hmm_dir."tbl ".$_[1]."3 ".$_[0]." > /dev/null");
 		my $command = ("hmmsearch  --noali --domtblout ".$tmpfile." ".$_[1]."3 ".$_[0]." > /dev/null");
 		print $command if ($debug);
-		if ($debug && not prompt_yn("Continue?")) {
-			exit;
-		}
 		system($command);
 		#my $hmm_command = "cat ".$hmm_dir."tbl";
 		#my $hmm_result = `$hmm_command`;
@@ -472,9 +469,6 @@ sub vote_hmmsearch{
 			my $command = ("hmmsearch --noali --domtblout ".$tmpfile." ".$_[1].$line[$i].".".$_[2].".hmm3 ".$_[0]." > /dev/null");
 			system($command);
 			print $command if ($debug);
-			if ($debug && not prompt_yn("Continue?")) {
-				exit;
-			}
 			#my $command = "cat ".$hmm_dir."tbl";
 			#my $hmm_result = `$command`;
 			local $/ = undef;

@@ -13,7 +13,7 @@ import re
 
 if len(sys.argv) < 3:
     print sys.argv[0], "LTRout new-GFF-file"
-        sys.exit()
+    sys.exit()
 
 infile = open(sys.argv[1], "r")
 outfile = open(sys.argv[2], "w")
