@@ -3,11 +3,6 @@ use strict;
 use Getopt::Long;
 use Cwd 'abs_path';
 use File::Basename;
-use lib dirname (dirname abs_path $0) . '/lib';
-use Prompt qw(prompt_yn);
-
-my $debug;
-$debug = $ENV{'MGESCAN_DEBUG'};
 
 my $seq; 
 my $phmm_file;
@@ -56,10 +51,6 @@ if ($hmmerv == 3){
 	#system("hmmconvert ".$phmm_file." > ".$phmm_file."c");
 	#system("hmmsearch  --noali --domtblout ".$phmm_dir."tbl ".$phmm_file."c ".$pep_file." > /dev/null");
 	my $hmm_command = ("hmmsearch  --noali --domtblout ".$tmpfile." ".$phmm_file."3 ".$pep_file." > /dev/null");
-	print $hmm_command if ($debug);
-	#if ($debug && not prompt_yn("Continue?")) {
-	#	exit;
-	#}
 	system($hmm_command);
 	local $/ = undef;
 	my $hmm_result = <$fh>;
@@ -80,10 +71,6 @@ if ($hmmerv == 3){
 	}
 }else{
 	$command = "hmm2search ".$phmm_file." ".$pep_file;
-	print $command if ($debug);
-	#if ($debug && not prompt_yn("Continue?")) {
-	#	exit;
-	#}
 	$hmm_result = `$command`;
 
 	@hmm_results = split(/\n/, $hmm_result);
