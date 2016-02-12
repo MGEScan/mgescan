@@ -1,5 +1,5 @@
 CC =	gcc
-CFLAGS = -O3 -Wall -w
+CFLAGS = -O3 -Wall -w # -g -O0 for gdb
 SRCS =	util_lib.c hmm_lib.c test_hmm.c
 OBJS = $(SRCS:.c=.o)
 MAIN = MGEScan

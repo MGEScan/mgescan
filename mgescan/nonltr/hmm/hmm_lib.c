@@ -486,10 +486,14 @@ void viterbi(HMM *hmm_ptr, int T, char *O, double *pprob, int *vpath, char *sign
 			vpath[final_t]=0;
 		}
 
-		for(sig_id=final_t-1; sig_id>=0; sig_id--){    
+		for(sig_id=final_t-1; sig_id>=0; sig_id--){
+
+			// skip if viterbi path or array is out of range
+			if ( path[vpath[sig_id+1]][sig_id+1] == -1)
+				continue;
 			vpath[sig_id] = path[vpath[sig_id+1]][sig_id+1];
 
-			if (path_signal[sig_id] == 1){
+			if (path_signal[sig_id] == 1 && alpha[vpath[sig_id]][sig_id] != DBL_MAX){
 				fprintf(outfp, "%d %d %lf\n", signal[sig_id], vpath[sig_id], alpha[vpath[sig_id]][sig_id]);
 			}
 		}
