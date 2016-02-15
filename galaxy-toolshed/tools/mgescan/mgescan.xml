@@ -7,6 +7,7 @@
 	<requirement type="package" version="3.0.0">mgescan</requirement>
 	<requirement type="package" version="4.0.0">tandem_repeats_finder</requirement>
 	<requirement type="package" version="5.0.0">emboss</requirement>
+	<requirement type="package" version="3.1b1">hmmer</requirement>
 	</requirements>
 	<version_command>mgescan --version</version_command>
 	<command interpreter="bash">
