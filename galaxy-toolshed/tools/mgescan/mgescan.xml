@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-
-<tool name="MGEScan" id="mgescan" version="0.0.2">
+<tool name="MGEScan" id="mgescan" version="3.0.0">
 	<description>
 		MGEScan
 	</description>
 	<requirements>
-	<requirement type="package" version="3.0">mgescan</requirement>
+	<requirement type="package" version="3.0.0">mgescan</requirement>
+	<requirement type="package" version="4.0.0">tandem_repeats_finder</requirement>
 	</requirements>
 	<version_command>mgescan --version</version_command>
 	<command interpreter="bash">
