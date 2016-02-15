@@ -6,7 +6,7 @@
   <package name="tandem_repeats_finder" version="4.0">
 	  <repository name="tandem_repeats_finder" owner="urgi-team" />
   </package>
-  <package name="package_emboss_5_0_0" version="5.0.0">
-	  <repository name="package_emboss_5_0_0" owner="devteam" />
+  <package name="emboss" version="5.0.0">
+        <repository changeset_revision="cf998ddc0542" name="package_emboss_5_0_0" owner="devteam" toolshed="https://toolshed.g2.bx.psu.edu" />
   </package>
 </tool_dependency>
