@@ -51,9 +51,7 @@ fi
 
 #set path for transeq
 #export PATH=$user_dir/mgescan/EMBOSS/bin:/usr/bin:$PATH
-transeq --version 2> /dev/null
-res=$?
-if [ 0 -ne $res ]
+if [ "" == "`which transeq`" ]
 then
 	echo "EMBOSS is not available."
 	exit
