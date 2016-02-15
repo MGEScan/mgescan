@@ -11,7 +11,7 @@ function package-update() {
 	return $?
 }
 package-update
-package-install python-virtualenv python-dev git gcc g++ -y
+package-install python-virtualenv python-dev make git gcc g++ -y
 package-install libopenmpi-dev openmpi-bin -y
 package-install hmmer2 -y
 cat <<EOF > $HOME/.mgescanrc
