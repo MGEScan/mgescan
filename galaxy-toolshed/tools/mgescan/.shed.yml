@@ -1,8 +1,7 @@
 categories:
-- MGEScan
-- Tool Dependency Packages
-description: Contains a tool dependency definition that downloads and installs
-        version 3 of the MGEScan package.
+- Sequence Analysis
+description: 'MGEScan: Identification of long terminal repeats (LTR) and non-LTR retroelements'
+homepage_url: http://mgescan.readthedocs.org
 long_description: |
         MGEScan - software packages to identify long terminal repeats (LTR) and
         non-LTR retroelements in eukaryotic genomic sequence
@@ -18,10 +17,7 @@ long_description: |
         Format Version 3 is used for visualization of genome sequence data via
         a web-based genome browser e.g. UCSC Genome Browser or Ensembl Genome
         Browser. 
-
-        http://mgescan.readthedocs.org
-
-name: package_mgescan_3
+name: mgescan
 owner: hyungrolee
-remote_repository_url: https://github.com/MGEScan/mgescan/blob/master/galaxy-toolshed/packages/package_mgescan_3
-type: tool_dependency_definition
+remote_repository_url: https://github.com/MGEScan/mgescan/blob/master/galaxy-toolshed/tools/mgescan
+type: unrestricted

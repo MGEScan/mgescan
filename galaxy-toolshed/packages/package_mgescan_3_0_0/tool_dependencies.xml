@@ -1,9 +1,6 @@
 <?xml version="1.0"?>
 <tool_dependency>
-    <package name="trf" version="4.0">
-        <repository name="tandem_repeats_finder" owner="urgi-team" prior_installation_required="True" />
-    </package>
-    <package name="mgescan" version="3">
+    <package name="mgescan" version="3.0.0">
         <install version="1.0">
             <actions_group>
             	<!--
