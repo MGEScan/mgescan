@@ -9,4 +9,7 @@
   <package name="emboss" version="5.0.0">
         <repository changeset_revision="cf998ddc0542" name="package_emboss_5_0_0" owner="devteam" toolshed="https://toolshed.g2.bx.psu.edu" />
   </package>
+  <package name="hmmer" version="3.1b1">
+    <repository changeset_revision="e49dc46333e2" name="package_hmmer_3_1b1" owner="iuc" toolshed="https://toolshed.g2.bx.psu.edu" />
+  </package>
 </tool_dependency>
