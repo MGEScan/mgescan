@@ -4,6 +4,10 @@
 	<description>
 		MGEScan
 	</description>
+	<requirements>
+	<requirement type="package" version="3.0">mgescan</requirement>
+	</requirements>
+	<version_command>mgescan --version</version_command>
 	<command interpreter="bash">
 		mgescan.sh $input '$input.name' 3 $output $program $clade $qvalue_en $qvalue_rt $ltr_gff3 $nonltr_gff3 $both_gff3 $mpi_yn.nmpi
 		<!-- mgescan.sh $input $input.name $hmmver $output $program $clade $qvalue_en $qvalue_rt $ltr_gff3 $nonltr_gff3 -->
