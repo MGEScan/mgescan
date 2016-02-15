@@ -2,7 +2,7 @@
 # mgescan.sh $input $input.name 3 $output L None None None $ltr_gff3 None None $sw_rm "$scaffold" $min_dist $max_dist $min_len_ltr $max_len_ltr $ltr_sim_condition $cluster_sim_condition $len_condition $repeatmasker
 if [ "" == "$MGESCAN_SRC" ]
 then
-	"\$MGESCAN_SRC is not defined."
+	echo "\$MGESCAN_SRC is not defined."
 	exit
 fi
 
