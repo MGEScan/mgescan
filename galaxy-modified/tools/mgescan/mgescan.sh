@@ -3,7 +3,7 @@
 if [ "" == "$MGESCAN_SRC" ]
 then
 	echo "\$MGESCAN_SRC is not defined."
-	exit
+	exit 2
 fi
 
 script_program=`which python`
@@ -54,7 +54,7 @@ fi
 if [ "" == "`which transeq`" ]
 then
 	echo "EMBOSS is not available."
-	exit
+	exit 2
 fi
 
 #move to the working directory
@@ -98,7 +98,7 @@ then
 	echo $VERSION3 selected.
 else
 	echo HMMER is not available.
-	exit
+	exit 2
 fi
 
 if [ "$program" == "L" ]
