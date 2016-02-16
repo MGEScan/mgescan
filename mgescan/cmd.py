@@ -208,7 +208,7 @@ class MGEScan(object):
 	return retcode
 
 def main():
-    arguments = docopt(__doc__, version='MGEScan 0.0.3')
+    arguments = docopt(__doc__, version='MGEScan 3.0.0')
     mge = MGEScan(arguments)
     mge.run()
 

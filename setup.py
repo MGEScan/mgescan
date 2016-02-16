@@ -21,7 +21,7 @@ reqs = [line.strip() for line in open('requirements.txt')]
 
 setup(
         name = "MGEScan",
-        version = "0.0.3",
+        version = "3.0.0",
         author = "Hyungro Lee",
         author_email = "hroe.lee@gmail.com",
         description = ("MGEScan on Galaxy Workflow System for identifying ltr and "
