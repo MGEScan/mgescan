@@ -1,24 +1,13 @@
 #!/bin/bash
 # mgescan.sh $input $input.name 3 $output L None None None $ltr_gff3 None None $sw_rm "$scaffold" $min_dist $max_dist $min_len_ltr $max_len_ltr $ltr_sim_condition $cluster_sim_condition $len_condition $repeatmasker
-if [ ! -f ~/.mgescanrc ]
+if [ "" == "$MGESCAN_SRC" ]
 then
-	".mgescanrc is not found."
+	echo "\$MGESCAN_SRC is not defined."
 	exit
-fi
-. ~/.mgescanrc
-user_dir=$MGESCAN_HOME
-#user_dir=$HOME
-#script=$user_dir/mgescan/wazim/MGEScan1.1/run_MGEScan.pl
-#script=$user_dir/mgescan/wazim/MGEScan1.3.1/run_MGEScan2.pl
-source $user_dir/virtualenv/mgescan/bin/activate >> /dev/null
-if [ "$HOSTNAME" == "silo.soic.indiana.edu" ]
-then
-	module load mpi/openmpi-x86_64
-	#echo module load openmpi-x86_64 loaded.
 fi
 
 script_program=`which python`
-script=$user_dir/mgescan/mgescan/cmd.py
+script=$MGESCAN_SRC/mgescan/cmd.py
 input_file=$1
 #input_file_name=$2
 input_file_name=`basename $input_file`
@@ -62,9 +51,7 @@ fi
 
 #set path for transeq
 #export PATH=$user_dir/mgescan/EMBOSS/bin:/usr/bin:$PATH
-transeq --version 2> /dev/null
-res=$?
-if [ 0 -ne $res ]
+if [ "" == "`which transeq`" ]
 then
 	echo "EMBOSS is not available."
 	exit
