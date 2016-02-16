@@ -1,35 +1,19 @@
 <?xml version="1.0"?>
-
-<tool name="MGEScan-LTR" id="mgescan-ltr" version="0.0.1">
+<tool name="MGEScan-LTR" id="mgescan-ltr" version="3.0.0">
 	<description>
 		de novo identification of LTR retroelements
 	</description>
-	<!--
-	<action module="galaxy.tools.actions.nonltr" class="nonltrToolAction"/>
 	<requirements>
-		<requirement type="package">HMMER</requirement>
-		<requirement type="package">EMBOSS</requirement>
+	<requirement type="package" version="3.0.0">mgescan</requirement>
+	<requirement type="package" version="4.0">tandem_repeats_finder</requirement>
+	<requirement type="package" version="5.0.0">emboss</requirement>
+	<requirement type="package" version="3.1b1">hmmer</requirement>
 	</requirements>
-	-->
 	<command interpreter="bash">
-		<!--
-		/u/lee212/retrotminer/MGEScan_LTR/find_ltr.pl -genome=/u/lee212/retrotminer/MGEScan_nonLTR_v2/anoGam1/ 
-		-data=/u/lee212/retrotminer/MGEScan_LTR/example/data/  -program=/u/lee212/retrotminer/MGEScan_LTR/
-		-->
-		<!--mgescan.sh $input $input.name $hmmver $output L None None None $ltr_gff3 None-->
-		<!--mgescan.sh $input $input.name 3 $output L None None None $ltr_gff3 None-->
 		mgescan.sh $input '$input.name' 3 $output L None None None $ltr_gff3 None None $sw_rm "$scaffold" $min_dist $max_dist $min_len_ltr $max_len_ltr $ltr_sim_condition $cluster_sim_condition $len_condition $repeatmasker
 	</command>
 	<inputs>
-		<!--
-		<param name="genome" type="text" label="directory where input genome data exists" />
-		<param name="data" type="text" label="directory of the output" />
-		-->
 		<param format="fasta" name="input" type="data" label="From"/>
-		<!--param name="hmmver" type="select" label="Hmmsearch version">
-			<option selected="selected" value="3">3</option>
-			<option value="2">2</option>
-		</param-->
 		<!-- path.conf -->
 		<param name="sw_rm" type="select" display="checkboxes" multiple="True" label="enable repeatmasker, if necessary" help="Use this option if repeatmasker is required to identify and annotate repetitive elements in nucleotide sequences"> 
 			<option value="Yes">Yes</option>
