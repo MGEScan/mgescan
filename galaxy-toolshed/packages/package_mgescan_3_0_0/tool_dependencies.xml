@@ -6,7 +6,7 @@
             	<!--
                 <actions architecture="x86_64" os="linux">
 			<action type="download_by_url">
-				https://github.com/MGEScan/mgescan/archive/1.0.tar.gz
+				https://github.com/MGEScan/mgescan/archive/1.1.tar.gz
 			</action>
                     <action type="move_directory_files">
                         <source_directory>.</source_directory>
@@ -16,7 +16,7 @@
                 -->
                 <actions>
 		<action type="download_by_url">
-				https://github.com/MGEScan/mgescan/archive/1.0.tar.gz
+				https://github.com/MGEScan/mgescan/archive/1.1.tar.gz
                     </action>
                     <action type="set_environment_for_install">
                         <repository name="tandem_repeats_finder" owner="urgi-team">
