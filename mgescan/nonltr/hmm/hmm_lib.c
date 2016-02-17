@@ -702,12 +702,14 @@ void get_hydro(int start, int end, double *score, char *O){
 	}
 	memset(seq, '\0', 20000);
 
-	strcpy(temp_file1, out_dir);
+	//strcpy(temp_file1, out_dir);
+	strcpy(temp_file1, "/tmp/");
 	strcat(temp_file1, "ppppp.XXXXXX");
 	int fd1;
 	fd1 = mkstemp(temp_file1);
 
-	strcpy(temp_file2, out_dir);
+	//strcpy(temp_file2, out_dir);
+	strcpy(temp_file2, "/tmp/");
 	strcat(temp_file2, "qqqqq.XXXXXX");
 	int fd2;
 	fd2 = mkstemp(temp_file2);
