@@ -41,7 +41,7 @@ class MGEScan(object):
         self.set_inputs()
         self.set_defaults()
         self.get_env()
-        self.set_env()
+        self.set_debug()
 
     def set_inputs(self):
         self.data_dir = utils.get_abspath(self.args['--output'])
@@ -83,6 +83,10 @@ class MGEScan(object):
         self.scaffold = "" # or directory
 
     def get_env(self):
+        if not os.environ.get('MGESCAN_SRC'):
+            print ("MGEScan environment variable is not defined or .mgescanrc is not sourced.")
+            sys.exit(-1)
+        self.base_path = os.environ.get('MGESCAN_SRC') + "/mgescan"
         self.hmmerv = os.environ.get("MGESCAN_HMMER_VERSION") or self.hmmerv
         self.min_dist = os.environ.get("MGESCAN_MIN_DISTANCE") or self.min_dist
         self.max_dist = os.environ.get("MGESCAN_MAX_DISTANCE") or self.max_dist
@@ -93,15 +97,11 @@ class MGEScan(object):
         self.len_condition = os.environ.get("MGESCAN_MIN_LENGTH") or self.len_condition
         self.sw_rm = os.environ.get("MGESCAN_REPEATMASKER") or self.sw_rm
         self.scaffold = os.environ.get("MGESCAN_SCAFFOLD_DIR") or self.scaffold
-
-    def set_env(self):
-        self.base_path = os.environ.get('MGESCAN_SRC') + "/mgescan"
-        if not self.base_path:
-            print ("MGEScan environment (.mgescanrc) is not defined")
-            sys.exit(-1)
+         
+    def set_debug(self):
         if self.debug:
             os.environ["MGESCAN_DEBUG"] = "True"
-            
+           
     def wrapper_split_files(self):
         split = Split()
         split.set_input(self.genome_dir)
