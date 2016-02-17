@@ -1,10 +1,14 @@
+import sys
 import os.path
 from mgescan import utils
 from docopt import docopt
+from subprocess import check_call
 from multiprocessing import Process
+from mgescan.biopython import reverse_complement_fasta, getid
+import shutil
 
-class NonLTR(object):
-    """MGEScan Non-LTR
+class nonLTR(object):
+    """MGEScan non-LTR
 
     Usage:
       nonltr.py <input> <output> [--mpi=<num>]
@@ -18,7 +22,7 @@ class NonLTR(object):
     """
 
     name = "nonltr"
-    ver = 'MGEScan NonLTR 3.0.0'
+    ver = 'MGEScan nonLTR 3.0.0'
     mpi_cmd = "mpi_mgescan"
     hmmerv = "3"
 
@@ -96,6 +100,9 @@ class NonLTR(object):
         self.run_cmd(cmd)
 
     def backward(self):
+
+        reverse_path = self.genome_path + "_b"
+        self.reverse_complement(reverse_path)
         if self.nmpi:
             cmd = self._padding("mpirun", self.p_np, self.p_mpi_option,
                     self.p_mgescan_mpi_cmd, self.p_prg, self.p_genome_b,
@@ -104,13 +111,13 @@ class NonLTR(object):
         else:
            from os import listdir
            from os.path import isfile, join
-           mypath = self.genome_path + "_b"
-           for f in listdir(mypath):
-               fpath = join(mypath, f)
+           for f in listdir(reverse_path):
+               fpath = join(reverse_path, f)
                if isfile(fpath):
                    p = Process(target=self.run_hmm, args=("backward",fpath,))
                    p.start()
         self.post_process("backward")
+        shutil.rmtree(reverse_path)
 
     def _padding(self, *args):
         res = ""
@@ -121,9 +128,16 @@ class NonLTR(object):
         else:
             return res
 
+    def reverse_complement(self, directory):
+        mypath = self.genome_path
+        for (dirpath, dirnames, filenames) in os.walk(mypath):
+            break
+        utils.create_directory(directory, False)
+        for name in filenames:
+            file_path = utils.get_abspath(dirpath + "/" + name)
+            reverse_complement_fasta(file_path, directory)
+
     def run_cmd(self, cmd):
-        print cmd
-        return
         try:
             retcode = check_call(cmd.split())
             if retcode < 0:
@@ -154,5 +168,5 @@ class NonLTR(object):
         self.post_process2()
 
 if __name__ == '__main__':
-    obj = NonLTR()
+    obj = nonLTR()
     obj.run()
