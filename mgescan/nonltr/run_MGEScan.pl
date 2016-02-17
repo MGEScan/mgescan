@@ -25,8 +25,12 @@ my $hmmerv;
 my $nmpi;
 my $host = hostname;
 
-my $debug;
+my $debug, $host_file, $hf_option;
 $debug = $ENV{'MGESCAN_DEBUG'};
+$host_file = "";
+$hf_option = "";
+$host_file = $ENV{'MGESCAN_HOME'}."/host_file" if -f $ENV{'MGESCAN_HOME'}."/host_file";
+$host_file = $ENV{'MGESCAN_SRC'}."/host_file" if -f $ENV{'MGESCAN_SRC'}."/host_file";
 
 print "\n\n";
 GetOptions(
@@ -87,7 +91,8 @@ printf "Running forward...\n";
 #
 if ($nmpi) {
 	my $mpi_program = $program_dir."/../mpi_mgescan";
-	my $mpi_option = "-mca btl ^openib"; # ignore finding infiniteband
+	$hf_option = "-hostfile $host_file " if ($host_file != "");
+	my $mpi_option = $hf_option."-mca btl ^openib"; # ignore finding infiniteband
 	my $command = "mpirun -n ".$nmpi." ".$mpi_option." ".$mpi_program." --prg nonltr --genome ".$plus_dna_dir." --data ".$plus_out_dir." --hmmerv ".$hmmerv;
 	system($command);
 } else {
@@ -128,7 +133,8 @@ printf "Running backward...\n";
 invert_seq($plus_dna_dir, $minus_dna_dir);
 if ($nmpi) {
 	my $mpi_program = $program_dir."/../mpi_mgescan";
-	my $mpi_option = "-mca btl ^openib"; # ignore finding infiniteband
+	$hf_option = "-hostfile $host_file " if ($host_file != "");
+	my $mpi_option = $hf_option."-mca btl ^openib"; # ignore finding infiniteband
 	my $command = "mpirun -n ".$nmpi." ".$mpi_option." ".$mpi_program." --prg nonltr --genome ".$minus_dna_dir." --data ".$minus_out_dir." --hmmerv ".$hmmerv;
 	system($command);
 } else {
