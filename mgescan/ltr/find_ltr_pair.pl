@@ -44,7 +44,9 @@ my $path_ltr;
 my $chr_name;
 my $run_hmm;
 
-my $debug, $host_file, $hf_option;
+my $debug;
+my $host_file;
+my $hf_option;
 $debug = $ENV{'MGESCAN_DEBUG'};
 $host_file = "";
 $hf_option = "";

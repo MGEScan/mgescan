@@ -40,7 +40,9 @@ my $LEN_CONDITION;              # length of LTRs to be in a cluster
 my $RANGE_BIN=500;         # range in the bin
 my $FLANKING_LEN=20;
 
-my $debug, $host_file, $hf_option;
+my $debug;
+my $host_file;
+my $hf_option;
 $debug = $ENV{'MGESCAN_DEBUG'};
 $host_file = "";
 $hf_option = "";
