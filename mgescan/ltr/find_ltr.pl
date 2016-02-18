@@ -202,7 +202,7 @@ sub call_find_ltr_for_each_chr{   #$genome_dir, $main_dir, $ltr_dir, $ltr_data_d
 		$hf_option = "-hostfile ". $host_file . " " if ($host_file ne "");
 		my $mpi_option = $hf_option."-mca btl ^openib"; # ignore finding infiniteband
 		my $prg_name = "ltr";
-		my $command = "mpirun -n ".$nmpi." ".$mpi_option." ".$mpi_program." --prg ".$prg_name." --genome ".$_[0]." --data ".$_[3]." --hmmerv ".$hmmerv;
+		my $command = "mpirun -x MGESCAN_SRC=".$ENV{'MGESCAN_SRC'}." -n ".$nmpi." ".$mpi_option." ".$mpi_program." --prg ".$prg_name." --genome ".$_[0]." --data ".$_[3]." --hmmerv ".$hmmerv;
 		# mpirun -n 1 -mca btl ^openib /nfs/nfs4/home/lee212/github/mgescan/mgescan/ltr/../mpi_mgescan --prg ltr --genome /scratch/lee212/test-results/mgescan2/ltr/dmelanogaster/genome/ --data /scratch/lee212/test-results/mgescan2/ltr/dmelanogaster/ltr/ltr/ --hmmerv 3
 		#
 		system($command);		
