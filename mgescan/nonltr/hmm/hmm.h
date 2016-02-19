@@ -40,7 +40,6 @@
 #define RT_CRE 31
 #define RT_R2 32
 
-
 #define A_H_KD 0.0703
 #define A_H_WW 0.0976
 #define A_H_HH 0.0639
@@ -62,21 +61,16 @@
 
 #define CODE 1
 
-
-
 typedef struct {
-  int N;          /* number of states;  Q={1,2,...,N} */
-  int M;          /* number of observation symbols; V={1,2,...,M}*/
-  double  **A;    /* A[1..N][1..N]. a[i][j] is the transition prob                                                                     
-                           of going from state i at time t to state j                                                                        
-                           at time t+1 */
-  double  **B;    /* B[1..N][1..M]. b[j][k] is the probability of                                                                      
-		     of observing symbol k in state j */
-  double  *pi;    /* pi[1..N] pi[i] is the initial state distribution. */
+	int N;          /* number of states;  Q={1,2,...,N} */
+	int M;          /* number of observation symbols; V={1,2,...,M}*/
+	double  **A;    /* A[1..N][1..N]. a[i][j] is the transition prob                                                                     
+			   of going from state i at time t to state j                                                                        
+			   at time t+1 */
+	double  **B;    /* B[1..N][1..M]. b[j][k] is the probability of                                                                      
+			   of observing symbol k in state j */
+	double  *pi;    /* pi[1..N] pi[i] is the initial state distribution. */
 } HMM;
-
-
-
 
 void print_hmm(HMM *hmm_ptr);
 void get_hmm_from_file(FILE *fp, HMM *hmm_ptr);
@@ -90,4 +84,4 @@ double dist_rt(int dist);
 double dist_id(int dist);
 double dist_ie(int dist);
 double get_prob(int state, int start, int end,  char *O, char *hmmerv);
- 
+
