@@ -32,6 +32,7 @@ MGEScan on Amazon Cloud (AWS EC2).
    workflow
    tutorial-cmd
    installation
+   toolshed
    aws
    ltr
    nonltr
