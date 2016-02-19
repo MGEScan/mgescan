@@ -47,7 +47,6 @@ void get_hmm_from_file(FILE *fp, HMM *hmm_ptr){
 	}
 }
 
-
 void read_obs_seq_from_file(FILE *fp, int *num_seqs_ptr, char ***obs_seqs_ptr){
 
 	int i = 0;
@@ -88,7 +87,6 @@ void read_obs_seq_from_file(FILE *fp, int *num_seqs_ptr, char ***obs_seqs_ptr){
 		}
 	}
 }
-
 
 void viterbi(HMM *hmm_ptr, int T, char *O, double *pprob, int *vpath, char *signal_file1, char *signal_file2, char *out_file, char *phmm_dir1, char *out_dir1, char *hmmerv){
 
@@ -148,8 +146,6 @@ void viterbi(HMM *hmm_ptr, int T, char *O, double *pprob, int *vpath, char *sign
 	   printf("ERROR: allocation of out_dir\n");
 	   exit;
 	   }
-
-
 
 	   memset(phmm_dir,0,50);
 	   memset(out_dir,0,50);
@@ -530,7 +526,6 @@ double dist_ape(int dist){
 	return result;
 }
 
-
 double dist_id(int dist){
 
 	double result;
@@ -594,7 +589,6 @@ double dist_ie(int dist){
 	}
 	return result;
 }
-
 
 double  get_prob(int state, int start_pos, int end_pos,  char *O, char *hmmerv){
 
