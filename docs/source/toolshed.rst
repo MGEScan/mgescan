@@ -39,9 +39,13 @@ toolshed page in which 3,728 tools available in 2016.
 .. image:: images/toolshed-registration2.png
 
 Type ``mgescan`` in the search box. Choose ``mgescan``, not
-``package_mgescan_3_0_0`` to preview and install.  You may find there are other
-dependencies to be installed as well. If you are ready to install, find
-**Install to Galaxy** button on top of the page. It goes to the confirmation page.
+``package_mgescan_3_0_0`` to preview and install.  
+
+.. image:: images/toolshed-registration3.png
+
+You may find there are other dependencies to be installed as well. If you are
+ready to install, find **Install to Galaxy** button on top of the page. It goes
+to the confirmation page.
 
 .. image:: images/toolshed-registration-if-tool_dependency_dir_is_not_set.png
 
@@ -53,7 +57,6 @@ You will find **Install** button at the bottom of the page. Once you click the
 button, your Galaxy server starts to download tools and repositories and
 install MGEScan on your Galaxy.
 
-.. image:: images/toolshed-registration3.png
 .. image:: images/toolshed-registration-installation.png
 
 You can find MGEScan from **Manage installed tools** page from the left menu
