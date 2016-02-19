@@ -255,8 +255,11 @@ sub get_domain_pep_seq{
 		$hmm_result = <$fh>;
 		close $fh;
 		unlink0($fh, $tmpfile);
-		while ($hmm_result =~ /\n((?!#).*)\n/g){
-			my @temp = split(/\s+/, $1);
+		#while ($hmm_result =~ /\n((?!#).*)\n/g){
+		my @sp = split /\n/, $hmm_result;
+		for my $line (@sp) {
+			next if ($line =~ /^#/);
+			my @temp = split(/\s+/, $line);
 			#	if ($temp[9]<0.000001 ){
 			my $key = substr($temp[0],0,length($temp[0]));
 			my $uniq_key = substr($temp[0],0,length($temp[0])-2);
@@ -345,7 +348,7 @@ sub get_domain_dna_seq{
 		#system("hmmconvert ".$_[1]." > ".$_[1]."c");
 		#system("hmmsearch  --noali --domtblout ".$hmm_dir."tbl ".$_[1]."c ".$_[0]." > /dev/null");
 		#system("hmmsearch  --noali --domtblout ".$hmm_dir."tbl ".$_[1]."3 ".$_[0]." > /dev/null");
-		my $command = ("hmmsearch  --noali --domtblout ".$tmpfile." ".$_[1]."3 ".$_[0]." > /dev/null");
+		my $command = ("hmmsearch --noali --domtblout ".$tmpfile." ".$_[1]."3 ".$_[0]." > /dev/null");
 		print $command if ($debug);
 		system($command);
 		#my $hmm_command = "cat ".$hmm_dir."tbl";
@@ -355,8 +358,11 @@ sub get_domain_dna_seq{
 		close $fh;
 		unlink0($fh, $tmpfile);
 
-		while ($hmm_result =~ /\n((?!#).*)\n/g){
-			my @temp = split(/\s+/, $1);
+		my @sp = split /\n/, $hmm_result;
+		#while ($hmm_result =~ /\n((?!#).*)\n/g){
+		for my $line (@sp) {
+			next if ($line =~ /^#/);
+			my @temp = split(/\s+/, $line);
 			my $key = substr($temp[0],0,length($temp[0]));
 			my $uniq_key = substr($temp[0],0,length($temp[0])-2);
 
@@ -475,9 +481,12 @@ sub vote_hmmsearch{
 			$hmm_result = <$fh>;
 			close $fh;
 			unlink0($fh, $tmpfile);
+			my @sp = split /\n/, $hmm_result;
+			#while ($hmm_result =~ /\n((?!#).*)\n/g){
+			for my $line (@sp) {
+				next if ($line =~ /^#/);
 
-			while ($hmm_result =~ /\n((?!#).*)\n/g){
-				my @temp = split(/\s+/, $1);
+				my @temp = split(/\s+/, $line);
 				my $uniq_key = substr($temp[0],0,length($temp[0]));
 
 				$save_evalue{$uniq_key} = $save_evalue{$uniq_key}."\t".$line[$i]."\t".$temp[11];

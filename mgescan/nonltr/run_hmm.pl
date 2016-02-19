@@ -57,6 +57,15 @@ print "    APE signal...\n";
 $phmm_file = $phmm_dir."ebi_ds36736_seq.hmm";
 $domain_ape_pos_file = $pos_dir.$dna_name.".ape.pos";
 get_signal_domain(\$pep_file, \$phmm_file, \$domain_ape_pos_file);
+#@files = ($domain_rt_pos_file, $domain_ape_pos_file);
+#my $pm = new Parallel::ForkManager(2);
+#foreach my $file (@files) {
+#  $pm->start and next;
+#  warn "Cannot get $res" if get_signal_domain(\$pep_file, \$phmm_file, \$file) != RC_OK;
+#  $pm->finish;
+#}
+#$pm->wait_all_children;
+
 
 ##############################################################################
 # generate corresponsing empty domains files if either of them does not exist 
@@ -139,14 +148,17 @@ sub get_signal_domain{
 		#
 		# NC_003070.9.fa_3     -          10142556 ebi_ds36752_seq      -            437         0 1118.0   6.0   3  11   1.5e-70   1.5e-70  225.5   0.0     2   435 3453451 3453883 3453450 3453885 0.91 -
 		#
-		while ($hmm_result =~ /\n((?!#).*)\n/g){
-			my @temp = split(/\s+/, $1);
+		my @sp = split /\n/, $hmm_result;
+		#while ($hmm_result =~ /\n((?!#).*)\n/g){
+		for my $line (@sp) {
+			next if ($line =~ /^#/);
+			
+			my @temp = split(/\s+/, $line);
 			if ($temp[11]<0.001 ){
 				# from to from(first one) to(first) score c-Evalue
 				print OUT eval($temp[17]*3)."\t".eval($temp[18]*3)."\t".$temp[15]."\t".$temp[16]."\t".$temp[13]."\t".$temp[11]."\n";
 			}
 		}
-
 	}else{
 		my $hmm_command = "hmm2search  -E 0.00001 ".${$_[1]}." ".${$_[0]};
 		my $hmm_result = `$hmm_command`;
