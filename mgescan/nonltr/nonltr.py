@@ -79,7 +79,6 @@ class nonLTR(object):
                if isfile(fpath):
                    p = Process(target=self.run_hmm, args=("forward", fpath,))
                    p.start()
-        self.post_process("forward")
 
     def post_process(self, t):
         if t == "forward":
@@ -116,8 +115,6 @@ class nonLTR(object):
                if isfile(fpath):
                    p = Process(target=self.run_hmm, args=("backward",fpath,))
                    p.start()
-        self.post_process("backward")
-        shutil.rmtree(reverse_path)
 
     def _padding(self, *args):
         res = ""
@@ -162,8 +159,11 @@ class nonLTR(object):
 
         if 'p1' in locals():
             p1.join()
+            self.post_process("forward")
         if 'p2' in locals():
             p2.join()
+            self.post_process("backward")
+            shutil.rmtree(reverse_path)
 
         self.post_process2()
 
