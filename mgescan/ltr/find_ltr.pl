@@ -5,6 +5,7 @@ use Cwd 'abs_path';
 use File::Basename;
 use Sys::Hostname;
 use File::Temp qw/ tempfile unlink0 /;
+use Time::HiRes;
 
 ###################################################
 # path configuration
@@ -643,9 +644,16 @@ sub find_ltr_pair{  #$path_genome, $path_ltr, $chr_name, $run_hmm
 		print "WARNING: no MEM in $chr_name\n";
 		return 0;
 	} 
+	# input: $mem_file
+	# output: $bin_file
+	# deletion: $mem_file, $dist_file
+	# note: $dist_file is created and deleted.
 	elsif (make_bin($mem_file, $dist_file, $bin_file) == 0){
 		print "WARNING: no bin in $chr_name\n";
 		return 0;
+	# input: $bin_file, $_[3] 
+	# output: $ltr_pre_file (.ltr)
+	# comment: $_[3] is value 1 defined in line 153, simulation might have 1?
 	}elsif (find_putative_ltr($bin_file, $ltr_pre_file, $_[3])==0){
 		print "WARNING: no putative LTR in $chr_name\n";
 		return 0;
@@ -694,6 +702,13 @@ sub make_bin { #$mem_file, $dist_file, $bin_file
 
 	# input: $mem_file
 	# output: $bin_file
+	#
+	# Description: 
+	# 1) sort mem file by 4th key (difference between start, end)
+	# 2) save the sorted as .dist file
+	# 3) make .bin file per RANGE_BIN (500)  with a separater (- multiply 73)
+	# 4) .temp1 and temp2 are used to store lines from .dist per RANGE_BIN and sort the file
+	#
 	my $mem_file_sub = $_[0];
 	my $dist_file_sub = $_[1];
 	my $bin_file_sub = $_[2];
@@ -707,10 +722,12 @@ sub make_bin { #$mem_file, $dist_file, $bin_file
 	my (@line_array, @line_array_bin);
 	my ($prev1, $prev2);
 	my $flag = 0;    
-	my $temp_file1 = $dist_file_sub.".temp1";
-	my $temp_file2 = $dist_file_sub.".temp2";
+	my $temp_file1 = $dist_file_sub.".temp1"; # lines captured from .dist per RANGE_BIN
+	my $temp_file2 = $dist_file_sub.".temp2"; # sorted by 1st key from .temp1 file
 	my $start_dist = $MIN_DIST; # Default 2,000
 	my $line_count=0;
+
+	# Bin separator
 	print OUTPUT "------------------------------------------------------------------------\n";
 	# Sorted data looks like this:
 	# (startAt) (startAt+1) (lengthAt) (startAt+1 - startAt)
@@ -727,6 +744,13 @@ sub make_bin { #$mem_file, $dist_file, $bin_file
 	#
 	# bin file will be created like this :
 	# ------------------------------------------------------------------------
+	# first four columns are same, add two more columns: 
+	# 5th: (startAt - previous startAt - previous lengthAt),
+	# 6th: (startAt+1 - previous startAt+1 - previous lengthAt) 
+	#
+	# (startAt) (startAt+1) (lengthAt) (startAt+1 - startAt) 5th 6th
+	#
+	# e.g. 
 	# 6329    8666    12      2337    6329    8666
 	# 6676    9007    10      2331    335     329
 	# 10943   13292   10      2349    4257    4275
@@ -749,6 +773,7 @@ sub make_bin { #$mem_file, $dist_file, $bin_file
 
 			# for each bin, add lines in the bin into a temp file(temp1)
 			# RANGE_BIN is 500 (default)
+			# First lines under 2500 go here?
 		}elsif ($line_array[3] < ($start_dist+$RANGE_BIN) && $flag==1) {  
 
 			print TEMP $each_line;
@@ -761,6 +786,7 @@ sub make_bin { #$mem_file, $dist_file, $bin_file
 
 			#after sorting each file of a bin, add it into bin_file
 			close(TEMP);
+			# Comment: Is this correct? -k 1n,2n works just like -k1n, sort by the first key unless -s added
 			system ("sort -k 1n,2n   $temp_file1 > $temp_file2");       
 			#save the sorted lines in a bin into bin file
 			open (TEMP_SORTED, $temp_file2) || die("Couldn't open sorted bin file!\n");
@@ -787,22 +813,22 @@ sub make_bin { #$mem_file, $dist_file, $bin_file
 			close(TEMP_SORTED);
 
 			#open a temp file again for the next bin
+			# Bin separator
 			print OUTPUT "------------------------------------------------------------------------\n";
 
 			open TEMP, ">$temp_file1";
 			print TEMP $each_line;
 
 			@line_array =  split(/\s+/,$each_line);
+			# start_dist increases 500 (2000 + 500) per bin
 			$start_dist = $start_dist + $RANGE_BIN;
 
+			# Comment: increase $start_dist if next difference is bigger
 			while ($start_dist+$RANGE_BIN <= $line_array[3])  {
-
 				$start_dist = $start_dist + $RANGE_BIN;
-
 			}
-			$flag =1;
-		}	
-	}    
+		} # else ends
+	} # while ends
 	close(DAT);
 
 	$prev1 = 0;   #the ending position of previous MEM
@@ -810,6 +836,10 @@ sub make_bin { #$mem_file, $dist_file, $bin_file
 
 	#after sorting each file of a bin, add it into bin_file
 	close(TEMP);
+
+	# Comment: In case if the while loop above ends without calling this part...
+	# This is same code above in else {} section. Can be duplicate
+	# Again -k 1n,2n is same as -k1n, only sorting first key
 	system ("sort -k 1n,2n $temp_file1 > $temp_file2");       
 	#save the sorted lines in a bin into bin file
 	open (TEMP_SORTED, $temp_file2) || die("Couldn't open sorted bin file!\n");
@@ -835,8 +865,8 @@ sub make_bin { #$mem_file, $dist_file, $bin_file
 
 	system("rm -rf $temp_file1");
 	system("rm -rf $temp_file2");
-	#system("rm -rf $dist_file_sub");   
-	#system("rm -rf $mem_file_sub");
+	system("rm -rf $dist_file_sub");
+	system("rm -rf $mem_file_sub");
 
 	if ($line_count ==0){
 		system("rm -rf ".$bin_file_sub);
@@ -848,6 +878,12 @@ sub make_bin { #$mem_file, $dist_file, $bin_file
 
 sub find_putative_ltr{ #$bin_file, $ltr_pre_file, $run_hmm
 
+	# output ($ltr_pre_file) looks like:
+	# 90893   91324   99574   100005  -       432     432     8681    99.8    4.224e-120      GTTTA   GTTTA   TGT     ACA     TGT     ACA     1       -3      1       -3      Bel
+	# 383369  383782  389950  390363  -       414     414     6581    100.0   1.2285e-113     -       -       -       -       -       -       0       0       0       0       Gypsy
+	# 838677  839099  846684  847106  -       423     423     8007    99.8    1.8216e-110     -       -       -       -       -       -       0       0       0       0       Gypsy
+	# 905859  906300  912786  913227  +       442     442     6927    100.0   5.3568e-109     CAAG    CAAG    TGT     ACA     TGT     ACA     0       0       0       0       Gypsy
+	#
 	my $bin_file_sub = $_[0];
 	my $ltr_pre_file_sub = $_[1];
 
@@ -856,10 +892,12 @@ sub find_putative_ltr{ #$bin_file, $ltr_pre_file, $run_hmm
 	my (@long_orf, @out_ltr);
 	my (@temp, @temp_prev, @temp_str, $str, @plus_minus, $temp_matcher, $direction, $is_ltr, $domain, @ltr_result);
 
+	# $file{1-4} used in check_putative_ltr()
 	my $file1 = $bin_file_sub.".temp1";
 	my $file2 = $bin_file_sub.".temp2";
 	my $file3 = $bin_file_sub.".temp3";
 	my $file4 = $bin_file_sub.".temp4";
+	# $file{5} collects results
 	my $file5 = $bin_file_sub.".temp5";
 
 	open(INPUT, $bin_file_sub)||die("couldn't open $bin_file_sub\n");
@@ -871,7 +909,7 @@ sub find_putative_ltr{ #$bin_file, $ltr_pre_file, $run_hmm
 	my $start_ltr2=0;
 	my $end_ltr1=0;
 	my $end_ltr2=0;
-	my $prev="";
+	my @prev;#$prev="";
 	my $num_line=0;
 	my $sum_match=0;
 	my $sum_gap1=0;
@@ -883,37 +921,68 @@ sub find_putative_ltr{ #$bin_file, $ltr_pre_file, $run_hmm
 	my $each_count=0;
 
 
+	# bin file looks like this, six columns:
+	# ------------------------------------------------------------------------
+	# 6329    8666    12      2337    6329    8666
+	# 6676    9007    10      2331    335     329
+	# 10943   13292   10      2349    4257    4275
+	# ...
+	#
+	# 1st: startAt 
+	# 2nd: startAt+1 
+	# 3rd: lengthAt 
+	# 4th: (2nd col - 1st col) 
+	# 5th: (1st col - prev 1st col - prev 3rd col) 
+	# 6th: (2nd col - prev 2nd col - prev - 3rd col)
+	#
+	my $start = Time::HiRes::gettimeofday();
+
+	my ($cpl,$es, $ed, $edt);
 	foreach my $each_line (<INPUT>){
 		$each_count++;
 		if ($each_count % 10000==0){
+			# progress displays
 			print $each_count."\t";
 		}
-		if($each_line =~ /--/){
+		#if($each_line =~ /--/){
+		if(substr($each_line,0,1) eq '-'){
 
+			# $start = 1 is trigger to call check_putative_ltr except one case
 			if ($start_find==1&& $start==1){
 				$count_alignment++;
+				# call check_putative_ltr
+				my $cpl_start_s = Time::HiRes::gettimeofday();
 				@ltr_result=check_putative_ltr($start_ltr1, $end_ltr1, $start_ltr2, $end_ltr2, $sum_gap1, $sum_gap2, $count_bin, $_[2], $bin_file_sub);
+				my $cpl_end_s = Time::HiRes::gettimeofday();
+				$cpl += ($cpl_end_s - $cpl_start_s);
 				if ($ltr_result[0]==1 ){
 					for(my $iii=1; $iii<=$#ltr_result; $iii++){
 						print OUTPUT2 $ltr_result[$iii]."\t";
+						print $ltr_result[$iii]."\t";
 					}
 					$line_count++;
 					print OUTPUT2 "\n";
+					print "\n";
 				}
 			}else{
 				$start_find=1;
 			}
-			$prev = "1000 1000 0 1000 1000 1000";	    
+			#$prev = "1000 1000 0 1000 1000 1000";	    
+			@prev = split(/\s+/, "1000 1000 0 1000 1000 1000");
 			$start=0;
 
-		}elsif ($each_line !~ /--/){
+			#}elsif ($each_line !~ /--/){
+			#}elsif (substr_($each_line,0,2) ne '--'){
+		}else {
 
 			chomp($each_line);
 			@temp = split(/\s+/, $each_line);
-			@temp_prev = split(/\s+/, $prev);
+			@temp_prev = @prev;#split(/\s+/, $prev);
 
+			if ( $temp[4]<100 && $temp[5]<100 && abs($temp[3]-$temp_prev[3]) <100) {
 
-			if ( $temp[4]<100 && $temp[5]<100 && abs($temp[3]-$temp_prev[3])<100 && $start==0){
+				$es = Time::HiRes::gettimeofday();
+			        if ($start==0){
 
 				$start=1;
 				$start_ltr1 = $temp_prev[0];
@@ -925,27 +994,41 @@ sub find_putative_ltr{ #$bin_file, $ltr_pre_file, $run_hmm
 				$sum_gap2 =$temp[5];	
 				$count_bin=2;
 
-			}elsif ($temp[4]<100 && $temp[5]<100 && abs($temp[3]-$temp_prev[3])<100 && $start==1){
+				# Comment: If too close, skip?
+				#}elsif ($temp[4]<100 && $temp[5]<100 && abs($temp[3]-$temp_prev[3])<100 && $start==1){
+		
+				#}elsif ($start==1){
+				}else {
 
-				$end_ltr1 = $temp[0]+$temp[2];
-				$end_ltr2 = $temp[1]+$temp[2];
-				$sum_match = $sum_match + $temp[2];
-				$sum_gap1 =$sum_gap1 + $temp[4];
-				$sum_gap2 =$sum_gap2 + $temp[5];	
-				$count_bin++;
+					$end_ltr1 = $temp[0]+$temp[2];
+					$end_ltr2 = $temp[1]+$temp[2];
+					$sum_match = $sum_match + $temp[2];
+					$sum_gap1 =$sum_gap1 + $temp[4];
+					$sum_gap2 =$sum_gap2 + $temp[5];	
+					$count_bin++;
+				}
+				$ed = Time::HiRes::gettimeofday();
+				$edt += $ed - $es;
 
+			# $start = 1 is trigger to call check_putative_ltr except one case
 			}elsif ($start==1){
 
 				$start=0;
 				$count_alignment++;
+				my $cpl_start_s = Time::HiRes::gettimeofday();
 				@ltr_result=check_putative_ltr($start_ltr1, $end_ltr1, $start_ltr2, $end_ltr2, $sum_gap1, $sum_gap2, $count_bin, $_[2], $bin_file_sub);
+				my $cpl_end_s = Time::HiRes::gettimeofday();
+				$cpl += ($cpl_end_s - $cpl_start_s);
 
+				$es = Time::HiRes::gettimeofday();
 				if ($ltr_result[0]==1){
 					for(my $iii=1; $iii<=$#ltr_result; $iii++){
 						print OUTPUT2 $ltr_result[$iii]."\t";
+						print $ltr_result[$iii]."\t";
 					}
 					$line_count++;
 					print OUTPUT2 "\n";
+					print "\n";
 				}
 
 				$sum_match=0;
@@ -965,9 +1048,12 @@ sub find_putative_ltr{ #$bin_file, $ltr_pre_file, $run_hmm
 					$sum_gap2 = 0;
 					$count_bin=1;
 				}
+				$ed = Time::HiRes::gettimeofday();
+				$edt += $ed - $es;
 
 			}elsif ( $temp[2]>50 && $start==0 )  {
 
+				$es = Time::HiRes::gettimeofday();
 				$start=1;
 				$start_ltr1 = $temp[0];
 				$start_ltr2 = $temp[1];
@@ -977,12 +1063,21 @@ sub find_putative_ltr{ #$bin_file, $ltr_pre_file, $run_hmm
 				$sum_gap1 = 0;
 				$sum_gap2 = 0;	
 				$count_bin=1;
+				$ed = Time::HiRes::gettimeofday();
+				$edt += $ed - $es;
 			}
-			$prev = $each_line;
-		}
-	}
+			@prev = @temp;#$each_line;
+		} # ends elsif ($each_line !~ /--/){
+	} # foreach ends
 	close(OUTPUT2);
 	close(INPUT);
+
+	my $end = Time::HiRes::gettimeofday();
+	#Total find_putative_ltr: 1456040685.75
+	#Total check_putative_ltr: 153.95
+	printf("Total find_putative_ltr: %.2f\n", $end - $start);
+	printf("Total check_putative_ltr: %.2f\n", $cpl);
+	printf("Total etc: %.2f\n", $edt);
 
 	if (-e $file1){
 		system("rm -rf $file1");
@@ -1600,3 +1695,7 @@ sub find_tsd{
 	return ($found, $offset55-21, $offset53-21, $offset35-21, $offset33-21, $di55, $di53, $di35, $di33, $tsd5, $tsd3);
 }
 
+sub substr_ {
+	my($what,$where,$howmuch) = @_;
+	unpack("x$where a$howmuch", $what);
+}
