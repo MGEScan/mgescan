@@ -64,6 +64,7 @@ sub convert_minus_to_plus{
 }
 
 sub merge_thmm{
+	# input: out1/, out2/, out2/full, out2/frag, dna_dir
 
 	if (-e $_[1]){
 		system("rm ".$_[1]."/*");
@@ -71,9 +72,12 @@ sub merge_thmm{
 		system("mkdir ".$_[1]);
 	}
 
+	# OUT is out2/full
 	open OUT, ">$_[2]";     # full-length
+	# FRAG is out2/frag
 	open FRAG, ">$_[3]";    # frag
 
+	# out1/{{ genome sequence original filename }}
 	opendir(DIRHANDLE, $_[0]) || die ("Cannot open directory ".$_[0]);  # result from HMM
 	foreach my $name (sort readdir(DIRHANDLE)) {
 
@@ -98,15 +102,16 @@ sub merge_thmm{
 			while(my $each_line=<IN>){
 				chomp($each_line);
 				my @temp = split(/\s+/, $each_line);
-				# temp[0]
-				# temp[1]
-				# temp[2]
+				# temp[0] : start end ?
+				# temp[1] : clade identification
+				# temp[2] : ?
 				if ($te == $temp[1] + 1 && $temp[1] != 0){
 					$start = $temp[0];
 					$te = $temp[1];
 					$count += 1;
 				}elsif ($temp[1] != 0 && $te >0){
 					print $each_line."\n";
+				# 
 				}elsif ($temp[1] == 0){
 					if ($count == 3 || ($count ==1 && $te>30)){   #full-length elements
 						if ($te <= 3 ){
@@ -138,6 +143,7 @@ sub merge_thmm{
 						print OUT $name."\t".$temp[0]."\t".$end."\t".eval($end-$temp[0])."\t".$te_name."\n";
 
 						my $seq_file = $_[1].$te_name."_full";
+						# e.g. L1_full for each sequence
 						open OUT1, ">>$seq_file";
 						print OUT1 ">".$name."_".$temp[0]."\n";
 

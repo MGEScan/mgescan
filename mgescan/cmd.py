@@ -173,12 +173,17 @@ class MGEScan(object):
         start = time.time()
 
         # nonltr
-        cmd0 = self.base_path + "/nonltr/run_MGEScan.pl \
-                -genome=%(genome_dir)s \
-                -data=%(data_dir)s \
-                -hmmerv=%(hmmerv)s"
+        #cmd0 = self.base_path + "/nonltr/run_MGEScan.pl \
+        #        -genome=%(genome_dir)s \
+        #        -data=%(data_dir)s \
+        #        -hmmerv=%(hmmerv)s"
+        cmd0 = "python " + self.base_path + "/nonltr/nonltr.py " + \
+                "%(genome_dir)s " + \
+                "%(data_dir)s "
+
         if self.mpi_enabled:
-            cmd0 = (cmd0 + " -mpi=%(mpi_enabled)s")
+            #cmd0 = (cmd0 + " -mpi=%(mpi_enabled)s")
+            cmd0 = (cmd0 + " --mpi=%(mpi_enabled)s")
         res0 = self.run_cmd(cmd0)
         
         # gff3

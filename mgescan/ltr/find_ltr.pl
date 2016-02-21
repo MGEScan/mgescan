@@ -67,7 +67,9 @@ my @rt=("anno_nonLTR_rt.hmm","anno_dirs_rt.hmm",
 # get congifuration from input
 ##################################################
 #get_path_conf($conf_file, \$tool_trf);
-get_value_conf($value_file, \$MIN_DIST,\$MAX_DIST,\$MIN_LEN_LTR,\$MAX_LEN_LTR,\$LTR_SIM_CONDITION,\$CLUSTER_SIM_CONDITION,\$LEN_CONDITION, );
+get_value_conf($value_file,
+	\$MIN_DIST,\$MAX_DIST,\$MIN_LEN_LTR,\$MAX_LEN_LTR,\$LTR_SIM_CONDITION,\$CLUSTER_SIM_CONDITION,\$LEN_CONDITION,
+);
 
 ##############################################
 # get values in value.conf from parameters
@@ -137,13 +139,6 @@ if (length($main_dir) == 0 ){
 	}
 }
 
-
-#if ($hmmerv > 2){
-#    $tool_pfam = $program_dir."/pfam_3/"; 
-#}else{
-#    $tool_pfam = $program_dir."/pfam_2/";
-#}
-
 #####################################################
 # Output configuration
 #####################################################
@@ -165,7 +160,17 @@ my $run_hmm = 1;   #for simulation:0
 my $genome_seq="";
 my $genome_head="";
 
+#####################################################
+# Main functions
+#####################################################
+#
+# call_find_ltr_for_each_chr() - calls find_ltr_pair() per genome sequence file
+# which is the most time consuming function due to lots of hmmsearch - (It
+# calls find_putative_ltr() which is the actual function for most time
+# consuming part)
+#
 call_find_ltr_for_each_chr($genome_dir, $main_dir, $ltr_dir, $ltr_data_dir);
+
 get_ltr_ir_seq($genome_dir, $ltr_data_dir, $ltr_seq_dir, $ir_seq_dir, $element_seq_dir);
 #--------------------------------------------------------------------------
 # run matcher with files in a given dir and report sim and len in a file
@@ -191,6 +196,10 @@ system("rm -rf ".$ir_seq_dir);
 system("rm -rf ".$ltr_seq_dir);
 system("rm -rf ".$ltr_data_dir);
 system("rm -rf ".$sim_file);
+
+#####################################################
+# SUB
+#####################################################
 
 sub call_find_ltr_for_each_chr{   #$genome_dir, $main_dir, $ltr_dir, $ltr_data_dir);
 
@@ -652,11 +661,14 @@ sub find_ltr_pair{  #$path_genome, $path_ltr, $chr_name, $run_hmm
 
 sub find_mem{ #$genome_file, $mask_file, $mem_file
 
+	# input: $genome_file 
+	# output:  mem file (ltr result file)
+	#          mask_file (trf result file) is generated but deleted before this sub terminates
 	my $genome_file_sub = $_[0];
 	my $mask_file_sub = $_[1];
 	my $mem_file_sub = $_[2];
 
-	print "Finging MEM\n";
+	print "Finding MEM\n";
 	my $command = $tool_trf." ".$genome_file_sub." 2 7 7 80 10 50 500 -m -h  > /dev/null 2>&1";
 	system($command);
 	my @temp = split(/\//, $genome_file_sub.".2.7.7.80.10.50.500");
@@ -680,11 +692,14 @@ sub find_mem{ #$genome_file, $mask_file, $mem_file
 
 sub make_bin { #$mem_file, $dist_file, $bin_file
 
+	# input: $mem_file
+	# output: $bin_file
 	my $mem_file_sub = $_[0];
 	my $dist_file_sub = $_[1];
 	my $bin_file_sub = $_[2];
 
 	print "Making bin\n";
+	# sort by gap (4th value in mem file)
 	system("sort -k 4n  $mem_file_sub > $dist_file_sub");
 	open(DAT, $dist_file_sub)|| die("Couldn't open $dist_file_sub!\n");
 	open OUTPUT, ">$bin_file_sub";
@@ -694,9 +709,35 @@ sub make_bin { #$mem_file, $dist_file, $bin_file
 	my $flag = 0;    
 	my $temp_file1 = $dist_file_sub.".temp1";
 	my $temp_file2 = $dist_file_sub.".temp2";
-	my $start_dist = $MIN_DIST;
+	my $start_dist = $MIN_DIST; # Default 2,000
 	my $line_count=0;
 	print OUTPUT "------------------------------------------------------------------------\n";
+	# Sorted data looks like this:
+	# (startAt) (startAt+1) (lengthAt) (startAt+1 - startAt)
+	# 10299448        10301458        10      2010
+	# 10471040        10473050        10      2010
+	# 10945817        10947827        10      2010
+	# 10959142        10961152        10      2010
+	# ...
+	# 9423474 9425484 10      2010
+	# 1025152 1027163 10      2011
+	# 11127337        11129348        11      2011
+	# 11285954        11287965        10      2011
+	#
+	#
+	# bin file will be created like this :
+	# ------------------------------------------------------------------------
+	# 6329    8666    12      2337    6329    8666
+	# 6676    9007    10      2331    335     329
+	# 10943   13292   10      2349    4257    4275
+	# ...
+	# 22211525        22213737        10      2212    851     1036
+	# 22213219        22215673        10      2454    1684    1926
+	# ------------------------------------------------------------------------
+	# 8051    10906   11      2855    8051    10906
+	# 10051   13037   10      2986    1989    2120
+	# ...
+	# 
 	while(my $each_line =<DAT>) {
 
 		@line_array = split(/\t/, $each_line);
@@ -707,6 +748,7 @@ sub make_bin { #$mem_file, $dist_file, $bin_file
 			$flag=1;
 
 			# for each bin, add lines in the bin into a temp file(temp1)
+			# RANGE_BIN is 500 (default)
 		}elsif ($line_array[3] < ($start_dist+$RANGE_BIN) && $flag==1) {  
 
 			print TEMP $each_line;
@@ -793,8 +835,8 @@ sub make_bin { #$mem_file, $dist_file, $bin_file
 
 	system("rm -rf $temp_file1");
 	system("rm -rf $temp_file2");
-	system("rm -rf $dist_file_sub");   
-	system("rm -rf $mem_file_sub");
+	#system("rm -rf $dist_file_sub");   
+	#system("rm -rf $mem_file_sub");
 
 	if ($line_count ==0){
 		system("rm -rf ".$bin_file_sub);

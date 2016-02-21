@@ -5,6 +5,7 @@ use Cwd 'abs_path';
 use File::Basename;
 use File::Temp qw/ tempfile unlink0 /;
 use lib (dirname abs_path $0) . '/lib';
+use Parallel::ForkManager;
 use Prompt qw(prompt_yn);
 
 my $pdir = dirname(abs_path($0))."/";
@@ -34,7 +35,6 @@ if (-e $pos_dir){
 	system("mkdir ".$pos_dir);
 }
 
-
 ##########################################################
 # get signal for some state of ORF1, RT, and APE
 # need HMMSEARCH
@@ -51,21 +51,24 @@ system($command);
 print "    RT signal...\n";
 $phmm_file = $phmm_dir."ebi_ds36752_seq.hmm";
 $domain_rt_pos_file = $pos_dir.$dna_name.".rt.pos";
-get_signal_domain(\$pep_file, \$phmm_file, \$domain_rt_pos_file);
+#get_signal_domain(\$pep_file, \$phmm_file, \$domain_rt_pos_file);
 
 print "    APE signal...\n";
 $phmm_file = $phmm_dir."ebi_ds36736_seq.hmm";
 $domain_ape_pos_file = $pos_dir.$dna_name.".ape.pos";
-get_signal_domain(\$pep_file, \$phmm_file, \$domain_ape_pos_file);
-#@files = ($domain_rt_pos_file, $domain_ape_pos_file);
-#my $pm = new Parallel::ForkManager(2);
-#foreach my $file (@files) {
-#  $pm->start and next;
-#  warn "Cannot get $res" if get_signal_domain(\$pep_file, \$phmm_file, \$file) != RC_OK;
-#  $pm->finish;
-#}
-#$pm->wait_all_children;
-
+#get_signal_domain(\$pep_file, \$phmm_file, \$domain_ape_pos_file);
+my @files;
+@files = ([$phmm_dir."ebi_ds36752_seq.hmm",$domain_rt_pos_file],
+	[$phmm_dir."ebi_ds36736_seq.hmm", $domain_ape_pos_file]); 
+my $pm = new Parallel::ForkManager(2);
+foreach my $filearray (@files) {
+	$pm->start and next;
+	my $file;
+	($phmm_file, $file) = @$filearray;
+	get_signal_domain(\$pep_file, \$phmm_file, \$file);
+	$pm->finish;
+}
+$pm->wait_all_children;
 
 ##############################################################################
 # generate corresponsing empty domains files if either of them does not exist 
@@ -110,7 +113,6 @@ if (-e $pep_file){
 #                        SUBROUTINE                       #
 ###########################################################
 
-
 sub get_signal_domain{
 
 	# Inputs $_[0], $_[1]
@@ -129,6 +131,9 @@ sub get_signal_domain{
 	my $fh;
 	my $tmpfile;
 	my $hmm_result;
+
+	print "get_signal_domain" if ($debug);
+	# print "\n".${$_[0]}. ${$_[1]}. ${$_[2]}."\n";
 
 	($fh, $tmpfile) = tempfile( UNLINK => 1, SUFFIX => '.tbl');
 

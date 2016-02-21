@@ -163,7 +163,7 @@ class nonLTR(object):
         if 'p2' in locals():
             p2.join()
             self.post_process("backward")
-            shutil.rmtree(reverse_path)
+            shutil.rmtree(self.genome_path + "_b")
 
         self.post_process2()
 
