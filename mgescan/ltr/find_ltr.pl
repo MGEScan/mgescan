@@ -5,7 +5,12 @@ use Cwd 'abs_path';
 use File::Basename;
 use Sys::Hostname;
 use File::Temp qw/ tempfile unlink0 /;
+use lib (dirname abs_path $0) . '/lib';
+use Parallel::ForkManager;
 use Time::HiRes;
+use Data::Dumper;
+use threads;
+#use delete;
 
 ###################################################
 # path configuration
@@ -643,7 +648,7 @@ sub find_ltr_pair{  #$path_genome, $path_ltr, $chr_name, $run_hmm
 	if (find_mem($genome_file, $mask_file, $mem_file) == 0){
 		print "WARNING: no MEM in $chr_name\n";
 		return 0;
-	} 
+	}
 	# input: $mem_file
 	# output: $bin_file
 	# deletion: $mem_file, $dist_file
@@ -651,10 +656,10 @@ sub find_ltr_pair{  #$path_genome, $path_ltr, $chr_name, $run_hmm
 	elsif (make_bin($mem_file, $dist_file, $bin_file) == 0){
 		print "WARNING: no bin in $chr_name\n";
 		return 0;
-	# input: $bin_file, $_[3] 
+	# input: $bin_file, $_[3]
 	# output: $ltr_pre_file (.ltr)
 	# comment: $_[3] is value 1 defined in line 153, simulation might have 1?
-	}elsif (find_putative_ltr($bin_file, $ltr_pre_file, $_[3])==0){
+       }elsif (find_putative_ltr($bin_file, $ltr_pre_file, $_[3])==0){
 		print "WARNING: no putative LTR in $chr_name\n";
 		return 0;
 	}else {
@@ -935,9 +940,11 @@ sub find_putative_ltr{ #$bin_file, $ltr_pre_file, $run_hmm
 	# 5th: (1st col - prev 1st col - prev 3rd col) 
 	# 6th: (2nd col - prev 2nd col - prev - 3rd col)
 	#
-	my $start = Time::HiRes::gettimeofday();
+	my ($start_b, @cpls, $cnt);
+	$cnt = 0;
+	$start_b = Time::HiRes::gettimeofday() if ($debug);
 
-	my ($cpl,$es, $ed, $edt);
+	my ($cpl,$cpl_start_s, $cpl_end_s);
 	foreach my $each_line (<INPUT>){
 		$each_count++;
 		if ($each_count % 10000==0){
@@ -945,24 +952,25 @@ sub find_putative_ltr{ #$bin_file, $ltr_pre_file, $run_hmm
 			print $each_count."\t";
 		}
 		#if($each_line =~ /--/){
-		if(substr($each_line,0,1) eq '-'){
+		if(substr($each_line,0,2) eq '--'){
 
 			# $start = 1 is trigger to call check_putative_ltr except one case
 			if ($start_find==1&& $start==1){
 				$count_alignment++;
 				# call check_putative_ltr
-				my $cpl_start_s = Time::HiRes::gettimeofday();
-				@ltr_result=check_putative_ltr($start_ltr1, $end_ltr1, $start_ltr2, $end_ltr2, $sum_gap1, $sum_gap2, $count_bin, $_[2], $bin_file_sub);
-				my $cpl_end_s = Time::HiRes::gettimeofday();
-				$cpl += ($cpl_end_s - $cpl_start_s);
+				$cpl_start_s = Time::HiRes::gettimeofday() if ($debug);
+				@ltr_result= check_putative_ltr($start_ltr1, $end_ltr1, $start_ltr2, $end_ltr2, $sum_gap1, $sum_gap2, $count_bin, $_[2], $bin_file_sub);
+				$cpl_end_s = Time::HiRes::gettimeofday() if($debug);
+				$cpl += ($cpl_end_s - $cpl_start_s) if($debug);
+				#$cpls[$cnt++] = [$start_ltr1, $end_ltr1, $start_ltr2, $end_ltr2, $sum_gap1, $sum_gap2, $count_bin, $_[2], $bin_file_sub];
 				if ($ltr_result[0]==1 ){
 					for(my $iii=1; $iii<=$#ltr_result; $iii++){
 						print OUTPUT2 $ltr_result[$iii]."\t";
-						print $ltr_result[$iii]."\t";
+						print $ltr_result[$iii]."\t" if($debug);
 					}
 					$line_count++;
 					print OUTPUT2 "\n";
-					print "\n";
+					print "\n" if($debug);
 				}
 			}else{
 				$start_find=1;
@@ -981,7 +989,6 @@ sub find_putative_ltr{ #$bin_file, $ltr_pre_file, $run_hmm
 
 			if ( $temp[4]<100 && $temp[5]<100 && abs($temp[3]-$temp_prev[3]) <100) {
 
-				$es = Time::HiRes::gettimeofday();
 			        if ($start==0){
 
 				$start=1;
@@ -1007,28 +1014,26 @@ sub find_putative_ltr{ #$bin_file, $ltr_pre_file, $run_hmm
 					$sum_gap2 =$sum_gap2 + $temp[5];	
 					$count_bin++;
 				}
-				$ed = Time::HiRes::gettimeofday();
-				$edt += $ed - $es;
 
 			# $start = 1 is trigger to call check_putative_ltr except one case
 			}elsif ($start==1){
 
 				$start=0;
 				$count_alignment++;
-				my $cpl_start_s = Time::HiRes::gettimeofday();
+				$cpl_start_s = Time::HiRes::gettimeofday() if ($debug);
 				@ltr_result=check_putative_ltr($start_ltr1, $end_ltr1, $start_ltr2, $end_ltr2, $sum_gap1, $sum_gap2, $count_bin, $_[2], $bin_file_sub);
-				my $cpl_end_s = Time::HiRes::gettimeofday();
-				$cpl += ($cpl_end_s - $cpl_start_s);
+				#$cpls[$cnt++] = [$start_ltr1, $end_ltr1, $start_ltr2, $end_ltr2, $sum_gap1, $sum_gap2, $count_bin, $_[2], $bin_file_sub];
+				$cpl_end_s = Time::HiRes::gettimeofday() if ($debug);
+				$cpl += ($cpl_end_s - $cpl_start_s) if($debug);
 
-				$es = Time::HiRes::gettimeofday();
 				if ($ltr_result[0]==1){
 					for(my $iii=1; $iii<=$#ltr_result; $iii++){
 						print OUTPUT2 $ltr_result[$iii]."\t";
-						print $ltr_result[$iii]."\t";
+						print $ltr_result[$iii]."\t" if($debug);
 					}
 					$line_count++;
 					print OUTPUT2 "\n";
-					print "\n";
+					print "\n" if ($debug);
 				}
 
 				$sum_match=0;
@@ -1048,12 +1053,9 @@ sub find_putative_ltr{ #$bin_file, $ltr_pre_file, $run_hmm
 					$sum_gap2 = 0;
 					$count_bin=1;
 				}
-				$ed = Time::HiRes::gettimeofday();
-				$edt += $ed - $es;
 
 			}elsif ( $temp[2]>50 && $start==0 )  {
 
-				$es = Time::HiRes::gettimeofday();
 				$start=1;
 				$start_ltr1 = $temp[0];
 				$start_ltr2 = $temp[1];
@@ -1063,21 +1065,147 @@ sub find_putative_ltr{ #$bin_file, $ltr_pre_file, $run_hmm
 				$sum_gap1 = 0;
 				$sum_gap2 = 0;	
 				$count_bin=1;
-				$ed = Time::HiRes::gettimeofday();
-				$edt += $ed - $es;
 			}
 			@prev = @temp;#$each_line;
 		} # ends elsif ($each_line !~ /--/){
 	} # foreach ends
+
+	#my $pm = new Parallel::ForkManager(200);
+=pod
+	my %ltrs;
+
+	$pm->run_on_finish(sub {
+			my ($pid, $exit_code, $ident, $exit_signal, $core_dump, $result_ref) = @_;
+			#my $a = ref($result_ref);
+			#my @b = $$result_ref;
+			#print " [$ident] ${$result_ref}, $a, @b\n";
+			#print &Dumper($result_ref)."\n";
+			$ltrs{$ident} = ${$result_ref};
+		});
+	foreach my $child (0 .. $#cpls) {
+		 my $tes =$cpls[$child];
+		my  ($sl1, $el1, $sl2, $el2, $sg1, $sg2, $cb, $rh, $bfs) = @$tes;
+		#print "($sl1, $el1, $sl2, $el2, $sg1, $sg2, $cb, $rh, $bfs)\n";
+		my $pid = $pm->start($child) and next;
+		$pm->finish(0, \check_putative_ltr($sl1, $el1, $sl2, $el2, $sg1, $sg2, $cb, $rh, $bfs));
+	}
+	sub test{
+		my @a = qw/a b c/;
+		return \@a;
+	}
+	#for (keys %ltrs) {
+	#	@ltr_result = @{$ltrs{$_}};
+	#	print "@ltr_result";
+	#}exit;
+
+	my $total = scalar @cpls;
+	$cnt = 0;
+	#foreach my $cplarray (@cpls) {
+	#	$pm->start and next;
+	#	my ($sl1, $el1, $sl2, $el2, $sg1, $sg2, $cb, $rh, $bfs) = @$cplarray;
+	#	print "[$cnt/$total]";# if ($debug);
+	#	print "($sl1, $el1, $sl2, $el2, $sg1, $sg2, $cb, $rh, $bfs)\n" if ($debug);
+	#	@ltr_result=check_putative_ltr($sl1, $el1, $sl2, $el2, $sg1, $sg2, $cb, $rh, $bfs);
+	#	$ltrs{$cnt++} = [@ltr_result];
+	#	print "@ltr_result\n" if ($ltr_result[0]==1) && ($debug);
+	#	$pm->finish;
+	#}
+	$pm->wait_all_children;
+
+=cut
+=pod
+	# 2/21/2016
+	# threads applied but errors
+	# Thread creation failed: pthread_create returned 11 
+	#
+	my ($idx, %thrs);
+	my $thr_lim = 20;
+	my @thr_list;
+	my @thr_done;
+	foreach my $child (0 .. $#cpls) {
+		my $temp = $cpls[$child];
+		my ($sl1, $el1, $sl2, $el2, $sg1, $sg2, $cb, $rh, $bfs) = @$temp;
+		my ($thr) = threads->create(\&check_putative_ltr, $sl1, $el1, $sl2, $el2, $sg1, $sg2, $cb, $rh, $bfs);
+		$thrs{$child} = $thr;
+		@thr_list = threads->list(threads::running);
+		while($#thr_list >= $thr_lim) {
+			for ( keys %thrs ) {
+				if ($thrs{$_}->is_joinable()) {
+					$ltrs{$_} = $thrs{$_}->join();
+					delete ($thrs{$_});
+				}
+			}
+			@thr_list = threads->list(threads::running);
+			print $child."==$#thr_list\n";
+		}
+=cut
+=pod
+		if ($child >= 100) {
+			$idx = $child - 100;
+			$ltrs{$idx} = $thrs{$idx}->join();
+		}
+	}
+=cut
+=pod
+	$idx++;
+	for ($idx .. $#cpls) {
+		$ltrs{$_ - 100} = $thrs{$_}->join();
+	}
+=cut
+=pod
+	while($#thr_list != -1) {
+		sleep(1);
+		@thr_list = threads->list(threads::running);
+	}
+	for ( keys %thrs ) {
+		$ltrs{$_} = $thrs{$_}->join();
+		@ltr_result = @{$ltrs{$_}};
+		if ($ltr_result[0]==1){
+			print "@ltr_result\n";
+		}
+	}
+
+	my $end = Time::HiRes::gettimeofday();
+	printf("Total 100 thread %.2f\n", $end - $start_b);
+	$cnt = 0;
+	$start_b = Time::HiRes::gettimeofday();
+	foreach my $cplarray (@cpls) {
+	#	$pm->start and next;
+		my ($sl1, $el1, $sl2, $el2, $sg1, $sg2, $cb, $rh, $bfs) = @$cplarray;
+	#	print "[$cnt/$total]";# if ($debug);
+	#	print "($sl1, $el1, $sl2, $el2, $sg1, $sg2, $cb, $rh, $bfs)\n" if ($debug);
+		my $ref=check_putative_ltr($sl1, $el1, $sl2, $el2, $sg1, $sg2, $cb, $rh, $bfs);
+		@ltr_result=$$ref;
+		$ltrs{$cnt++} = [@ltr_result];
+	#	print "@ltr_result\n" if ($ltr_result[0]==1) && ($debug);
+	#	$pm->finish;
+	}
+	my $end = Time::HiRes::gettimeofday();
+	printf("Total sequencial %.2f\n", $end - $start_b);
+	#print keys %ltrs;
+	for ( keys %ltrs ) {
+		@ltr_result = @{$ltrs{$_}};
+		if ($ltr_result[0]==1){
+			for(my $iii=1; $iii<=$#ltr_result; $iii++){
+				print OUTPUT2 $ltr_result[$iii]."\t";
+				print $ltr_result[$iii]."\t";
+			}
+			$line_count++;
+			print OUTPUT2 "\n";
+			print "\n" ;
+		}
+	}
+=cut
 	close(OUTPUT2);
 	close(INPUT);
 
-	my $end = Time::HiRes::gettimeofday();
-	#Total find_putative_ltr: 1456040685.75
-	#Total check_putative_ltr: 153.95
-	printf("Total find_putative_ltr: %.2f\n", $end - $start);
-	printf("Total check_putative_ltr: %.2f\n", $cpl);
-	printf("Total etc: %.2f\n", $edt);
+	my $end = Time::HiRes::gettimeofday() if($debug);
+	printf ("================================\n") if ($debug);
+	#Total find_putative_ltr: 150.75
+	#Total check_putative_ltr: 146.87
+	printf("Total find_putative_ltr: %.2f\n", $end - $start_b) if($debug);
+	printf("Total check_putative_ltr: %.2f\n", $cpl) if($debug);
+	printf ("================================\n") if ($debug);
 
 	if (-e $file1){
 		system("rm -rf $file1");
@@ -1122,6 +1250,12 @@ sub check_putative_ltr{ # $start_ltr1, $end_ltr1, $start_ltr2, $end_ltr2, $sum_g
 	my $file3 = $bin_file_sub.".temp3";
 	my $file4 = $bin_file_sub.".temp4";
 
+	my ($fh1, $fh2, $fh3, $fh4);
+	($fh1, $file1) = tempfile( UNLINK => 1, SUFFIX => '.temp1');
+	($fh2, $file2) = tempfile( UNLINK => 1, SUFFIX => '.temp2');
+	($fh3, $file3) = tempfile( UNLINK => 1, SUFFIX => '.temp3');
+	($fh4, $file4) = tempfile( UNLINK => 1, SUFFIX => '.temp4');
+
 	my $direction="*";
 	my $domain=1;
 	my @long_orf=(0,"*");
@@ -1164,12 +1298,14 @@ sub check_putative_ltr{ # $start_ltr1, $end_ltr1, $start_ltr2, $end_ltr2, $sum_g
 		print SEQ3 $seq3."\n";
 		close(SEQ3);
 
+		# matcher (EMBOSS) in find_sim()
 		@temp_str = find_sim($file1, $file2); 
 		if (($temp_str[0]>$LTR_SIM_CONDITION) && ($temp_str[3]-$temp_str[1] >= $MIN_LEN_LTR) && ($temp_str[4]-$temp_str[2] >= $MIN_LEN_LTR) ){
 
 			@plus_minus = (1,1);
 			@orf = (0,"");
 			if ($run_hmm_sub==1){
+				# transeq, hmmsearch in find_domain()
 				@plus_minus = find_domain($file3, $file4);   #returning evalue for + strand and - strand
 				@orf = check_long_orf($file4);
 			}else{
@@ -1184,7 +1320,6 @@ sub check_putative_ltr{ # $start_ltr1, $end_ltr1, $start_ltr2, $end_ltr2, $sum_g
 			$out_ltr[5] = $out_ltr[3] -  $out_ltr[2] + 1;
 			$out_ltr[6] = $out_ltr[2] -  $out_ltr[0];
 
-
 			if ($plus_minus[0] < $plus_minus[1] && $plus_minus[0] < 1e-10){   #forward strand
 
 				$direction = "+";
@@ -1195,13 +1330,11 @@ sub check_putative_ltr{ # $start_ltr1, $end_ltr1, $start_ltr2, $end_ltr2, $sum_g
 				@tsd_result = check_tsd($direction, $out_ltr[0], $out_ltr[1], $out_ltr[2], $out_ltr[3]);  
 				#@tsd_result = tsd5, tsd3, di55, di53, di35, di33, offset55, offset53, offset35, offset33
 
-
 			}elsif($plus_minus[1] < $plus_minus[0] && $plus_minus[1] < 1e-10){   #backward strand
 
 				$direction = "-";
 				$is_ltr=1;
 				$domain = $plus_minus[1];
-
 
 				#check tsd and dinucleotide
 				@tsd_result = check_tsd($direction, $out_ltr[0], $out_ltr[1], $out_ltr[2], $out_ltr[3]);  
@@ -1231,6 +1364,17 @@ sub check_putative_ltr{ # $start_ltr1, $end_ltr1, $start_ltr2, $end_ltr2, $sum_g
 		}
 	}
 
+	close($fh1);
+	close($fh2);
+	close($fh3);
+	close($fh4);
+	unlink0($fh1,$file1);
+	unlink0($fh2,$file2);
+	unlink0($fh3,$file3);
+	unlink0($fh4,$file4);
+
+	# reference is necessary in threads, parallel
+	#return \@ltr_result;
 	return @ltr_result;
 }
 
@@ -1382,6 +1526,7 @@ sub find_domain{ #$file3, $file4
 	my $fh;
 	my $tmpfile;
 
+	# Comment: Can be parallelized?
 	for (my $j=0; $j<=$#rt; $j++){
 		if ($hmmerv == 3){
 			($fh, $tmpfile) = tempfile( UNLINK => 1, SUFFIX => '.tbl');
