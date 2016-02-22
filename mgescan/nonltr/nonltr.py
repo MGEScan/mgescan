@@ -68,7 +68,7 @@ class nonLTR(object):
         utils.create_directory(self.output_path, False)
         if self.nmpi:
             #cmd = self._padding("mpirun", self.p_np, self.p_mpi_option,
-            cmd = self._padding("mpirun", "-n " + str(int(math.ceil(1.0*self.nmpi/2))), self.p_mpi_option,
+            cmd = self._padding("mpirun", "-n " + str(int(math.ceil(1.0*int(self.nmpi)/2))), self.p_mpi_option,
                     self.p_mgescan_mpi_cmd, self.p_prg, self.p_genome_f,
                     self.p_data_f, self.p_hmmerv)
             self.run_cmd(cmd)
@@ -105,7 +105,7 @@ class nonLTR(object):
         self.reverse_complement(reverse_path)
         if self.nmpi:
             #cmd = self._padding("mpirun", self.p_np, self.p_mpi_option,
-            cmd = self._padding("mpirun", "-n " + str(int(math.ceil(1.0*self.nmpi/2))), self.p_mpi_option,
+            cmd = self._padding("mpirun", "-n " + str(int(math.ceil(1.0*int(self.nmpi)/2))), self.p_mpi_option,
                     self.p_mgescan_mpi_cmd, self.p_prg, self.p_genome_b,
                     self.p_data_b, self.p_hmmerv)
             self.run_cmd(cmd)
