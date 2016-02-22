@@ -1,11 +1,11 @@
 import sys
-import os.path
 from mgescan import utils
 from docopt import docopt
 from subprocess import check_call
 from multiprocessing import Process
 from mgescan.biopython import reverse_complement_fasta, getid
 import shutil
+import os
 
 class nonLTR(object):
     """MGEScan non-LTR
@@ -71,12 +71,10 @@ class nonLTR(object):
                     self.p_data_f, self.p_hmmerv)
             self.run_cmd(cmd)
         else:
-           from os import listdir
-           from os.path import isfile, join
            mypath = self.genome_path
-           for f in listdir(mypath):
-               fpath = join(mypath, f)
-               if isfile(fpath):
+           for f in os.listdir(mypath):
+               fpath = os.path.join(mypath, f)
+               if os.path.isfile(fpath):
                    p = Process(target=self.run_hmm, args=("forward", fpath,))
                    p.start()
 
@@ -108,11 +106,9 @@ class nonLTR(object):
                     self.p_data_b, self.p_hmmerv)
             self.run_cmd(cmd)
         else:
-           from os import listdir
-           from os.path import isfile, join
-           for f in listdir(reverse_path):
-               fpath = join(reverse_path, f)
-               if isfile(fpath):
+           for f in os.listdir(reverse_path):
+               fpath = os.path.join(reverse_path, f)
+               if os.path.isfile(fpath):
                    p = Process(target=self.run_hmm, args=("backward",fpath,))
                    p.start()
 
