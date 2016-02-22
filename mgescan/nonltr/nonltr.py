@@ -66,7 +66,8 @@ class nonLTR(object):
     def forward(self):
         utils.create_directory(self.output_path, False)
         if self.nmpi:
-            cmd = self._padding("mpirun", self.p_np, self.p_mpi_option,
+            #cmd = self._padding("mpirun", self.p_np, self.p_mpi_option,
+            cmd = self._padding("mpirun", "-n " + int(math.ceil(1.0*self.nmpi/2)), self.p_mpi_option,
                     self.p_mgescan_mpi_cmd, self.p_prg, self.p_genome_f,
                     self.p_data_f, self.p_hmmerv)
             self.run_cmd(cmd)
@@ -75,8 +76,9 @@ class nonLTR(object):
            for f in os.listdir(mypath):
                fpath = os.path.join(mypath, f)
                if os.path.isfile(fpath):
-                   p = Process(target=self.run_hmm, args=("forward", fpath,))
-                   p.start()
+                   #p = Process(target=self.run_hmm, args=("forward", fpath,))
+                   #p.start()
+                   self.run_hmm("forward", fpath)
 
     def post_process(self, t):
         if t == "forward":
@@ -101,7 +103,8 @@ class nonLTR(object):
         reverse_path = self.genome_path + "_b"
         self.reverse_complement(reverse_path)
         if self.nmpi:
-            cmd = self._padding("mpirun", self.p_np, self.p_mpi_option,
+            #cmd = self._padding("mpirun", self.p_np, self.p_mpi_option,
+            cmd = self._padding("mpirun", "-n " + int(math.ceil(1.0*self.nmpi/2)), self.p_mpi_option,
                     self.p_mgescan_mpi_cmd, self.p_prg, self.p_genome_b,
                     self.p_data_b, self.p_hmmerv)
             self.run_cmd(cmd)
@@ -109,8 +112,9 @@ class nonLTR(object):
            for f in os.listdir(reverse_path):
                fpath = os.path.join(reverse_path, f)
                if os.path.isfile(fpath):
-                   p = Process(target=self.run_hmm, args=("backward",fpath,))
-                   p.start()
+                   #p = Process(target=self.run_hmm, args=("backward",fpath,))
+                   #p.start()
+                   self.run_hmm("backward",fpath)
 
     def _padding(self, *args):
         res = ""
