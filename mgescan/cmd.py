@@ -22,6 +22,7 @@ from mgescan import utils
 from mgescan.split import Split
 import shutil
 import time
+import math
 
 class MGEScan(object):
     """ MGEScan runs mgescan for identifying ltr and nonltr in genome
@@ -46,9 +47,11 @@ class MGEScan(object):
     def set_inputs(self):
         self.data_dir = utils.get_abspath(self.args['--output'])
         self.genome_dir = utils.get_abspath(self.args['<genome_dir>'])
-        self.mpi_enabled = self.args['--mpi']
         self.ltr_enabled = self.args['ltr']
         self.nonltr_enabled = self.args['nonltr']
+        self.mpi_enabled = self.args['--mpi']
+	if(self.mpi_enabled and not self.ltr_enabled and not self.nonltr_enabled):
+        	self.mpi_enabled = str(int(math.ceil(1.0*int(self.args['--mpi'])/2)))
         self.debug = self.args['--debug']
 
     def set_defaults(self):
