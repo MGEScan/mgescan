@@ -1181,20 +1181,23 @@ sub find_domain{ #$file3, $file4
 
 	for (my $j=0; $j<=$#rt; $j++){
 		if ($hmmerv == 3){
-			($fh, $tmpfile) = tempfile( UNLINK => 1, SUFFIX => '.tbl');
+			#($fh, $tmpfile) = tempfile( UNLINK => 1, SUFFIX => '.tbl');
 			#system("hmmconvert ".$tool_pfam.$rt[$j]." > ".$tool_pfam."c_".$rt[$j]);
-			system("hmmsearch -E 0.000001 --noali --tblout ".$tmpfile." ".$tool_pfam."".$rt[$j]."3 ".$_[1]."> /dev/null");
-			local $/ = undef;
-			my $str = <$fh>;
-			close $fh;
-			unlink0($fh, $tmpfile);
-			if ($str =~ /\n(\d+.*)\n/){
+			#system("hmmsearch -E 0.000001 --noali --tblout ".$tmpfile." ".$tool_pfam."".$rt[$j]."3 ".$_[1]."> /dev/null");
+			my $temp_tool="hmmsearch -E 0.000001 ".$tool_pfam."".$rt[$j]."3 ".$_[1];
+			my $str = `$temp_tool`;
+			#local $/ = undef;
+			#my $str = <$fh>;
+			#close $fh;
+			#unlink0($fh, $tmpfile);
+			#if ($str =~ /\n(\d+.*)\n/){
+			if ($str =~ /-----------\n\s+(.*)\n/) {
 				my @temp_plus = split(/\s+/, $1);
-				if ($temp_plus[4]<$evalue){
-					$evalue=$temp_plus[4];
+				if ($temp_plus[0]<$evalue){
+					$evalue=$temp_plus[0];
 					$class = $j;
 
-					if ($temp_plus[0]=~ /(\_1|\_2|\_3)/){
+					if ($temp_plus[8]=~ /(\_1|\_2|\_3)/){
 						$sign = "+";
 					}else{
 						$sign = "-";
@@ -1265,20 +1268,23 @@ sub find_domain{ #$file3, $file4
 
 		for (my $j=0; $j<=$#pf; $j++){
 			if ($hmmerv == 3){
-				($fh, $tmpfile) = tempfile( UNLINK => 1, SUFFIX => '.tbl');
+				#($fh, $tmpfile) = tempfile( UNLINK => 1, SUFFIX => '.tbl');
 				#system("hmmconvert ".$tool_pfam.$pf[$j]." > ".$tool_pfam."c_".$pf[$j]);
-				system("hmmsearch -E 0.000001 --noali --tblout ".$tmpfile." ".$tool_pfam."".$pf[$j]."3 ".$_[1]."> /dev/null");
-				local $/ = undef;
-				my $str = <$fh>;
-				close $fh;
-				unlink0($fh, $tmpfile);
-				if ($str =~ /\n(\d+.*)\n/){
+				#system("hmmsearch -E 0.000001 --noali --tblout ".$tmpfile." ".$tool_pfam."".$pf[$j]."3 ".$_[1]."> /dev/null");
+				my $temp_tool="hmmsearch -E 0.000001 --noali ".$tool_pfam."".$pf[$j]."3 ".$_[1];
+				my $str = `$temp_tool`;
+				#local $/ = undef;
+				#my $str = <$fh>;
+				#close $fh;
+				#unlink0($fh, $tmpfile);
+				#if ($str =~ /\n(\d+.*)\n/){
+				if ($str =~ /-----------\n\s+(.*)\n/) {
 					my @temp_plus = split(/\s+/, $1);
 
-					if ($temp_plus[0]=~ /(\_1|\_2|\_3)/){
-						$plus = $plus * $temp_plus[4];
+					if ($temp_plus[8]=~ /(\_1|\_2|\_3)/){
+						$plus = $plus * $temp_plus[0];
 					}else{
-						$minus = $minus * $temp_plus[4];
+						$minus = $minus * $temp_plus[0];
 					}
 				}
 			}else{

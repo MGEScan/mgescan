@@ -1532,34 +1532,50 @@ sub find_domain{ #$file3, $file4
 			#($fh, $tmpfile) = tempfile( UNLINK => 1, SUFFIX => '.tbl');
 			#system("hmmconvert ".$tool_pfam.$rt[$j]." > ".$tool_pfam."c_".$rt[$j]);
 			#system("hmmsearch -E 0.000001 --noali --tblout ".$tmpfile." ".$tool_pfam."".$rt[$j]."3 ".$_[1]."> /dev/null");
-			$tmpfile = "/dev/stdout";
-			my $temp_tool="hmmsearch -o /dev/null -E 0.000001 --noali --tblout ".$tmpfile." ".$tool_pfam."".$rt[$j]."3 ".$_[1];
+			my $temp_tool="hmmsearch -E 0.000001 --noali ".$tool_pfam."".$rt[$j]."3 ".$_[1];
 			my $str = `$temp_tool`;
 			#local $/ = undef;
 			#my $str = <$fh>;
 			#close $fh;
 			#unlink0($fh, $tmpfile);
 
-			if ($str =~ /\n(\d+.*)\n/){
+			# Scores for complete sequences (score includes all domains):
+			#   --- full sequence ---   --- best 1 domain ---    -#dom-
+			#    E-value  score  bias    E-value  score  bias    exp  N  Sequence Description
+			#    ------- ------ -----    ------- ------ -----   ---- --  -------- -----------
+			#   2.3e-196  636.7  28.6      4e-52  164.8   0.1    8.3  8  3_3
+			#   7.9e-177  572.8  11.9      4e-52  164.8   0.1    6.5  7  3_1
+			#   2.3e-150  486.2  26.6    5.9e-51  160.9   0.0    4.3  4  3_2
+			if ($str =~ /-----------\n\s+(.*)\n/) {
+			#if ($str =~ /\n(\d+.*)\n/){
 				my @temp_plus = split(/\s+/, $1);
-				if ($temp_plus[4]<$evalue){
-					$evalue=$temp_plus[4];
+				# E-value
+				if ($temp_plus[0]<$evalue){
+					$evalue=$temp_plus[0];
 					$class = $j;
 
-					if ($temp_plus[0]=~ /(\_1|\_2|\_3)/){
+					# Sequence
+					if ($temp_plus[8]=~ /(\_1|\_2|\_3)/){
 						$sign = "+";
 					}else{
 						$sign = "-";
 					}
 				}
 			}
-
 		}else{
 			#system("hmmconvert -F ".$tool_pfam.$rt[$j]." ".$tool_pfam."c_".$rt[$j]);
 			my $temp_tool="hmm2search -E 0.000001 ".$tool_pfam."".$rt[$j]." ".$_[1];
 			my $str = `$temp_tool`;
 
+			# Scores for complete sequences (score includes all domains):
+			# Sequence Description                                    Score    E-value  N
+			# -------- -----------                                    -----    ------- ---
+			# 3_1                                                     729.0     1e-219   5
+			# 3_3                                                     725.1   1.6e-218   7
+			# 3_2                                                     540.2   7.5e-163   4
+
 			if ($str =~ /\s---\n(\d+\_\d\s+\d+\.\d+\s+((\d|\-|\.|e)+))\s/){
+				# 3_1                                                  729.0     1e-219
 				my @temp_plus = split(/\s+/, $1);
 
 				if ($temp_plus[2]<$evalue){
@@ -1574,9 +1590,7 @@ sub find_domain{ #$file3, $file4
 				}
 			}
 		}
-
-
-	}
+	} #for
 
 
 	if ($class == 0 || $class == 1){         #nonLTR
@@ -1620,20 +1634,20 @@ sub find_domain{ #$file3, $file4
 				#($fh, $tmpfile) = tempfile( UNLINK => 1, SUFFIX => '.tbl');
 				#system("hmmconvert ".$tool_pfam.$pf[$j]." > ".$tool_pfam."c_".$pf[$j]);
 				#system("hmmsearch -E 0.000001 --noali --tblout ".$tmpfile." ".$tool_pfam."".$pf[$j]."3 ".$_[1]."> /dev/null");
-				$tmpfile = "/dev/stdout";
-				my $temp_tool = "hmmsearch -o /dev/null -E 0.000001 --noali --tblout ".$tmpfile." ".$tool_pfam."".$pf[$j]."3 ".$_[1];
+				my $temp_tool = "hmmsearch -E 0.000001 --noali ".$tool_pfam."".$pf[$j]."3 ".$_[1];
 				my $str = `$temp_tool`;
 				#local $/ = undef;
 				#my $str = <$fh>;
 				#close $fh;
 				#unlink0($fh, $tmpfile);
-				if ($str =~ /\n(\d+.*)\n/){
+				#if ($str =~ /\n(\d+.*)\n/){
+				if ($str =~ /-----------\n\s+(.*)\n/) {
 					my @temp_plus = split(/\s+/, $1);
 
-					if ($temp_plus[0]=~ /(\_1|\_2|\_3)/){
-						$plus = $plus * $temp_plus[4];
+					if ($temp_plus[8]=~ /(\_1|\_2|\_3)/){
+						$plus = $plus * $temp_plus[0];
 					}else{
-						$minus = $minus * $temp_plus[4];
+						$minus = $minus * $temp_plus[0];
 					}
 				}
 			}else{
