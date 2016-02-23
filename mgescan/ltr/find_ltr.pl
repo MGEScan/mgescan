@@ -1546,8 +1546,8 @@ sub find_domain{ #$file3, $file4
 			#   2.3e-196  636.7  28.6      4e-52  164.8   0.1    8.3  8  3_3
 			#   7.9e-177  572.8  11.9      4e-52  164.8   0.1    6.5  7  3_1
 			#   2.3e-150  486.2  26.6    5.9e-51  160.9   0.0    4.3  4  3_2
-			if ($str =~ /-----------\n\s+(.*)\n/) {
-			#if ($str =~ /\n(\d+.*)\n/){
+			if ($str =~ /-----------\n\s+(\d+.*)\n/) {
+
 				my @temp_plus = split(/\s+/, $1);
 				# E-value
 				if ($temp_plus[0]<$evalue){
@@ -1641,7 +1641,7 @@ sub find_domain{ #$file3, $file4
 				#close $fh;
 				#unlink0($fh, $tmpfile);
 				#if ($str =~ /\n(\d+.*)\n/){
-				if ($str =~ /-----------\n\s+(.*)\n/) {
+				if ($str =~ /-----------\n\s+(\d+.*)\n/) {
 					my @temp_plus = split(/\s+/, $1);
 
 					if ($temp_plus[8]=~ /(\_1|\_2|\_3)/){

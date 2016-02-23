@@ -1184,14 +1184,14 @@ sub find_domain{ #$file3, $file4
 			#($fh, $tmpfile) = tempfile( UNLINK => 1, SUFFIX => '.tbl');
 			#system("hmmconvert ".$tool_pfam.$rt[$j]." > ".$tool_pfam."c_".$rt[$j]);
 			#system("hmmsearch -E 0.000001 --noali --tblout ".$tmpfile." ".$tool_pfam."".$rt[$j]."3 ".$_[1]."> /dev/null");
-			my $temp_tool="hmmsearch -E 0.000001 ".$tool_pfam."".$rt[$j]."3 ".$_[1];
+			my $temp_tool="hmmsearch -E 0.000001 --noali ".$tool_pfam."".$rt[$j]."3 ".$_[1];
 			my $str = `$temp_tool`;
 			#local $/ = undef;
 			#my $str = <$fh>;
 			#close $fh;
 			#unlink0($fh, $tmpfile);
 			#if ($str =~ /\n(\d+.*)\n/){
-			if ($str =~ /-----------\n\s+(.*)\n/) {
+			if ($str =~ /-----------\n\s+(\d+.*)\n/) {
 				my @temp_plus = split(/\s+/, $1);
 				if ($temp_plus[0]<$evalue){
 					$evalue=$temp_plus[0];
@@ -1278,7 +1278,7 @@ sub find_domain{ #$file3, $file4
 				#close $fh;
 				#unlink0($fh, $tmpfile);
 				#if ($str =~ /\n(\d+.*)\n/){
-				if ($str =~ /-----------\n\s+(.*)\n/) {
+				if ($str =~ /-----------\n\s+(\d+.*)\n/) {
 					my @temp_plus = split(/\s+/, $1);
 
 					if ($temp_plus[8]=~ /(\_1|\_2|\_3)/){
