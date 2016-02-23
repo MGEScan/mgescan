@@ -1529,13 +1529,16 @@ sub find_domain{ #$file3, $file4
 	# Comment: Can be parallelized?
 	for (my $j=0; $j<=$#rt; $j++){
 		if ($hmmerv == 3){
-			($fh, $tmpfile) = tempfile( UNLINK => 1, SUFFIX => '.tbl');
+			#($fh, $tmpfile) = tempfile( UNLINK => 1, SUFFIX => '.tbl');
 			#system("hmmconvert ".$tool_pfam.$rt[$j]." > ".$tool_pfam."c_".$rt[$j]);
-			system("hmmsearch -E 0.000001 --noali --tblout ".$tmpfile." ".$tool_pfam."".$rt[$j]."3 ".$_[1]."> /dev/null");
-			local $/ = undef;
-			my $str = <$fh>;
-			close $fh;
-			unlink0($fh, $tmpfile);
+			#system("hmmsearch -E 0.000001 --noali --tblout ".$tmpfile." ".$tool_pfam."".$rt[$j]."3 ".$_[1]."> /dev/null");
+			$tmpfile = "/dev/stdout";
+			my $temp_tool="hmmsearch -o /dev/null -E 0.000001 --noali --tblout ".$tmpfile." ".$tool_pfam."".$rt[$j]."3 ".$_[1];
+			my $str = `$temp_tool`;
+			#local $/ = undef;
+			#my $str = <$fh>;
+			#close $fh;
+			#unlink0($fh, $tmpfile);
 
 			if ($str =~ /\n(\d+.*)\n/){
 				my @temp_plus = split(/\s+/, $1);
@@ -1614,13 +1617,16 @@ sub find_domain{ #$file3, $file4
 
 		for (my $j=0; $j<=$#pf; $j++){
 			if ($hmmerv == 3){
-				($fh, $tmpfile) = tempfile( UNLINK => 1, SUFFIX => '.tbl');
+				#($fh, $tmpfile) = tempfile( UNLINK => 1, SUFFIX => '.tbl');
 				#system("hmmconvert ".$tool_pfam.$pf[$j]." > ".$tool_pfam."c_".$pf[$j]);
-				system("hmmsearch -E 0.000001 --noali --tblout ".$tmpfile." ".$tool_pfam."".$pf[$j]."3 ".$_[1]."> /dev/null");
-				local $/ = undef;
-				my $str = <$fh>;
-				close $fh;
-				unlink0($fh, $tmpfile);
+				#system("hmmsearch -E 0.000001 --noali --tblout ".$tmpfile." ".$tool_pfam."".$pf[$j]."3 ".$_[1]."> /dev/null");
+				$tmpfile = "/dev/stdout";
+				my $temp_tool = "hmmsearch -o /dev/null -E 0.000001 --noali --tblout ".$tmpfile." ".$tool_pfam."".$pf[$j]."3 ".$_[1];
+				my $str = `$temp_tool`;
+				#local $/ = undef;
+				#my $str = <$fh>;
+				#close $fh;
+				#unlink0($fh, $tmpfile);
 				if ($str =~ /\n(\d+.*)\n/){
 					my @temp_plus = split(/\s+/, $1);
 
