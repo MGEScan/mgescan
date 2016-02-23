@@ -237,6 +237,10 @@ int main(int argc, char** argv) {
 	div_t div_result = div(*nfiles_copy, world_size);
 	int num_per_node = div_result.quot;
 	int remainder = div_result.rem;
+	if (*nfiles_copy < world_size)  {
+		num_per_node = 1;
+		remainder = 0;
+	}
 	int bytes_per_node = NAME_MAX;
 	bytes_per_node *= num_per_node;
 	char *sub_results = (char *)malloc(sizeof(char) * bytes_per_node);
