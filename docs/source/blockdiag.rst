@@ -1,3 +1,6 @@
+MGEScan Software Process
+===============================
+
 .. blockdiag::
 
   diagram {
@@ -53,3 +56,9 @@
    'Analysis of RT \n/ Scanning ORFs';
    }
    }
+
+* HMMER: hmmsearch 3.1b1 http://hmmer.org/
+* EMBOSS: matcher, transeq http://emboss.sourceforge.net/, http://www.ebi.ac.uk/Tools/emboss/
+* GAME: Choi, Jeong-Hyeon, Hwan-Gue Cho, and Sun Kim. "GAME: a simple and efficient whole genome alignment method using maximal exact match filtering." Computational biology and chemistry 29.3 (2005): 244-253.
+* Tandem Repeats Finder: https://tandem.bu.edu/trf/trf.html
+* MGEScan: https://github.com/mgescan/mgescan
