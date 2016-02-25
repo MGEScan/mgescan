@@ -33,6 +33,7 @@ MGEScan on Amazon Cloud (AWS EC2).
    tutorial-cmd
    installation
    toolshed
+   blockdiag
    aws
    ltr
    nonltr
