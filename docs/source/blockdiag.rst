@@ -8,7 +8,8 @@
    nonLTR [ numbered = MPI ];
    LTR [ numbered = MPI ];
    
-   Chromosomes -> MGEScan -> nonLTR -> "Translation \n to Protein" -> "Signals of APE" -> 'E-values \n from 12 clades' -> 'Searching \n Path of States' -> 'Classification \n (post processing)' -> 'Results \n(gff3)';
+   Chromosomes -> MGEScan -> nonLTR -> 'Forward Strand' -> "Translation \n to Protein" -> "Signals of APE" -> 'E-values \n from 12 clades' -> 'Searching \n Path of States' -> 'Classification \n (post processing)' -> 'Results \n(gff3)';
+   nonLTR -> 'Reverse Strand' -> "Translation \n to Protein";
    "Translation \n to Protein" -> 'Signals of RT' -> 'E-values \n from 12 clades';
 
    group { 
