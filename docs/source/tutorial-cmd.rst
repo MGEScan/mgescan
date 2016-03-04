@@ -1,4 +1,4 @@
-MGEScan Command Line Interface (In Progress)
+MGEScan Command Line Interface
 ===============================================================================
 
 MGEScan provides Command Line Interface (CLI) along with Galaxy Web Interface.
@@ -127,8 +127,5 @@ follows.
 Sample output of ``ltr.out`` for D. melanogaster
 
 :download:`ltr.out <sample_ltr_out.txt>`
-
-gff3
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
