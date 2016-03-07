@@ -12,6 +12,8 @@ sequences. More cloud options will be available soon including Google Compute
 Engine, Microsoft Windows Azure or private cloudplatforms such as OpenStack and
 Eucalyptus.
 
+.. note:: To update to the latest version of MGEScan, run ``cd $MGESCAN_SRC;git pull;python setup.py install``
+
 Deploying MGEScan on Galaxy
 -------------------------------------------------------------------------------
 
