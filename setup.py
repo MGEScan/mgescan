@@ -1,13 +1,26 @@
 import os
+import time
+import subprocess as sub
 from setuptools import setup
 from setuptools.command.bdist_egg import bdist_egg 
+def cmd_exists(cmd):
+    return sub.call(["which", cmd], stdout=sub.PIPE, stderr=sub.PIPE) == 0
 
 class MGEScanInstall(bdist_egg):
     def run(self):
-        os.system("cd mgescan/ltr/MER; make clean; make")
-        os.system("cd mgescan/nonltr/; make clean; make translate")
-        os.system("cd mgescan/nonltr/hmm;make clean; make")
-        os.system("cd mgescan;mpicc mpi_mgescan.c -o mpi_mgescan")
+        if cmd_exists("make") and cmd_exists('gcc') and cmd_exists('g++'):
+            os.system("cd mgescan/ltr/MER; make clean; make")
+            os.system("cd mgescan/nonltr/; make clean; make translate")
+            os.system("cd mgescan/nonltr/hmm;make clean; make")
+        else:
+            print ("[Warning] make|gcc|g++ does not exist. Compile code is skipped")
+            time.sleep(3)
+        if cmd_exists("mpicc"):
+            os.system("cd mgescan;mpicc mpi_mgescan.c -o mpi_mgescan")
+        else:
+            print ("[Warning] mpicc does not exist. Compile mpi code is\
+                    skipped")
+            time.sleep(3)
         bdist_egg.run(self)
 
 class MGEScanInstallOnly(bdist_egg):
@@ -18,7 +31,6 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 reqs = [line.strip() for line in open('requirements.txt')]
-
 setup(
         name = "MGEScan",
         version = "3.0.0",
