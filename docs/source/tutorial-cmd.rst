@@ -11,6 +11,44 @@ If you have installed MGEScan on Galaxy, MGEScan CLI tools are available on your
 
 .. note:: Do you need to install MGEScan? See here for :ref:`Installation <ref-mgescan-installation>`. Follow the instructions except the Galaxy. You can skip the Galaxy installation if you need MGEScan CLI tools only.
 
+Installation in Userspace
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+It is possible to install MGEScan on userspace without root permission. Please
+follow the instructions below. ``virtualenv`` is required. Create your 
+virtualenv and activate it like::
+
+   virtualenv $HOME/virtualenv/mgescan
+   source $HOME/virtualenv/mgescan/bin/activate
+
+Once your virtualenv is activated, you will see ``(mgescan)`` label in your prompt.
+
+.. note:: Don't forget to activate your virtualenv when you open a new session.
+   source $HOME/virtualenv/mgescan/bin/activate
+
+::
+
+   git clone https://github.com/MGEScan/mgescan.git
+   cd mgescan
+   python setup.py install
+   
+You will see a (Y/n) prompt for your input like::
+
+   $MGESCAN_HOME is not defined where MGESCAN will be installed.
+   Would you install MGESCAN at /$HOME/mgescan3 (Y/n)?
+
+``$HOME/mgescan3`` is a default path to install MGEScan. Proceed to install 
+MGEScan in the default directory ``$HOME/mgescan3``.
+If you like to install MGEScan in other location, define MGESCAN_HOME environment
+variable like this::
+
+   export MGESCAN_HOME=<desired location to install mgescan>
+   e.g.
+   export MGESCAN_HOME=/home/abc/program/mgescan
+   
+
+
+
 Usage
 -------------------------------------------------------------------------------
 
