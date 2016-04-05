@@ -25,11 +25,12 @@ class MGEScanInstall(bdist_egg):
         if not os.environ.get('MGESCAN_HOME'):
              print ("$MGESCAN_HOME is not defined where MGESCAN will be" + \
                      " installed.")
-             def_home = raw_input("Would you install MGESCAN at" + \
-                     " $HOME/mgescan3 (Y/n)?")
+             def_home = raw_input("Would you install MGESCAN at " + \
+                     os.environ.get("HOME") + "/mgescan3 (Y/n)?")
              if def_home.lower() == 'n':
                  print ("Run 'export MGESCAN_HOME=<your desired destination" + \
-                         " path to install>'")
+                         " path to install>' if you want to install somewhere"+\
+                         " else\n")
                  sys.exit()
              os.environ['MGESCAN_HOME'] = os.environ.get('HOME') + "/mgescan3"
         if os.environ.get('MGESCAN_HOME') and not os.environ.get("MGESCAN_SRC"):

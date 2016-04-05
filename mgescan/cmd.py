@@ -43,6 +43,13 @@ class MGEScan(object):
         self.set_defaults()
         self.get_env()
         self.set_debug()
+        self.check_tools()
+
+    def check_tools(self):
+        utils.check_cmd('trf')
+        utils.check_cmd('hmmsearch')
+        utils.check_cmd('matcher')
+        utils.check_cmd('transeq')
 
     def set_inputs(self):
         self.data_dir = utils.get_abspath(self.args['--output'])

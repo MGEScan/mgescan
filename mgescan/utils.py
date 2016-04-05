@@ -1,4 +1,6 @@
+import time
 import os, errno
+import subprocess as sub
 
 def get_abspath(path):
     try:
@@ -30,3 +32,12 @@ def silentremove(filename):
         if e.errno != errno.ENOENT: # errno.ENOENT = no such file or directory
             raise # re-raise exception if a different error occured
 
+def cmd_exists(cmd):
+    return sub.call(["which", cmd], stdout=sub.PIPE, stderr=sub.PIPE) == 0
+
+def check_cmd(cmd):
+    if not cmd_exists(cmd):
+        print "=" * 50
+        print "[Error] " + cmd + " is not found. "
+        print "=" * 50
+        time.sleep(3)
