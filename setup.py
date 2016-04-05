@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 import subprocess as sub
 from setuptools import setup
@@ -18,9 +19,23 @@ class MGEScanInstall(bdist_egg):
         if cmd_exists("mpicc"):
             os.system("cd mgescan;mpicc mpi_mgescan.c -o mpi_mgescan")
         else:
-            print ("[Warning] mpicc does not exist. Compile mpi code is\
-                    skipped")
+            print ("[Warning] mpicc does not exist. Compile mpi code is"\
+                    + " skipped")
             time.sleep(3)
+        if not os.environ.get('MGESCAN_HOME'):
+             print ("$MGESCAN_HOME is not defined where MGESCAN will be" + \
+                     " installed.")
+             def_home = raw_input("Would you install MGESCAN at" + \
+                     " $HOME/mgescan3 (Y/n)?")
+             if def_home.lower() == 'n':
+                 print ("Run 'export MGESCAN_HOME=<your desired destination" + \
+                         " path to install>'")
+                 sys.exit()
+             os.environ['MGESCAN_HOME'] = os.environ.get('HOME') + "/mgescan3"
+             os.environ['MGESCAN_SRC'] = os.environ.get('MGESCAN_HOME') + "/src"
+             os.makedirs(os.environ.get("MGESCAN_SRC"), 0755)
+             os.system("cp -pr * $MGESCAN_SRC")
+
         bdist_egg.run(self)
 
 class MGEScanInstallOnly(bdist_egg):

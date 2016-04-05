@@ -88,7 +88,14 @@ class MGEScan(object):
     def get_env(self):
         if not os.environ.get('MGESCAN_SRC'):
             print ("MGEScan environment variable is not defined or .mgescanrc is not sourced.")
-            sys.exit(-1)
+            print (os.environ.get("HOME")+"/mgescan3 (default path) is used"+ \
+            " to run MGEScan")
+            os.environ['MGESCAN_HOME'] = os.environ.get("HOME")+"/mgescan3"
+            os.environ['MGESCAN_SRC'] = os.environ.get("MGESCAN_HOME") + "/src"
+            if not os.path.exists(os.environ.get("MGESCAN_SRC")):
+                print (os.environ.get("MGESCAN_SRC") + " does not exist." + \
+                " MGEScan stopped")
+                sys.exit(-1)
         self.base_path = os.environ.get('MGESCAN_SRC') + "/mgescan"
         self.hmmerv = os.environ.get("MGESCAN_HMMER_VERSION") or self.hmmerv
         self.min_dist = os.environ.get("MGESCAN_MIN_DISTANCE") or self.min_dist
