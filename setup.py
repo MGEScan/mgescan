@@ -32,10 +32,12 @@ class MGEScanInstall(bdist_egg):
                          " path to install>'")
                  sys.exit()
              os.environ['MGESCAN_HOME'] = os.environ.get('HOME') + "/mgescan3"
-             os.environ['MGESCAN_SRC'] = os.environ.get('MGESCAN_HOME') + "/src"
-             if not os.path.exists(os.environ.get("MGESCAN_SRC")):
-                 os.makedirs(os.environ.get("MGESCAN_SRC"), 0755)
-                 os.system("cp -pr * $MGESCAN_SRC")
+        if os.environ.get('MGESCAN_HOME') and not os.environ.get("MGESCAN_SRC"):
+            os.environ['MGESCAN_SRC'] = os.environ.get('MGESCAN_HOME') + "/src"
+            if not os.path.exists(os.environ.get("MGESCAN_SRC")):
+                os.makedirs(os.environ.get("MGESCAN_SRC"), 0755)
+        if os.environ.get("MGESCAN_SRC"):
+            os.system("cp -pr * $MGESCAN_SRC")
 
         bdist_egg.run(self)
 

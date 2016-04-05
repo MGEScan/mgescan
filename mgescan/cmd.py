@@ -86,6 +86,8 @@ class MGEScan(object):
         self.scaffold = "" # or directory
 
     def get_env(self):
+        if os.environ.get("MGESCAN_HOME") and not os.environ.get("MGESCAN_SRC"):
+            os.environ['MGESCAN_SRC'] = os.environ.get("MGESCAN_HOME") + "/src"
         if not os.environ.get('MGESCAN_SRC'):
             print ("MGEScan environment variable is not defined or .mgescanrc is not sourced.")
             print (os.environ.get("HOME")+"/mgescan3 (default path) is used"+ \
