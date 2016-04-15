@@ -18,6 +18,8 @@ Amazon Cloud (EC2) to utilize on-demand computing resources for data analysis.
 .. |Click| raw:: html
 
    <a href="http://149.165.158.125:38080/" target="_blank">MGEScan on OpenStack Cloud (on Futuresystems.org)</a>
+   
+The link redirects to 149.165.158.125:38080 as of 04/14/2016. Refresh this page if it is changed or not accessible, contact us.
 
 .. note:: Every first Tuesday of the month is a maintenance day on FutureSystems and MGEScan is unavailable until it's completed.
    
