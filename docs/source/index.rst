@@ -13,11 +13,14 @@ supported for MGEScan-LTR and MGEScan-nonLTR programs so the better performance
 is guaranteed than previous version of MGEScan. Cloud image is available on
 Amazon Cloud (EC2) to utilize on-demand computing resources for data analysis.
 
-**Try MGEScan here:** |Click|.
+**Try MGEScan here:** `MGEScan on IU FutureSystems OpenStack Cloud <server.html>`_
+.. comment::
 
-.. |Click| raw:: html
+    **Try MGEScan here:** |Click|.
 
-   <a href="http://149.165.158.125:38080/" target="_blank">MGEScan on OpenStack Cloud (on Futuresystems.org)</a>
+    .. |Click| raw:: html
+
+       <a href="http://149.165.158.125:38080/" target="_blank">MGEScan on OpenStack Cloud (on Futuresystems.org)</a>
    
 The link redirects to 149.165.158.125:38080 as of 04/14/2016. Refresh this page if it is changed or not accessible, contact us via hroe.lee@gmail.com.
 
