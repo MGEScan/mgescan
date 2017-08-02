@@ -21,17 +21,18 @@ Eucalyptus.
 * Update Galaxy tools ``cp -pr $MGESCAN_SRC/galaxy-modified/* $GALAXY_HOME``
 * Start Galaxy server ``cd $GALAXY_HOME;nohup bash run.sh &``
 
-Command lines only:
+Command lines only
 
-``
-kill `ps -ef|grep universe_wsgi|grep -v grep|awk '{print $2}'`
-sudo yum update -y
-cd $MGESCAN_SRC;git pull;python setup.py install
-cd $GALAXY_HOME;git pull
-cd $GALAXY_HOME;./run.sh;sh manage_db.sh -c ./universe_wsgi.ini upgrade
-cp -pr $MGESCAN_SRC/galaxy-modified/* $GALAXY_HOME
-cd $GALAXY_HOME;nohup bash run.sh &
-``
+.. code-block::
+
+         kill `ps -ef|grep universe_wsgi|grep -v grep|awk '{print $2}'`
+         sudo yum update -y
+         cd $MGESCAN_SRC;git pull;python setup.py install
+         cd $GALAXY_HOME;git pull
+         cd $GALAXY_HOME;./run.sh;sh manage_db.sh -c ./universe_wsgi.ini upgrade
+         cp -pr $MGESCAN_SRC/galaxy-modified/* $GALAXY_HOME
+         cd $GALAXY_HOME;nohup bash run.sh &
+
 
 Deploying MGEScan on Galaxy
 -------------------------------------------------------------------------------
