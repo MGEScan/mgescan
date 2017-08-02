@@ -5,7 +5,7 @@ MGESCan on Amazon Cloud (EC2)
 
 With Amazon Cloud Web Services, a virtual single or distributed system for
 MGEScan can be easily deployed. MGEScan (Amazon machine image ID: ami-10672b7a 
-on 'US East' region)
+on 'US East-Ohio' region)
 is available to create our Galaxy-based system for MGEScan which is identifying
 long terminal repeats (LTR) and non-LTR retroelements in eukaryotic genomic
 sequences. More cloud options will be available soon including Google Compute
@@ -35,7 +35,7 @@ MGEScan Machine Image
 
 In AWS Management Console, open *EC2 Dashboard > Launch Instance*. To choose an
 Amazon Machine Image (AMI) of MGEScan, select *Community AMIs* on the left tab,
-and search by name or id, e.g. mgescan or ami-10672b7a. (US East Region Only)
+and search by name or id, e.g. mgescan or ami-10672b7a. (US East-Ohio Region Only)
 
 .. image:: images/aws-finding-image.png
 
