@@ -126,9 +126,16 @@ Usage:
 Amazon Cloud Image (EC2)
 -------------------------------------------------------------------------------
 
-* US East Region Only
+* US East (Ohio) Region Only
 * MGEScan - ami-394ebd52 (latest version)
 * retrotminer-alpha - ami-23d9c74a (created at 2014)
+
+.. note:: Old AMIs need to get an update of MGEScan, run the following commands after launching a new instance, and restart the server.
+``cd $MGESCAN_SRC;git pull;python setup.py install``
+``cp -pr $MGESCAN_SRC/galaxy-modified/* $GALAXY_HOME``
+
+
+
 
 Citation
 -------------------------------------------------------------------------------
