@@ -6,6 +6,9 @@ then
 	exit 2
 fi
 
+# in some cases, venv is deactivated, this line forces to activate
+source $MGESCAN_VENV/bin/activate
+
 script_program=`which python`
 script=$MGESCAN_SRC/mgescan/cmd.py
 input_file=$1
