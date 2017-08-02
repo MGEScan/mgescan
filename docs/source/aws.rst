@@ -23,7 +23,7 @@ Eucalyptus.
 
 Command lines only
 
-.. code-block::
+::
 
          kill `ps -ef|grep universe_wsgi|grep -v grep|awk '{print $2}'`
          sudo yum update -y
