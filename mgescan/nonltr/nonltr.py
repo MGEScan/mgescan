@@ -138,10 +138,10 @@ class nonLTR(object):
     def run_cmd(self, cmd):
         try:
             retcode = check_call(cmd.split())
-            if retcode < 0:
+            if retcode != 0:
                 print >>sys.stderr, "%s was terminated by signal" % cmd, -retcode
-            else:
-                print >>sys.stderr, "Returned", retcode
+            #else:
+            #    print >>sys.stderr, "Returned", retcode
         except OSError as e:
             print >>sys.stderr, "Failed:", e
         return retcode
