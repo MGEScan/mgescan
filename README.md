@@ -76,7 +76,7 @@ wget http://www.repeatmasker.org/RepeatMasker-open-4-0-5.tar.gz
 tar xvzf RepeatMasker-open-4-0-5.tar.gz
 ```
 
-.. note:: Find the latest at: http://www.repeatmasker.org/RMDownload.html
+>> Find the latest at: http://www.repeatmasker.org/RMDownload.html
 
 Installation
 -------------------------------------------------------------------------------
@@ -130,9 +130,12 @@ Amazon Cloud Image (EC2)
 * MGEScan - ami-394ebd52 (latest version)
 * retrotminer-alpha - ami-23d9c74a (created at 2014)
 
-.. note:: Old AMIs need to get an update of MGEScan, run the following commands after launching a new instance, and restart the server.
-``cd $MGESCAN_SRC;git pull;python setup.py install``
-``cp -pr $MGESCAN_SRC/galaxy-modified/* $GALAXY_HOME``
+>> Old AMIs need to get an update of MGEScan, run the following commands after launching a new instance, and restart the server.
+
+```sh
+cd $MGESCAN_SRC;git pull;python setup.py install
+cp -pr $MGESCAN_SRC/galaxy-modified/* $GALAXY_HOME
+```
 
 
 
