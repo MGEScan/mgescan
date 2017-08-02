@@ -134,6 +134,7 @@ Amazon Cloud Image (EC2)
 
 ```sh
 (Stop galaxy server first - processs looks like 'python ./scripts/paster.py serve universe_wsgi.ini')
+sudo yum update -y
 cd $MGESCAN_SRC;git pull;python setup.py install
 cd $GALAXY_HOME;git pull;sh manage_db.sh -c ./universe_wsgi.ini upgrade
 cp -pr $MGESCAN_SRC/galaxy-modified/* $GALAXY_HOME
