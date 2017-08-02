@@ -39,16 +39,17 @@
 		</conditional>
 	</inputs>
 	<outputs>
-		<data format="ltr.out" name="output" label="LTR Results (ltr.out)">
+		<!-- Updated based on https://galaxyproject.org/learn/datatypes (08.02.2017) -->
+		<data format="txt" name="output" label="LTR Results (ltr.out)">
 			<filter>program != "N"</filter>
 		</data>
 		<data format="fasta" name="clade" label="clade file (FASTA)">
 			<filter>program != "L"</filter>
 		</data>
-		<data format="qfile" name="qvalue_en" label="qvalue_en">
+		<data format="txt" name="qvalue_en" label="qvalue_en">
 			<filter>program != "L"</filter>
 		</data>
-		<data format="qfile" name="qvalue_rt" label="qvalue_rt">
+		<data format="txt" name="qvalue_rt" label="qvalue_rt">
 			<filter>program != "L"</filter>
 		</data>
 		<data format="gff3" name="ltr_gff3" label="GFF3 for LTR">
