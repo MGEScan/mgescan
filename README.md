@@ -133,8 +133,11 @@ Amazon Cloud Image (EC2)
 >> Old AMIs need to get an update of MGEScan, run the following commands after launching a new instance, and restart the server.
 
 ```sh
+(Stop galaxy server first - processs looks like 'python ./scripts/paster.py serve universe_wsgi.ini')
 cd $MGESCAN_SRC;git pull;python setup.py install
+cd $GALAXY_HOME;git pull;sh manage_db.sh -c ./universe_wsgi.ini upgrade
 cp -pr $MGESCAN_SRC/galaxy-modified/* $GALAXY_HOME
+cd $GALAXY_HOME;nohup bash run.sh &
 ```
 
 
