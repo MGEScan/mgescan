@@ -1,6 +1,6 @@
 .. _ref-mgescan-ec2:
 
-MGESCan on Amazon Cloud (EC2)
+MGEScan on Amazon Cloud (EC2)
 ===============================================================================
 
 With Amazon Cloud Web Services, a virtual single or distributed system for
