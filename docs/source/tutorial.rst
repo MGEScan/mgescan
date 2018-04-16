@@ -11,9 +11,7 @@ Overview
 -------------------------------------------------------------------------------
 
 This tutorial demonstrates a quick start of using MGEScan on Galaxy workflow
-with a sample dataset, D. melanogaster genome. A public server at Indiana
-University (http://silo.cs.indiana.edu:38080) provides sample datasets and
-MGEScan tools to try MGEScan on Galaxy without installation hassle.
+with a sample dataset, D. melanogaster genome.
 
 .. tip:: Approximate 3 hours and 30 minutes (including 3 hours computation
          time)
@@ -28,9 +26,9 @@ menu on top and MGEScan tools on the left frame.
 Access to Galaxy/MGEScan
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Open Galaxy/MGEScan at your web browser:
+Run Galaxy/MGEScan at your machine:
 
-* http://silo.cs.indiana.edu:38080
+.. * http://silo.cs.indiana.edu:38080
 
 .. image:: images/mgescan-main.png
 
