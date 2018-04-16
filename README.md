@@ -5,8 +5,6 @@ A Galaxy based system for identifying retrotransposons in genome
 
 ![mgescan workflow](https://raw.githubusercontent.com/MGEScan/mgescan/master/docs/source/images/rtm-workflow-final.png)
 
-**DEMO Version : [silo.cs.indiana.edu:38080](http://silo.cs.indiana.edu:38080/)**
-
 * [Tutorial](http://mgescan.readthedocs.org/en/latest/tutorial.html)
 * [Documentation](http://mgescan.readthedocs.org/en/latest/index.html)
 * [Source](https://github.com/MGEScan/mgescan/)
