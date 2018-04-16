@@ -45,7 +45,7 @@ Register
 
 Email address is required to sign up.
 
-* http://silo.cs.indiana.edu:38080/user/create
+.. * http://silo.cs.indiana.edu:38080/user/create
 
 .. image:: images/galaxy-register.png
 
@@ -55,7 +55,7 @@ Login
 If you already have an account, you can use your user id and password at
 the *User > Login* page.
 
-* http://silo.cs.indiana.edu:38080/user/login
+.. * http://silo.cs.indiana.edu:38080/user/login
 
 .. image:: images/galaxy-login.png
 
@@ -66,7 +66,7 @@ You can find sample datasets (e.g. D.melanogaster) at ``Shared Data`` menu on
 top. Click "Shared Data" > "Data Libraries" and find "Sample datasets for
 MGEScan".
 
-* http://silo.cs.indiana.edu:38080/library/index
+.. * http://silo.cs.indiana.edu:38080/library/index
 
 Example: Drosophila melanogaster
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -161,8 +161,9 @@ Enable MPI
 
 To accelerate processing time, select "Yes" at "Enable MPI" select form and
 specify "Number of MPI Processes". If you have a multi-core system, use up to
-the number of cores.  silo.cs.indiana.edu has 24 cores but we will use **4** in
-this tutorial to avoid being a noisy neighbor.
+the number of cores. 
+
+.. silo.cs.indiana.edu has 24 cores but we will use **4** in this tutorial to avoid being a noisy neighbor.
 
 
 Our options are:
