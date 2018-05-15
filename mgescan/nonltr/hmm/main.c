@@ -9,7 +9,7 @@
 int main (int argc, char **argv){
 
 	int c;
-	char *hmm_file, *seq_file, *sig1_file, *sig2_file, *out_file, *phmm_dir, *out_dir, *hmmerv;
+	char *hmm_file, *seq_file, *sig1_file, *sig2_file, *out_file, *phmm_dir, *out_dir, *hmmerv, *temp_dir;
 	int debug=1;
 	FILE *fp;
 	HMM hmm;
@@ -25,7 +25,7 @@ int main (int argc, char **argv){
 	int *vpath;
 
 	/* read command line argument */
-	while ((c=getopt(argc, argv, "m:s:r:a:o:p:d:v:")) != -1){
+	while ((c=getopt(argc, argv, "m:s:r:a:o:p:d:v:t:")) != -1){
 
 		switch (c){
 			case 'm':
@@ -59,7 +59,9 @@ int main (int argc, char **argv){
 			case 'v':
 				hmmerv = optarg;   /* hmmer version */
 				break;
-
+			case 't':
+				temp_dir = optarg;   /* temp dir */
+				break;
 		}
 	}
 
@@ -77,7 +79,7 @@ int main (int argc, char **argv){
 	/* test */
 	for (i=0; i<num_seqs; i++){
 		T = strlen(obs_seqs[i]);
-		viterbi(&hmm, T, obs_seqs[i], &pprob, vpath, sig1_file, sig2_file, out_file, phmm_dir, out_dir, hmmerv); 
+		viterbi(&hmm, T, obs_seqs[i], &pprob, vpath, sig1_file, sig2_file, out_file, phmm_dir, out_dir, hmmerv, temp_dir); 
 	}
 	/* free memory */
 	free_hmm(&hmm);

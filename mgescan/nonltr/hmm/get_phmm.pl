@@ -14,14 +14,19 @@ my @hmm_results;
 my $hmm_result;
 my $hmmerv;
 my $phmm_dir;
+my $temp_dir;
 
 GetOptions(    'seq=s' => \$seq,
 	'hmmfile=s' => \$phmm_file,
 	'odir=s' => \$out_dir,
 	'v=s' => \$hmmerv,
 	'd=s' => \$phmm_dir,
+	't:s' => \$temp_dir,
 );
 
+if (length($temp_dir) == 0) {
+	$temp_dir = "/tmp";
+}
 my $fh1;
 my $fh2;
 my $tmpfile1;
@@ -30,8 +35,8 @@ my $template1;
 my $template2;
 
 use File::Temp qw/ tempfile unlink0 /;
-($fh1, $tmpfile1) = tempfile( UNLINK => 1, SUFFIX => '.aaaaa');
-($fh2, $tmpfile2) = tempfile( UNLINK => 1, SUFFIX => '.bbbbb');
+($fh1, $tmpfile1) = tempfile( UNLINK => 1, DIR => $temp_dir, SUFFIX => '.aaaaa');
+($fh2, $tmpfile2) = tempfile( UNLINK => 1, DIR => $temp_dir, SUFFIX => '.bbbbb');
 
 $seq_file = $tmpfile1;#$out_dir."aaaaa";
 $pep_file = $tmpfile2;#$out_dir."bbbbb";
@@ -47,7 +52,7 @@ if ($hmmerv == 3){
 	my $fh;
 	my $tmpfile;
 	my $template;
-	($fh, $tmpfile) = tempfile( UNLINK => 1, SUFFIX => '.tbl');
+	($fh, $tmpfile) = tempfile( UNLINK => 1, DIR => $temp_dir, SUFFIX => '.tbl');
 	#system("hmmconvert ".$phmm_file." > ".$phmm_file."c");
 	#system("hmmsearch  --noali --domtblout ".$phmm_dir."tbl ".$phmm_file."c ".$pep_file." > /dev/null");
 	my $hmm_command = ("hmmsearch  --noali --domtblout ".$tmpfile." ".$phmm_file."3 ".$pep_file." > /dev/null");

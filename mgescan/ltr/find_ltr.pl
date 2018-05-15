@@ -45,6 +45,7 @@ my $CLUSTER_SIM_CONDITION;      # similarity of LTRs to be in a cluster
 my $LEN_CONDITION;              # length of LTRs to be in a cluster
 my $RANGE_BIN=500;         # range in the bin
 my $FLANKING_LEN=20;
+my $TEMP_DIR = "/tmp";
 
 my $debug;
 my $host_file;
@@ -81,6 +82,7 @@ get_value_conf($value_file,
 # get values in value.conf from parameters
 ##############################################
 my ($min_dist, $max_dist, $min_len_ltr, $max_len_ltr, $ltr_sim_condition, $cluster_sim_condition, $len_condition);
+my ($temp_dir);
 GetOptions(
 	'data=s' => \$main_dir,
 	'genome=s' => \$main_genome_dir,
@@ -93,7 +95,8 @@ GetOptions(
 	'max_len_ltr:s' => \$max_len_ltr,
 	'ltr_sim_condition:s' => \$ltr_sim_condition,
 	'cluster_sim_condition:s' => \$cluster_sim_condition,
-	'len_condition:s' => \$len_condition
+	'len_condition:s' => \$len_condition,
+	'temp_dir:s' => \$temp_dir,
 );
 if (length($min_dist) > 0){
 	$MIN_DIST = $min_dist
@@ -115,6 +118,9 @@ if (length($cluster_sim_condition) > 0){
 }
 if (length($len_condition) > 0){
 	$LEN_CONDITION = $len_condition
+}
+if (length($temp_dir) > 0) {
+	$TEMP_DIR = $temp_dir
 }
 ##############################################
 
@@ -1251,10 +1257,10 @@ sub check_putative_ltr{ # $start_ltr1, $end_ltr1, $start_ltr2, $end_ltr2, $sum_g
 	my $file4 = $bin_file_sub.".temp4";
 
 	my ($fh1, $fh2, $fh3, $fh4);
-	($fh1, $file1) = tempfile( UNLINK => 1, SUFFIX => '.temp1');
-	($fh2, $file2) = tempfile( UNLINK => 1, SUFFIX => '.temp2');
-	($fh3, $file3) = tempfile( UNLINK => 1, SUFFIX => '.temp3');
-	($fh4, $file4) = tempfile( UNLINK => 1, SUFFIX => '.temp4');
+	($fh1, $file1) = tempfile( UNLINK => 1, DIR => $TEMP_DIR, SUFFIX => '.temp1');
+	($fh2, $file2) = tempfile( UNLINK => 1, DIR => $TEMP_DIR, SUFFIX => '.temp2');
+	($fh3, $file3) = tempfile( UNLINK => 1, DIR => $TEMP_DIR, SUFFIX => '.temp3');
+	($fh4, $file4) = tempfile( UNLINK => 1, DIR => $TEMP_DIR, SUFFIX => '.temp4');
 
 	my $direction="*";
 	my $domain=1;

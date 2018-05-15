@@ -11,6 +11,7 @@ use Prompt qw(prompt_yn);
 my $pdir = dirname(abs_path($0))."/";
 my $phmm_dir = $pdir."pHMM/";
 my $hmmerv;
+my $TEMP_DIR;
 
 my $debug;
 $debug = $ENV{'MGESCAN_DEBUG'};
@@ -21,7 +22,7 @@ $debug = $ENV{'MGESCAN_DEBUG'};
 #print "Getting input parameter...\n";
 my ($dna_file, $pep_file, $out_dir, $dna_name, $command);
 my ($out1_dir, $out_file, $pos_dir);
-get_parameter(\$dna_file, \$out_dir, \$hmmerv);
+get_parameter(\$dna_file, \$out_dir, \$hmmerv, \$TEMP_DIR);
 get_id(\$dna_file, \$dna_name);
 
 $out1_dir = $out_dir."out1/";
@@ -96,7 +97,7 @@ if (-e $domain_rt_pos_file  || -e $domain_ape_pos_file ){
 	# -o output file
 	# -p program path
 	# -d output path
-	$command = $pdir."hmm/MGEScan -m ".$pdir."hmm/chr.hmm -s ".$dna_file." -r ".$domain_rt_pos_file." -a ".$domain_ape_pos_file." -o ".$out_file." -p ".$pdir." -d ".$out1_dir." -v ".$hmmerv;
+	$command = $pdir."hmm/MGEScan -m ".$pdir."hmm/chr.hmm -s ".$dna_file." -r ".$domain_rt_pos_file." -a ".$domain_ape_pos_file." -o ".$out_file." -p ".$pdir." -d ".$out1_dir." -v ".$hmmerv." -t ".$TEMP_DIR;
 	print $command."\n" if ($debug);
 	if ($debug && not prompt_yn("Continue?")) {
 		exit;
@@ -135,7 +136,7 @@ sub get_signal_domain{
 	print "get_signal_domain" if ($debug);
 	# print "\n".${$_[0]}. ${$_[1]}. ${$_[2]}."\n";
 
-	($fh, $tmpfile) = tempfile( UNLINK => 1, SUFFIX => '.tbl');
+	($fh, $tmpfile) = tempfile( UNLINK => 1, DIR => $TEMP_DIR, SUFFIX => '.tbl');
 
 	open (OUT, ">$temp_file");
 	if ($hmmerv == 3){
@@ -255,12 +256,13 @@ sub usage {
 
 sub get_parameter{
 
-	my ($dna, $out, $hmmerv);
+	my ($dna, $out, $hmmerv, $temp_dir);
 
 	GetOptions(
 		'dna=s' => \$dna,
 		'out=s' => \$out,
 		'hmmerv=s' => \$hmmerv,
+		'temp_dir:s' => \$temp_dir
 	);
 
 	if (! -e $dna){
@@ -276,9 +278,14 @@ sub get_parameter{
 		system("mkdir ".$out);
 	}
 
+	if (length($temp_dir) == 0) {
+		$temp_dir = "/tmp";
+	}
+
 	${$_[0]} = $dna;
 	${$_[1]} = $out;
 	${$_[2]} = $hmmerv;
+	${$_[3]} = $temp_dir;
 }
 
 

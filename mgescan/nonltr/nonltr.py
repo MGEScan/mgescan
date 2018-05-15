@@ -12,7 +12,7 @@ class nonLTR(object):
     """MGEScan non-LTR
 
     Usage:
-      nonltr.py <input> <output> [--mpi=<num>]
+      nonltr.py <input> <output> [--mpi=<num>] [--temp_dir=<temp_dir>]
       nonltr.py -h | --help
       nonltr.py --version
 
@@ -23,7 +23,7 @@ class nonLTR(object):
     """
 
     name = "nonltr"
-    ver = 'MGEScan nonLTR 3.0.0'
+    ver = 'MGEScan nonLTR 3.0.2'
     mpi_cmd = "mpi_mgescan"
     hmmerv = "3"
 
@@ -52,6 +52,7 @@ class nonLTR(object):
         self.p_data_f = "--data " + self.output_path + "/f/"
         self.p_data_b = "--data " + self.output_path + "/b/"
         self.p_hmmerv = "--hmmerv " + self.hmmerv
+        self.p_temp_dir = "--temp_dir " + self.temp_dir
         self.set_mpi_option()
 
     def set_mpi_option(self):
@@ -70,7 +71,7 @@ class nonLTR(object):
             #cmd = self._padding("mpirun", self.p_np, self.p_mpi_option,
             cmd = self._padding("mpirun", "-n " + str(int(math.ceil(1.0*int(self.nmpi)/2))), self.p_mpi_option,
                     self.p_mgescan_mpi_cmd, self.p_prg, self.p_genome_f,
-                    self.p_data_f, self.p_hmmerv)
+                    self.p_data_f, self.p_hmmerv, self.p_temp_dir)
             self.run_cmd(cmd)
         else:
            mypath = self.genome_path
@@ -90,13 +91,19 @@ class nonLTR(object):
 
     def run_hmm(self, t, fname):
         if t == "forward":
-            cmd = self.run_hmm_cmd + " --dna=" + fname + " --out=" + self.output_path + "/f/" + " --hmmerv=" + self.hmmerv
+            cmd = self.run_hmm_cmd + " --dna=" + fname + " --out=" + \
+                    self.output_path + "/f/" + " --hmmerv=" + self.hmmerv + \
+                    " --temp_dir=" + self.temp_dir
         elif t == "backward":
-            cmd = self.run_hmm_cmd + " --dna=" + fname + " --out=" + self.output_path + "/b/" + " --hmmerv=" + self.hmmerv
+            cmd = self.run_hmm_cmd + " --dna=" + fname + " --out=" + \
+                    self.output_path + "/b/" + " --hmmerv=" + self.hmmerv + \
+                    " --temp_dir=" + self.temp_dir
         self.run_cmd(cmd)
 
     def post_process2(self):
-        cmd = self.run_post2_cmd + " --data_dir=" + self.output_path + " --hmmerv=" + self.hmmerv
+        cmd = self.run_post2_cmd + " --data_dir=" + self.output_path + \
+                " --hmmerv=" + self.hmmerv + \
+                " --temp_dir=" + self.temp_dir
         self.run_cmd(cmd)
 
     def backward(self):
@@ -107,7 +114,7 @@ class nonLTR(object):
             #cmd = self._padding("mpirun", self.p_np, self.p_mpi_option,
             cmd = self._padding("mpirun", "-n " + str(int(math.ceil(1.0*int(self.nmpi)/2))), self.p_mpi_option,
                     self.p_mgescan_mpi_cmd, self.p_prg, self.p_genome_b,
-                    self.p_data_b, self.p_hmmerv)
+                    self.p_data_b, self.p_hmmerv, self.p_temp_dir)
             self.run_cmd(cmd)
         else:
            for f in os.listdir(reverse_path):
@@ -151,6 +158,7 @@ class nonLTR(object):
         self.nmpi = self.args['--mpi']
         self.genome_path = utils.get_abspath(self.args['<input>'])
         self.output_path = utils.get_abspath(self.args['<output>'])
+        self.temp_dir = utils.get_abspath(self.args['--temp_dir']) or "/tmp"
 
     def run(self):
         p1 = Process(target=self.forward)

@@ -1,9 +1,9 @@
 """MGEScan: identifying ltr and non-ltr in genome sequences
 
 Usage:
-    mgescan both <genome_dir> [--output=<data_dir>] [--mpi=<num>] [--debug]
-    mgescan ltr <genome_dir> [--output=<data_dir>] [--mpi=<num>] [--debug]
-    mgescan nonltr <genome_dir> [--output=<data_dir>] [--mpi=<num>] [--debug]
+    mgescan both <genome_dir> [--output=<data_dir>] [--mpi=<num>] [--temp_dir=<temp_dir>] [--debug]
+    mgescan ltr <genome_dir> [--output=<data_dir>] [--mpi=<num>] [--temp_dir=<temp_dir>] [--debug]
+    mgescan nonltr <genome_dir> [--output=<data_dir>] [--mpi=<num>] [--temp_dir=<temp_dir>] [--debug]
     mgescan (-h | --help)
     mgescan --version
 
@@ -54,6 +54,7 @@ class MGEScan(object):
     def set_inputs(self):
         self.data_dir = utils.get_abspath(self.args['--output'])
         self.genome_dir = utils.get_abspath(self.args['<genome_dir>'])
+        self.temp_dir = utils.get_abspath(self.args['--temp_dir'])
         self.ltr_enabled = self.args['ltr']
         self.nonltr_enabled = self.args['nonltr']
         self.mpi_enabled = self.args['--mpi']
@@ -173,6 +174,9 @@ class MGEScan(object):
                 -ltr_sim_condition=%(ltr_sim_condition)s \
                 -cluster_sim_condition=%(cluster_sim_condition)s \
                 -len_condition=%(len_condition)s"
+                
+        if self.temp_dir:
+            cmd1 += " -temp_dir=%(temp_dir)s"
         if self.mpi_enabled:
             cmd1 = (cmd1 + " -mpi=%(mpi_enabled)s")
         res1 = self.run_cmd(cmd1)
@@ -199,6 +203,9 @@ class MGEScan(object):
         cmd0 = "python " + self.base_path + "/nonltr/nonltr.py " + \
                 "%(genome_dir)s " + \
                 "%(data_dir)s "
+
+        if self.temp_dir:
+            cmd0 += " --temp_dir=%(temp_dir)s"
 
         if self.mpi_enabled:
             #cmd0 = (cmd0 + " -mpi=%(mpi_enabled)s")
@@ -232,7 +239,7 @@ class MGEScan(object):
 	return retcode
 
 def main():
-    arguments = docopt(__doc__, version='MGEScan 3.0.0')
+    arguments = docopt(__doc__, version='MGEScan 3.0.2')
     mge = MGEScan(arguments)
     mge.run()
 

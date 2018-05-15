@@ -88,7 +88,7 @@ void read_obs_seq_from_file(FILE *fp, int *num_seqs_ptr, char ***obs_seqs_ptr){
 	}
 }
 
-void viterbi(HMM *hmm_ptr, int T, char *O, double *pprob, int *vpath, char *signal_file1, char *signal_file2, char *out_file, char *phmm_dir1, char *out_dir1, char *hmmerv){
+void viterbi(HMM *hmm_ptr, int T, char *O, double *pprob, int *vpath, char *signal_file1, char *signal_file2, char *out_file, char *phmm_dir1, char *out_dir1, char *hmmerv, char *temp_dir){
 
 	/*
 	   chr *O: sequecne
@@ -261,7 +261,7 @@ void viterbi(HMM *hmm_ptr, int T, char *O, double *pprob, int *vpath, char *sign
 				path[IE][sig_id] = IE;
 
 				for (ss=0; ss<NO_APE; ss++){
-					state_score = get_prob(ape_state[ss], signal[start[ape_state[ss]]], t, O, hmmerv);
+					state_score = get_prob(ape_state[ss], signal[start[ape_state[ss]]], t, O, hmmerv, temp_dir);
 					if (state_score == DBL_MAX){
 						alpha[ape_state[ss]][sig_id] = DBL_MAX;
 					}else{
@@ -312,14 +312,14 @@ void viterbi(HMM *hmm_ptr, int T, char *O, double *pprob, int *vpath, char *sign
 				strcpy(state_flag,  "ID/IE end");
 				path_signal[sig_id] = 1;
 
-				state_score = get_prob(IE, signal[start[IE]], t, O, hmmerv);
+				state_score = get_prob(IE, signal[start[IE]], t, O, hmmerv, temp_dir);
 
 				alpha[IE][sig_id] = alpha[IE][start[IE]] - state_score - log(dist_ie(t-signal[start[IE]]+1));   
 				path[IE][sig_id] = IE;
 
 				if (start[id_state[0]] >-1){
 					for (si=0; si<NO_APE; si++){
-						state_score = get_prob(id_state[si], signal[start[id_state[si]]], t, O, hmmerv);
+						state_score = get_prob(id_state[si], signal[start[id_state[si]]], t, O, hmmerv, temp_dir);
 
 						if (dist_id(t-signal[start[id_state[si]]]+1)==0){
 							alpha[id_state[si]][sig_id] = DBL_MAX;   
@@ -378,7 +378,7 @@ void viterbi(HMM *hmm_ptr, int T, char *O, double *pprob, int *vpath, char *sign
 				path[IE][sig_id] = IE;
 
 				for (si=0; si<NO_RT; si++) {
-					state_score = get_prob(rt_state[si], signal[start[rt_state[si]]], t, O, hmmerv);
+					state_score = get_prob(rt_state[si], signal[start[rt_state[si]]], t, O, hmmerv, temp_dir);
 					if (state_score == DBL_MAX){
 						alpha[rt_state[si]][sig_id] = DBL_MAX;
 					}else{
@@ -424,7 +424,7 @@ void viterbi(HMM *hmm_ptr, int T, char *O, double *pprob, int *vpath, char *sign
 				strcpy(state_flag,  "IE end");
 				path_signal[sig_id] = 1;
 
-				state_score = get_prob(IE, signal[start[IE]], t, O, hmmerv);
+				state_score = get_prob(IE, signal[start[IE]], t, O, hmmerv, temp_dir);
 
 				if (dist_ie(t-signal[start[IE]]+1)==0){
 					alpha[IE][sig_id] = DBL_MAX;
@@ -590,7 +590,7 @@ double dist_ie(int dist){
 	return result;
 }
 
-double  get_prob(int state, int start_pos, int end_pos,  char *O, char *hmmerv){
+double  get_prob(int state, int start_pos, int end_pos,  char *O, char *hmmerv, char *temp_dir){
 
 	double state_score=0;
 	int seq_len;
@@ -625,7 +625,7 @@ double  get_prob(int state, int start_pos, int end_pos,  char *O, char *hmmerv){
 
 	}else if (flag == 1){
 
-		get_phmm(state, start_pos, end_pos, &state_score, O, &seq_len, hmmerv);
+		get_phmm(state, start_pos, end_pos, &state_score, O, &seq_len, hmmerv, temp_dir);
 
 		if (state_score == -1){
 			state_score = DBL_MAX;
@@ -852,7 +852,7 @@ void get_hydro(int start, int end, double *score, char *O){
 	free(domain_bp);
 }
 
-void get_phmm(int state, int start, int end, double *score, char *O, int *seq_len, char* hmmerv){
+void get_phmm(int state, int start, int end, double *score, char *O, int *seq_len, char* hmmerv, char* temp_dir){
 
 	char *domain_bp;
 	char *command;
@@ -936,6 +936,8 @@ void get_phmm(int state, int start, int end, double *score, char *O, int *seq_le
 	strcat(command, out_dir);
 	strcat(command, " -v ");
 	strcat(command, hmmerv);
+	strcat(command, " -t ");
+	strcat(command, temp_dir);
 	strcat(command, " -d ");
 	strcat(command, phmm_dir);
 	strcat(command, "pHMM/");

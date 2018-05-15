@@ -107,6 +107,7 @@ typedef struct arguments {
 	char genome[BUFSIZ];
 	char data[BUFSIZ];
 	int hmmerv;
+	char temp_dir[BUFSIZ];
 } ARGS;
 
 void run_mgescan_cmd(char *flist, ARGS optarg, int per_node) {
@@ -137,7 +138,7 @@ void run_mgescan_cmd(char *flist, ARGS optarg, int per_node) {
 					// NOT IMPLEMENTED
 					sprintf(tmp, "%s/mgescan/ltr/find_ltr_pair.pl -path_genome=%s -path_ltr=%s -chr_name=%s -run_hmm=%d", getenv("MGESCAN_SRC"), optarg.genome, optarg.data, flist + (NAME_MAX * i), 1);
 				} else { 
-					sprintf(tmp, "%s/mgescan/nonltr/run_hmm.pl --dna=%s/%s --out=%s --hmmerv=%d", getenv("MGESCAN_SRC"), optarg.genome, flist + (NAME_MAX * i), optarg.data, optarg.hmmerv);
+					sprintf(tmp, "%s/mgescan/nonltr/run_hmm.pl --dna=%s/%s --out=%s --hmmerv=%d --temp_dir=%s", getenv("MGESCAN_SRC"), optarg.genome, flist + (NAME_MAX * i), optarg.data, optarg.hmmerv, optarg.temp_dir);
 				}
 				printf("%s\n",tmp);
 				res = system(tmp);
@@ -159,6 +160,7 @@ ARGS arg_parse(int argc, char** argv) {
 		{"genome",  required_argument, 0, 'g'},
 		{"data",    required_argument, 0, 'd'},
 		{"hmmerv",    required_argument, 0, 'v'},
+		{"temp_dir",    optional_argument, 0, 't'},
 		{0, 0, 0, 0}
 	};
 
@@ -168,7 +170,7 @@ ARGS arg_parse(int argc, char** argv) {
 	/* getopt_long stores the option index here. */
 	int option_index = 0;
 
-	while((c = getopt_long (argc, argv, "p:g:d:v:",
+	while((c = getopt_long (argc, argv, "p:g:d:v:t:",
 			long_options, &option_index)) != -1) {
 		switch (c)
 		{
@@ -187,6 +189,10 @@ ARGS arg_parse(int argc, char** argv) {
 
 			case 'v':
 				pargs.hmmerv = atoi(optarg);
+				break;
+
+			case 't':
+				strcpy(pargs.temp_dir, optarg);
 				break;
 
 			case '?':

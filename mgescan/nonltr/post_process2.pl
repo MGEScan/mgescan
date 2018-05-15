@@ -13,6 +13,7 @@ $debug = $ENV{'MGESCAN_DEBUG'};
 my $pdir = dirname(abs_path($0))."/";
 my $hmm_dir = $pdir."pHMM/";
 my $hmmerv;
+my $temp_dir;
 
 my @all_clade = ('CR1', 'I', 'Jockey', 'L1', 'L2', 'R1', 'RandI', 'Rex', 'RTE', 'Tad1', 'R2','CRE');
 my @en_clade = ('CR1', 'I', 'Jockey', 'L1', 'L2', 'R1', 'RandI', 'Rex', 'RTE', 'Tad1');
@@ -26,7 +27,7 @@ my $evalue_file;
 my $tree_dir;
 my $seq;
 
-get_parameter(\$dir, \$hmmerv);
+get_parameter(\$dir, \$hmmerv, \$temp_dir);
 
 # copy seq from out2 dir into info dir
 system("mkdir -p ".$dir."info/full");
@@ -108,11 +109,12 @@ system("rm -r ".$dir."f") if (not $debug);
 
 sub get_parameter{
 
-	my ($dir, $hmmerv);
+	my ($dir, $hmmerv, $temp_dir);
 
 	GetOptions(
 		'data_dir=s' => \$dir,
 		'hmmerv=s' => \$hmmerv,
+		'temp_dir:s' => \$temp_dir
 	);
 
 	if (! -e $dir){
@@ -124,9 +126,13 @@ sub get_parameter{
 		usage();
 		exit;
 	}
+	if (length($temp_dir) == 0) {
+		$temp_dir = "/tmp";
+	}
 
 	${$_[0]} = $dir."/";
 	${$_[1]} = $hmmerv;
+	${$_[2]} = $temp_dir;
 }
 
 
@@ -240,7 +246,7 @@ sub get_domain_pep_seq{
 	my $tmpfile;
 	my $hmm_result;
 
-	($fh, $tmpfile) = tempfile( UNLINK => 1, SUFFIX => '.tbl');
+	($fh, $tmpfile) = tempfile( UNLINK => 1, DIR => $temp_dir, SUFFIX => '.tbl');
 
 	if ($hmmerv == 3){
 		#system("hmmconvert ".$_[1]." > ".$_[1]."c");
@@ -342,7 +348,7 @@ sub get_domain_dna_seq{
 	my $tmpfile;
 	my $hmm_result;
 
-	($fh, $tmpfile) = tempfile( UNLINK => 1, SUFFIX => '.tbl');
+	($fh, $tmpfile) = tempfile( UNLINK => 1, DIR => $temp_dir, SUFFIX => '.tbl');
 
 	if ($hmmerv == 3){
 		#system("hmmconvert ".$_[1]." > ".$_[1]."c");
@@ -468,7 +474,7 @@ sub vote_hmmsearch{
 	my $hmm_result;
 
 	for ($i=0; $i<=$#line; $i++){
-		($fh, $tmpfile) = tempfile( UNLINK => 1, SUFFIX => '.tbl');
+		($fh, $tmpfile) = tempfile( UNLINK => 1, DIR => $temp_dir, SUFFIX => '.tbl');
 		if ($hmmerv == 3){
 			#system("hmmconvert ".$_[1].$line[$i].".".$_[2].".hmm "." > ".$_[1].$line[$i].".".$_[2].".hmmc");
 			#system("hmmsearch --noali --domtblout ".$hmm_dir."tbl ".$_[1].$line[$i].".".$_[2].".hmmc ".$_[0]." > /dev/null");

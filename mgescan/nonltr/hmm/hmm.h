@@ -76,12 +76,12 @@ void print_hmm(HMM *hmm_ptr);
 void get_hmm_from_file(FILE *fp, HMM *hmm_ptr);
 void free_hmm(HMM *hmm);
 void read_obs_seq_from_file(FILE *fp, int *len_seqs_ptr, char ***obs_seqs_ptr);
-void viterbi(HMM *hmm_ptr,int T, char *O,  double *pprob, int *vpath, char *file1, char *file2, char *outfile, char *phmm, char *outdir, char *hmmerv);
-void get_phmm(int state, int start, int end, double *score, char *O, int *seq_len, char *hmmerv);  
+void viterbi(HMM *hmm_ptr,int T, char *O,  double *pprob, int *vpath, char *file1, char *file2, char *outfile, char *phmm, char *outdir, char *hmmerv, char *temp_dir);
+void get_phmm(int state, int start, int end, double *score, char *O, int *seq_len, char *hmmerv, char *temp_dir);  
 void get_hydro(int start, int end, double *score, char *O);
 double dist_ape(int dist);
 double dist_rt(int dist);
 double dist_id(int dist);
 double dist_ie(int dist);
-double get_prob(int state, int start, int end,  char *O, char *hmmerv);
+double get_prob(int state, int start, int end,  char *O, char *hmmerv, char *temp_dir);
 
