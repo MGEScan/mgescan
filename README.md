@@ -145,21 +145,16 @@ cd $GALAXY_HOME;nohup bash run.sh &
 Citation
 -------------------------------------------------------------------------------
 
-How to cite MGEScan on Galaxy [here]
-
-References
--------------------------------------------------------------------------------
-
-1. M. Rho, S. Schaack, X. Gao, S. Kim, M. Lynch and H. Tang (2010), LTR
-   retroelements in the genome of Daphnia pulex, BMC Genomics, 11:425. Pubmed. 
-
-2. M. Rho and H. Tang (2009), MGEScan-nonLTR: computational identification and
-   classification of Non-LTR retrotransposons in eukaryotic genomes. Nucleic Acid
-   Res, 37(21):e143. Free fulltext at NAR online 
-
-3. M. Rho, J. H. Choi, S. Kim, M. Lynch and H. Tang (2007), De novo
-   identification of LTR retrotransposons in eukaryotic genomes. BMC Genomics,
-   8:90. Pubmed. 
+@article{lee2016mgescan,
+  title={MGEScan: a Galaxy-based system for identifying retrotransposons in genomes},
+  author={Lee, Hyungro and Lee, Minsu and Mohammed Ismail, Wazim and Rho, Mina and Fox, Geoffrey C and Oh, Sangyoon and Tang, Haixu},
+  journal={Bioinformatics},
+  volume={32},
+  number={16},
+  pages={2502--2504},
+  year={2016},
+  publisher={Oxford University Press}
+}
 
 Web Sites
 -------------------------------------------------------------------------------
